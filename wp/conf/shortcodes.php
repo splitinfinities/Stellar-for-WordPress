@@ -61,11 +61,19 @@ function img_smart_image_shortcode( $attr, $content = null ) {
 		$block = in_array('block', $attr) ? 'block' : '';
 	}
 
-	$final_image = '<stellar-image ' . array_to_html_attributes($attr) . ' ' . $nozoom . ' ' . $block . ' poster=' . make_href_root_relative($placeholder[0]) . '>';
-		foreach ($images as $media => $src) {
-			$final_image .= '<source media="' . $media . '" srcset="' . $src . '" />';
-		}
-	$final_image .= '</stellar-image>';
+	$is_360 = get_field('image_360', $attr['image_id']);
+
+	if ($is_360) {
+		$final_image = "<stellar-360-image src='" . make_href_root_relative($image_large[0])  . "'></stellar-360-image>";
+	} else {
+		$final_image = "<stellar-image " . array_to_html_attributes($attr) . ' ' . $nozoom . ' ' . $block . ' poster=' . make_href_root_relative($placeholder[0]) . '>';
+			foreach ($images as $media => $src) {
+				$final_image .= '<source media="' . $media . '" srcset="' . $src . '" />';
+			}
+		$final_image .= "</stellar-image>";
+	}
+
+
 
 	return $final_image;
 }

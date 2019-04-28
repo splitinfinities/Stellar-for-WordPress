@@ -42,6 +42,22 @@ We will make sure the image that\'s loaded matters to the device that\'s using t
 			'default_value' => '',
 		),
 		array (
+			'key' => 'field_56fd9c86f65f6',
+			'label' => '360 Image',
+			'name' => 'image_360',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 0,
+		),
+		array (
 			'key' => 'field_56fd9c86f65e3',
 			'label' => 'Animated PNG',
 			'name' => 'image_animated_png',

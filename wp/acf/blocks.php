@@ -11,6 +11,7 @@ if( function_exists('acf_register_block') ) {
 		'category'			=> 'common',
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'hero', 'quote' ),
+		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
 	));
 
 	acf_register_block(array(
@@ -21,6 +22,7 @@ if( function_exists('acf_register_block') ) {
 		'category'			=> 'common',
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'content', 'quote' ),
+		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
 	));
 
 	acf_register_block(array(
@@ -31,6 +33,7 @@ if( function_exists('acf_register_block') ) {
 		'category'			=> 'common',
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'carousel', 'quote' ),
+		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
 	));
 
 	acf_register_block(array(
@@ -41,6 +44,7 @@ if( function_exists('acf_register_block') ) {
 		'category'			=> 'common',
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'carousel', 'quote' ),
+		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
 	));
 
 	acf_register_block(array(
@@ -51,6 +55,7 @@ if( function_exists('acf_register_block') ) {
 		'category'			=> 'common',
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'carousel', 'quote' ),
+		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
 	));
 
 	acf_register_block(array(
@@ -61,6 +66,7 @@ if( function_exists('acf_register_block') ) {
 		'category'			=> 'common',
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'call', 'to', 'action', 'quote' ),
+		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
 	));
 
 	acf_register_block(array(
@@ -71,5 +77,6 @@ if( function_exists('acf_register_block') ) {
 		'category'			=> 'common',
 		'icon'				=> 'admin-comments',
 		'keywords'			=> array( 'testimonial', 'quote' ),
+		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
 	));
 }

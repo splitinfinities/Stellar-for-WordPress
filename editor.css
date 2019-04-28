@@ -1,0 +1,11 @@
+:root {
+    font-size: 16px;
+}
+
+* {
+    max-width: 100% !important;
+}
+
+p + p {
+    margin-top: 1em;
+}

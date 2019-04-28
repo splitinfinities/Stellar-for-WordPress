@@ -1,0 +1,3 @@
+<footer>
+	<h1>Hello</h1>
+</footer>

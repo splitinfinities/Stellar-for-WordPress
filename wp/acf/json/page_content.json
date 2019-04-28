@@ -1,0 +1,3109 @@
+[
+    {
+        "key": "group_58a1080aaca25",
+        "title": "Page content",
+        "fields": [
+            {
+                "key": "field_58bc60699ba5c",
+                "label": "You're Ready to Build an Annual Report! Woo!",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "notice notice-success is-dismissible",
+                    "id": ""
+                },
+                "message": "<p>This is is the builder for the page. To add a new section <b>click that big blue \"Add a Section To This Report\" Button<\/b>  down below. You'll see you have a few options. <b>To start, let's select \"Intro Section.\"<\/b><\/p>",
+                "new_lines": "",
+                "esc_html": 0
+            },
+            {
+                "key": "field_55e769a2c47b6",
+                "label": "Sections",
+                "name": "page_sections",
+                "type": "flexible_content",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layouts": {
+                    "55f1ad9542e07": {
+                        "key": "55f1ad9542e07",
+                        "name": "hero",
+                        "label": "Intro Section",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58a10df6361e6",
+                                "label": "About the Intro Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "This section creates a big full-screen image section with your logo and your introduction text. \r\n<a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/intro-section\/\">Learn More.<\/a>",
+                                "new_lines": "br",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_56fe8736ffcc2",
+                                "label": "Settings",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_56280951abe4c",
+                                "label": "BGCA Default Intro or Build Your Own Intro?",
+                                "name": "content",
+                                "type": "radio",
+                                "instructions": "",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "100",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "default": "Use BGCA Default",
+                                    "custom": "Make Your Own"
+                                },
+                                "allow_null": 0,
+                                "other_choice": 0,
+                                "save_other_choice": 0,
+                                "default_value": "default",
+                                "layout": "horizontal",
+                                "return_format": "value"
+                            },
+                            {
+                                "key": "field_58bc6887fc55b",
+                                "label": "Up Next:",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": [
+                                    [
+                                        {
+                                            "field": "field_56280951abe4c",
+                                            "operator": "==",
+                                            "value": "default"
+                                        }
+                                    ]
+                                ],
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "<h4>You're using the BGCA default intro section for this page, so you're good to go with this section!<\/h4>\r\n\r\n<p><b>You're ready to add a new section to your report. <\/b>\r\n\r\n<i>You can do whatever you like here, but we'd recommend moving into the<\/i> 'Who We Are \/ About Us'<i>, which you can select from the \"Add a Section To This Report\" button below.<\/i><\/p>",
+                                "new_lines": "br",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_56fe85f345b37",
+                                "label": "Custom Content",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": [
+                                    [
+                                        {
+                                            "field": "field_56280951abe4c",
+                                            "operator": "==",
+                                            "value": "custom"
+                                        }
+                                    ]
+                                ],
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_55f71a87e67fd",
+                                "label": "Image",
+                                "name": "hero_image",
+                                "type": "image_crop",
+                                "instructions": "This is the background image for the page.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "50",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "crop_type": "min",
+                                "target_size": "hero-png",
+                                "width": "",
+                                "height": "",
+                                "preview_size": "large-hero-png",
+                                "force_crop": "no",
+                                "save_in_media_library": "yes",
+                                "retina_mode": "no",
+                                "save_format": "id",
+                                "library": "all"
+                            },
+                            {
+                                "key": "field_55f71bb88923f",
+                                "label": "Heading Text",
+                                "name": "hero_content_heading",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": [
+                                    [
+                                        {
+                                            "field": "field_56280951abe4c",
+                                            "operator": "==",
+                                            "value": "custom"
+                                        }
+                                    ]
+                                ],
+                                "wrapper": {
+                                    "width": "100",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example: The Boys & Girls Clubs of Memphis 2016 Annual Report",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": 50
+                            },
+                            {
+                                "key": "field_58a3c0098ba38",
+                                "label": "Subheading Text",
+                                "name": "hero_content_subheading",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": [
+                                    [
+                                        {
+                                            "field": "field_56280951abe4c",
+                                            "operator": "==",
+                                            "value": "custom"
+                                        }
+                                    ]
+                                ],
+                                "wrapper": {
+                                    "width": "100",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "Example: A Year of Helping Area Kids Stay Healthy & Happy",
+                                "maxlength": 140,
+                                "rows": "",
+                                "new_lines": "wpautop"
+                            },
+                            {
+                                "key": "field_563bc62bcff1d",
+                                "label": "Content's Horizontal Alignment",
+                                "name": "hero_content_horiz_alignment",
+                                "type": "radio",
+                                "instructions": "Got text on somebody's face? Let's try and move it out of the way to the right or left.",
+                                "required": 0,
+                                "conditional_logic": [
+                                    [
+                                        {
+                                            "field": "field_56280951abe4c",
+                                            "operator": "!=",
+                                            "value": "default"
+                                        }
+                                    ]
+                                ],
+                                "wrapper": {
+                                    "width": "100",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "start": "Left",
+                                    "center": "Center",
+                                    "end": "Right"
+                                },
+                                "allow_null": 0,
+                                "other_choice": 0,
+                                "save_other_choice": 0,
+                                "default_value": "center",
+                                "layout": "horizontal",
+                                "return_format": "value"
+                            },
+                            {
+                                "key": "field_563bc62bcff2c",
+                                "label": "Content's Vertical Alignment",
+                                "name": "hero_content_vert_alignment",
+                                "type": "radio",
+                                "instructions": "Still got text showing up where you don't want it? You can move it up or down here.",
+                                "required": 0,
+                                "conditional_logic": [
+                                    [
+                                        {
+                                            "field": "field_56280951abe4c",
+                                            "operator": "!=",
+                                            "value": "default"
+                                        }
+                                    ]
+                                ],
+                                "wrapper": {
+                                    "width": "100",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "start": "Top",
+                                    "center": "Center",
+                                    "end": "Bottom"
+                                },
+                                "allow_null": 0,
+                                "other_choice": 0,
+                                "save_other_choice": 0,
+                                "default_value": "center",
+                                "layout": "horizontal",
+                                "return_format": "value"
+                            },
+                            {
+                                "key": "field_58bc698cfc55c",
+                                "label": "Up Next:",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": [
+                                    [
+                                        {
+                                            "field": "field_56280951abe4c",
+                                            "operator": "==",
+                                            "value": "custom"
+                                        }
+                                    ]
+                                ],
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "<h4>You're using your own content and it's going to look awesome. <\/h4>\r\n\r\n<p><b>When you're ready to add a new section to your report... <\/b>\r\n\r\n<i>You can do whatever you like here, but we'd recommend moving into the<\/i> 'Who We Are \/ About Us'<i>, which you can select from the \"Add a Section To This Report\" button below.<\/i><\/p>",
+                                "new_lines": "br",
+                                "esc_html": 0
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "58a10a5a33793": {
+                        "key": "58a10a5a33793",
+                        "name": "who_we_are",
+                        "label": "Who We Are \/ About Us",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58a10e21361e7",
+                                "label": "About The Who We Are Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "Tell us a quick bit of information about your organization and let us know what locations are affiliated with you. *<i>If you haven't added any locations yet, you can do so <a href=\"http:\/\/boysandgirlsclubofamerica.local\/wp-admin\/post-new.php?post_type=locations\" target=\"_blank\">here<\/a>.<\/i>\r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/who-we-are-section\/\">Learn More.<\/a>",
+                                "new_lines": "br",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_58a1151271276",
+                                "label": "Content",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58a8ebdb33a52",
+                                "label": "Photo",
+                                "name": "photo",
+                                "type": "image_crop",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "crop_type": "min",
+                                "target_size": "hero-png",
+                                "width": "",
+                                "height": "",
+                                "preview_size": "medium-hero-png",
+                                "force_crop": "yes",
+                                "save_in_media_library": "yes",
+                                "retina_mode": "no",
+                                "save_format": "id",
+                                "library": "all"
+                            },
+                            {
+                                "key": "field_58a3c0edd6568",
+                                "label": "Heading",
+                                "name": "heading",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example: About the Orlando Clubs",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": 60
+                            },
+                            {
+                                "key": "field_58a3c106d6569",
+                                "label": "Description",
+                                "name": "subheading",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "example: Since 1972, the Boys & Girls Clubs of Orlando, Florida serve over 12,000 area youth with after-school activities, healthy meals, activities and more!",
+                                "placeholder": "",
+                                "maxlength": 280,
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_58bc6f1214eac",
+                                "label": "Locations",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "top",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58a115b971279",
+                                "label": "Locations",
+                                "name": "locations_slideshow",
+                                "type": "repeater",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "collapsed": "field_58a115d77127a",
+                                "min": 1,
+                                "max": 0,
+                                "layout": "block",
+                                "button_label": "Add A Location",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_58a115d77127a",
+                                        "label": "Location",
+                                        "name": "location",
+                                        "type": "post_object",
+                                        "instructions": "Choose a location from the list. If you don't see your location, <a href=\"http:\/\/boysandgirlsclubofamerica.local\/wp-admin\/post-new.php?post_type=locations\" target=\"_blank\">click here<\/a> to create it. Then, come back to this page and select your new location. We do this because, over the years, you may add or lose locations.",
+                                        "required": 1,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "post_type": [
+                                            "locations"
+                                        ],
+                                        "taxonomy": [],
+                                        "allow_null": 0,
+                                        "multiple": 0,
+                                        "return_format": "id",
+                                        "ui": 1
+                                    }
+                                ]
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "58a107d2907cf": {
+                        "key": "58a107d2907cf",
+                        "name": "executive_letter",
+                        "label": "Executive Letter",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58a10e39361e8",
+                                "label": "About the Executive Letter Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "Here's the letter from an important person (Executive Director, Board Member, Program Manager, whomever) at your organization. If you don't have a letter handy, no worries! You can use the default letter from the President of BGCA. This section looks like this:\r\n\r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/executive-letter-section\/\">Learn More.<\/a>",
+                                "new_lines": "br",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_58a3c1741b70d",
+                                "label": "Settings",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58a3c17d1b70e",
+                                "label": "Letter to Use",
+                                "name": "letter_to_use",
+                                "type": "radio",
+                                "instructions": "Would you like to use the BGCA president's letter for this year here, or would you like to write your own letter?",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "default": "BGCA President's Letter",
+                                    "custom": "Write Your Own Letter"
+                                },
+                                "allow_null": 0,
+                                "other_choice": 0,
+                                "save_other_choice": 0,
+                                "default_value": "",
+                                "layout": "horizontal",
+                                "return_format": "value"
+                            },
+                            {
+                                "key": "field_58a107d2907d3",
+                                "label": "Custom Letter",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": [
+                                    [
+                                        {
+                                            "field": "field_58a3c17d1b70e",
+                                            "operator": "==",
+                                            "value": "custom"
+                                        }
+                                    ]
+                                ],
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58a1177ffab76",
+                                "label": "Executive Section Photo",
+                                "name": "executives_photo",
+                                "type": "image_crop",
+                                "instructions": "This image can be just of the Club, the kids, the executive or ideally the Executive in a Club with the Kids.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "crop_type": "min",
+                                "target_size": "hero-png",
+                                "width": "",
+                                "height": "",
+                                "preview_size": "medium-hero-png",
+                                "force_crop": "no",
+                                "save_in_media_library": "yes",
+                                "retina_mode": "no",
+                                "save_format": "id",
+                                "library": "all"
+                            },
+                            {
+                                "key": "field_58a118f0fab77",
+                                "label": "Executive's Name",
+                                "name": "executives_name",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
+                                "key": "field_58a11905fab78",
+                                "label": "Executive's Title",
+                                "name": "executives_title",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
+                                "key": "field_58aa44daa20a0",
+                                "label": "Synopsis Sentences",
+                                "name": "executives_lead_in",
+                                "type": "textarea",
+                                "instructions": "This is a sentence or two for folks who are going to be too lazy to read this whole letter. It shows directly under the image.",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example:  This was a big year for our Clubs: with over 200 new members and our brand new location in South City.",
+                                "maxlength": 560,
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_58aa44fba20a1",
+                                "label": "Pull Quote",
+                                "name": "pull_quote",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "40",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": 140,
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_58aa4523a20a2",
+                                "label": "First Sentences",
+                                "name": "supporting_copy_for_pull_quote",
+                                "type": "textarea",
+                                "instructions": "The first few sentences of your letter - which should provide a warm welcome to the individuals visiting the page.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "60",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example: Dear Club Supporter, Last year was a year of successes and challenges for our Clubs.....",
+                                "maxlength": 280,
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_58aa4538a20a3",
+                                "label": "Letter",
+                                "name": "letter",
+                                "type": "wysiwyg",
+                                "instructions": "Put in the rest of the letter here.",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "tabs": "visual",
+                                "toolbar": "basic",
+                                "media_upload": 0,
+                                "delay": 1
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "58b1c57ba2a74": {
+                        "key": "58b1c57ba2a74",
+                        "name": "youth_profile",
+                        "label": "Youth Profile",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58b1c57ba2a75",
+                                "label": "About the Youth Profile Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "This section creates a styled long-form story to highlight one of your Club Youth or perhaps several Youth. When you're done editing, it looks like this:\r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/youth-profile-section\/\">Learn More.<\/a>",
+                                "new_lines": "br",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_58b1c57ba2a76",
+                                "label": "Settings",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58b1c57ba2a77",
+                                "label": "Letter to Use",
+                                "name": "letter_to_use",
+                                "type": "radio",
+                                "instructions": "Would you like to use the presidents letter for this year here, or would you like to write your own letter?",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "default": "National Youth of the Year",
+                                    "custom": "Custom Youth Profile"
+                                },
+                                "allow_null": 0,
+                                "other_choice": 0,
+                                "save_other_choice": 0,
+                                "default_value": "",
+                                "layout": "horizontal",
+                                "return_format": "value"
+                            },
+                            {
+                                "key": "field_58bca749aed03",
+                                "label": "What Kind of Story is This?",
+                                "name": "profile_type",
+                                "type": "radio",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": [
+                                    [
+                                        {
+                                            "field": "field_58b1c57ba2a77",
+                                            "operator": "==",
+                                            "value": "custom"
+                                        }
+                                    ]
+                                ],
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": {
+                                    "profile": "Youth Profile",
+                                    "yoy": "Youth of the Year"
+                                },
+                                "allow_null": 0,
+                                "other_choice": 0,
+                                "save_other_choice": 0,
+                                "default_value": "",
+                                "layout": "horizontal",
+                                "return_format": "value"
+                            },
+                            {
+                                "key": "field_58b1c57ba2a78",
+                                "label": "Content",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": [
+                                    [
+                                        {
+                                            "field": "field_58b1c57ba2a77",
+                                            "operator": "==",
+                                            "value": "custom"
+                                        }
+                                    ]
+                                ],
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58b1c57ba2a79",
+                                "label": "Youth's photo",
+                                "name": "youths_photo",
+                                "type": "image_crop",
+                                "instructions": "",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "crop_type": "min",
+                                "target_size": "hero-png",
+                                "width": "",
+                                "height": "",
+                                "preview_size": "medium-hero-png",
+                                "force_crop": "no",
+                                "save_in_media_library": "yes",
+                                "retina_mode": "no",
+                                "save_format": "id",
+                                "library": "all"
+                            },
+                            {
+                                "key": "field_58b1c57ba2a7a",
+                                "label": "Youth's name",
+                                "name": "youths_name",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": 80
+                            },
+                            {
+                                "key": "field_58b1c57ba2a7b",
+                                "label": "Short Description",
+                                "name": "youths_byline",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example: 18, South Club",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": 80
+                            },
+                            {
+                                "key": "field_58b1c57ba2a7c",
+                                "label": "Synopsis Sentences",
+                                "name": "youths_lead_in",
+                                "type": "textarea",
+                                "instructions": "This is a sentence or two for folks who are going to be too lazy to read this whole profile. It shows directly under the image.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": 560,
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_58b1c57ba2a7d",
+                                "label": "Pull Quote",
+                                "name": "pull_quote",
+                                "type": "textarea",
+                                "instructions": "A short quote from the profile.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "40",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": 140,
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_58b1c57ba2a7e",
+                                "label": "Intro Sentences",
+                                "name": "supporting_copy_for_pull_quote",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "60",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example: When Michael first came to the Clubs, he didn't know anybody in town and was living out of the back of his mom's car.",
+                                "maxlength": 280,
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_58b1c57ba2a7f",
+                                "label": "Full Story",
+                                "name": "letter",
+                                "type": "wysiwyg",
+                                "instructions": "",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "tabs": "visual",
+                                "toolbar": "basic",
+                                "media_upload": 0,
+                                "delay": 1
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5a03b16fdb8bb": {
+                        "key": "5a03b16fdb8bb",
+                        "name": "general_story",
+                        "label": "General Story",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_5a03b16fdb8bc",
+                                "label": "About the General Story Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "This section creates a styled long-form story that you can use to tell any story you would like:\r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/general-story-section\/\">Learn More.<\/a>",
+                                "new_lines": "br",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_5a03b16fdb8c1",
+                                "label": "Leading Photo",
+                                "name": "story_photo",
+                                "type": "image_crop",
+                                "instructions": "",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "crop_type": "min",
+                                "target_size": "hero-png",
+                                "width": "",
+                                "height": "",
+                                "preview_size": "medium-hero-png",
+                                "force_crop": "no",
+                                "save_in_media_library": "yes",
+                                "retina_mode": "no",
+                                "save_format": "id",
+                                "library": "all"
+                            },
+                            {
+                                "key": "field_5a03b16fdb8c2",
+                                "label": "Story Title",
+                                "name": "section_name",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": 80
+                            },
+                            {
+                                "key": "field_5a03b16fdb8c3",
+                                "label": "Short Description",
+                                "name": "story_description",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example: 18, South Club",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": 80
+                            },
+                            {
+                                "key": "field_5a03b16fdb8c4",
+                                "label": "Synopsis Sentences",
+                                "name": "story_lead_in",
+                                "type": "textarea",
+                                "instructions": "This is a sentence or two for folks who are going to be too lazy to read this whole profile. It shows directly under the image.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": 560,
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_5a03b16fdb8c7",
+                                "label": "Full Story",
+                                "name": "story_letter",
+                                "type": "wysiwyg",
+                                "instructions": "",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "tabs": "visual",
+                                "toolbar": "basic",
+                                "media_upload": 0,
+                                "delay": 1
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "58a1081e9f4dd": {
+                        "key": "58a1081e9f4dd",
+                        "name": "impact_areas",
+                        "label": "Club Areas of Focus",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58a10e7f361eb",
+                                "label": "About the Areas of Focus Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "Areas of Focus are the general fields in which your Clubs Work. For example: Academics, Athletics, Nutrition, Public Service, Youth with Special Needs. You can add as many (or few of these as you like). When you're done editing, it looks like this:\r\n\r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/areas-of-focus-section\/\">Learn More.<\/a>",
+                                "new_lines": "br",
+                                "esc_html": 1
+                            },
+                            {
+                                "key": "field_58a1081e9f4e7",
+                                "label": "Content",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58a1081e9f4e9",
+                                "label": "Impact Areas",
+                                "name": "impact_areas",
+                                "type": "repeater",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "collapsed": "field_58a11bf3be876",
+                                "min": 1,
+                                "max": 0,
+                                "layout": "block",
+                                "button_label": "Add an impact area",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_58a11bf3be876",
+                                        "label": "Area of Focus",
+                                        "name": "title",
+                                        "type": "text",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "prepend": "",
+                                        "append": "",
+                                        "maxlength": ""
+                                    },
+                                    {
+                                        "key": "field_58a11c1abe877",
+                                        "label": "Description",
+                                        "name": "description",
+                                        "type": "textarea",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "maxlength": "",
+                                        "rows": "",
+                                        "new_lines": "br"
+                                    },
+                                    {
+                                        "key": "field_58a1081e9f4f3",
+                                        "label": "Image",
+                                        "name": "media_id",
+                                        "type": "image",
+                                        "instructions": "If this is a video, this image is used as the preload image -  use the first frame of the video if you can.",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "100",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "return_format": "id",
+                                        "preview_size": "thumbnail",
+                                        "library": "all",
+                                        "min_width": "",
+                                        "min_height": "",
+                                        "min_size": "",
+                                        "max_width": "",
+                                        "max_height": "",
+                                        "max_size": "",
+                                        "mime_types": ""
+                                    },
+                                    {
+                                        "key": "field_58a12244be878",
+                                        "label": "Wins list",
+                                        "name": "wins_list",
+                                        "type": "repeater",
+                                        "instructions": "List out major accomplishments for your Club in this area of focus for the past year.",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "collapsed": "",
+                                        "min": 0,
+                                        "max": 0,
+                                        "layout": "table",
+                                        "button_label": "",
+                                        "sub_fields": [
+                                            {
+                                                "key": "field_58a12257be879",
+                                                "label": "Win title",
+                                                "name": "win_title",
+                                                "type": "text",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "placeholder": "example: More Meals Served",
+                                                "prepend": "",
+                                                "append": "",
+                                                "maxlength": 80
+                                            },
+                                            {
+                                                "key": "field_58a12263be87a",
+                                                "label": "Win description",
+                                                "name": "win_description",
+                                                "type": "text",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "placeholder": "example: Last year, we served 30,000 healthy meals",
+                                                "prepend": "",
+                                                "append": "",
+                                                "maxlength": 140
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "58a105dc90781": {
+                        "key": "58a105dc90781",
+                        "name": "stats",
+                        "label": "Club Numbers \/ Statistics",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58a10e93361ec",
+                                "label": "About the Numbers Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "This section is for highlighting quantifiable successes. We have a few different graphing options available to you. So whether you want a pie chart, a line graph or just a big number, we've got you covered.\r\n\r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/numbers-section\/\">Learn More.<\/a>",
+                                "new_lines": "br",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_58a105dc9078b",
+                                "label": "Content",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58a105dc9078c",
+                                "label": "Numbers Intro Text",
+                                "name": "lead_in_content",
+                                "type": "textarea",
+                                "instructions": "This is the intro text for this section.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example: We did so many great things this year, and we have numbers.",
+                                "maxlength": "",
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_58b37ad358c2b",
+                                "label": "Stats",
+                                "name": "stats",
+                                "type": "flexible_content",
+                                "instructions": "",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "button_label": "Add a Stat",
+                                "min": "",
+                                "max": "",
+                                "layouts": [
+                                    {
+                                        "key": "58b37ada7c320",
+                                        "name": "percentage",
+                                        "label": "Percentage",
+                                        "display": "row",
+                                        "sub_fields": [
+                                            {
+                                                "key": "field_58b37af458c2c",
+                                                "label": "Title",
+                                                "name": "title",
+                                                "type": "text",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "placeholder": "",
+                                                "prepend": "",
+                                                "append": "",
+                                                "maxlength": ""
+                                            },
+                                            {
+                                                "key": "field_58b37bf758c3d",
+                                                "label": "Number",
+                                                "name": "number",
+                                                "type": "number",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "placeholder": "",
+                                                "prepend": "",
+                                                "append": "",
+                                                "min": "",
+                                                "max": "",
+                                                "step": ""
+                                            },
+                                            {
+                                                "key": "field_58b37b0158c2d",
+                                                "label": "Image",
+                                                "name": "image",
+                                                "type": "image_crop",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "crop_type": "hard",
+                                                "target_size": "large",
+                                                "width": "",
+                                                "height": "",
+                                                "preview_size": "thumbnail",
+                                                "force_crop": "no",
+                                                "save_in_media_library": "yes",
+                                                "retina_mode": "no",
+                                                "save_format": "id",
+                                                "library": "all"
+                                            }
+                                        ],
+                                        "min": "",
+                                        "max": ""
+                                    },
+                                    {
+                                        "key": "58bcb82f32674",
+                                        "name": "number",
+                                        "label": "Whole Number",
+                                        "display": "row",
+                                        "sub_fields": [
+                                            {
+                                                "key": "field_58bcb82f32675",
+                                                "label": "Title",
+                                                "name": "title",
+                                                "type": "text",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "placeholder": "",
+                                                "prepend": "",
+                                                "append": "",
+                                                "maxlength": ""
+                                            },
+                                            {
+                                                "key": "field_58bcb82f32676",
+                                                "label": "Number",
+                                                "name": "number",
+                                                "type": "number",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "placeholder": "",
+                                                "prepend": "",
+                                                "append": "",
+                                                "min": "",
+                                                "max": "",
+                                                "step": ""
+                                            },
+                                            {
+                                                "key": "field_58bcb82f32677",
+                                                "label": "Image",
+                                                "name": "image",
+                                                "type": "image_crop",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "crop_type": "hard",
+                                                "target_size": "large",
+                                                "width": "",
+                                                "height": "",
+                                                "preview_size": "thumbnail",
+                                                "force_crop": "no",
+                                                "save_in_media_library": "yes",
+                                                "retina_mode": "no",
+                                                "save_format": "id",
+                                                "library": "all"
+                                            }
+                                        ],
+                                        "min": "",
+                                        "max": ""
+                                    },
+                                    {
+                                        "key": "58b37b3b58c2e",
+                                        "name": "doughnut_chart",
+                                        "label": "Doughnut chart",
+                                        "display": "block",
+                                        "sub_fields": [
+                                            {
+                                                "key": "field_58b37b4958c2f",
+                                                "label": "Title",
+                                                "name": "title",
+                                                "type": "text",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "placeholder": "",
+                                                "prepend": "",
+                                                "append": "",
+                                                "maxlength": ""
+                                            },
+                                            {
+                                                "key": "field_58b37b4f58c30",
+                                                "label": "Numbers",
+                                                "name": "numbers",
+                                                "type": "repeater",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "collapsed": "",
+                                                "min": 1,
+                                                "max": 0,
+                                                "layout": "",
+                                                "button_label": "Add a datapoint",
+                                                "sub_fields": [
+                                                    {
+                                                        "key": "field_58b37b5b58c31",
+                                                        "label": "Number",
+                                                        "name": "number",
+                                                        "type": "number",
+                                                        "instructions": "",
+                                                        "required": 1,
+                                                        "conditional_logic": 0,
+                                                        "wrapper": {
+                                                            "width": "",
+                                                            "class": "",
+                                                            "id": ""
+                                                        },
+                                                        "default_value": "",
+                                                        "placeholder": "",
+                                                        "prepend": "",
+                                                        "append": "",
+                                                        "min": "",
+                                                        "max": "",
+                                                        "step": ""
+                                                    },
+                                                    {
+                                                        "key": "field_58b37b9f58c32",
+                                                        "label": "Label",
+                                                        "name": "label",
+                                                        "type": "text",
+                                                        "instructions": "",
+                                                        "required": 1,
+                                                        "conditional_logic": 0,
+                                                        "wrapper": {
+                                                            "width": "",
+                                                            "class": "",
+                                                            "id": ""
+                                                        },
+                                                        "default_value": "",
+                                                        "placeholder": "",
+                                                        "prepend": "",
+                                                        "append": "",
+                                                        "maxlength": ""
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "min": "",
+                                        "max": ""
+                                    },
+                                    {
+                                        "key": "58b37bc058c33",
+                                        "name": "pie_chart",
+                                        "label": "Pie chart",
+                                        "display": "block",
+                                        "sub_fields": [
+                                            {
+                                                "key": "field_58b37bc058c34",
+                                                "label": "Title",
+                                                "name": "title",
+                                                "type": "text",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "placeholder": "",
+                                                "prepend": "",
+                                                "append": "",
+                                                "maxlength": ""
+                                            },
+                                            {
+                                                "key": "field_58b37bc058c35",
+                                                "label": "Numbers",
+                                                "name": "numbers",
+                                                "type": "repeater",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "collapsed": "",
+                                                "min": 1,
+                                                "max": 0,
+                                                "layout": "",
+                                                "button_label": "Add a datapoint",
+                                                "sub_fields": [
+                                                    {
+                                                        "key": "field_58b37bc058c36",
+                                                        "label": "Number",
+                                                        "name": "number",
+                                                        "type": "number",
+                                                        "instructions": "",
+                                                        "required": 1,
+                                                        "conditional_logic": 0,
+                                                        "wrapper": {
+                                                            "width": "",
+                                                            "class": "",
+                                                            "id": ""
+                                                        },
+                                                        "default_value": "",
+                                                        "placeholder": "",
+                                                        "prepend": "",
+                                                        "append": "",
+                                                        "min": "",
+                                                        "max": "",
+                                                        "step": ""
+                                                    },
+                                                    {
+                                                        "key": "field_58b37bc058c37",
+                                                        "label": "Label",
+                                                        "name": "label",
+                                                        "type": "text",
+                                                        "instructions": "",
+                                                        "required": 1,
+                                                        "conditional_logic": 0,
+                                                        "wrapper": {
+                                                            "width": "",
+                                                            "class": "",
+                                                            "id": ""
+                                                        },
+                                                        "default_value": "",
+                                                        "placeholder": "",
+                                                        "prepend": "",
+                                                        "append": "",
+                                                        "maxlength": ""
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "min": "",
+                                        "max": ""
+                                    },
+                                    {
+                                        "key": "58b37bca58c38",
+                                        "name": "line_graph",
+                                        "label": "Line graph",
+                                        "display": "block",
+                                        "sub_fields": [
+                                            {
+                                                "key": "field_58b37bca58c39",
+                                                "label": "Title",
+                                                "name": "title",
+                                                "type": "text",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "placeholder": "",
+                                                "prepend": "",
+                                                "append": "",
+                                                "maxlength": ""
+                                            },
+                                            {
+                                                "key": "field_58b37bca58c3a",
+                                                "label": "Numbers",
+                                                "name": "numbers",
+                                                "type": "repeater",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "collapsed": "",
+                                                "min": 1,
+                                                "max": 0,
+                                                "layout": "row",
+                                                "button_label": "Add a datapoint",
+                                                "sub_fields": [
+                                                    {
+                                                        "key": "field_58b37bca58c3b",
+                                                        "label": "Number",
+                                                        "name": "number",
+                                                        "type": "number",
+                                                        "instructions": "",
+                                                        "required": 1,
+                                                        "conditional_logic": 0,
+                                                        "wrapper": {
+                                                            "width": "",
+                                                            "class": "",
+                                                            "id": ""
+                                                        },
+                                                        "default_value": "",
+                                                        "placeholder": "",
+                                                        "prepend": "",
+                                                        "append": "",
+                                                        "min": "",
+                                                        "max": "",
+                                                        "step": ""
+                                                    },
+                                                    {
+                                                        "key": "field_58b37bca58c3c",
+                                                        "label": "Label",
+                                                        "name": "label",
+                                                        "type": "text",
+                                                        "instructions": "",
+                                                        "required": 1,
+                                                        "conditional_logic": 0,
+                                                        "wrapper": {
+                                                            "width": "",
+                                                            "class": "",
+                                                            "id": ""
+                                                        },
+                                                        "default_value": "",
+                                                        "placeholder": "",
+                                                        "prepend": "",
+                                                        "append": "",
+                                                        "maxlength": ""
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "min": "",
+                                        "max": ""
+                                    }
+                                ]
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "58a10613907a0": {
+                        "key": "58a10613907a0",
+                        "name": "finances",
+                        "label": "Finances",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58a10ea6361ed",
+                                "label": "About the Financials Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "Every annual report has to have one! Give us your itemized expenses and income sources. \r\n\r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/financials-section\/\">Learn More.<\/a>",
+                                "new_lines": "br",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_58b35e651c0a7",
+                                "label": "Financials Intro Text",
+                                "name": "lead_in",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example: Boys & Girls Club of Clark County Financials for 2019....",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
+                                "key": "field_58a10613907a1",
+                                "label": "Expenses",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58b35f6a1c0b3",
+                                "label": "Expense Line Items",
+                                "name": "expense_line_items",
+                                "type": "repeater",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "collapsed": "",
+                                "min": 0,
+                                "max": 0,
+                                "layout": "table",
+                                "button_label": "",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_58b35f6a1c0b4",
+                                        "label": "Expense Name",
+                                        "name": "title",
+                                        "type": "text",
+                                        "instructions": "",
+                                        "required": 1,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "prepend": "",
+                                        "append": "",
+                                        "maxlength": ""
+                                    },
+                                    {
+                                        "key": "field_58b35f6a1c0b5",
+                                        "label": "Dollar Amount",
+                                        "name": "number",
+                                        "type": "number",
+                                        "instructions": "* Whole numbers only, no dollar signs or punctuation.",
+                                        "required": 1,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "prepend": "$",
+                                        "append": "",
+                                        "min": 0,
+                                        "max": "",
+                                        "step": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "key": "field_58b35ffc25f89",
+                                "label": "Expenses Description Text",
+                                "name": "expenses_copy",
+                                "type": "textarea",
+                                "instructions": "This is an optional text area to describe expenses in more depth.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": "",
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_58b35e431c0a4",
+                                "label": "Revenue",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58b35f281c0b0",
+                                "label": "Revenue Line Items",
+                                "name": "revenue_line_items",
+                                "type": "repeater",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "collapsed": "",
+                                "min": 0,
+                                "max": 0,
+                                "layout": "table",
+                                "button_label": "",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_58b35f381c0b1",
+                                        "label": "Revenue Name",
+                                        "name": "title",
+                                        "type": "text",
+                                        "instructions": "",
+                                        "required": 1,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "prepend": "",
+                                        "append": "",
+                                        "maxlength": ""
+                                    },
+                                    {
+                                        "key": "field_58b35f441c0b2",
+                                        "label": "Dollar Amount",
+                                        "name": "number",
+                                        "type": "number",
+                                        "instructions": "* Whole numbers only. No punctuation or dollar signs needed.",
+                                        "required": 1,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "prepend": "$",
+                                        "append": "",
+                                        "min": 0,
+                                        "max": "",
+                                        "step": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "key": "field_58b35fd625f88",
+                                "label": "Revenue Expenses Description",
+                                "name": "revenue_copy",
+                                "type": "textarea",
+                                "instructions": "Talk a bit about where this money came from in more depth.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": "",
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_58bcb6620953b",
+                                "label": "Miscellaneous",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58bcb7200953c",
+                                "label": "Miscellaneous Financials",
+                                "name": "misc_line_items",
+                                "type": "repeater",
+                                "instructions": "This is for the weird stuff like investment portfolios and endowments.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "collapsed": "",
+                                "min": 0,
+                                "max": 0,
+                                "layout": "table",
+                                "button_label": "",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_58bcb7210953d",
+                                        "label": "Item Name",
+                                        "name": "title",
+                                        "type": "text",
+                                        "instructions": "",
+                                        "required": 1,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "prepend": "",
+                                        "append": "",
+                                        "maxlength": ""
+                                    },
+                                    {
+                                        "key": "field_58bcb7210953e",
+                                        "label": "Dollar Amount",
+                                        "name": "number",
+                                        "type": "number",
+                                        "instructions": "* Whole numbers only. No punctuation or dollar signs needed.",
+                                        "required": 1,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "prepend": "$",
+                                        "append": "",
+                                        "min": "",
+                                        "max": "",
+                                        "step": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "key": "field_58bcb72d0953f",
+                                "label": "Miscellaneous Financials Description",
+                                "name": "misc_copy",
+                                "type": "textarea",
+                                "instructions": "Talk a bit about these items in more depth.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "maxlength": "",
+                                "rows": "",
+                                "new_lines": "br"
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "58a108599f4fc": {
+                        "key": "58a108599f4fc",
+                        "name": "year_in_the_club",
+                        "label": "Year in the Club",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58a10ecb6dcbe",
+                                "label": "About the Year in the Club Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "This shows all the events that have happened in the Club over the past year. \r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/year-in-club-section\/\">Learn More.<\/a>",
+                                "new_lines": "br",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_58a12562be87e",
+                                "label": "Events",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58a1256bbe87f",
+                                "label": "Section Intro",
+                                "name": "lead_in",
+                                "type": "text",
+                                "instructions": "Share any takeaway notes for the year.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example: 2020 was a big year for the Boys & Girls Clubs of Chocteau County.",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": 80
+                            },
+                            {
+                                "key": "field_58a12587be880",
+                                "label": "Events this Year",
+                                "name": "events",
+                                "type": "repeater",
+                                "instructions": "Add each memorable event from the Annual Report Year. After adding all your events, drag and drop them into chronological order.",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "collapsed": "field_58a1259abe881",
+                                "min": 1,
+                                "max": 0,
+                                "layout": "block",
+                                "button_label": "Add an Event",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_58a1259abe881",
+                                        "label": "Date",
+                                        "name": "date",
+                                        "type": "date_picker",
+                                        "instructions": "At this time, all dates have to be a fixed date with a day, month and year. If this event spans a period of time, simply select the first date of that span.",
+                                        "required": 1,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "display_format": "F j, Y",
+                                        "return_format": "Ymd",
+                                        "first_day": 1
+                                    },
+                                    {
+                                        "key": "field_58a125f8be883",
+                                        "label": "Name of the Event",
+                                        "name": "title",
+                                        "type": "text",
+                                        "instructions": "What was this event?",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "prepend": "",
+                                        "append": "",
+                                        "maxlength": 70
+                                    },
+                                    {
+                                        "key": "field_58a125abbe882",
+                                        "label": "Event Description",
+                                        "name": "content",
+                                        "type": "textarea",
+                                        "instructions": "Write a couple sentences about this event.",
+                                        "required": 1,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "maxlength": 560,
+                                        "rows": "",
+                                        "new_lines": "br"
+                                    }
+                                ]
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "58a10a3c3378d": {
+                        "key": "58a10a3c3378d",
+                        "name": "important_people",
+                        "label": "Important People",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58a10ed86dcbf",
+                                "label": "About Important People",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "Whether listing your staff of your board, this section lets you display a group of people with a photo and short description of each. \r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/important-people-section\/\">Learn More.<\/a>",
+                                "new_lines": "wpautop",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_58a1262abe884",
+                                "label": "Content",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58bccbccf9497",
+                                "label": "Section Title",
+                                "name": "title",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
+                                "key": "field_58bccbe4f9498",
+                                "label": "Section Subtitle",
+                                "name": "subtitle",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
+                                "key": "field_58bccc12f9499",
+                                "label": "People",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58a126d7be885",
+                                "label": "People",
+                                "name": "people",
+                                "type": "repeater",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "collapsed": "field_58bc3f330f794",
+                                "min": 0,
+                                "max": 0,
+                                "layout": "row",
+                                "button_label": "Add a Person",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_58a126f76819f",
+                                        "label": "Name",
+                                        "name": "name",
+                                        "type": "text",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "prepend": "",
+                                        "append": "",
+                                        "maxlength": ""
+                                    },
+                                    {
+                                        "key": "field_58a12700681a0",
+                                        "label": "Job title",
+                                        "name": "job_title",
+                                        "type": "text",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "prepend": "",
+                                        "append": "",
+                                        "maxlength": ""
+                                    },
+                                    {
+                                        "key": "field_58a12708681a1",
+                                        "label": "Short Bio",
+                                        "name": "about_me",
+                                        "type": "wysiwyg",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "tabs": "visual",
+                                        "toolbar": "basic",
+                                        "media_upload": 0,
+                                        "delay": 1
+                                    },
+                                    {
+                                        "key": "field_58a1272a681a3",
+                                        "label": "Social Media Links",
+                                        "name": "links",
+                                        "type": "repeater",
+                                        "instructions": "Adding these is entirely optional.",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "collapsed": "field_58a12730681a4",
+                                        "min": 0,
+                                        "max": 0,
+                                        "layout": "block",
+                                        "button_label": "Add a link",
+                                        "sub_fields": [
+                                            {
+                                                "key": "field_58a12730681a4",
+                                                "label": "Platform",
+                                                "name": "platform",
+                                                "type": "select",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "choices": {
+                                                    "twitter": "Twitter",
+                                                    "instagram": "Instagram",
+                                                    "website": "Personal Website"
+                                                },
+                                                "default_value": [],
+                                                "allow_null": 0,
+                                                "multiple": 0,
+                                                "ui": 0,
+                                                "ajax": 0,
+                                                "return_format": "array",
+                                                "placeholder": ""
+                                            },
+                                            {
+                                                "key": "field_58a12772681a5",
+                                                "label": "Link",
+                                                "name": "link",
+                                                "type": "url",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "placeholder": ""
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key": "field_58bc3f330f794",
+                                        "label": "Photo",
+                                        "name": "photo",
+                                        "type": "image_crop",
+                                        "instructions": "",
+                                        "required": 1,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "crop_type": "min",
+                                        "target_size": "large",
+                                        "width": "",
+                                        "height": "",
+                                        "preview_size": "large",
+                                        "force_crop": "no",
+                                        "save_in_media_library": "yes",
+                                        "retina_mode": "no",
+                                        "save_format": "id",
+                                        "library": "all"
+                                    }
+                                ]
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "58a10a4633790": {
+                        "key": "58a10a4633790",
+                        "name": "our_programs",
+                        "label": "Our Programs",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58a10ee56dcc0",
+                                "label": "About the Programs Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "This is a section where visitors can scroll through the programs offered at your Club. Add from a catalogue of default BGCA programs and add your own. \r\n\r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/programs-section\/\">Learn More.<\/a>",
+                                "new_lines": "wpautop",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_58a127ea681a6",
+                                "label": "Content",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58a904486e766",
+                                "label": "Section Heading",
+                                "name": "heading",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "Our Programs",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            },
+                            {
+                                "key": "field_58a904526e767",
+                                "label": "Subheading",
+                                "name": "subheading",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "A small sample of what the Clubs offer",
+                                "maxlength": "",
+                                "rows": "",
+                                "new_lines": "br"
+                            },
+                            {
+                                "key": "field_58bccd32f949a",
+                                "label": "Programs",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58a12874681a9",
+                                "label": "Programs",
+                                "name": "programs",
+                                "type": "repeater",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "collapsed": "field_58a1287e681aa",
+                                "min": 1,
+                                "max": 0,
+                                "layout": "block",
+                                "button_label": "Add a Program",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_58a9054b6e76a",
+                                        "label": "Program Source",
+                                        "name": "program_source",
+                                        "type": "radio",
+                                        "instructions": "Do you want to choose a program from the library or do you want to make your own custom program?",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "choices": {
+                                            "from_programs": "Choose one from the library",
+                                            "custom": "Make my own!"
+                                        },
+                                        "allow_null": 0,
+                                        "other_choice": 0,
+                                        "save_other_choice": 0,
+                                        "default_value": "",
+                                        "layout": "horizontal",
+                                        "return_format": "value"
+                                    },
+                                    {
+                                        "key": "field_58a1287e681aa",
+                                        "label": "Program",
+                                        "name": "program",
+                                        "type": "post_object",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": [
+                                            [
+                                                {
+                                                    "field": "field_58a9054b6e76a",
+                                                    "operator": "==",
+                                                    "value": "from_programs"
+                                                }
+                                            ]
+                                        ],
+                                        "wrapper": {
+                                            "width": "100%",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "post_type": [
+                                            "program"
+                                        ],
+                                        "taxonomy": [],
+                                        "allow_null": 0,
+                                        "multiple": 0,
+                                        "return_format": "id",
+                                        "ui": 1
+                                    },
+                                    {
+                                        "key": "field_58bc9626753f0",
+                                        "label": "Program Title",
+                                        "name": "title",
+                                        "type": "text",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": [
+                                            [
+                                                {
+                                                    "field": "field_58a9054b6e76a",
+                                                    "operator": "==",
+                                                    "value": "custom"
+                                                }
+                                            ]
+                                        ],
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "prepend": "",
+                                        "append": "",
+                                        "maxlength": ""
+                                    },
+                                    {
+                                        "key": "field_58bccfdef949b",
+                                        "label": "Custom Content for National Programs",
+                                        "name": "",
+                                        "type": "message",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": [
+                                            [
+                                                {
+                                                    "field": "field_58a9054b6e76a",
+                                                    "operator": "==",
+                                                    "value": "from_programs"
+                                                }
+                                            ]
+                                        ],
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "message": "You can use your own customized description and photo of this program if you like. If you leave the below fields empty, the default content for this program from BGCA will show instead.",
+                                        "new_lines": "wpautop",
+                                        "esc_html": 1
+                                    },
+                                    {
+                                        "key": "field_58bc9631753f1",
+                                        "label": "Program Subtitle",
+                                        "name": "lead_in",
+                                        "type": "textarea",
+                                        "instructions": "Provide a very short description of this program.",
+                                        "required": 0,
+                                        "conditional_logic": [
+                                            [
+                                                {
+                                                    "field": "field_58a9054b6e76a",
+                                                    "operator": "==",
+                                                    "value": "custom"
+                                                }
+                                            ]
+                                        ],
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "example: After School Athletics",
+                                        "maxlength": 140,
+                                        "rows": "",
+                                        "new_lines": "br"
+                                    },
+                                    {
+                                        "key": "field_58bcae457622d",
+                                        "label": "Program Description",
+                                        "name": "description",
+                                        "type": "textarea",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "default_value": "",
+                                        "placeholder": "",
+                                        "maxlength": 560,
+                                        "rows": "",
+                                        "new_lines": "br"
+                                    },
+                                    {
+                                        "key": "field_58bc964a753f2",
+                                        "label": "Photo",
+                                        "name": "photo",
+                                        "type": "image_crop",
+                                        "instructions": "Upload a photograph of this program.",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "crop_type": "min",
+                                        "target_size": "large-hero-png",
+                                        "width": "",
+                                        "height": "",
+                                        "preview_size": "medium-hero-png",
+                                        "force_crop": "no",
+                                        "save_in_media_library": "yes",
+                                        "retina_mode": "no",
+                                        "save_format": "id",
+                                        "library": "all"
+                                    },
+                                    {
+                                        "key": "field_58bc9f23602ce",
+                                        "label": "Logo",
+                                        "name": "logo",
+                                        "type": "image_crop",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": [
+                                            [
+                                                {
+                                                    "field": "field_58a9054b6e76a",
+                                                    "operator": "==",
+                                                    "value": "custom"
+                                                }
+                                            ]
+                                        ],
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "crop_type": "min",
+                                        "target_size": "apple-square-76",
+                                        "width": "",
+                                        "height": "",
+                                        "preview_size": "apple-square-180",
+                                        "force_crop": "no",
+                                        "save_in_media_library": "yes",
+                                        "retina_mode": "no",
+                                        "save_format": "id",
+                                        "library": "all"
+                                    }
+                                ]
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "58a91948a24b3": {
+                        "key": "58a91948a24b3",
+                        "name": "donor_thank_you",
+                        "label": "Donor Thank you",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58a91948a24b4",
+                                "label": "About the Donor Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "Here we can create different lists of donors that we want to thank for their support over this particular calendar year. \r\n\r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/donor-section\/\">Learn More.<\/a>",
+                                "new_lines": "wpautop",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_58a91948a24b5",
+                                "label": "Content",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58bcd0fef949c",
+                                "label": "Groups",
+                                "name": "groups",
+                                "type": "repeater",
+                                "instructions": "",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "collapsed": "field_58a9196da24c1",
+                                "min": 1,
+                                "max": 0,
+                                "layout": "table",
+                                "button_label": "Add a person",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_58bcd136f949e",
+                                        "label": "Donor\/Sponsor Group",
+                                        "name": "teir",
+                                        "type": "repeater",
+                                        "instructions": "",
+                                        "required": 0,
+                                        "conditional_logic": 0,
+                                        "wrapper": {
+                                            "width": "",
+                                            "class": "",
+                                            "id": ""
+                                        },
+                                        "collapsed": "",
+                                        "min": 0,
+                                        "max": 0,
+                                        "layout": "table",
+                                        "button_label": "",
+                                        "sub_fields": [
+                                            {
+                                                "key": "field_58bcd1acf949f",
+                                                "label": "Group Name",
+                                                "name": "teir_title",
+                                                "type": "text",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "default_value": "",
+                                                "placeholder": "",
+                                                "prepend": "",
+                                                "append": "",
+                                                "maxlength": ""
+                                            },
+                                            {
+                                                "key": "field_58bcd1e7f94a0",
+                                                "label": "Donor List",
+                                                "name": "thank_yous",
+                                                "type": "repeater",
+                                                "instructions": "",
+                                                "required": 0,
+                                                "conditional_logic": 0,
+                                                "wrapper": {
+                                                    "width": "",
+                                                    "class": "",
+                                                    "id": ""
+                                                },
+                                                "collapsed": "",
+                                                "min": 0,
+                                                "max": 0,
+                                                "layout": "table",
+                                                "button_label": "",
+                                                "sub_fields": [
+                                                    {
+                                                        "key": "field_58bcd254f94a1",
+                                                        "label": "Donor\/Sponsor Name",
+                                                        "name": "persons_name",
+                                                        "type": "text",
+                                                        "instructions": "",
+                                                        "required": 0,
+                                                        "conditional_logic": 0,
+                                                        "wrapper": {
+                                                            "width": "",
+                                                            "class": "",
+                                                            "id": ""
+                                                        },
+                                                        "default_value": "",
+                                                        "placeholder": "",
+                                                        "prepend": "",
+                                                        "append": "",
+                                                        "maxlength": 40
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "58a10439dbe2a": {
+                        "key": "58a10439dbe2a",
+                        "name": "call_to_action",
+                        "label": "Call to Action",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_58a10ef16dcc1",
+                                "label": "About the Call to Action Section",
+                                "name": "",
+                                "type": "message",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "message": "The Call to Action is best utilized at the very bottom of your annual report so visitors know what to do next, but you can also throw these in throughout the design to get visitors to give, follow or volunteer.\r\n\r\n\r\n <a target=\"_blank\" href=\"https:\/\/bgca.local\/faqs_nice\/cta-section\/\">Learn More.<\/a>",
+                                "new_lines": "wpautop",
+                                "esc_html": 0
+                            },
+                            {
+                                "key": "field_58a10439dbe30",
+                                "label": "Content",
+                                "name": "",
+                                "type": "tab",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "placement": "left",
+                                "endpoint": 0
+                            },
+                            {
+                                "key": "field_58a10439dbe31",
+                                "label": "Call to Action Title",
+                                "name": "header",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example: Join the Club!",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": 80
+                            },
+                            {
+                                "key": "field_58bc4bd768680",
+                                "label": "Subtitle",
+                                "name": "subheader",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "example: Your gift to the Boys & Girls Clubs of Monroe Township will help serve over 15,000 deserving kids.",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": 200
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    }
+                },
+                "button_label": "Add a Section to this Report",
+                "min": 3,
+                "max": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "reports"
+                }
+            ]
+        ],
+        "menu_order": -1,
+        "position": "acf_after_title",
+        "style": "seamless",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "the_content",
+            "excerpt",
+            "custom_fields",
+            "discussion",
+            "comments",
+            "revisions",
+            "author",
+            "format",
+            "page_attributes",
+            "featured_image",
+            "tags",
+            "send-trackbacks"
+        ],
+        "active": 1,
+        "description": ""
+    }
+]

@@ -175,11 +175,7 @@ acf_add_local_field_group(array (
 						'pinterest' => 'Pinterest',
 						'linkedin' => 'LinkedIn',
 						'youtube' => 'YouTube',
-						'producthunt' => 'Product Hunt',
-						'deviantart' => 'DeviantArt',
 						'dribbble' => 'Dribbble',
-						'behance' => 'Behance',
-						'houzz' => 'Houzz',
 					),
 					'default_value' => array (
 					),

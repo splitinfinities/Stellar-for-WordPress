@@ -504,6 +504,10 @@ class SENDO {
 			include __DIR__ . '/../vendor/sendo/style.php';
 		}
 
+		elseif ($type === 'connecting') {
+			include __DIR__ . '/../vendor/sendo/connecting.php';
+		}
+
 		elseif ($type === 'bodyclass') {
 			return ($this->routeClassOverride) ? $this->routeClassOverride : $this->route_class();
 		}

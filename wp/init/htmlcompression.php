@@ -7,6 +7,7 @@ class WP_HTML_Compression {
 	// Settings
 	protected $compress_css = true;
 	protected $compress_js = true;
+	protected $compress_template = false;
 	protected $info_comment = true;
 	protected $remove_comments = true;
 
@@ -35,7 +36,7 @@ class WP_HTML_Compression {
 	}
 
 	protected function minifyHTML($html) {
-		$pattern = '/<(?<script>script).*?<\/script\s*>|<(?<style>style).*?<\/style\s*>|<!(?<comment>--).*?-->|<(?<tag>[\/\w.:-]*)(?:".*?"|\'.*?\'|[^\'">]+)*>|(?<text>((<[^!\/\w.:-])?[^<]*)+)|/si';
+		$pattern = '/<(?<script>script).*?<\/script\s*>|<(?<template>template).*?<\/template\s*>|<(?<style>style).*?<\/style\s*>|<!(?<comment>--).*?-->|<(?<tag>[\/\w.:-]*)(?:".*?"|\'.*?\'|[^\'">]+)*>|(?<text>((<[^!\/\w.:-])?[^<]*)+)|/si';
 		preg_match_all($pattern, $html, $matches, PREG_SET_ORDER);
 		$overriding = false;
 		$raw_tag = false;
@@ -49,6 +50,10 @@ class WP_HTML_Compression {
 			if (is_null($tag)) {
 				if ( !empty($token['script']) ) {
 					$strip = $this->compress_js;
+				}
+
+				if ( !empty($token['template']) ) {
+					$strip = $this->compress_template;
 				}
 
 				else if ( !empty($token['style']) ) {

@@ -28,10 +28,6 @@ if (get_field('enable_caching', 'option')) {
 	$sendo_transient = get_transient( md5( $the_path_for_the_transient ) . '_sendo_' . $cached_time->timestamp );
 }
 
-global $inverted;
-
-$inverted = false;
-
 // TODO: Move this to a function
 // If the caches are set, and the user isn't logged in,
 // Set the $content variable and $sendo variable from the cache.

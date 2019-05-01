@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@stellar-design/core": "^1.0.0-1"
+    "@stellar-design/core": "^1.0.0-9"
   }
 }

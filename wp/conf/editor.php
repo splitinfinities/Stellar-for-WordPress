@@ -145,8 +145,196 @@ function my_tiny_mce_before_init( $mceInit ) {
 			)
 		),
 		array(
+			'title' => 'Text Colors',
+			'items' => array(
+				array(
+					'title' => 'Black',
+					'classes' => 'black',
+					'selector' => 'p,h1,h2,h3,h4,h5,h6',
+					'wrapper' => true,
+				),
+				array(
+					'title' => 'White',
+					'classes' => 'white',
+					'selector' => 'p,h1,h2,h3,h4,h5,h6',
+					'wrapper' => true,
+				),
+				array(
+					'title' => 'Primary',
+					'items' => array(
+						array(
+							'title' => 'Shade 0',
+							'classes' => 'theme-base0',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 1',
+							'classes' => 'theme-base1',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 2',
+							'classes' => 'theme-base2',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 3',
+							'classes' => 'theme-base3',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 4',
+							'classes' => 'theme-base4',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 5',
+							'classes' => 'theme-base5',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 6',
+							'classes' => 'theme-base6',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 7',
+							'classes' => 'theme-base7',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 8',
+							'classes' => 'theme-base8',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 9',
+							'classes' => 'theme-base9',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+					)
+				),
+				array(
+					'title' => 'Complement',
+					'items' => array(
+						array(
+							'title' => 'Shade 0',
+							'classes' => 'theme-complement0',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 1',
+							'classes' => 'theme-complement1',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 2',
+							'classes' => 'theme-complement2',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 3',
+							'classes' => 'theme-complement3',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 4',
+							'classes' => 'theme-complement4',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 5',
+							'classes' => 'theme-complement5',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 6',
+							'classes' => 'theme-complement6',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 7',
+							'classes' => 'theme-complement7',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 8',
+							'classes' => 'theme-complement8',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+						array(
+							'title' => 'Shade 9',
+							'classes' => 'theme-complement9',
+							'selector' => 'p,h1,h2,h3,h4,h5,h6',
+							'wrapper' => true,
+						),
+					)
+				),
+			)
+		),
+		array(
+			'title' => 'Text Shadow',
+			'items' => array(
+				array(
+					'title' => 'Text shadow Top Left',
+					'classes' => 'long-shadow-tl',
+					'selector' => 'p,h1,h2,h3,h4,h5,h6',
+					'wrapper' => true,
+				),
+				array(
+					'title' => 'Text shadow Top Right',
+					'classes' => 'long-shadow-tr',
+					'selector' => 'p,h1,h2,h3,h4,h5,h6',
+					'wrapper' => true,
+				),
+				array(
+					'title' => 'Text shadow Bottom Left',
+					'classes' => 'long-shadow-bl',
+					'selector' => 'p,h1,h2,h3,h4,h5,h6',
+					'wrapper' => true,
+				),
+				array(
+					'title' => 'Text shadow Bottom Right',
+					'classes' => 'long-shadow-br',
+					'selector' => 'p,h1,h2,h3,h4,h5,h6',
+					'wrapper' => true,
+				),
+			)
+		),
+		array(
 			'title' => 'Type',
 			'items' => array(
+				array(
+					'title' => 'Massive',
+					'classes' => 'fs-massive',
+					'selector' => 'p,h1,h2,h3,h4,h5,h6',
+					'wrapper' => true,
+				),
+				array(
+					'title' => 'Large',
+					'classes' => 'fs-large',
+					'selector' => 'p,h1,h2,h3,h4,h5,h6',
+					'wrapper' => true,
+				),
 				array(
 					'title' => 'Size 1',
 					'classes' => 'fs1',

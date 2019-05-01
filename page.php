@@ -1,3 +1,4 @@
+<?php sendo()->hide_chrome() ?>
 <?php if ( have_rows( 'hero', 5 ) ) : ?>
 	<?php while ( have_rows( 'hero', 5 ) ) : the_row(); ?>
 		<div class="relative overflow-hidden z-2">

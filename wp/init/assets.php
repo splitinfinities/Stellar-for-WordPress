@@ -12,8 +12,8 @@ function prepare_scripts() {
 	$assets_basepath = '/assets';
 
 	$base_assets = array(
-		'app.js' => get_template_directory_uri() . $assets_basepath . '/node_modules/@stellar-design/core/dist/stellar-core.js',
-		'app.css' => get_template_directory_uri() . $assets_basepath . '/node_modules/@stellar-design/core/dist/stellar-core.css',
+		'app.js' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core.js',
+		'app.css' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core.css',
 	);
 
 	// Embed resources that we need

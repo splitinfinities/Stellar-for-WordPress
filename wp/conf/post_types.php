@@ -6,25 +6,35 @@
  */
 function init_custom_post_types() {
 	$post_types = array(
-
+		'components' => array(
+			'title' => "Components",
+			'singular' => "Component",
+			'plural' => "Components",
+			'slug' => "components",
+			'position' => -1,
+			'has_archive' => true,
+			'menu_icon' => '',
+			'supports' => array('editor', 'title', 'permalink'),
+			'taxonomies' => array()
+		)
 	);
 
 	foreach ($post_types as $name => $options) {
 		$labels = array(
-			'name'               => _x( $options['title'], 'post type general name', 'tech_omaha' ),
-			'singular_name'      => _x( $options['singular'], 'post type singular name', 'tech_omaha' ),
-			'menu_name'          => _x( $options['title'], 'admin menu', 'tech_omaha' ),
-			'name_admin_bar'     => _x( $options['singular'], 'add new on admin bar', 'tech_omaha' ),
-			'add_new'            => _x( 'Add ' . $options['singular'], $name, 'tech_omaha' ),
-			'add_new_item'       => __( 'Add New ' . $options['singular'], 'tech_omaha' ),
-			'new_item'           => __( 'New ' . $options['singular'], 'tech_omaha' ),
-			'edit_item'          => __( 'Edit ' . $options['singular'], 'tech_omaha' ),
-			'view_item'          => __( 'View ' . $options['singular'], 'tech_omaha' ),
-			'all_items'          => __( 'All ' . $options['plural'], 'tech_omaha' ),
-			'search_items'       => __( 'Search ' . $options['plural'], 'tech_omaha' ),
-			'parent_item_colon'  => __( 'Parent ' . $options['plural'], 'tech_omaha' ),
-			'not_found'          => __( 'No ' . strtolower($options['plural']) . ' found.', 'tech_omaha' ),
-			'not_found_in_trash' => __( 'No ' . strtolower($options['plural']) . ' found in Trash.', 'tech_omaha' )
+			'name'               => _x( $options['title'], 'post type general name', 'stellar' ),
+			'singular_name'      => _x( $options['singular'], 'post type singular name', 'stellar' ),
+			'menu_name'          => _x( $options['title'], 'admin menu', 'stellar' ),
+			'name_admin_bar'     => _x( $options['singular'], 'add new on admin bar', 'stellar' ),
+			'add_new'            => _x( 'Add ' . $options['singular'], $name, 'stellar' ),
+			'add_new_item'       => __( 'Add New ' . $options['singular'], 'stellar' ),
+			'new_item'           => __( 'New ' . $options['singular'], 'stellar' ),
+			'edit_item'          => __( 'Edit ' . $options['singular'], 'stellar' ),
+			'view_item'          => __( 'View ' . $options['singular'], 'stellar' ),
+			'all_items'          => __( 'All ' . $options['plural'], 'stellar' ),
+			'search_items'       => __( 'Search ' . $options['plural'], 'stellar' ),
+			'parent_item_colon'  => __( 'Parent ' . $options['plural'], 'stellar' ),
+			'not_found'          => __( 'No ' . strtolower($options['plural']) . ' found.', 'stellar' ),
+			'not_found_in_trash' => __( 'No ' . strtolower($options['plural']) . ' found in Trash.', 'stellar' )
 		);
 
 		$args = array(
@@ -38,6 +48,7 @@ function init_custom_post_types() {
 			'capability_type'    => 'post',
 			'has_archive'        => $options['has_archive'],
 			'hierarchical'       => true,
+			'show_in_rest'       => true,
 			'menu_position'      => $options['position'],
 			'menu_icon'          => $options['menu_icon'],
 			'supports'           => $options['supports'],

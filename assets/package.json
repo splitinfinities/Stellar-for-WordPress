@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cp -a ./node_modules/@stellar-design/core/dist ./stellar"
   },
   "author": "",
   "license": "ISC",

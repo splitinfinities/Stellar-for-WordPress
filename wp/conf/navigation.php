@@ -40,9 +40,10 @@ class SPLITINFINITIES_Walker_Nav_Menu extends Walker_Nav_Menu {
         $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
         $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
         $attributes .= ' class="menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+        $attributes .= (array_search('current-menu-item', $item->classes) != 0) ? ' open' : '';
 
         // Build HTML output and pass through the proper filter.
-        $item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s</a>%6$s',
+        $item_output = sprintf( '%1$s<stellar-tab tag="a" %2$s>%3$s%4$s%5$s</stellar-tab>%6$s',
             $args->before,
             $attributes,
             $args->link_before,

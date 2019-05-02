@@ -1,0 +1,30 @@
+import '../../../stencil.core';
+export declare class Picture {
+    element: HTMLElement;
+    figure: HTMLElement;
+    poster: string;
+    width: number;
+    height: number;
+    nozoom: boolean;
+    bg: string;
+    aspectRatio: number;
+    sources: Array<any>;
+    io: IntersectionObserver;
+    active: boolean;
+    zoom: any;
+    palette: any;
+    componentWillLoad(): void;
+    componentDidLoad(): void;
+    mountZoom(): void;
+    handlePosterChange(): void;
+    medium(): Promise<any>;
+    handleImage(): Promise<void>;
+    addIntersectionObserver(): void;
+    removeIntersectionObserver(): void;
+    getPictureColor(): void;
+    setBG(): void;
+    prepareSources(): void;
+    updateAspectRatio(): void;
+    renderPicture(): JSX.Element[];
+    render(): JSX.Element;
+}

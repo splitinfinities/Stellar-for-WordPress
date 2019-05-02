@@ -6,6 +6,7 @@ use Carbon\Carbon as Carbon;
 
 // Sets up SENDO
 global $sendo;
+global $wp_query;
 $content_transient = false;
 $sendo_transient = false;
 
@@ -80,10 +81,14 @@ if ( $content_transient && $sendo_transient && ! is_user_logged_in( ) ) {
 	}
 }
 
+if ($_GET["ajax"] === "true") {
+	echo $content; exit;
+}
+
 // Capture the page in memory
 ob_start(); ?>
 <!doctype html>
-<html class="no-js theme_<?php echo $sendo->theme_color; ?>" <?php language_attributes(); ?>>
+<html class="no-js <?php the_field('color_mode') ?>" <?php language_attributes(); ?>>
 <head>
 	<?php $sendo->output('meta'); ?>
 
@@ -99,7 +104,7 @@ ob_start(); ?>
 
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/style.css">
 </head>
-<body <?php body_class(); ?> data-section="top">
+<body <?php body_class(get_field('theme') . " " . get_field('complement')); ?> data-section="top">
 	<?php if ($sendo->chrome_shown): ?>
 		<?php get_template_part('header'); ?>
 	<?php endif; ?>

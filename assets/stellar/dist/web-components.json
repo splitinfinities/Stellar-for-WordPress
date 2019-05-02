@@ -1,0 +1,2354 @@
+{
+  "tags": [
+    {
+      "label": "web-audio-debugger",
+      "description": "",
+      "attributes": [
+        {
+          "label": "count",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "web-audio-effect",
+      "description": "",
+      "attributes": [
+        {
+          "label": "axis",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "method",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "midicontroller",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "responds",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "use",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "value",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "web-audio-sequencer",
+      "description": "",
+      "attributes": [
+        {
+          "label": "autoplay",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "taps",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "tempo",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "web-audio-source",
+      "description": "",
+      "attributes": [
+        {
+          "label": "effectsvolume",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "inert",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "midichannel",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "midikey",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "playing",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "src",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "web-audio-visualizer-shader",
+      "description": "",
+      "attributes": [
+        {
+          "label": "type",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "web-audio-visualizer",
+      "description": "",
+      "attributes": [
+        {
+          "label": "color",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "for",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "height",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "smoothing",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "width",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "web-audio",
+      "description": "",
+      "attributes": [
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-button",
+      "description": "",
+      "attributes": [
+        {
+          "label": "active",
+          "description": "Sets the button or link as an active state.",
+          "required": false
+        },
+        {
+          "label": "block",
+          "description": "Sets the button or link to render at full width to the parent.",
+          "required": false
+        },
+        {
+          "label": "danger",
+          "description": "Sets the button or link to provide the affordance of a dangerous action.",
+          "required": false
+        },
+        {
+          "label": "disabled",
+          "description": "Sets the button or link as disabled and not-interactable.",
+          "required": false
+        },
+        {
+          "label": "for",
+          "description": "Sets the href on the anchor tag if the button is a link.",
+          "required": false
+        },
+        {
+          "label": "ghost",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "href",
+          "description": "Sets the href on the anchor tag if the button is a link.",
+          "required": false
+        },
+        {
+          "label": "icon",
+          "description": "Sets the button or link as a button with only an icon.",
+          "required": false
+        },
+        {
+          "label": "invert",
+          "description": "Sets the button or link as an outlined button.",
+          "required": false
+        },
+        {
+          "label": "label",
+          "description": "Sets accessibility options on the buttons",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "Sets the name on the button if the button is an input. Allows the button to act as an item in a form.",
+          "required": false
+        },
+        {
+          "label": "outline",
+          "description": "Sets the button or link as an outlined button.",
+          "required": false
+        },
+        {
+          "label": "padding",
+          "description": "Sets the padding inside of the button. Can be small, medium, or large.",
+          "required": false
+        },
+        {
+          "label": "pill",
+          "description": "Sets the button or link to render as a pill.",
+          "required": false
+        },
+        {
+          "label": "processable",
+          "description": "Sets the button or link as processing when clicked.",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "Sets the size of the button. Can be tiny, small, medium, or large.",
+          "required": false
+        },
+        {
+          "label": "tag",
+          "description": "Allows the button to render for different tags.",
+          "required": false
+        },
+        {
+          "label": "target",
+          "description": "Sets the target on the anchor tag if the button is a link.",
+          "required": false
+        },
+        {
+          "label": "value",
+          "description": "Sets the value on the button if the button is an input.",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-color-picker",
+      "description": "",
+      "attributes": [
+        {
+          "label": "val",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-form",
+      "description": "",
+      "attributes": [
+        {
+          "label": "accept-charset",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "action",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "ajax",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "autocomplete",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "enctype",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "method",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "novalidate",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "target",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-input",
+      "description": "",
+      "attributes": [
+        {
+          "label": "accept",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "autocomplete",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "autofocus",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "color",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "cols",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "date-type",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "default",
+          "description": "The pre-set value to pass to the input element",
+          "required": false
+        },
+        {
+          "label": "description",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "disabled",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "droppable",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "focused",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "icon",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "label",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "match",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "max",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "maxlength",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "min",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "multiple",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "multiple-file-caption",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "The name of the input element",
+          "required": false
+        },
+        {
+          "label": "novalidate",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "placeholder",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "readonly",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "replace_placeholder",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "required",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "requirements",
+          "description": "The pre-set value to pass to the input element",
+          "required": false
+        },
+        {
+          "label": "rows",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "spellcheck",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "step",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "token-field",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "tooltip",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "The kind of element that the Input should be rendered as",
+          "required": false
+        },
+        {
+          "label": "validates",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "value",
+          "description": "The pre-set value to pass to the input element",
+          "required": false
+        },
+        {
+          "label": "wrap",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-item",
+      "description": "",
+      "attributes": [
+        {
+          "label": "danger",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "fit",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "focused",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "href",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "label",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "multiple",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "route",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "selectable",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "selected",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "simple",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "value",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "value-label",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "wrap",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-label",
+      "description": "",
+      "attributes": [
+        {
+          "label": "for",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "underneath",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-password-requirements",
+      "description": "",
+      "attributes": [
+        {
+          "label": "for",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-progress",
+      "description": "",
+      "attributes": [
+        {
+          "label": "blurable",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "editable",
+          "description": "Allows the progress bar to be clicked on, to help the user to navigate through the progressing content.",
+          "required": false
+        },
+        {
+          "label": "max",
+          "description": "Sets the maximum cap for steps in the progress bar",
+          "required": false
+        },
+        {
+          "label": "noease",
+          "description": "eliminates the easing in the css so you can apply value updates without jitter.",
+          "required": false
+        },
+        {
+          "label": "rounded",
+          "description": "eliminates the easing in the css so you can apply value updates without jitter.",
+          "required": false
+        },
+        {
+          "label": "slender",
+          "description": "Renders if this element is slender or not",
+          "required": false
+        },
+        {
+          "label": "value",
+          "description": "Sets the value of the progress bar",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-select",
+      "description": "",
+      "attributes": [
+        {
+          "label": "default",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "description",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "focused",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "footer",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "inline",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "label",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "multiple",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "novalidate",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "open",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "other",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "overlay",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "placeholder",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "placeholder-inverted",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "processing",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "required",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "tooltip",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "value",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "value-label",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "verbiage",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "verbiage-an",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-switch",
+      "description": "",
+      "attributes": [
+        {
+          "label": "checked",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "checked-default",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-toggle-option",
+      "description": "",
+      "attributes": [
+        {
+          "label": "checked",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "checked-default",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "default",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "disabled",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "for",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "icon",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "inline",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "required",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "selected-copy",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "single",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "tooltip",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "value",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-toggle",
+      "description": "",
+      "attributes": [
+        {
+          "label": "card",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "description",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "flip",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "label",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "novalidate",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "required",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "single",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "stacked",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "value",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-asset-library",
+      "description": "",
+      "attributes": []
+    },
+    {
+      "label": "stellar-chart",
+      "description": "",
+      "attributes": [
+        {
+          "label": "for",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "remote",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-code",
+      "description": "",
+      "attributes": [
+        {
+          "label": "code-string",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "copy",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "expandable",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "expanded",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "feature",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "language",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "preview",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "simple",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-color-library",
+      "description": "",
+      "attributes": []
+    },
+    {
+      "label": "stellar-markdown",
+      "description": "",
+      "attributes": [
+        {
+          "label": "code-string",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "src",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-reveal",
+      "description": "",
+      "attributes": [
+        {
+          "label": "active",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "animation",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "delay",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "out-animation",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "timing",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-scatter",
+      "description": "",
+      "attributes": [
+        {
+          "label": "colors",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "float",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "max",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "min",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "sizes",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-starscape",
+      "description": "",
+      "attributes": []
+    },
+    {
+      "label": "stellar-story",
+      "description": "",
+      "attributes": [
+        {
+          "label": "target",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-stripe",
+      "description": "",
+      "attributes": [
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "token",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-unit",
+      "description": "",
+      "attributes": [
+        {
+          "label": "decimals",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "from",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "round",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "to",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "value",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-360-image",
+      "description": "",
+      "attributes": [
+        {
+          "label": "height",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "poster",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "src",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "width",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-360-video",
+      "description": "",
+      "attributes": [
+        {
+          "label": "height",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "poster",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "src",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "width",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-image",
+      "description": "",
+      "attributes": [
+        {
+          "label": "bg",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "height",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "nozoom",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "poster",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "width",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-interview-line",
+      "description": "",
+      "attributes": [
+        {
+          "label": "complement",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "in",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "out",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-interview",
+      "description": "",
+      "attributes": [
+        {
+          "label": "aspect-ratio",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "color",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "debug",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "height",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "playing",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "src",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "width",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-playlist",
+      "description": "",
+      "attributes": [
+        {
+          "label": "artwork",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "autoplay",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "playing",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "playlist",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "remember",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "title",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "view",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "skeleton-img",
+      "description": "",
+      "attributes": [
+        {
+          "label": "height",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "icon",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "loading",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "width",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "skeleton-text",
+      "description": "",
+      "attributes": [
+        {
+          "label": "as",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "loading",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "width",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-song",
+      "description": "",
+      "attributes": [
+        {
+          "label": "artwork",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "playing",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "src",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-video",
+      "description": "",
+      "attributes": [
+        {
+          "label": "autoplay",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "controls",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "height",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "muted",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "overlay",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "playsinline",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "poster",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "preload",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "width",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-animate-text",
+      "description": "",
+      "attributes": [
+        {
+          "label": "method",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-blur",
+      "description": "",
+      "attributes": [
+        {
+          "label": "horizontal",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "vertical",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-parallax-section",
+      "description": "",
+      "attributes": [
+        {
+          "label": "layer",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "percentage",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "speed",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-parallax",
+      "description": "",
+      "attributes": []
+    },
+    {
+      "label": "stellar-slide",
+      "description": "The Slide component is a child component of [Slides](../Slides). The template\nshould be written as `ion-slide`. Any slide content should be written\nin this component and it should be used in conjunction with [Slides](../Slides).\n\nSee the [Slides API Docs](../Slides) for more usage information.",
+      "attributes": []
+    },
+    {
+      "label": "stellar-slides",
+      "description": "The Slides component is a multi-section container. Each section can be swiped\nor dragged between. It contains any number of [Slide](../Slide) components.\n\n\nAdopted from Swiper.js:\nThe most modern mobile touch slider and framework with hardware accelerated transitions.\n\nhttp://www.idangero.us/swiper/\n\nCopyright 2016, Vladimir Kharlampidi\nThe iDangero.us\nhttp://www.idangero.us/\n\nLicensed under MIT",
+      "attributes": [
+        {
+          "label": "auto-height",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "centered-slides",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "direction",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "effect",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "loop",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "nested",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "options",
+          "description": "Options to pass to the swiper instance.\nSee http://idangero.us/swiper/api/ for valid options",
+          "required": false
+        },
+        {
+          "label": "pager",
+          "description": "Show or hide the pager",
+          "required": false
+        },
+        {
+          "label": "pagination",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "slides-per-view",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "space-between",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "speed",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "watch-slides-progress",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "watch-slides-visibility",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-accordion",
+      "description": "",
+      "attributes": [
+        {
+          "label": "label",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "open",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "tight",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-asset",
+      "description": "",
+      "attributes": [
+        {
+          "label": "align",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "aria-label",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "block",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "language",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "src",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-avatar",
+      "description": "",
+      "attributes": [
+        {
+          "label": "color",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "initials",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "processing",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "shape",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "src",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "tooltip",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-breadcrumb",
+      "description": "",
+      "attributes": [
+        {
+          "label": "color",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "disabled",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "first",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "href",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "label",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "last",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "target",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-breadcrumbs",
+      "description": "",
+      "attributes": [
+        {
+          "label": "color",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "description",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "home",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "icon",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "icon_size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "icon_src",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "label",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-callout",
+      "description": "",
+      "attributes": [
+        {
+          "label": "type",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-card",
+      "description": "",
+      "attributes": [
+        {
+          "label": "flip_icon",
+          "description": "Sets the href on the anchor tag if the button is a link.",
+          "required": false
+        },
+        {
+          "label": "flippable",
+          "description": "Let's a card be flippable",
+          "required": false
+        },
+        {
+          "label": "flipped",
+          "description": "Renders a flipped card",
+          "required": false
+        },
+        {
+          "label": "for",
+          "description": "Sets the href on the anchor tag if the button is a link.",
+          "required": false
+        },
+        {
+          "label": "href",
+          "description": "Sets the href if the card is a link.",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "Sets the name if the card is a button.",
+          "required": false
+        },
+        {
+          "label": "padding",
+          "description": "Sets the padding inside of the button. Can be small, medium, or large.",
+          "required": false
+        },
+        {
+          "label": "shadow",
+          "description": "Renders a shadow on the card",
+          "required": false
+        },
+        {
+          "label": "tag",
+          "description": "Sets the element to render the card as - an anchor tag, a button, or a div.",
+          "required": false
+        },
+        {
+          "label": "transition",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "Sets the element to render the card as - an anchor tag, a button, or a div.",
+          "required": false
+        },
+        {
+          "label": "value",
+          "description": "Sets the value if the card is a button.",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-comment",
+      "description": "",
+      "attributes": [
+        {
+          "label": "content",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-comments",
+      "description": "",
+      "attributes": []
+    },
+    {
+      "label": "stellar-content",
+      "description": "",
+      "attributes": [
+        {
+          "label": "behavior",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "for",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "open",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "copy-wrap",
+      "description": "",
+      "attributes": [
+        {
+          "label": "align",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "full",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-dropdown",
+      "description": "",
+      "attributes": [
+        {
+          "label": "icon",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "label",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "open",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "position",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-grid",
+      "description": "",
+      "attributes": [
+        {
+          "label": "align",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "cols",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "compact",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "padding",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "responsive",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "swappable",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "swappable-selector",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-group-overflow",
+      "description": "",
+      "attributes": [
+        {
+          "label": "count",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-group",
+      "description": "",
+      "attributes": [
+        {
+          "label": "count",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "overflow",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-layout",
+      "description": "",
+      "attributes": [
+        {
+          "label": "align",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "padding",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-message",
+      "description": "",
+      "attributes": [
+        {
+          "label": "closable",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "remember",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "shown",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "striped",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-pagination",
+      "description": "",
+      "attributes": [
+        {
+          "label": "color",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "current",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "padding",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "pages",
+          "description": "Public: Sets the max cap of pages you can skip through",
+          "required": false
+        },
+        {
+          "label": "type",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "url",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-step",
+      "description": "",
+      "attributes": [
+        {
+          "label": "disabled",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "href",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "open",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "order",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "tab-count",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-steps",
+      "description": "",
+      "attributes": [
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-tab",
+      "description": "",
+      "attributes": [
+        {
+          "label": "disabled",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "href",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "notifications",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "open",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "order",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "tab-count",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "tag",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-table",
+      "description": "",
+      "attributes": [
+        {
+          "label": "chart",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "striped",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "upgrade",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-tabs",
+      "description": "",
+      "attributes": [
+        {
+          "label": "behavior",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "block",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "height",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "name",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "noanimation",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "vertical",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-tag",
+      "description": "",
+      "attributes": [
+        {
+          "label": "color",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "outline",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "pill",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "size",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "text-color",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "label": "stellar-tooltip",
+      "description": "",
+      "attributes": [
+        {
+          "label": "align",
+          "description": "",
+          "required": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+var assert=function(e,r){if(!e)throw r||"Assertion failed!";return e},delay=function(e){return new Promise(function(r){return setTimeout(r,e)})};export{delay as a,assert as b};

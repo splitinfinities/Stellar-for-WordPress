@@ -1,0 +1,1 @@
+export * from '../esm/es2017/stellar-core.define.js';

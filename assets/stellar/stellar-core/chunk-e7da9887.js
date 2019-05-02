@@ -1,0 +1,1 @@
+var n=function(n){return new Promise(function(e){setTimeout(e,n)})};export{n as a};

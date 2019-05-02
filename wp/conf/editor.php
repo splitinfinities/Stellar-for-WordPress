@@ -617,21 +617,17 @@ add_filter( 'tiny_mce_before_init', 'my_tiny_mce_before_init' );
 
 
 function my_theme_add_editor_styles() {
-	add_editor_style( get_template_directory_uri() . '/assets/node_modules/@stellar-design/core/dist/stellar-core.css' );
+	add_editor_style( get_template_directory_uri() . '/assets/stellar/stellar-core.css' );
 	add_editor_style( get_template_directory_uri() . '/editor.css' );
 }
 add_action( 'admin_init', 'my_theme_add_editor_styles' );
 
 function misha_allowed_block_types( $allowed_blocks ) {
-	// $allowed_blocks = array(
-	// 	'common/hero',
-	// 	'common/content',
-	// 	'common/carousel',
-	// 	'common/statistics',
-	// 	'common/page-list',
-	// 	'common/calltoaction',
-	// 	'common/testimonial'
-	// );
+	$allowed_blocks = array(
+		'acf/hero',
+		'acf/content',
+		'acf/grid',
+	);
 
 	return $allowed_blocks;
 }

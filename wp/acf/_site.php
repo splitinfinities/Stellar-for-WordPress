@@ -1625,7 +1625,7 @@ if( function_exists('acf_add_local_field_group') ):
                                 'key' => 'field_5cc8a2f1d1b93',
                                 'label' => 'Code',
                                 'name' => 'code',
-                                'type' => 'textarea',
+                                'type' => 'wysiwyg',
                                 'instructions' => '',
                                 'required' => 0,
                                 'conditional_logic' => 0,
@@ -1635,10 +1635,10 @@ if( function_exists('acf_add_local_field_group') ):
                                     'id' => '',
                                 ),
                                 'default_value' => '',
-                                'placeholder' => '',
-                                'maxlength' => '',
-                                'rows' => '',
-                                'new_lines' => '',
+                                'tabs' => 'text',
+                                'media_upload' => 0,
+                                'toolbar' => 'full',
+                                'delay' => 0,
                             ),
                             array(
                                 'key' => 'field_5ccb40df7b88e',
@@ -2359,4 +2359,4 @@ if( function_exists('acf_add_local_field_group') ):
         'description' => '',
     ));
 
-    endif;
+endif;

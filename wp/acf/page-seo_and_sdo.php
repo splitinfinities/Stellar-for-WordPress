@@ -44,7 +44,7 @@ acf_add_local_field_group(array (
 			'label' => 'Title',
 			'name' => 'seo_page_title',
 			'type' => 'text',
-			'instructions' => '\'You can customize how the title looks here. <br /><br /> • <b>{title}</b> for the name of the current page, \' . get_the_title($_GET[\'post\']) . \'. <br /> • <b>{site_name}</b> or <b>{site_title}</b> for the name of the blog, \'.get_bloginfo(\'name\').\'.\'',
+			'instructions' => "You can customize how the title looks here. <br /><br /> • <b>{title}</b> for the name of the current page, " . get_the_title($_GET['post']) . ". <br /> • <b>{site_name}</b> or <b>{site_title}</b> for the name of the blog, " . get_bloginfo('name') . ".",
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (

@@ -1,0 +1,37 @@
+import '../../../stencil.core';
+export declare class Playlist {
+    element: HTMLElement;
+    dark: Boolean;
+    autoplay: boolean;
+    current: number;
+    currentTrack: CurrentSongInterface;
+    playlist: string;
+    remember: boolean;
+    artwork: boolean;
+    view: "playlist" | "art";
+    playing: boolean;
+    load: boolean;
+    currentTime: number | string;
+    duration: number | string;
+    visualizer: HTMLWebAudioVisualizerElement;
+    audio: HTMLAudioElement;
+    progress: HTMLProgressElement;
+    progress_value: number;
+    playlistItems: NodeListOf<HTMLStellarSongElement>;
+    currentPlaylistItem: HTMLStellarSongElement;
+    context: any;
+    componentWillLoad(): void;
+    componentDidLoad(): void;
+    handleProgressClick(): void;
+    handleTimeUpdates(): void;
+    handleKeydown(event: any): void;
+    loadFromStorage(): void;
+    prepare(element: any): Promise<void>;
+    play(): Promise<void>;
+    pause(): Promise<void>;
+    next(): Promise<void>;
+    previous(): Promise<void>;
+    togglePlaylist(): void;
+    toggleAlbumArtView(): void;
+    render(): JSX.Element;
+}

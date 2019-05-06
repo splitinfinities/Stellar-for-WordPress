@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Scripts and stylesheets
  *
@@ -12,9 +11,8 @@ function prepare_scripts() {
 	$assets_basepath = '/assets';
 
 	$base_assets = array(
-		'app.css' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core/stellar-core.css',
-		'app.esm.js' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core/stellar-core.esm.js',
-		'app.js' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core/stellar-core.js',
+		'app.js' => get_template_directory_uri() . $assets_basepath . '/stellar/dist/stellar-core.js',
+		'app.css' => get_template_directory_uri() . $assets_basepath . '/stellar/dist/stellar-core.css',
 	);
 
 	// Embed resources that we need
@@ -23,17 +21,17 @@ function prepare_scripts() {
 add_action('wp_enqueue_scripts', 'prepare_scripts', 100);
 add_action('admin_enqueue_scripts', 'prepare_scripts');
 
-add_filter( 'script_loader_tag', 'add_id_to_script', 10, 3 );
+// add_filter( 'script_loader_tag', 'add_id_to_script', 10, 3 );
 
-function add_id_to_script( $tag, $handle, $source ) {
-    if (strpos($handle, 'esm') !== false) {
-        $tag = '<script type="module" src="' . $source . '" ></script>';
-    } else {
-        $tag = '<script nomodule src="' . $source . '" ></script>';
-	}
+// function add_id_to_script( $tag, $handle, $source ) {
+//     if (strpos($handle, 'esm') !== false) {
+//         $tag = '<script type="module" src="' . $source . '" ></script>';
+//     } else {
+//         $tag = '<script nomodule src="' . $source . '" ></script>';
+// 	}
 
-	return $tag;
-}
+// 	return $tag;
+// }
 
 /**
  * Loads the scripts we need on first page load
@@ -59,7 +57,6 @@ function enqueue_load($assets) {
 
 	wp_enqueue_style('app.css', $assets['app.css'], false, null);
 	wp_enqueue_script('app.js', $assets['app.js'], array(), null, true);
-	wp_enqueue_script('app.esm.js', $assets['app.esm.js'], array(), null, true);
 	wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.3.1.min.js', array(), null, true);
 
 }

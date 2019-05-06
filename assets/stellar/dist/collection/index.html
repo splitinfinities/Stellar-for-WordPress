@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" name="viewport">
+        <title>Stencil Component Starter</title>
+        <link href="/build/stellar-core.css" rel="stylesheet">
+        <script src="/build/stellar-core.js"></script>
+        <script src="/global/page2layers.js"></script>
+        <script>
+    var dark = false;
+    var theme = "green";
+
+    const darkMode = function () {
+      dark = !dark;
+      changeDarkMode()
+    }
+
+    const changeDarkMode = function() {
+      if (dark) {
+        document.querySelector('html').classList.add('dark-mode');
+      } else {
+        document.querySelector('html').classList.remove('dark-mode');
+      }
+    }
+
+    const changeTheme = function(color) {
+      document.querySelector('html').classList = "";
+      document.querySelector('body').classList = "";
+      changeDarkMode();
+      if (color !== "none") {
+        document.querySelector('html').classList.add(`theme-${color}`);
+        document.querySelector('body').classList.add(`theme-${color}`);
+      }
+    }
+  </script>
+    </head>
+    <body>
+        <main class="z-1 relative">
+            <stellar-button class="sticky top-0 right-0 z-max" onclick="darkMode()" tag="button">Switch Modes</stellar-button>
+
+            <stellar-color-picker class="absolute top-2 right-2 z-max" onchange="changeTheme(this.val)"></stellar-color-picker>
+
+            <stellar-360-image color="blue" height="1824" nozoom src="./global/images/_images/Carmelo.jpg" width="2736"></stellar-360-image>
+
+            <div class="aspect-ratio aspect-ratio--1x1 mb4">
+              <div class="aspect-ratio--object cover" style="background:url(http://mrmrs.github.io/photos/001.jpg) center;"></div>
+            </div>
+
+            <stellar-playlist>
+                <stellar-song artwork src="./global/audio/_audio/playlist/01 The Leaves Were Falling.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/02 Because I'm Me.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/03 Frankie Sinatra.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/04 Subways.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/05 Going Home.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/06 If I Was a Folkstar.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/07 Colours.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/08 Zap!.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/09 The Noisy Eater.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/10 Wildflower.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/11 Harmony.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/12 Live a Lifetime Love.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/13 Park Music.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/14 Livin' Underwater (Is Somethin' Wild).mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/15 The Wozard of Iz.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/16 Over the Turnstiles.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/17 Sunshine.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/18 Light Up.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/19 Kaleidoscope Lovers.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/20 Stepkids.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/21 Saturday Night Inside Out.mp3"></stellar-song>
+                <stellar-song artwork src="./global/audio/_audio/playlist/22 Frankie Sinatra (Extended Mix).mp3"></stellar-song>
+            </stellar-playlist>
+
+            <stellar-layout >
+            <stellar-video-interview class="mt5" src="./global/video/_video/Carmelo.mp4">
+                <copy-wrap align="center" slot="transcript">
+                    <stellar-interview-line in="1496" out="5010">
+                        <h5 class="white fw7 lh-solid">Interviewer: Has anyone ever tried to come and buy your property?</h4>
+                    </stellar-interview-line>
+
+                    <stellar-interview-line in="8374" out="13290">
+                        <h5 class="white fw7 lh-solid">Carmelo: Me han dado un cheque en blanco [para] comprar mi propiedad.</h4>
+                    </stellar-interview-line>
+
+                    <stellar-interview-line in="13484" out="17811">
+                        <h5 class="white fw7 lh-solid">Translator: They have given me a blank check in order to buy my property.</h5>
+                    </stellar-interview-line>
+                </copy-wrap>
+            </stellar-video-interview>
+            <stellar-interview class="mt5" src="./global/audio/_audio/carmelo_07.mp3">
+                <copy-wrap
+                    align="center" slot="transcript">
+                    <!-- In are the milliseconds when copy should be displayed, out is the  -->
+
+                    <stellar-interview-line in="1496" out="5010">
+                        <h4 class="white fw7 lh-solid">Interviewer: Has anyone ever tried to come and buy your property?</h4>
+                    </stellar-interview-line>
+
+                    <stellar-interview-line in="8374" out="13290">
+                        <h4 class="white fw7 lh-solid">Carmelo: Me han dado un cheque en blanco [para] comprar mi propiedad.</h4>
+                    </stellar-interview-line>
+
+                    <stellar-interview-line in="13484" out="17811">
+                        <h4 class="white fw7 lh-solid">Translator: They have given me a blank check in order to buy my property.</h4>
+                    </stellar-interview-line>
+
+                </copy-wrap>
+                <stellar-360-image color="blue" height="1824" nozoom src="./global/images/_images/Carmelo.jpg" width="2736"></stellar-360-image>
+            </stellar-interview>
+            </stellar-layout>
+    </main>
+</body></html>

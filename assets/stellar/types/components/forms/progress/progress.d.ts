@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Progress {
     element: HTMLElement;
@@ -26,6 +25,10 @@ export declare class Progress {
      * Sets the value of the progress bar
      */
     value: number;
+    /**
+     * Sets the value of the progress bar
+     */
+    secondary: number;
     blurable: boolean;
     wrapper: "stellar-blur" | "div";
     blur: number;
@@ -34,6 +37,6 @@ export declare class Progress {
     componentWillLoad(): void;
     observeValue(): void;
     handleClick(e: any): void;
-    progress(): number;
-    render(): JSX.Element;
+    progress(secondary?: any): number;
+    render(): any;
 }

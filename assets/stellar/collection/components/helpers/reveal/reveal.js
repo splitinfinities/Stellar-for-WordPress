@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import properties from 'css-custom-properties';
 import delay from 'await-delay';
 export class Scatter {
@@ -17,6 +18,9 @@ export class Scatter {
     addIntersectionObserver() {
         if ('IntersectionObserver' in window) {
             this.io = new IntersectionObserver((data) => {
+                // because there will only ever be one instance
+                // of the element we are observing
+                // we can just use data[0]
                 if (data[0].isIntersecting) {
                     setTimeout(() => {
                         this.active = true;
@@ -24,10 +28,14 @@ export class Scatter {
                     }, 350);
                     this.removeIntersectionObserver();
                 }
+            }, {
+                rootMargin: '50%',
+                threshold: [0]
             });
             this.io.observe(this.element);
         }
         else {
+            // fall back to setTimeout for Safari and IE
             setTimeout(() => {
                 this.in();
             }, 300);
@@ -48,6 +56,7 @@ export class Scatter {
             "--animation": this.outAnimation
         }, this.element);
         this.children.forEach((element, index) => {
+            // @ts-ignore
             element.style.setProperty('animation-delay', `${this.delay * index}ms`);
             element.style.setProperty('animation-timing', `${this.timing}ms`);
         });
@@ -58,6 +67,7 @@ export class Scatter {
             "--animation": this.animation
         }, this.element);
         this.children.forEach((element, index) => {
+            // @ts-ignore
             element.style.setProperty('animation-delay', `${this.delay * index}ms`);
             element.style.setProperty('animation-timing', `${this.timing}ms`);
         });
@@ -68,48 +78,141 @@ export class Scatter {
     }
     static get is() { return "stellar-reveal"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["reveal.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["reveal.css"]
+    }; }
     static get properties() { return {
-        "active": {
-            "type": Boolean,
-            "attr": "active",
-            "reflectToAttr": true,
-            "mutable": true
-        },
         "animation": {
-            "type": String,
-            "attr": "animation",
-            "reflectToAttr": true
-        },
-        "children": {
-            "state": true
-        },
-        "delay": {
-            "type": Number,
-            "attr": "delay",
-            "reflectToAttr": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "in": {
-            "method": true
-        },
-        "io": {
-            "state": true
-        },
-        "out": {
-            "method": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "\"fadeIn\"|\"fadeInUp\"|\"fadeInDown\"",
+                "resolved": "\"fadeIn\" | \"fadeInDown\" | \"fadeInUp\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "animation",
+            "reflect": true,
+            "defaultValue": "\"fadeInUp\""
         },
         "outAnimation": {
-            "type": String,
-            "attr": "out-animation",
-            "reflectToAttr": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "\"fadeOut\"|\"fadeOutUp\"|\"fadeOutDown\"",
+                "resolved": "\"fadeOut\" | \"fadeOutDown\" | \"fadeOutUp\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "out-animation",
+            "reflect": true,
+            "defaultValue": "\"fadeOut\""
+        },
+        "delay": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "delay",
+            "reflect": true,
+            "defaultValue": "100"
         },
         "timing": {
-            "type": Number,
-            "attr": "timing",
-            "reflectToAttr": true
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "timing",
+            "reflect": true,
+            "defaultValue": "50"
+        },
+        "active": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "active",
+            "reflect": true,
+            "defaultValue": "false"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-reveal:**/"; }
+    static get states() { return {
+        "io": {},
+        "children": {}
+    }; }
+    static get methods() { return {
+        "out": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "in": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }

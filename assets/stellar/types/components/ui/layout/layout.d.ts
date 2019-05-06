@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Layout {
     element: HTMLElement;
     type: string;
@@ -7,6 +6,6 @@ export declare class Layout {
     align: "baseline" | "center" | "top" | "bottom";
     componentWillLoad(): void;
     componentDidLoad(): void;
-    refresh(): void;
-    render(): JSX.Element;
+    refresh(): Promise<void>;
+    render(): any;
 }

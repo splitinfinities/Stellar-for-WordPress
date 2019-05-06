@@ -2,6 +2,7 @@ import '../web-audio-debugger/web-audio-debugger';
 import { BufferLoader } from '../bufferloader';
 import { delay } from '../helpers';
 import webmidi from 'webmidi';
+import { asyncForEach } from '../../../utils';
 export class WebAudio {
     constructor() {
         this.name = "web_audio";
@@ -10,15 +11,21 @@ export class WebAudio {
         this.sources = [];
         this.keys = {};
     }
-    source(name) {
+    async source(name) {
+        if (this.sources.length === 0) {
+            await this.connect_the_world();
+        }
         return this.sources[name];
     }
-    get_context() {
+    async get_context() {
         return this.context;
     }
-    is_prepared() {
+    async is_prepared() {
         return this.prepared;
     }
+    /******************
+     * Private behavior
+     **/
     componentDidLoad() {
         this.connect_debugger();
     }
@@ -32,6 +39,7 @@ export class WebAudio {
         return true;
     }
     connect_context() {
+        // @ts-ignore
         this.context = (window["webkitAudioContext"]) ? new webkitAudioContext : new AudioContext;
         this.log("Connected to this.context");
     }
@@ -43,8 +51,11 @@ export class WebAudio {
         this._sources = Array.from(this.element.querySelectorAll('web-audio-source'));
         this.externalFiles = [];
         this._sources.forEach((source, index) => {
+            // @ts-ignore
             this.log(`(${index}) Preparing ${source.name}`);
+            // @ts-ignore
             this.sources[source.name] = source;
+            // @ts-ignore
             let bufferLoader = new BufferLoader(this.context, [source.src], (bufferList) => {
                 this.cache_sources(bufferList, source);
             });
@@ -70,15 +81,16 @@ export class WebAudio {
     }
     async connect_visualizers() {
         await delay(20);
+        // @ts-ignore
         this.visualizers = Array.from(document.querySelectorAll(`web-audio-visualizer[for="${this.name}"]`));
         if (this.visualizers) {
             this.log(`Attaching visualizers`);
-            this.visualizers.forEach((visualizer, index) => {
+            await asyncForEach(this.visualizers, async (visualizer, index) => {
                 if (index === 0) {
-                    visualizer = visualizer.connect(this.context, this.context.destination);
+                    visualizer = await visualizer.connect(this.context, this.context.destination);
                 }
                 else {
-                    visualizer = visualizer.connect(this.context, this.previousVisualizer.analyser);
+                    visualizer = await visualizer.connect(this.context, this.previousVisualizer.analyser);
                 }
                 this.previousVisualizer = visualizer;
             });
@@ -87,10 +99,10 @@ export class WebAudio {
             this.log(`No visualizers for ${this.name}`);
         }
         if (this.visualizers.length >= 1) {
-            this.gain.connect(this.previousVisualizer.analyser);
+            await this.gain.connect(this.previousVisualizer.analyser);
         }
         else {
-            this.gain.connect(this.context.destination);
+            await this.gain.connect(this.context.destination);
         }
     }
     connect_debugger() {
@@ -123,6 +135,7 @@ export class WebAudio {
                     input.addListener('pitchbend', 'all', (e) => {
                         this.log(`PITCH: Channel: ${e.channel}, Value: ${e.value}`);
                     });
+                    // Listen to control change message on all channels
                     input.addListener('controlchange', 'all', (e) => {
                         this.log(`CTRL: Channel: ${e.channel}, controller: ${e.controller.number}, Value: ${e.value}`);
                         var event = new CustomEvent('midi-controller-update', { detail: e });
@@ -135,68 +148,152 @@ export class WebAudio {
     }
     static get is() { return "web-audio"; }
     static get properties() { return {
-        "_currentSource": {
-            "state": true
-        },
-        "_sources": {
-            "state": true
+        "name": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": false,
+            "defaultValue": "\"web_audio\""
         },
         "autoplay": {
-            "type": "Any",
-            "attr": "autoplay"
-        },
-        "connect_the_world": {
-            "method": true
-        },
-        "context": {
-            "state": true
-        },
-        "debugger": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "externalFiles": {
-            "state": true
-        },
-        "gain": {
-            "state": true
-        },
-        "get_context": {
-            "method": true
-        },
-        "is_prepared": {
-            "method": true
-        },
-        "keys": {
-            "state": true
+            "type": "unknown",
+            "mutable": false,
+            "complexType": {
+                "original": "Boolean",
+                "resolved": "Boolean",
+                "references": {
+                    "Boolean": {
+                        "location": "global"
+                    }
+                }
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            }
         },
         "midi": {
-            "type": "Any",
-            "attr": "midi"
-        },
-        "name": {
-            "type": String,
-            "attr": "name"
-        },
-        "prepared": {
-            "state": true
-        },
-        "previousVisualizer": {
-            "state": true
-        },
-        "source": {
-            "method": true
-        },
-        "sources": {
-            "state": true
-        },
-        "visualizerNodes": {
-            "state": true
-        },
-        "visualizers": {
-            "state": true
+            "type": "unknown",
+            "mutable": false,
+            "complexType": {
+                "original": "Boolean",
+                "resolved": "Boolean",
+                "references": {
+                    "Boolean": {
+                        "location": "global"
+                    }
+                }
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "defaultValue": "false"
         }
     }; }
+    static get states() { return {
+        "debugger": {},
+        "prepared": {},
+        "context": {},
+        "gain": {},
+        "sources": {},
+        "_sources": {},
+        "_currentSource": {},
+        "keys": {},
+        "externalFiles": {},
+        "visualizers": {},
+        "previousVisualizer": {},
+        "visualizerNodes": {}
+    }; }
+    static get methods() { return {
+        "source": {
+            "complexType": {
+                "signature": "(name: any) => Promise<any>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<any>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "get_context": {
+            "complexType": {
+                "signature": "() => Promise<AudioContext>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    },
+                    "AudioContext": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<AudioContext>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "is_prepared": {
+            "complexType": {
+                "signature": "() => Promise<Boolean>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    },
+                    "Boolean": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<Boolean>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "connect_the_world": {
+            "complexType": {
+                "signature": "() => Promise<boolean>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<boolean>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }

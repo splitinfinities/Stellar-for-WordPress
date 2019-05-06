@@ -20,7 +20,7 @@ stellar-interview div.card section {
   padding-top: 0 !important;
 }
 
-stellar-interview web-audio-visualizer[type="bars"] {
+stellar-interview web-audio-visualizer {
   position: absolute;
   top: auto;
   left: 0;
@@ -30,6 +30,17 @@ stellar-interview web-audio-visualizer[type="bars"] {
   height: 60%;
   pointer-events: none;
   z-index: 2;
+}
+
+stellar-interview web-audio-visualizer[type="circle"] {
+  height: 100%;
+}
+
+
+stellar-interview web-audio-visualizer[type="bars2"] {
+  width: 80%;
+  left: 10%;
+  right: 10%;
 }
 
 stellar-interview stellar-image,
@@ -52,6 +63,10 @@ stellar-interview stellar-progress {
 
 stellar-interview stellar-progress .progress {
   border: 0;
+}
+
+stellar-interview h3 {
+  color: white;
 }
 
 stellar-interview stellar-unit {

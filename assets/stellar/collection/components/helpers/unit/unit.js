@@ -12,32 +12,102 @@ export class Unit {
         return roundTo(convert(this.value).from(this.from).to(this.to), this.decimals) + " " + this.to;
     }
     static get is() { return "stellar-unit"; }
+    static get originalStyleUrls() { return {
+        "$": ["unit.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["unit.css"]
+    }; }
     static get properties() { return {
-        "decimals": {
-            "type": Number,
-            "attr": "decimals",
-            "reflectToAttr": true
+        "value": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "value",
+            "reflect": true,
+            "defaultValue": "1000"
         },
         "from": {
-            "type": String,
-            "attr": "from",
-            "reflectToAttr": true
-        },
-        "round": {
-            "type": Boolean,
-            "attr": "round",
-            "reflectToAttr": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "from",
+            "reflect": true,
+            "defaultValue": "\"B\""
         },
         "to": {
-            "type": String,
-            "attr": "to",
-            "reflectToAttr": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "to",
+            "reflect": true,
+            "defaultValue": "\"KB\""
         },
-        "value": {
-            "type": Number,
-            "attr": "value",
-            "reflectToAttr": true
+        "round": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "round",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "decimals": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "decimals",
+            "reflect": true,
+            "defaultValue": "2"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-unit:**/"; }
 }

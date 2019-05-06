@@ -13,13 +13,13 @@ export class WebAudioSource {
         this.elapsedTime = 0.0;
         this.playing = false;
     }
-    getBuffer() {
+    async getBuffer() {
         return this.buffer;
     }
-    webAudio() {
+    async webAudio() {
         return this.webAudioWrapper;
     }
-    gain(place = "wet") {
+    async gain(place = "wet") {
         if (place === "wet") {
             return this.wetGain;
         }
@@ -30,7 +30,7 @@ export class WebAudioSource {
             return this.channelGain;
         }
     }
-    getDuration() {
+    async getDuration() {
         return this.duration;
     }
     currentTime() {
@@ -49,7 +49,7 @@ export class WebAudioSource {
         return current;
     }
     ;
-    prepare() {
+    async prepare() {
         if (!this.inert) {
             this.source = this.context.createBufferSource();
             this.source.buffer = this.buffer;
@@ -67,7 +67,7 @@ export class WebAudioSource {
             this.duration = this.source.buffer.duration;
         }
     }
-    play() {
+    async play() {
         if (!this.inert) {
             this.prepare();
             this.source.start(0, this.pausedTime);
@@ -81,18 +81,18 @@ export class WebAudioSource {
             throw "Cannot play inert media.";
         }
     }
-    skipTo(time) {
+    async skipTo(time) {
         this.stop();
         this.pausedTime = time / 1000;
         this.play();
     }
-    pause() {
+    async pause() {
         this.elapsedTime = this.context.currentTime - this.startTime;
         this.stop();
         this.pausedTime = this.elapsedTime;
         this.playing = false;
     }
-    toggle() {
+    async toggle() {
         if (this.playing) {
             this.pause();
         }
@@ -100,7 +100,7 @@ export class WebAudioSource {
             this.play();
         }
     }
-    stop() {
+    async stop() {
         if (this.source) {
             this.source.disconnect();
             this.source.stop();
@@ -119,15 +119,16 @@ export class WebAudioSource {
             raf(() => { this.tick(); });
         }
     }
-    assignBuffer(webAudio, buffer) {
+    async assignBuffer(webAudio, buffer) {
         this.webAudioWrapper = webAudio.element;
         this.context = webAudio.context;
         this.buffer = buffer;
         if (!this.inert) {
             this.masterGain = webAudio.gain;
             this.channelGain = this.context.createGain();
-            this.prepareEffects();
+            await this.prepareEffects();
             if (Object.keys(this.effects).length > 0) {
+                // Make the source and gain
                 this.wetGain = this.context.createGain();
                 let previous = "";
                 Object.keys(this.effects).reverse().forEach((element, index) => {
@@ -146,11 +147,11 @@ export class WebAudioSource {
             this.channelGain.connect(this.masterGain);
         }
     }
-    prepareEffects() {
+    async prepareEffects() {
         if (this.element.parentElement.nodeName !== "WEB-AUDIO") {
             let element = this.element.parentElement;
             while (element.nodeName !== "WEB-AUDIO") {
-                this.effects[element.getAttribute("name")] = element.attachEffect(this.context, this.element);
+                this.effects[element.getAttribute("name")] = await element.attachEffect(this.context, this.element);
                 element = element.parentElement;
             }
         }
@@ -158,132 +159,362 @@ export class WebAudioSource {
     static get is() { return "web-audio-source"; }
     static get encapsulation() { return "shadow"; }
     static get properties() { return {
-        "assignBuffer": {
-            "method": true
-        },
-        "buffer": {
-            "state": true
-        },
-        "channelGain": {
-            "state": true
-        },
-        "context": {
-            "state": true
-        },
-        "dryGain": {
-            "state": true
-        },
-        "duration": {
-            "state": true
-        },
-        "effects": {
-            "state": true
-        },
-        "effectsvolume": {
-            "type": Number,
-            "attr": "effectsvolume",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "elapsedTime": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "entry": {
-            "state": true
-        },
-        "gain": {
-            "method": true
-        },
-        "getBuffer": {
-            "method": true
-        },
-        "getDuration": {
-            "method": true
-        },
-        "inert": {
-            "type": Boolean,
-            "attr": "inert"
-        },
-        "masterGain": {
-            "state": true
-        },
-        "midichannel": {
-            "type": Number,
-            "attr": "midichannel",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "midikey": {
-            "type": Number,
-            "attr": "midikey",
-            "reflectToAttr": true,
-            "mutable": true
+        "src": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "src",
+            "reflect": true
         },
         "name": {
-            "type": String,
-            "attr": "name",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": true
         },
-        "pause": {
-            "method": true
+        "inert": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "inert",
+            "reflect": false,
+            "defaultValue": "false"
         },
-        "pausedTime": {
-            "state": true
+        "midikey": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "midikey",
+            "reflect": true,
+            "defaultValue": "0"
         },
-        "play": {
-            "method": true
+        "midichannel": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "midichannel",
+            "reflect": true,
+            "defaultValue": "1"
+        },
+        "effectsvolume": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "effectsvolume",
+            "reflect": true,
+            "defaultValue": "100"
         },
         "playing": {
-            "type": Boolean,
-            "attr": "playing",
-            "mutable": true
-        },
-        "prepare": {
-            "method": true
-        },
-        "skipTo": {
-            "method": true
-        },
-        "source": {
-            "state": true
-        },
-        "src": {
-            "type": String,
-            "attr": "src",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "startTime": {
-            "state": true
-        },
-        "status": {
-            "state": true
-        },
-        "stop": {
-            "method": true
-        },
-        "toggle": {
-            "method": true
-        },
-        "webAudio": {
-            "method": true
-        },
-        "webAudioWrapper": {
-            "state": true
-        },
-        "wetGain": {
-            "state": true
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "playing",
+            "reflect": false,
+            "defaultValue": "false"
         }
     }; }
+    static get states() { return {
+        "webAudioWrapper": {},
+        "status": {},
+        "context": {},
+        "masterGain": {},
+        "wetGain": {},
+        "dryGain": {},
+        "channelGain": {},
+        "effects": {},
+        "source": {},
+        "buffer": {},
+        "entry": {},
+        "duration": {},
+        "startTime": {},
+        "pausedTime": {},
+        "elapsedTime": {}
+    }; }
     static get events() { return [{
-            "name": "timeupdate",
             "method": "timeupdate",
+            "name": "timeupdate",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
+    static get methods() { return {
+        "getBuffer": {
+            "complexType": {
+                "signature": "() => Promise<AudioBuffer>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    },
+                    "AudioBuffer": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<AudioBuffer>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "webAudio": {
+            "complexType": {
+                "signature": "() => Promise<HTMLElement>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    },
+                    "HTMLElement": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<HTMLElement>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "gain": {
+            "complexType": {
+                "signature": "(place?: string) => Promise<GainNode>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    },
+                    "GainNode": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<GainNode>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "getDuration": {
+            "complexType": {
+                "signature": "() => Promise<number>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<number>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "prepare": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "play": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "skipTo": {
+            "complexType": {
+                "signature": "(time: any) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "pause": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "toggle": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "stop": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "assignBuffer": {
+            "complexType": {
+                "signature": "(webAudio: any, buffer: any) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }, {
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }

@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Image360 {
     element: HTMLElement;
     src: string;
@@ -7,6 +6,13 @@ export declare class Image360 {
     height: number;
     viewer: any;
     image: HTMLElement;
+    io: IntersectionObserver;
+    ready: boolean;
     componentDidLoad(): void;
-    render(): JSX.Element[];
+    addIntersectionObserver(): void;
+    handleInScreen(): void;
+    handleOffScreen(): void;
+    prepare(): void;
+    destroy(): void;
+    render(): any;
 }

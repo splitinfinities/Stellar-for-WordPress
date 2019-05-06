@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 export class AssetLibrary {
     constructor() {
         this.icons = [];
@@ -18,15 +19,9 @@ export class AssetLibrary {
             }))));
     }
     static get is() { return "stellar-asset-library"; }
-    static get properties() { return {
-        "element": {
-            "elementRef": true
-        },
-        "icons": {
-            "state": true
-        },
-        "kind": {
-            "state": true
-        }
+    static get states() { return {
+        "icons": {},
+        "kind": {}
     }; }
+    static get elementRef() { return "element"; }
 }

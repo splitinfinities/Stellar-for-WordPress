@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import { blurringEase } from '../../../utils';
 export class Tabs {
     constructor() {
@@ -29,7 +30,7 @@ export class Tabs {
         this.contentsList = Array.from(document.querySelectorAll(`stellar-content[for='${this.name}']`));
         return this.contentsList;
     }
-    blurring() {
+    async blurring() {
         this.ease.start();
     }
     async componentWillLoad() {
@@ -39,6 +40,7 @@ export class Tabs {
     async componentDidLoad() {
         if (!this.noanimation) {
             setTimeout(() => {
+                // @ts-ignore
                 window.dispatchEvent(new Event('resize'));
                 this.element.shadowRoot.querySelector('.indicator').classList.add('ready');
             }, 100);
@@ -59,67 +61,192 @@ export class Tabs {
     }
     static get is() { return "stellar-tabs"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["tabs.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["tabs.css"]
+    }; }
     static get properties() { return {
-        "behavior": {
-            "type": String,
-            "attr": "behavior",
-            "reflectToAttr": true
-        },
-        "block": {
-            "type": Boolean,
-            "attr": "block",
-            "reflectToAttr": true
-        },
-        "blur": {
-            "state": true
-        },
-        "blurring": {
-            "method": true
-        },
-        "contents": {
-            "method": true
-        },
-        "contentsList": {
-            "state": true
-        },
-        "ease": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
         "height": {
-            "type": String,
-            "attr": "height"
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "height",
+            "reflect": false
         },
         "name": {
-            "type": String,
-            "attr": "name",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": true
         },
         "noanimation": {
-            "type": Boolean,
-            "attr": "noanimation",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "noanimation",
+            "reflect": true,
+            "defaultValue": "false"
         },
         "size": {
-            "type": String,
-            "attr": "size",
-            "reflectToAttr": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string|\"tiny\"|\"small\"|\"medium\"|\"large\"",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "size",
+            "reflect": true,
+            "defaultValue": "\"medium\""
         },
-        "tabs": {
-            "method": true
-        },
-        "tabsList": {
-            "state": true
+        "block": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "block",
+            "reflect": true,
+            "defaultValue": "false"
         },
         "vertical": {
-            "type": Boolean,
-            "attr": "vertical",
-            "reflectToAttr": true
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "vertical",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "behavior": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "behavior",
+            "reflect": true
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-tabs:**/"; }
+    static get states() { return {
+        "tabsList": {},
+        "contentsList": {},
+        "ease": {},
+        "blur": {}
+    }; }
+    static get methods() { return {
+        "tabs": {
+            "complexType": {
+                "signature": "() => Promise<any[]>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<any[]>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "contents": {
+            "complexType": {
+                "signature": "() => Promise<any[]>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<any[]>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "blurring": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }

@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class WebAudioSequencer {
     name: string;
     autoplay: boolean;
@@ -15,7 +14,7 @@ export declare class WebAudioSequencer {
     componentDidLoad(): void;
     schedule(): void;
     advance(): void;
-    play(): void;
-    stop(): void;
-    render(): JSX.Element[];
+    play(): Promise<void>;
+    stop(): Promise<void>;
+    render(): any[];
 }

@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 import { ResizeObserver } from '../../../utils';
 export declare class Card {
@@ -64,5 +63,5 @@ export declare class Card {
     removeRotation(): Promise<void>;
     click(e?: UIEvent): Promise<boolean>;
     flip_card(e?: UIEvent): Promise<void>;
-    render(): JSX.Element;
+    render(): any;
 }

@@ -1,3 +1,5 @@
+import { h } from '@stencil/core';
+// import { blurringEase } from '../../../utils';
 export class AnimateText {
     constructor() {
         this.method = "lettering";
@@ -5,8 +7,14 @@ export class AnimateText {
         this.horizontalBlur = 0;
     }
     blurHorizontal() {
+        // blurringEase((e: number) => {
+        //   this.horizontalBlur = e * 4
+        // }, 450, 0, 'exponential', { invert: true })
     }
     blurVertical() {
+        // blurringEase((e: number) => {
+        //   this.verticalBlur = e * 4
+        // }, 450, 0, 'exponential', { invert: true })
     }
     componentWillLoad() {
         if (this.method === "lettering") {
@@ -23,20 +31,35 @@ export class AnimateText {
             h("slot", null)));
     }
     static get is() { return "stellar-animate-text"; }
+    static get originalStyleUrls() { return {
+        "$": ["animate-text.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["animate-text.css"]
+    }; }
     static get properties() { return {
-        "element": {
-            "elementRef": true
-        },
-        "horizontalBlur": {
-            "state": true
-        },
         "method": {
-            "type": String,
-            "attr": "method"
-        },
-        "verticalBlur": {
-            "state": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string|\"glitch\"|\"lettering\"|\"weight\"|\"fade\"",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "method",
+            "reflect": false,
+            "defaultValue": "\"lettering\""
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-animate-text:**/"; }
+    static get states() { return {
+        "verticalBlur": {},
+        "horizontalBlur": {}
+    }; }
+    static get elementRef() { return "element"; }
 }

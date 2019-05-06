@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import { leadingZeroIndex, relPathAsAbs } from "../../../utils";
 import jsmediatags from 'jsmediatags/dist/jsmediatags.js';
 import smallIndexedDb from 'small-indexeddb';
@@ -61,7 +62,7 @@ export class Song {
         this.artist = details.artist;
         this.picture = details.picture;
     }
-    details() {
+    async details() {
         return {
             'title': this.title,
             'album': this.album,
@@ -70,13 +71,13 @@ export class Song {
             'picture': this.picture
         };
     }
-    preload() {
+    async preload() {
         var audio = new Audio();
         audio.src = this.src;
         audio.preload = "auto";
         audio.volume = 1;
     }
-    play() {
+    async play() {
         if (!this.playing) {
             this.songChangedHandler();
             this.playing = true;
@@ -84,13 +85,13 @@ export class Song {
             this.player.play();
         }
     }
-    switching() {
+    async switching() {
         this.playing = false;
     }
-    getIndex() {
+    async getIndex() {
         return this._index;
     }
-    setIndex(value) {
+    async setIndex(value) {
         this._index = value;
     }
     render() {
@@ -108,73 +109,192 @@ export class Song {
     }
     static get is() { return "stellar-song"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["song.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["song.css"]
+    }; }
+    static get assetsDirs() { return ["vendor"]; }
     static get properties() { return {
-        "_index": {
-            "state": true
-        },
-        "album": {
-            "state": true
-        },
-        "artist": {
-            "state": true
-        },
-        "artwork": {
-            "type": Boolean,
-            "attr": "artwork"
-        },
-        "details": {
-            "method": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "error": {
-            "state": true
-        },
-        "genre": {
-            "state": true
-        },
-        "getIndex": {
-            "method": true
-        },
-        "picture": {
-            "state": true
-        },
-        "play": {
-            "method": true
-        },
-        "player": {
-            "state": true
+        "src": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "src",
+            "reflect": false
         },
         "playing": {
-            "type": Boolean,
-            "attr": "playing",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "playing",
+            "reflect": true
         },
-        "preload": {
-            "method": true
-        },
-        "setIndex": {
-            "method": true
-        },
-        "src": {
-            "type": String,
-            "attr": "src"
-        },
-        "switching": {
-            "method": true
-        },
-        "title": {
-            "state": true
+        "artwork": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "artwork",
+            "reflect": false
         }
     }; }
+    static get states() { return {
+        "_index": {},
+        "player": {},
+        "title": {},
+        "album": {},
+        "artist": {},
+        "genre": {},
+        "picture": {},
+        "error": {}
+    }; }
     static get events() { return [{
-            "name": "songChanged",
             "method": "songChanged",
+            "name": "songChanged",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
-    static get style() { return "/**style-placeholder:stellar-song:**/"; }
+    static get methods() { return {
+        "details": {
+            "complexType": {
+                "signature": "() => Promise<{ 'title': string; 'album': string; 'genre': string; 'artist': string; 'picture': string; }>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<{ 'title': string; 'album': string; 'genre': string; 'artist': string; 'picture': string; }>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "preload": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "play": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "switching": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "getIndex": {
+            "complexType": {
+                "signature": "() => Promise<number>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<number>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "setIndex": {
+            "complexType": {
+                "signature": "(value: any) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }

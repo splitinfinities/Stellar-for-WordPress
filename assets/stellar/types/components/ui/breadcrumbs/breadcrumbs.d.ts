@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Breadcrumbs {
     el: HTMLElement;
     icon: string;
@@ -10,5 +9,5 @@ export declare class Breadcrumbs {
     color: string;
     componentWillLoad(): void;
     updateBreadcrumbs(): void;
-    render(): JSX.Element;
+    render(): any;
 }

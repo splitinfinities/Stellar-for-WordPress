@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 import { Validator } from "./lib";
 import { TinyDatePicker } from '../../../utils';
@@ -118,18 +117,18 @@ export declare class Input {
     resetValue(): void;
     handleKeyDown(event: any): void;
     validateDarkColor(): boolean;
-    renderLabel(): JSX.Element;
-    renderColorPicker(): JSX.Element;
-    renderSearch(): JSX.Element;
-    renderIncrements(): JSX.Element;
-    renderPasswordStrength(): JSX.Element;
-    renderPasswordStrengthSmile(): JSX.Element;
-    renderSearchClearButton(): JSX.Element;
-    renderDatePicker(): JSX.Element;
-    renderInput(): JSX.Element;
-    renderTextArea(): JSX.Element;
-    renderFileUpload(): JSX.Element;
-    renderMultipleFileUploads(): JSX.Element;
-    renderErrors(): JSX.Element;
-    render(): JSX.Element;
+    renderLabel(): any;
+    renderColorPicker(): any;
+    renderSearch(): any;
+    renderIncrements(): any;
+    renderPasswordStrength(): any;
+    renderPasswordStrengthSmile(): any;
+    renderSearchClearButton(): any;
+    renderDatePicker(): any;
+    renderInput(): any;
+    renderTextArea(): any;
+    renderFileUpload(): any;
+    renderMultipleFileUploads(): any;
+    renderErrors(): any;
+    render(): any;
 }

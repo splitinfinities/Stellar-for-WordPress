@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 export class Tooltip {
     constructor() {
         this.align = "center";
@@ -9,15 +10,31 @@ export class Tooltip {
     }
     static get is() { return "stellar-tooltip"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["tooltip.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["tooltip.css"]
+    }; }
     static get properties() { return {
         "align": {
-            "type": String,
-            "attr": "align",
-            "reflectToAttr": true
-        },
-        "element": {
-            "elementRef": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "\"left\"|\"center\"|\"right\"|\"middle-left\"|\"middle-center\"|\"middle-right\"|\"bottom-left\"|\"bottom-center\"|\"bottom-right\"",
+                "resolved": "\"bottom-center\" | \"bottom-left\" | \"bottom-right\" | \"center\" | \"left\" | \"middle-center\" | \"middle-left\" | \"middle-right\" | \"right\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "align",
+            "reflect": true,
+            "defaultValue": "\"center\""
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-tooltip:**/"; }
+    static get elementRef() { return "element"; }
 }

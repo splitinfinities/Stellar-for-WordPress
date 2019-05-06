@@ -1,0 +1,1 @@
+System.register([],function(e){"use strict";return{execute:function(){e("a",function(e){return new Promise(function(t){setTimeout(t,e)})})}}});

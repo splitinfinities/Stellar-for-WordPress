@@ -18,9 +18,9 @@ export declare class WebAudio {
     visualizers: Array<WebAudioVisualizer>;
     previousVisualizer: WebAudioVisualizer;
     visualizerNodes: Array<string>;
-    source(name: any): HTMLWebAudioSourceElement;
-    get_context(): AudioContext;
-    is_prepared(): Boolean;
+    source(name: any): Promise<HTMLWebAudioSourceElement>;
+    get_context(): Promise<AudioContext>;
+    is_prepared(): Promise<Boolean>;
     /******************
      * Private behavior
      **/

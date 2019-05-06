@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import zxcvbn from "zxcvbn";
 export class PasswordRequirements {
     constructor() {
@@ -103,45 +104,55 @@ export class PasswordRequirements {
     }
     static get is() { return "stellar-password-requirements"; }
     static get properties() { return {
-        "commonNames": {
-            "state": true
-        },
-        "commonPasswords": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
         "for": {
-            "type": String,
-            "attr": "for",
-            "reflectToAttr": true
-        },
-        "input": {
-            "state": true
-        },
-        "length": {
-            "state": true
-        },
-        "number": {
-            "state": true
-        },
-        "repeated": {
-            "state": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "for",
+            "reflect": true
         },
         "size": {
-            "type": String,
-            "attr": "size"
-        },
-        "symbol": {
-            "state": true
-        },
-        "uppercase": {
-            "state": true
-        },
-        "value": {
-            "state": true,
-            "watchCallbacks": ["handleValueChange"]
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "\"tiny\"|\"small\"|\"large\"",
+                "resolved": "\"large\" | \"small\" | \"tiny\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "size",
+            "reflect": false
         }
     }; }
+    static get states() { return {
+        "input": {},
+        "value": {},
+        "length": {},
+        "uppercase": {},
+        "number": {},
+        "symbol": {},
+        "commonPasswords": {},
+        "commonNames": {},
+        "repeated": {}
+    }; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "value",
+            "methodName": "handleValueChange"
+        }]; }
 }

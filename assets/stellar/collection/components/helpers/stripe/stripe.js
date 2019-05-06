@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import * as config from './config';
 export class Card {
     constructor() {
@@ -13,7 +14,7 @@ export class Card {
     componentDidLoad() {
         this.connect();
     }
-    connect() {
+    async connect() {
         this.stripe = window["Stripe"](this.token);
         this.input = this.element.querySelector('.token');
         this.attachToForm();
@@ -44,16 +45,20 @@ export class Card {
     handleResponse({ error, token }) {
         if (error) {
             this.setError(error.message);
+            // this.dispatchEvent(new ErrorEvent('stripe-error', {error, bubbles, composed}));
         }
         else {
             this.error = undefined;
             this.value = token.id;
+            // this.dispatchEvent(new CustomEvent('stripe-token', {token, bubbles, composed}));
         }
     }
     handleError(error) {
+        // this.dispatchEvent(new ErrorEvent('stripe-error', {error, bubbles, composed}));
+        // Show error in UI
         this.setError(error.message);
     }
-    setError(error) {
+    async setError(error) {
         this.error = error;
     }
     prepareStripe() {
@@ -92,48 +97,111 @@ export class Card {
                 this.renderZip())));
     }
     static get is() { return "stellar-stripe"; }
+    static get originalStyleUrls() { return {
+        "$": ["stripe.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["stripe.css"]
+    }; }
     static get properties() { return {
-        "card": {
-            "state": true
-        },
-        "cardData": {
-            "state": true
-        },
-        "connect": {
-            "method": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "error": {
-            "state": true
-        },
-        "getToken": {
-            "method": true
-        },
-        "input": {
-            "state": true
+        "token": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "token",
+            "reflect": false,
+            "defaultValue": "'pk_test_6pRNASCoBOKtIshFeQd4XMUh'"
         },
         "name": {
-            "type": String,
-            "attr": "name"
-        },
-        "setError": {
-            "method": true
-        },
-        "state": {
-            "state": true
-        },
-        "stripe": {
-            "state": true
-        },
-        "token": {
-            "type": String,
-            "attr": "token"
-        },
-        "value": {
-            "state": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": false,
+            "defaultValue": "'stripe'"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-stripe:**/"; }
+    static get states() { return {
+        "input": {},
+        "stripe": {},
+        "error": {},
+        "card": {},
+        "value": {},
+        "cardData": {},
+        "state": {}
+    }; }
+    static get methods() { return {
+        "connect": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "getToken": {
+            "complexType": {
+                "signature": "() => Promise<boolean>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<boolean>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "setError": {
+            "complexType": {
+                "signature": "(error: string) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }

@@ -52,7 +52,7 @@ class WP_HTML_Compression {
 					$strip = $this->compress_js;
 				}
 
-				if ( !empty($token['template']) ) {
+				else if ( !empty($token['template']) ) {
 					$strip = $this->compress_template;
 				}
 

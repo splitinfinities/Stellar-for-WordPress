@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from "../../../stencil.core";
 export declare class Toggle {
     element: HTMLElement;
@@ -23,8 +22,8 @@ export declare class Toggle {
     validate(): Promise<FormResult>;
     toggleChangedHandler(event: CustomEvent): void;
     updateChecked(): void;
-    renderValidation(): JSX.Element;
-    renderBlock(): JSX.Element;
-    renderPlain(): JSX.Element[];
-    render(): JSX.Element[];
+    renderValidation(): any;
+    renderBlock(): any;
+    renderPlain(): any[];
+    render(): any[];
 }

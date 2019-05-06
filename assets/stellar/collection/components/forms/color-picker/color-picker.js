@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import { colors } from '../../../utils';
 import properties from 'css-custom-properties';
 export class ColorPicker {
@@ -6,6 +7,7 @@ export class ColorPicker {
     }
     componentWillLoad() {
         this.options = Object.keys(colors).filter((color) => {
+            // @ts-ignore
             return !["base", "white", "black"].includes(color);
         });
         properties.set({
@@ -29,27 +31,54 @@ export class ColorPicker {
     }
     static get is() { return "stellar-color-picker"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["color-picker.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["color-picker.css"]
+    }; }
     static get properties() { return {
-        "element": {
-            "elementRef": true
-        },
-        "options": {
-            "state": true
-        },
         "val": {
-            "type": String,
-            "attr": "val",
-            "reflectToAttr": true,
+            "type": "string",
             "mutable": true,
-            "watchCallbacks": ["valueChangedHandler"]
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "val",
+            "reflect": true,
+            "defaultValue": "\"none\""
         }
     }; }
+    static get states() { return {
+        "options": {}
+    }; }
     static get events() { return [{
-            "name": "change",
             "method": "change",
+            "name": "change",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
-    static get style() { return "/**style-placeholder:stellar-color-picker:**/"; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "val",
+            "methodName": "valueChangedHandler"
+        }]; }
 }

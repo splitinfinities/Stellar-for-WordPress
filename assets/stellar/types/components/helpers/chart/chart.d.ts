@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import Highcharts from 'highcharts';
 import { HighchartsModel } from './options';
 export declare class Chart {
@@ -15,8 +14,8 @@ export declare class Chart {
     handleConfig(): void;
     handleAttrs(): void;
     componentDidLoad(): void;
-    options(newOptions: any): void;
-    get_options(): any;
-    refresh(): void;
-    render(): JSX.Element;
+    options(newOptions: any): Promise<void>;
+    get_options(): Promise<any>;
+    refresh(): Promise<void>;
+    render(): any;
 }

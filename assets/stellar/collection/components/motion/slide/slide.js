@@ -1,15 +1,17 @@
+import { h, Host } from '@stencil/core';
 export class Slide {
-    hostData() {
-        return {
-            class: {
+    render() {
+        return h(Host, { class: {
                 'slide-zoom': true,
                 'swiper-slide': true
-            }
-        };
-    }
-    render() {
-        return (h("slot", null));
+            } },
+            h("slot", null));
     }
     static get is() { return "stellar-slide"; }
-    static get style() { return "/**style-placeholder:stellar-slide:**/"; }
+    static get originalStyleUrls() { return {
+        "$": ["slide.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["slide.css"]
+    }; }
 }

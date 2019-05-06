@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import Highcharts from 'highcharts';
 import Data from 'highcharts/modules/data';
 import merge from 'deepmerge';
@@ -21,7 +22,7 @@ export class Chart {
         this.options(theme);
         this.refresh();
     }
-    options(newOptions) {
+    async options(newOptions) {
         this.__options = Object.assign({}, this.__options, { chart: {
                 type: this.type
             }, data: {
@@ -35,10 +36,10 @@ export class Chart {
         });
         this.refresh();
     }
-    get_options() {
+    async get_options() {
         return this.__options;
     }
-    refresh() {
+    async refresh() {
         this.__chart = this.element.shadowRoot.querySelector('.highchart');
         if (this.__chart) {
             this.__highchart = Highcharts.chart(this.__chart, this.__options);
@@ -49,53 +50,155 @@ export class Chart {
     }
     static get is() { return "stellar-chart"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["chart.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["chart.css"]
+    }; }
     static get properties() { return {
-        "__chart": {
-            "state": true
-        },
-        "__data": {
-            "state": true
-        },
-        "__highchart": {
-            "state": true
-        },
-        "__informant": {
-            "state": true
-        },
-        "__options": {
-            "state": true
-        },
-        "config": {
-            "type": "Any",
-            "attr": "config",
-            "watchCallbacks": ["handleConfig"]
-        },
-        "element": {
-            "elementRef": true
-        },
-        "for": {
-            "type": String,
-            "attr": "for",
-            "watchCallbacks": ["handleAttrs"]
-        },
-        "get_options": {
-            "method": true
-        },
-        "options": {
-            "method": true
-        },
-        "refresh": {
-            "method": true
+        "type": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "\"area\"|\"areaspline\"|\"bar\"|\"bubble\"|\"column\"|\"line\"|\"pie\"|\"polygon\"|\"scatter\"|\"spline\"|\"waterfall\"",
+                "resolved": "\"area\" | \"areaspline\" | \"bar\" | \"bubble\" | \"column\" | \"line\" | \"pie\" | \"polygon\" | \"scatter\" | \"spline\" | \"waterfall\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "type",
+            "reflect": false
         },
         "remote": {
-            "type": String,
-            "attr": "remote"
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "remote",
+            "reflect": false
         },
-        "type": {
-            "type": String,
-            "attr": "type",
-            "watchCallbacks": ["handleAttrs"]
+        "for": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "for",
+            "reflect": false
+        },
+        "config": {
+            "type": "unknown",
+            "mutable": false,
+            "complexType": {
+                "original": "HighchartsModel",
+                "resolved": "HighchartsModel",
+                "references": {
+                    "HighchartsModel": {
+                        "location": "import",
+                        "path": "./options"
+                    }
+                }
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "defaultValue": "new HighchartsModel"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-chart:**/"; }
+    static get states() { return {
+        "__chart": {},
+        "__options": {},
+        "__data": {},
+        "__highchart": {},
+        "__informant": {}
+    }; }
+    static get methods() { return {
+        "options": {
+            "complexType": {
+                "signature": "(newOptions: any) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "get_options": {
+            "complexType": {
+                "signature": "() => Promise<any>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<any>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "refresh": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "config",
+            "methodName": "handleConfig"
+        }, {
+            "propName": "type",
+            "methodName": "handleAttrs"
+        }, {
+            "propName": "for",
+            "methodName": "handleAttrs"
+        }]; }
 }

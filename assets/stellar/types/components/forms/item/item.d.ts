@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 import { RouterHistory, LocationSegments } from '@stencil/router';
 export declare class Item {
@@ -44,6 +43,6 @@ export declare class Item {
     classes(): string;
     select_item(state?: {
         selected: boolean;
-    }): void;
-    render(): JSX.Element;
+    }): Promise<void>;
+    render(): any;
 }

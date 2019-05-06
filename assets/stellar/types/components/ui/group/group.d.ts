@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Group {
     element: HTMLElement;
     size: string;
@@ -6,6 +5,6 @@ export declare class Group {
     count: number;
     extras: Array<Element>;
     componentWillLoad(): void;
-    resultantExtras(): JSX.Element[];
-    render(): JSX.Element[];
+    resultantExtras(): any[];
+    render(): any[];
 }

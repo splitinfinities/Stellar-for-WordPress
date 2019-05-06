@@ -1,14 +1,12 @@
-import '../../../stencil.core';
 export declare class WebAudioVisualizer {
     element: HTMLElement;
     canvas: HTMLCanvasElement;
     canvasCTX: any | WebGLRenderingContext | CanvasRenderingContext2D;
     for: string;
-    type: string | "wave" | "bars" | "webgl";
+    type: string | "wave" | "bars" | "circle" | "bars2";
     smoothing: number;
     size: number;
     color: string;
-    tag: HTMLAudioElement;
     freqs: Uint8Array;
     times: Uint8Array;
     width: number;
@@ -25,17 +23,12 @@ export declare class WebAudioVisualizer {
     fragSpectrum: Uint8Array;
     _bufferLength: AnalyserNode;
     _dataArray: AnalyserNode;
+    _color: any;
+    componentWillLoad(): void;
     componentDidLoad(): void;
-    connect(context: AudioContext, destination?: any): this;
+    connect(context: AudioContext, destination?: any): Promise<this>;
     draw(): void;
-    wave(): void;
-    bars(): void;
-    webgl(): void;
+    clearBackground: () => void;
     getFrequencyValue(freq: any): number;
-    __prepareWebGL(): void;
-    __createShader(): any;
-    __createTexture(): any;
-    __copyAudioDataToTexture(): void;
-    __renderQuad(): void;
-    render(): JSX.Element;
+    render(): any;
 }

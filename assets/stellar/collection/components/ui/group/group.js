@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 export class Group {
     constructor() {
         this.size = "medium";
@@ -36,26 +37,70 @@ export class Group {
     }
     static get is() { return "stellar-group"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["group.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["group.css"]
+    }; }
     static get properties() { return {
-        "count": {
-            "type": Number,
-            "attr": "count"
-        },
-        "element": {
-            "elementRef": true
-        },
-        "extras": {
-            "state": true
+        "size": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "size",
+            "reflect": false,
+            "defaultValue": "\"medium\""
         },
         "overflow": {
-            "type": Boolean,
-            "attr": "overflow"
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "overflow",
+            "reflect": false,
+            "defaultValue": "false"
         },
-        "size": {
-            "type": String,
-            "attr": "size",
-            "mutable": true
+        "count": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "count",
+            "reflect": false,
+            "defaultValue": "10"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-group:**/"; }
+    static get states() { return {
+        "extras": {}
+    }; }
+    static get elementRef() { return "element"; }
 }

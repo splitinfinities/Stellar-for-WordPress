@@ -1,0 +1,1 @@
+System.register([],function(t){"use strict";return{execute:function(){t("b",function(t,e){if(!t)throw e||"Assertion failed!";return t}),t("a",function(t){return new Promise(function(e){return setTimeout(e,t)})})}}});

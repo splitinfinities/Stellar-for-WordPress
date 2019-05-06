@@ -1,1 +1,0 @@
-var awaitDelay=function(a){return new Promise(function(e){setTimeout(e,a)})};export{awaitDelay as a};

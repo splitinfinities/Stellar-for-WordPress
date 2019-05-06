@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import Prism from 'prismjs';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace.js';
@@ -37,7 +38,7 @@ export class Code {
     replaceAll(str, find, replace) {
         return str.replace(new RegExp(find, 'g'), replace);
     }
-    highlight() {
+    async highlight() {
         var block = this.element.shadowRoot.querySelector('code');
         Prism.highlightElement(block, false);
     }
@@ -52,7 +53,7 @@ export class Code {
         const copyText = await this.result();
         ezClipboard.copyPlain(copyText);
     }
-    setCode(code) {
+    async setCode(code) {
         this.code = code;
     }
     getCode() {
@@ -106,72 +107,232 @@ export class Code {
     }
     static get is() { return "stellar-code"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["code.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["code.css"]
+    }; }
     static get properties() { return {
-        "clipboard": {
-            "method": true
-        },
-        "code": {
-            "state": true
-        },
-        "codeString": {
-            "type": String,
-            "attr": "code-string"
-        },
-        "copied": {
-            "state": true
-        },
-        "copy": {
-            "type": Boolean,
-            "attr": "copy"
-        },
-        "element": {
-            "elementRef": true
-        },
-        "expandable": {
-            "type": Boolean,
-            "attr": "expandable"
-        },
-        "expanded": {
-            "type": Boolean,
-            "attr": "expanded",
-            "mutable": true
-        },
-        "feature": {
-            "type": Boolean,
-            "attr": "feature"
-        },
-        "highlight": {
-            "method": true
-        },
         "language": {
-            "type": String,
-            "attr": "language",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "observer": {
-            "state": true
-        },
-        "preview": {
-            "type": Boolean,
-            "attr": "preview"
-        },
-        "randomName": {
-            "state": true
-        },
-        "raw": {
-            "state": true
-        },
-        "result": {
-            "method": true
-        },
-        "setCode": {
-            "method": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "language",
+            "reflect": true,
+            "defaultValue": "\"html\""
         },
         "simple": {
-            "type": Boolean,
-            "attr": "simple"
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "simple",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "codeString": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "code-string",
+            "reflect": false
+        },
+        "copy": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "copy",
+            "reflect": false,
+            "defaultValue": "true"
+        },
+        "expanded": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "expanded",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "expandable": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "expandable",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "preview": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "preview",
+            "reflect": false,
+            "defaultValue": "true"
+        },
+        "feature": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "feature",
+            "reflect": false,
+            "defaultValue": "false"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-code:**/"; }
+    static get states() { return {
+        "copied": {},
+        "randomName": {},
+        "observer": {},
+        "code": {},
+        "raw": {}
+    }; }
+    static get methods() { return {
+        "highlight": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "result": {
+            "complexType": {
+                "signature": "() => Promise<string>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<string>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "clipboard": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "setCode": {
+            "complexType": {
+                "signature": "(code: any) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }

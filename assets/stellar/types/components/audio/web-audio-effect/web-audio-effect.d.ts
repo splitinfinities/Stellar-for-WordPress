@@ -14,6 +14,6 @@ export declare class WebAudioEffect {
     context: AudioContext;
     source: WebAudioSource;
     parent: WebAudioEffect | WebAudio;
-    attachEffect(context: any, source: any): string;
+    attachEffect(context: any, source: any): Promise<string>;
     effects(): string[];
 }

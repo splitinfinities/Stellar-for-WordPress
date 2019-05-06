@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Avatar {
     element: HTMLElement;
     src: string;
@@ -12,9 +11,6 @@ export declare class Avatar {
     colorAuto: boolean;
     colors: string[];
     componentWillLoad(): void;
-    hostData(): {
-        class: string;
-    };
     formatName(): void;
-    render(): JSX.Element;
+    render(): any;
 }

@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import { properties } from '../../../utils';
 export class Tab {
     constructor() {
@@ -33,6 +34,7 @@ export class Tab {
     }
     handleIndicatorPosition() {
         if (this.open && this.parent && this.parent.nodeName === "STELLAR-TABS") {
+            // this.parent.blurring()
             if (this.parent.vertical) {
                 properties.set({
                     "--tab-top": `${this.element.offsetTop}px`,
@@ -56,6 +58,7 @@ export class Tab {
     }
     render() {
         const Tag = this.tag;
+        // @ts-ignore
         return h("div", { class: "tab-wrap" },
             h(Tag, { role: "tab", "aria-selected": this.open ? "true" : "false", "aria-setsize": this.tabCount, "aria-posinset": this.order, href: this.href, tabindex: "0", class: "tab-button", onClick: (e) => this.handleClick(e) },
                 this.renderNotifications(),
@@ -63,61 +66,163 @@ export class Tab {
     }
     static get is() { return "stellar-tab"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["tab.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["tab.css"]
+    }; }
     static get properties() { return {
-        "disabled": {
-            "type": Boolean,
-            "attr": "disabled"
-        },
-        "element": {
-            "elementRef": true
-        },
         "href": {
-            "type": String,
-            "attr": "href",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "notifications": {
-            "type": "Any",
-            "attr": "notifications"
-        },
-        "open": {
-            "type": Boolean,
-            "attr": "open",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "order": {
-            "type": Number,
-            "attr": "order",
-            "reflectToAttr": true
-        },
-        "parent": {
-            "state": true
-        },
-        "tabCount": {
-            "type": Number,
-            "attr": "tab-count",
-            "reflectToAttr": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "href",
+            "reflect": true,
+            "defaultValue": "\"#\""
         },
         "tag": {
-            "type": String,
-            "attr": "tag",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "tag",
+            "reflect": true,
+            "defaultValue": "\"button\""
+        },
+        "disabled": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "disabled",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "open": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "open",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "notifications": {
+            "type": "any",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean|number",
+                "resolved": "boolean | number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "notifications",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "order": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "order",
+            "reflect": true
+        },
+        "tabCount": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "tab-count",
+            "reflect": true
         }
     }; }
+    static get states() { return {
+        "parent": {}
+    }; }
     static get events() { return [{
-            "name": "contentChange",
             "method": "contentChange",
+            "name": "contentChange",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
+    static get elementRef() { return "element"; }
     static get listeners() { return [{
-            "name": "window:resize",
+            "name": "resize",
             "method": "handleResize",
+            "target": "window",
+            "capture": false,
             "passive": true
         }]; }
-    static get style() { return "/**style-placeholder:stellar-tab:**/"; }
 }

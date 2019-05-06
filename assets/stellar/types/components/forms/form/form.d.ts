@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Form {
     element: HTMLElement;
@@ -13,7 +12,7 @@ export declare class Form {
     target: string;
     selectors: Array<string>;
     submit: EventEmitter;
-    handleEnter(): void;
+    handleEnter(event: any): void;
     register(selectors: string[]): Promise<void>;
     refresh(): Promise<void>;
     state(): Promise<{
@@ -24,5 +23,5 @@ export declare class Form {
         valid: boolean;
     }>;
     submit_form(): Promise<void>;
-    render(): JSX.Element;
+    render(): any;
 }

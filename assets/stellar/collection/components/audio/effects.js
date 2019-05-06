@@ -11,14 +11,17 @@ export const buildDelayNode = function (context, effectWC) {
     responsiveTo(delay, effectWC);
     return delay;
 };
-export const buildReverbNode = function (context, effectWC) {
+export const buildReverbNode = async function (context, effectWC) {
     const convolver = context.createConvolver();
     var source = effectWC._use;
-    if (source.getBuffer()) {
-        convolver.buffer = source.getBuffer();
+    const buffer = await source.getBuffer();
+    if (buffer) {
+        convolver.buffer = buffer;
     }
+    // responsiveTo(convolver, effectWC)
     return convolver;
 };
+// Private
 const responsiveTo = function (effect, effectWC) {
     if (effectWC.midicontroller !== false) {
         biquadResponsiveToMidi(effect, effectWC);
@@ -32,7 +35,10 @@ const responsiveTo = function (effect, effectWC) {
 };
 const handleMouseMove = function (event) {
     var eventDoc, doc, body;
-    event = event || window.event;
+    event = event || window.event; // IE-ism
+    // If pageX/Y aren't available and clientX/Y are,
+    // calculate pageX/Y - logic taken from jQuery.
+    // (This is to support old IE)
     if (event.pageX == null && event.clientX != null) {
         eventDoc = (event.target && event.target.ownerDocument) || document;
         doc = eventDoc.documentElement;
@@ -89,7 +95,7 @@ const biquadResponsiveToMouse = function (effect, effectWC) {
         if (!window["mouseInitialized"]) {
             window["mouseInitialized"] = true;
             document.onmousemove = handleMouseMove;
-            setInterval(getMousePosition, 100);
+            setInterval(getMousePosition, 100); // setInterval repeats every X ms
         }
     })();
 };

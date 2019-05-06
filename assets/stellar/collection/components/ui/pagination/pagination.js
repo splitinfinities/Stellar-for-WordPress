@@ -1,6 +1,10 @@
+import { h } from '@stencil/core';
 import { properties, blurringEase } from '../../../utils';
 export class Pagination {
     constructor() {
+        /**
+         * Public: Sets the max cap of pages you can skip through
+         */
         this.pages = 1;
         this.type = "full";
         this.current = 1;
@@ -62,6 +66,7 @@ export class Pagination {
         }
     }
     updateSurroundingPages() {
+        // @ts-ignore
         const pages = Array(this.pages).fill(0).map((item, index) => {
             const number = index + 1;
             return {
@@ -155,74 +160,151 @@ export class Pagination {
     }
     static get is() { return "stellar-pagination"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["pagination.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["pagination.css"]
+    }; }
     static get properties() { return {
-        "__current": {
-            "state": true,
-            "watchCallbacks": ["currentObserver"]
-        },
-        "__first": {
-            "state": true
-        },
-        "__last": {
-            "state": true
-        },
-        "__next": {
-            "state": true
-        },
-        "__previous": {
-            "state": true
-        },
-        "__surroundingPages": {
-            "state": true
-        },
-        "blur": {
-            "state": true
-        },
-        "color": {
-            "type": String,
-            "attr": "color"
-        },
-        "current": {
-            "type": Number,
-            "attr": "current",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "ease": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "padding": {
-            "type": Number,
-            "attr": "padding",
-            "reflectToAttr": true,
-            "mutable": true
-        },
         "pages": {
-            "type": Number,
-            "attr": "pages",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": "Public: Sets the max cap of pages you can skip through"
+            },
+            "attribute": "pages",
+            "reflect": true,
+            "defaultValue": "1"
         },
         "type": {
-            "type": String,
-            "attr": "type",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "\"full\"|\"compact\"",
+                "resolved": "\"compact\" | \"full\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "type",
+            "reflect": true,
+            "defaultValue": "\"full\""
+        },
+        "current": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "current",
+            "reflect": true,
+            "defaultValue": "1"
+        },
+        "padding": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "padding",
+            "reflect": true,
+            "defaultValue": "2"
+        },
+        "color": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "color",
+            "reflect": false,
+            "defaultValue": "\"gray\""
         },
         "url": {
-            "type": "Any",
-            "attr": "url"
+            "type": "any",
+            "mutable": false,
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "url",
+            "reflect": false,
+            "defaultValue": "\"#page-{0}\""
         }
     }; }
+    static get states() { return {
+        "__surroundingPages": {},
+        "__current": {},
+        "__first": {},
+        "__previous": {},
+        "__next": {},
+        "__last": {},
+        "blur": {},
+        "ease": {}
+    }; }
     static get events() { return [{
-            "name": "changed",
             "method": "changed",
+            "name": "changed",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
-    static get style() { return "/**style-placeholder:stellar-pagination:**/"; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "__current",
+            "methodName": "currentObserver"
+        }]; }
 }

@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Card {
     element: HTMLElement;
     input: HTMLInputElement;
@@ -12,7 +11,7 @@ export declare class Card {
     state: "submitting" | "processing" | "submitted" | "preparing";
     componentWillLoad(): void;
     componentDidLoad(): void;
-    connect(): void;
+    connect(): Promise<void>;
     getToken(): Promise<boolean>;
     attachToForm(): void;
     handleResponse({ error, token }: {
@@ -20,9 +19,9 @@ export declare class Card {
         token: any;
     }): void;
     handleError(error: any): void;
-    setError(error: string): void;
+    setError(error: string): Promise<void>;
     prepareStripe(): void;
-    renderPhone(): JSX.Element;
-    renderZip(): JSX.Element;
-    render(): JSX.Element;
+    renderPhone(): any;
+    renderZip(): any;
+    render(): any;
 }

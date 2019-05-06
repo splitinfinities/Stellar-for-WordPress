@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 export class Table {
     constructor() {
         this.upgrade = false;
@@ -27,30 +28,91 @@ export class Table {
         ];
     }
     static get is() { return "stellar-table"; }
+    static get originalStyleUrls() { return {
+        "$": ["table.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["table.css"]
+    }; }
     static get properties() { return {
-        "chart": {
-            "type": Boolean,
-            "attr": "chart"
-        },
-        "element": {
-            "elementRef": true
-        },
         "name": {
-            "type": String,
-            "attr": "name"
-        },
-        "striped": {
-            "type": Boolean,
-            "attr": "striped"
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": false
         },
         "upgrade": {
-            "type": Boolean,
-            "attr": "upgrade"
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "upgrade",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "chart": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "chart",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "striped": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "striped",
+            "reflect": false,
+            "defaultValue": "false"
         }
     }; }
+    static get elementRef() { return "element"; }
     static get listeners() { return [{
             "name": "change",
-            "method": "tableChangeHandler"
+            "method": "tableChangeHandler",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }]; }
-    static get style() { return "/**style-placeholder:stellar-table:**/"; }
 }

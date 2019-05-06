@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Tabs {
     element: HTMLElement;
     height: string;
@@ -14,8 +13,8 @@ export declare class Tabs {
     blur: number;
     tabs(): Promise<HTMLStellarTabElement[]>;
     contents(): Promise<HTMLStellarContentElement[]>;
-    blurring(): void;
+    blurring(): Promise<void>;
     componentWillLoad(): Promise<void>;
     componentDidLoad(): Promise<void>;
-    render(): JSX.Element;
+    render(): any;
 }

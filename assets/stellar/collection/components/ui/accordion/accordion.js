@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import { blurringEase, properties } from '../../../utils';
 export class Accordion {
     constructor() {
@@ -37,12 +38,13 @@ export class Accordion {
         this.els = Array.from(this.element.querySelectorAll("*:not([slot='label'])"));
         this.updateTabIndex();
     }
-    refresh() {
+    async refresh() {
         properties.set({
             "--accordion-height": `${this.expander.scrollHeight}px`
         }, this.element);
     }
     attachObserver() {
+        // Start observing the target node for configured mutations
         this.observer.observe(this.element, { childList: true, subtree: true });
     }
     componentWillUnload() {
@@ -76,47 +78,110 @@ export class Accordion {
     }
     static get is() { return "stellar-accordion"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["accordion.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["accordion.css"]
+    }; }
     static get properties() { return {
-        "blur": {
-            "state": true
-        },
-        "ease": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "els": {
-            "state": true
-        },
-        "expander": {
-            "state": true
-        },
-        "label": {
-            "type": String,
-            "attr": "label"
-        },
-        "name": {
-            "type": String,
-            "attr": "name"
-        },
-        "observer": {
-            "state": true
-        },
         "open": {
-            "type": Boolean,
-            "attr": "open",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "refresh": {
-            "method": true
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "open",
+            "reflect": true,
+            "defaultValue": "false"
         },
         "tight": {
-            "type": Boolean,
-            "attr": "tight",
-            "reflectToAttr": true
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "tight",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "name": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": false,
+            "defaultValue": "\"accordion\""
+        },
+        "label": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "label",
+            "reflect": false,
+            "defaultValue": "\"More Details\""
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-accordion:**/"; }
+    static get states() { return {
+        "blur": {},
+        "ease": {},
+        "expander": {},
+        "observer": {},
+        "els": {}
+    }; }
+    static get methods() { return {
+        "refresh": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }

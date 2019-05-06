@@ -1,3 +1,4 @@
+import { h } from "@stencil/core";
 import { blurringEase } from "../../../utils";
 export class ToggleOption {
     constructor() {
@@ -49,7 +50,7 @@ export class ToggleOption {
             this.checked = this.input.checked;
         }
     }
-    updateSelected(value) {
+    async updateSelected(value) {
         this.input.checked = value;
         this.checked = value;
         this.change.emit({ element: this.element, value: this.value, checked: this.input.checked });
@@ -112,108 +113,334 @@ export class ToggleOption {
             this.tooltip && h("stellar-tooltip", { align: "bottom-left" }, this.tooltip)));
     }
     static get is() { return "stellar-toggle-option"; }
+    static get originalStyleUrls() { return {
+        "$": ["toggle-option.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["toggle-option.css"]
+    }; }
     static get properties() { return {
-        "_type": {
-            "state": true
-        },
-        "blur": {
-            "state": true
+        "type": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "type",
+            "reflect": true,
+            "defaultValue": "\"checkbox\""
         },
         "checked": {
-            "type": Boolean,
-            "attr": "checked",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "checked",
+            "reflect": true,
+            "defaultValue": "false"
         },
         "checkedDefault": {
-            "type": Boolean,
-            "attr": "checked-default"
-        },
-        "confirm": {
-            "method": true
-        },
-        "default": {
-            "type": String,
-            "attr": "default"
-        },
-        "disabled": {
-            "type": Boolean,
-            "attr": "disabled",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "ease": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "focused": {
-            "state": true
-        },
-        "for": {
-            "type": String,
-            "attr": "for"
-        },
-        "icon": {
-            "type": Boolean,
-            "attr": "icon",
-            "reflectToAttr": true
-        },
-        "inline": {
-            "type": Boolean,
-            "attr": "inline"
-        },
-        "input": {
-            "state": true
-        },
-        "name": {
-            "type": String,
-            "attr": "name",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "required": {
-            "type": Boolean,
-            "attr": "required"
-        },
-        "selectedCopy": {
-            "type": String,
-            "attr": "selected-copy"
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "checked-default",
+            "reflect": false,
+            "defaultValue": "false"
         },
         "single": {
-            "type": Boolean,
-            "attr": "single",
-            "reflectToAttr": true
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "single",
+            "reflect": true
         },
-        "size": {
-            "type": Boolean,
-            "attr": "size"
+        "icon": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "icon",
+            "reflect": true
         },
         "tooltip": {
-            "type": String,
-            "attr": "tooltip",
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "tooltip",
+            "reflect": false
         },
-        "type": {
-            "type": String,
-            "attr": "type",
-            "reflectToAttr": true
+        "disabled": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "disabled",
+            "reflect": true
         },
-        "updateSelected": {
-            "method": true
+        "for": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "for",
+            "reflect": false,
+            "defaultValue": "\"\""
+        },
+        "name": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": true
+        },
+        "default": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "default",
+            "reflect": false,
+            "defaultValue": "\"\""
         },
         "value": {
-            "type": String,
-            "attr": "value"
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "value",
+            "reflect": false
+        },
+        "required": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "required",
+            "reflect": false
+        },
+        "inline": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "inline",
+            "reflect": false
+        },
+        "size": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "size",
+            "reflect": false
+        },
+        "selectedCopy": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "selected-copy",
+            "reflect": false,
+            "defaultValue": "\"Selected!\""
         }
     }; }
+    static get states() { return {
+        "input": {},
+        "_type": {},
+        "focused": {},
+        "blur": {},
+        "ease": {}
+    }; }
     static get events() { return [{
-            "name": "change",
             "method": "change",
+            "name": "change",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
-    static get style() { return "/**style-placeholder:stellar-toggle-option:**/"; }
+    static get methods() { return {
+        "confirm": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "updateSelected": {
+            "complexType": {
+                "signature": "(value: boolean) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }

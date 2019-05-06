@@ -1,3 +1,4 @@
+// Color system made via: https://palx.jxnblk.com/e5405c
 export const colors = {
     "base": "#26B0C7",
     "white": "#ffffff",

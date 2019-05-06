@@ -1,7 +1,5 @@
-import '../../../stencil.core';
 export declare class Playlist {
     element: HTMLElement;
-    title: string;
     dark: Boolean;
     autoplay: boolean;
     current: number;
@@ -11,6 +9,7 @@ export declare class Playlist {
     artwork: boolean;
     view: "playlist" | "art";
     playing: boolean;
+    load: boolean;
     currentTime: number | string;
     duration: number | string;
     visualizer: HTMLWebAudioVisualizerElement;
@@ -24,16 +23,14 @@ export declare class Playlist {
     componentDidLoad(): void;
     handleProgressClick(): void;
     handleTimeUpdates(): void;
-    handleSpacebarKey(): void;
-    handleLeftKey(): void;
-    handleRightKey(): void;
+    handleKeydown(event: any): void;
     loadFromStorage(): void;
-    prepare(element: any): void;
-    play(): void;
-    pause(): void;
-    next(): void;
-    previous(): void;
+    prepare(element: any): Promise<void>;
+    play(): Promise<void>;
+    pause(): Promise<void>;
+    next(): Promise<void>;
+    previous(): Promise<void>;
     togglePlaylist(): void;
     toggleAlbumArtView(): void;
-    render(): JSX.Element;
+    render(): any;
 }

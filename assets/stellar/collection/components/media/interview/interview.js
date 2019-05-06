@@ -1,26 +1,23 @@
+import { h } from '@stencil/core';
 import ezClipboard from 'ez-clipboard';
 import properties from 'css-custom-properties';
+import { get_interview_lines, update_interview_lines } from './helpers';
+import { delay } from '../../../utils';
 export class Interview {
     constructor() {
         this.randomId = Math.floor(Math.random() * 6) + 1;
-        this.debug = false;
-        this.color = "gray";
+        this.color = "white";
         this.playing = false;
         this.width = 800;
         this.height = 800;
         this.aspectRatio = 100;
+        this.visualization = "bars2";
         this.loaded = false;
         this.loading = false;
-        this.duration = 1;
+        this.visible = false;
+        this.duration = 0;
         this.current = 0;
         this.cache = new WeakMap();
-        this.difference = (a, b) => Math.abs(a - b);
-        this.limit = (min, max, value) => Math.max(Math.min(value, max), min);
-        this.interval = (start, end, current) => this.difference(start, current) / this.difference(start, end);
-        this.interpolate = (start, end, progress) => {
-            const p = this.difference(start, end) * progress;
-            return start > end ? start - p : start + p;
-        };
     }
     componentWillLoad() {
         properties.set({
@@ -29,20 +26,27 @@ export class Interview {
             "--aspectRatio": `${this.aspectRatio}%`
         }, this.element);
     }
-    componentDidLoad() {
-        this.update_interview_lines();
-        this.audio = this.element.querySelector('web-audio');
+    async componentDidLoad() {
+        if (!this.interviewLines) {
+            this.interviewLines = get_interview_lines(this.element);
+        }
+        update_interview_lines(this.interviewLines, this.cache, this.time);
         this.addIntersectionObserver();
     }
     addIntersectionObserver() {
         if ('IntersectionObserver' in window) {
             this.io = new IntersectionObserver((data) => {
+                // because there will only ever be one instance
+                // of the element we are observing
+                // we can just use data[0]
                 if (data[0].isIntersecting) {
+                    this.handleInScreen();
                 }
                 else {
                     this.handleOffScreen();
                 }
             }, {
+                rootMargin: '50%',
                 threshold: [0]
             });
             this.io.observe(this.element);
@@ -51,178 +55,72 @@ export class Interview {
     handleTimeUpdate(event) {
         this.current = Math.round(event.detail.time * 1000);
         this.duration = Math.round(event.detail.duration * 1000);
-        this.update_interview_lines();
+        update_interview_lines(this.interviewLines, this.cache, this.time);
     }
-    get_interview_lines() {
-        const els = Array.from(this.element.querySelectorAll('.line'));
-        this.interviewLines = els.map(el => {
-            const offset = 0;
-            const end = parseInt(el.dataset.end, 10);
-            const start = parseInt(el.dataset.start, 10);
-            const opacityStart = parseFloat(el.dataset.opacityStart);
-            const opacityEnd = parseFloat(el.dataset.opacityEnd);
-            const translateXStart = parseInt(el.dataset.translatexStart, 10);
-            const translateXEnd = parseInt(el.dataset.translatexEnd, 10);
-            const translateYStart = parseInt(el.dataset.translateyStart, 10);
-            const translateYEnd = parseInt(el.dataset.translateyEnd, 10);
-            const scaleStart = parseFloat(el.dataset.scaleStart);
-            const scaleEnd = parseFloat(el.dataset.scaleEnd);
-            const updates = {};
-            if (!isNaN(opacityStart) && !isNaN(opacityEnd)) {
-                updates["opacity"] = {
-                    end: opacityEnd,
-                    start: opacityStart
-                };
-            }
-            if (!isNaN(translateXStart) && !isNaN(translateXEnd)) {
-                updates["translateX"] = {
-                    end: translateXEnd,
-                    start: translateXStart
-                };
-            }
-            if (!isNaN(translateYStart) && !isNaN(translateYEnd)) {
-                updates["translateY"] = {
-                    end: translateYEnd,
-                    start: translateYStart
-                };
-            }
-            if (!isNaN(scaleStart) && !isNaN(scaleEnd)) {
-                updates["scale"] = {
-                    end: scaleEnd,
-                    start: scaleStart
-                };
-            }
-            if (typeof end === 'undefined' ||
-                typeof start === 'undefined' ||
-                Object.keys(updates).length === 0) {
-                return null;
-            }
-            return { el, end, offset, start, updates };
-        }).filter(x => x);
-        return this.interviewLines;
-    }
-    update_interview_lines() {
-        const transformProp = this.prefixedTransformProp();
-        const y = this.time();
-        this.get_interview_lines().map(({ el, end, offset, start, updates }) => {
-            const s = offset + start;
-            const e = offset + end;
-            const state = this.cache.get(el);
-            if ((y >= s && y <= e) ||
-                (state !== 'before' && y < s) ||
-                (state !== 'after' && y > e)) {
-                let translateX = 0;
-                let translateY = 0;
-                let scale = 1;
-                const current = this.limit(s, e, y);
-                const i = this.interval(s, e, current);
-                if (updates.opacity) {
-                    const { end, start } = updates.opacity;
-                    const opacity = this.interpolate(start, end, i).toFixed(2);
-                    el.style.opacity = opacity;
-                }
-                if (updates.translateX) {
-                    const { end, start } = updates.translateX;
-                    translateX = parseInt(this.interpolate(start, end, i), 10);
-                }
-                if (updates.translateY) {
-                    const { end, start } = updates.translateY;
-                    translateY = parseInt(this.interpolate(start, end, i), 10);
-                }
-                if (updates.scale) {
-                    const { end, start } = updates.scale;
-                    scale = this.interpolate(start, end, i).toFixed(2);
-                }
-                el.style[transformProp] =
-                    `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
-                if (y < s) {
-                    this.cache.set(el, 'before');
-                }
-                else if (y > e) {
-                    this.cache.set(el, 'after');
-                }
-                else {
-                    this.cache.set(el, 'during');
-                }
-            }
-        });
-    }
-    prefixedTransformProp() {
-        const el = document.createElement('div');
-        const vendors = ['Webkit', 'webkit', 'Moz', 'moz', 'ms', 'o'];
-        if (el.style.transform != null) {
-            return 'transform';
-        }
-        for (let v in vendors) {
-            const prop = `${vendors[v]}Transform`;
-            if (typeof el.style[prop] !== 'undefined') {
-                return prop;
-            }
-        }
-    }
-    time() {
+    get time() {
         return this.current;
     }
-    handleInScreen(cb = () => { }) {
-        this.loading = true;
-        if (!this.loaded && !this.audio.is_prepared()) {
-            this.audio.connect_the_world().then(() => {
-                this.loaded = true;
-                setTimeout(() => {
-                    this.loading = false;
-                    this.audio.source("interview").prepare();
-                    this.duration = Math.round(this.audio.source("interview").getDuration() * 1000);
-                    cb();
-                }, 1000);
-            });
+    async handleInScreen() {
+        await delay(1000);
+        this.visible = true;
+        await delay(100);
+        this.audio = this.element.querySelector('web-audio');
+        this.audio_source = await this.audio.source("interview");
+    }
+    async attachContext() {
+        if (!this.loaded) {
+            this.loading = true;
+            await this.audio.connect_the_world();
+            if (!this.audio_source) {
+                this.audio_source = await this.audio.source("interview");
+                await this.audio_source.prepare();
+            }
+            const duration = await this.audio_source.getDuration();
+            this.duration = Math.round(duration * 1000);
+            this.loaded = true;
+            this.loading = false;
         }
     }
     async handleOffScreen() {
         this.pause();
     }
-    play() {
+    async play() {
         if (this.audio) {
-            if (this.audio.source("interview")) {
-                this.audio.source("interview").play();
+            if (this.audio_source) {
+                await this.audio_source.play();
+                this.playing = this.audio_source.playing;
             }
-            this.playing = this.audio.source("interview").playing;
         }
     }
-    skipTo(time) {
+    async skipTo(time) {
         if (this.audio) {
-            if (this.audio.source("interview")) {
-                this.audio.source("interview").skipTo(time);
+            if (this.audio_source) {
+                await this.audio_source.skipTo(time);
+                this.playing = this.audio_source.playing;
             }
-            this.playing = this.audio.source("interview").playing;
         }
     }
-    pause() {
+    async pause() {
         if (this.audio) {
-            if (this.audio.source("interview")) {
-                this.audio.source("interview").pause();
+            if (this.audio_source) {
+                await this.audio_source.pause();
+                this.playing = this.audio_source.playing;
             }
-            this.playing = this.audio.source("interview").playing;
         }
     }
-    toggle() {
+    async toggle() {
         if (this.audio) {
-            if (this.audio.source("interview")) {
-                this.audio.source("interview").toggle();
+            if (this.audio_source) {
+                await this.audio_source.toggle();
+                this.playing = this.audio_source.playing;
             }
-            this.playing = this.audio.source("interview").playing;
         }
     }
-    handleClick() {
-        if (!this.audio.is_prepared()) {
-            this.handleInScreen(() => {
-                this.handleClick();
-            });
-        }
-        else {
-            this.toggle();
-        }
+    async handleClick() {
+        await this.attachContext();
+        await this.toggle();
         if (this.current === this.duration) {
-            this.skipTo(0);
+            await this.skipTo(0);
         }
     }
     handleCurrentClick() {
@@ -230,14 +128,17 @@ export class Interview {
     }
     render() {
         return (h("div", { class: "card", onDblClick: () => { this.handleClick(); } },
-            h("section", null,
+            !this.visible && h("div", null,
+                h("skeleton-img", { width: "1050", height: "600", loading: true }),
+                h("div", { style: { "display": "none" } },
+                    h("slot", null))),
+            this.visible && h("section", null,
                 h("slot", null),
                 h("div", { class: "transcript" },
                     h("slot", { name: "transcript" })),
                 h("web-audio", { name: `interview-${this.randomId}` },
                     h("web-audio-source", { src: this.src, name: "interview" })),
-                this.debug && h("web-audio-debugger", null),
-                h("web-audio-visualizer", { for: `interview-${this.randomId}`, type: "bars", color: this.color }),
+                h("web-audio-visualizer", { for: `interview-${this.randomId}`, type: this.visualization, width: "1024", height: "1024", color: this.color }),
                 h("button", { class: this.loading ? "loading button" : (this.playing ? "playing button" : "button"), onClick: () => { this.handleClick(); } },
                     h("stellar-asset", { name: this.loading ? "sync" : (this.playing ? "pause" : "play"), class: this.loading ? "animation-spin" : "" })),
                 h("h3", null,
@@ -247,85 +148,227 @@ export class Interview {
                 h("stellar-progress", { value: this.current, max: this.duration, noease: true, blurable: false, slender: true, editable: true, onValueChange: (e) => { this.skipTo(e.detail.value); } }))));
     }
     static get is() { return "stellar-interview"; }
+    static get originalStyleUrls() { return {
+        "$": ["interview.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["interview.css"]
+    }; }
     static get properties() { return {
-        "aspectRatio": {
-            "type": Number,
-            "attr": "aspect-ratio",
-            "mutable": true
-        },
-        "audio": {
-            "state": true
+        "src": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "src",
+            "reflect": false
         },
         "color": {
-            "type": String,
-            "attr": "color"
-        },
-        "current": {
-            "state": true
-        },
-        "debug": {
-            "type": Boolean,
-            "attr": "debug"
-        },
-        "duration": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "height": {
-            "type": Number,
-            "attr": "height",
-            "mutable": true
-        },
-        "interviewLines": {
-            "state": true
-        },
-        "io": {
-            "state": true
-        },
-        "loaded": {
-            "state": true
-        },
-        "loading": {
-            "state": true
-        },
-        "pause": {
-            "method": true
-        },
-        "play": {
-            "method": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "color",
+            "reflect": false,
+            "defaultValue": "\"white\""
         },
         "playing": {
-            "type": Boolean,
-            "attr": "playing",
-            "mutable": true
-        },
-        "randomId": {
-            "state": true
-        },
-        "skipTo": {
-            "method": true
-        },
-        "src": {
-            "type": String,
-            "attr": "src"
-        },
-        "toggle": {
-            "method": true
-        },
-        "updateFunc": {
-            "state": true
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "playing",
+            "reflect": false,
+            "defaultValue": "false"
         },
         "width": {
-            "type": Number,
-            "attr": "width",
-            "mutable": true
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "width",
+            "reflect": false,
+            "defaultValue": "800"
+        },
+        "height": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "height",
+            "reflect": false,
+            "defaultValue": "800"
+        },
+        "aspectRatio": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "aspect-ratio",
+            "reflect": false,
+            "defaultValue": "100"
+        },
+        "visualization": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "\"circle\"|\"bars\"|\"wave\"|\"bars2\"",
+                "resolved": "\"bars\" | \"bars2\" | \"circle\" | \"wave\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "visualization",
+            "reflect": false,
+            "defaultValue": "\"bars2\""
         }
     }; }
+    static get states() { return {
+        "randomId": {},
+        "audio": {},
+        "audio_source": {},
+        "io": {},
+        "loaded": {},
+        "loading": {},
+        "visible": {},
+        "updateFunc": {},
+        "duration": {},
+        "current": {},
+        "interviewLines": {}
+    }; }
+    static get methods() { return {
+        "play": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "skipTo": {
+            "complexType": {
+                "signature": "(time: number) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "pause": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "toggle": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
     static get listeners() { return [{
             "name": "timeupdate",
-            "method": "handleTimeUpdate"
+            "method": "handleTimeUpdate",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }]; }
-    static get style() { return "/**style-placeholder:stellar-interview:**/"; }
 }

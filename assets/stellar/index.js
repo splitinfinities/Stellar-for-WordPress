@@ -1,1 +1,1 @@
-// StellarCore: CommonJS Main
+module.exports = require('./cjs/stellar-core.cjs.js');

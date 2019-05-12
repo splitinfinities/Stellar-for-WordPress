@@ -1,8 +1,7 @@
+import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Song {
     element: HTMLElement;
-    songChanged: EventEmitter;
-    songChangedHandler(): void;
     src: string;
     playing: boolean;
     artwork: boolean;
@@ -14,10 +13,14 @@ export declare class Song {
     genre: string;
     picture: string;
     error: Object;
+    songChanged: EventEmitter;
+    loaded: EventEmitter;
     readonly url: string;
     componentWillLoad(): Promise<void>;
     componentDidLoad(): void;
+    songChangedHandler(): void;
     updateDetails(details: any): void;
+    load(): Promise<void>;
     details(): Promise<{
         'title': string;
         'album': string;
@@ -30,5 +33,5 @@ export declare class Song {
     switching(): Promise<void>;
     getIndex(): Promise<number>;
     setIndex(value: any): Promise<void>;
-    render(): any;
+    render(): JSX.Element;
 }

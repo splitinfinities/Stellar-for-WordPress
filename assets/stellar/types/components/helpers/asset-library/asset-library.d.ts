@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import "ionicons";
 export declare class AssetLibrary {
     element: HTMLElement;
@@ -5,5 +6,5 @@ export declare class AssetLibrary {
     kind: number;
     componentWillLoad(): void;
     fetchIcons(): Promise<void>;
-    render(): any;
+    render(): JSX.Element;
 }

@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import properties from 'css-custom-properties';
 export class SkeletonImg {
     constructor() {
@@ -37,106 +36,38 @@ export class SkeletonImg {
         ];
     }
     static get is() { return "skeleton-img"; }
-    static get originalStyleUrls() { return {
-        "$": ["skeleton-img.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["skeleton-img.css"]
-    }; }
     static get properties() { return {
-        "width": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "width",
-            "reflect": true,
-            "defaultValue": "600"
+        "block": {
+            "type": Boolean,
+            "attr": "block",
+            "reflectToAttr": true
+        },
+        "element": {
+            "elementRef": true
         },
         "height": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "height",
-            "reflect": true,
-            "defaultValue": "300"
-        },
-        "block": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "block",
-            "reflect": true,
-            "defaultValue": "false"
-        },
-        "loading": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "loading",
-            "reflect": true,
-            "defaultValue": "false"
+            "type": Number,
+            "attr": "height",
+            "reflectToAttr": true
         },
         "icon": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "icon",
-            "reflect": true,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "icon",
+            "reflectToAttr": true
+        },
+        "loading": {
+            "type": Boolean,
+            "attr": "loading",
+            "reflectToAttr": true
+        },
+        "observer": {
+            "state": true
+        },
+        "width": {
+            "type": Number,
+            "attr": "width",
+            "reflectToAttr": true
         }
     }; }
-    static get states() { return {
-        "observer": {}
-    }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:skeleton-img:**/"; }
 }

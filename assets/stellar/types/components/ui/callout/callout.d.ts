@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Callout {
     element: HTMLElement;
     type: "alert" | "error" | "info" | "success" | "default";
@@ -5,5 +6,5 @@ export declare class Callout {
     componentDidLoad(): void;
     handleTheme(): void;
     handleType(): void;
-    render(): any;
+    render(): JSX.Element;
 }

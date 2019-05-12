@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class ColorPicker {
     element: HTMLElement;
@@ -7,5 +8,5 @@ export declare class ColorPicker {
     componentWillLoad(): void;
     valueChangedHandler(val: string): void;
     updateValue(color: any): void;
-    render(): any;
+    render(): JSX.Element;
 }

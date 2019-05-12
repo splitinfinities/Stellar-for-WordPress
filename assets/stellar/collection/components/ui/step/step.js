@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import { parentNodeSelector } from '../../../utils';
 export class Step {
     constructor() {
@@ -28,120 +27,46 @@ export class Step {
             h("stellar-label", null, this.renderTitle())));
     }
     static get is() { return "stellar-step"; }
-    static get originalStyleUrls() { return {
-        "$": ["step.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["step.css"]
-    }; }
     static get properties() { return {
-        "href": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "href",
-            "reflect": true,
-            "defaultValue": "\"#\""
-        },
         "disabled": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "disabled",
-            "reflect": false,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "disabled"
+        },
+        "element": {
+            "elementRef": true
+        },
+        "href": {
+            "type": String,
+            "attr": "href",
+            "reflectToAttr": true,
+            "mutable": true
         },
         "open": {
-            "type": "boolean",
-            "mutable": true,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "open",
-            "reflect": true,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "open",
+            "reflectToAttr": true,
+            "mutable": true
         },
         "order": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "order",
-            "reflect": true
+            "type": Number,
+            "attr": "order",
+            "reflectToAttr": true
+        },
+        "parent": {
+            "state": true
         },
         "tabCount": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "tab-count",
-            "reflect": true
+            "type": Number,
+            "attr": "tab-count",
+            "reflectToAttr": true
         }
     }; }
-    static get states() { return {
-        "parent": {}
-    }; }
     static get events() { return [{
-            "method": "contentChange",
             "name": "contentChange",
+            "method": "contentChange",
             "bubbles": true,
             "cancelable": true,
-            "composed": true,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            }
+            "composed": true
         }]; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-step:**/"; }
 }

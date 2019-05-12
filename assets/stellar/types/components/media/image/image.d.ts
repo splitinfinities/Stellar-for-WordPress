@@ -1,7 +1,10 @@
+import '../../../stencil.core';
 export declare class Picture {
     element: HTMLElement;
     figure: HTMLElement;
     poster: string;
+    large: string;
+    type: "background" | "picture";
     width: number;
     height: number;
     nozoom: boolean;
@@ -16,6 +19,7 @@ export declare class Picture {
     componentDidLoad(): void;
     mountZoom(): void;
     handlePosterChange(): void;
+    handleActive(): void;
     medium(): Promise<any>;
     handleImage(): Promise<void>;
     addIntersectionObserver(): void;
@@ -23,7 +27,8 @@ export declare class Picture {
     getPictureColor(): void;
     setBG(): void;
     prepareSources(): void;
+    setBackgroundImage(): void;
     updateAspectRatio(): void;
-    renderPicture(): any[];
-    render(): any;
+    renderPicture(): JSX.Element[];
+    render(): JSX.Element;
 }

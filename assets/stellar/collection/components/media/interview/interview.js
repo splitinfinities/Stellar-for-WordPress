@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import ezClipboard from 'ez-clipboard';
 import properties from 'css-custom-properties';
 import { get_interview_lines, update_interview_lines } from './helpers';
@@ -36,9 +35,6 @@ export class Interview {
     addIntersectionObserver() {
         if ('IntersectionObserver' in window) {
             this.io = new IntersectionObserver((data) => {
-                // because there will only ever be one instance
-                // of the element we are observing
-                // we can just use data[0]
                 if (data[0].isIntersecting) {
                     this.handleInScreen();
                 }
@@ -53,7 +49,7 @@ export class Interview {
         }
     }
     handleTimeUpdate(event) {
-        this.current = Math.round(event.detail.time * 1000);
+        this.current = Math.abs(Math.round(event.detail.time * 1000));
         this.duration = Math.round(event.detail.duration * 1000);
         update_interview_lines(this.interviewLines, this.cache, this.time);
     }
@@ -129,7 +125,7 @@ export class Interview {
     render() {
         return (h("div", { class: "card", onDblClick: () => { this.handleClick(); } },
             !this.visible && h("div", null,
-                h("skeleton-img", { width: "1050", height: "600", loading: true }),
+                h("skeleton-img", { width: 1050, height: 600, loading: true }),
                 h("div", { style: { "display": "none" } },
                     h("slot", null))),
             this.visible && h("section", null,
@@ -138,237 +134,102 @@ export class Interview {
                     h("slot", { name: "transcript" })),
                 h("web-audio", { name: `interview-${this.randomId}` },
                     h("web-audio-source", { src: this.src, name: "interview" })),
-                h("web-audio-visualizer", { for: `interview-${this.randomId}`, type: this.visualization, width: "1024", height: "1024", color: this.color }),
+                h("web-audio-visualizer", { for: `interview-${this.randomId}`, type: this.visualization, width: 1024, height: 1024, color: this.color }),
                 h("button", { class: this.loading ? "loading button" : (this.playing ? "playing button" : "button"), onClick: () => { this.handleClick(); } },
                     h("stellar-asset", { name: this.loading ? "sync" : (this.playing ? "pause" : "play"), class: this.loading ? "animation-spin" : "" })),
                 h("h3", null,
                     h("stellar-unit", { class: "current", value: this.current, from: "ms", to: "s", onClick: () => { this.handleCurrentClick(); } })),
                 h("h3", null,
                     h("stellar-unit", { class: "duration", value: this.duration, from: "ms", to: "s" })),
-                h("stellar-progress", { value: this.current, max: this.duration, noease: true, blurable: false, slender: true, editable: true, onValueChange: (e) => { this.skipTo(e.detail.value); } }))));
+                h("stellar-progress", { value: this.current, max: this.duration, noease: true, blurable: false, slender: true, editable: true, onChange: (e) => { this.skipTo(e.detail.value); } }))));
     }
     static get is() { return "stellar-interview"; }
-    static get originalStyleUrls() { return {
-        "$": ["interview.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["interview.css"]
-    }; }
     static get properties() { return {
-        "src": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "src",
-            "reflect": false
+        "aspectRatio": {
+            "type": Number,
+            "attr": "aspect-ratio",
+            "mutable": true
+        },
+        "audio": {
+            "state": true
+        },
+        "audio_source": {
+            "state": true
         },
         "color": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "color",
-            "reflect": false,
-            "defaultValue": "\"white\""
+            "type": String,
+            "attr": "color"
         },
-        "playing": {
-            "type": "boolean",
-            "mutable": true,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "playing",
-            "reflect": false,
-            "defaultValue": "false"
+        "current": {
+            "state": true
         },
-        "width": {
-            "type": "number",
-            "mutable": true,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "width",
-            "reflect": false,
-            "defaultValue": "800"
+        "duration": {
+            "state": true
+        },
+        "element": {
+            "elementRef": true
         },
         "height": {
-            "type": "number",
-            "mutable": true,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "height",
-            "reflect": false,
-            "defaultValue": "800"
+            "type": Number,
+            "attr": "height",
+            "mutable": true
         },
-        "aspectRatio": {
-            "type": "number",
-            "mutable": true,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "aspect-ratio",
-            "reflect": false,
-            "defaultValue": "100"
+        "interviewLines": {
+            "state": true
         },
-        "visualization": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "\"circle\"|\"bars\"|\"wave\"|\"bars2\"",
-                "resolved": "\"bars\" | \"bars2\" | \"circle\" | \"wave\"",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "visualization",
-            "reflect": false,
-            "defaultValue": "\"bars2\""
-        }
-    }; }
-    static get states() { return {
-        "randomId": {},
-        "audio": {},
-        "audio_source": {},
-        "io": {},
-        "loaded": {},
-        "loading": {},
-        "visible": {},
-        "updateFunc": {},
-        "duration": {},
-        "current": {},
-        "interviewLines": {}
-    }; }
-    static get methods() { return {
-        "play": {
-            "complexType": {
-                "signature": "() => Promise<void>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+        "io": {
+            "state": true
         },
-        "skipTo": {
-            "complexType": {
-                "signature": "(time: number) => Promise<void>",
-                "parameters": [{
-                        "tags": [],
-                        "text": ""
-                    }],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+        "loaded": {
+            "state": true
+        },
+        "loading": {
+            "state": true
         },
         "pause": {
-            "complexType": {
-                "signature": "() => Promise<void>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
+        },
+        "play": {
+            "method": true
+        },
+        "playing": {
+            "type": Boolean,
+            "attr": "playing",
+            "mutable": true
+        },
+        "randomId": {
+            "state": true
+        },
+        "skipTo": {
+            "method": true
+        },
+        "src": {
+            "type": String,
+            "attr": "src"
         },
         "toggle": {
-            "complexType": {
-                "signature": "() => Promise<void>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
+        },
+        "updateFunc": {
+            "state": true
+        },
+        "visible": {
+            "state": true
+        },
+        "visualization": {
+            "type": String,
+            "attr": "visualization",
+            "mutable": true
+        },
+        "width": {
+            "type": Number,
+            "attr": "width",
+            "mutable": true
         }
     }; }
-    static get elementRef() { return "element"; }
     static get listeners() { return [{
             "name": "timeupdate",
-            "method": "handleTimeUpdate",
-            "target": undefined,
-            "capture": false,
-            "passive": false
+            "method": "handleTimeUpdate"
         }]; }
+    static get style() { return "/**style-placeholder:stellar-interview:**/"; }
 }

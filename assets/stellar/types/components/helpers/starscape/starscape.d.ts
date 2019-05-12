@@ -1,4 +1,5 @@
+import '../../../stencil.core';
 export declare class Starscape {
     element: HTMLElement;
-    render(): any;
+    render(): JSX.Element;
 }

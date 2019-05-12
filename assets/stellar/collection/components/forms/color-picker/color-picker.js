@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import { colors } from '../../../utils';
 import properties from 'css-custom-properties';
 export class ColorPicker {
@@ -7,7 +6,6 @@ export class ColorPicker {
     }
     componentWillLoad() {
         this.options = Object.keys(colors).filter((color) => {
-            // @ts-ignore
             return !["base", "white", "black"].includes(color);
         });
         properties.set({
@@ -31,54 +29,27 @@ export class ColorPicker {
     }
     static get is() { return "stellar-color-picker"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["color-picker.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["color-picker.css"]
-    }; }
     static get properties() { return {
+        "element": {
+            "elementRef": true
+        },
+        "options": {
+            "state": true
+        },
         "val": {
-            "type": "string",
+            "type": String,
+            "attr": "val",
+            "reflectToAttr": true,
             "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "val",
-            "reflect": true,
-            "defaultValue": "\"none\""
+            "watchCallbacks": ["valueChangedHandler"]
         }
     }; }
-    static get states() { return {
-        "options": {}
-    }; }
     static get events() { return [{
-            "method": "change",
             "name": "change",
+            "method": "change",
             "bubbles": true,
             "cancelable": true,
-            "composed": true,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            }
+            "composed": true
         }]; }
-    static get elementRef() { return "element"; }
-    static get watchers() { return [{
-            "propName": "val",
-            "methodName": "valueChangedHandler"
-        }]; }
+    static get style() { return "/**style-placeholder:stellar-color-picker:**/"; }
 }

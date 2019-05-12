@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Pagination {
     element: HTMLElement;
@@ -32,12 +33,12 @@ export declare class Pagination {
     handleChange(event: Event): void;
     handleClick(event: UIEvent): void;
     formatUrl(pageNumber: any): any;
-    renderFirstPageButton(): any;
-    renderPreviousPageButton(): any;
-    renderNextPageButton(): any;
-    renderLastPageButton(): any;
+    renderFirstPageButton(): JSX.Element;
+    renderPreviousPageButton(): JSX.Element;
+    renderNextPageButton(): JSX.Element;
+    renderLastPageButton(): JSX.Element;
     renderPagesList(): any;
-    renderPagesPreviousEllipsis(): any;
-    renderPagesNextEllipsis(): any;
-    render(): any;
+    renderPagesPreviousEllipsis(): JSX.Element;
+    renderPagesNextEllipsis(): JSX.Element;
+    render(): JSX.Element;
 }

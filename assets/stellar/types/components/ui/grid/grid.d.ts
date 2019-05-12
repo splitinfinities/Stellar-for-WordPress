@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Grid {
     element: HTMLElement;
@@ -17,5 +18,5 @@ export declare class Grid {
     componentWillLoad(): void;
     componentDidLoad(): void;
     refresh(): Promise<void>;
-    render(): any;
+    render(): JSX.Element;
 }

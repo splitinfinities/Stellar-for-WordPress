@@ -1,6 +1,7 @@
+import '../../../stencil.core';
 export declare class GroupOverflow {
     element: HTMLElement;
     count: number;
     size: string;
-    render(): any;
+    render(): JSX.Element;
 }

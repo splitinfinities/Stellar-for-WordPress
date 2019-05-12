@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import { bars, wave, circle, bars2 } from './visualizations';
 import { colors } from '../../../utils';
 import hexToHsl from 'hex-to-hsl';
@@ -43,7 +42,6 @@ export class WebAudioVisualizer {
     draw() {
         this.analyser.smoothingTimeConstant = this.smoothing;
         this.analyser.fftSize = this.size;
-        // Get the frequency data from the currently playing music
         this.analyser.getByteFrequencyData(this.freqs);
         this.analyser.getByteTimeDomainData(this.times);
         var width = Math.floor(this.freqs.length);
@@ -74,237 +72,105 @@ export class WebAudioVisualizer {
     }
     static get is() { return "web-audio-visualizer"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["web-audio-visualizer.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["web-audio-visualizer.css"]
-    }; }
     static get properties() { return {
-        "for": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "for",
-            "reflect": true,
-            "defaultValue": "\"web_audio\""
-        },
-        "type": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string|\"wave\"|\"bars\"|\"circle\"|\"bars2\"",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "type",
-            "reflect": true,
-            "defaultValue": "\"wave\""
-        },
-        "smoothing": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "smoothing",
-            "reflect": false,
-            "defaultValue": "0.7"
-        },
-        "size": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "size",
-            "reflect": false,
-            "defaultValue": "1024"
-        },
-        "color": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "color",
-            "reflect": false,
-            "defaultValue": "\"white\""
-        },
-        "width": {
-            "type": "number",
-            "mutable": true,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "width",
-            "reflect": true,
-            "defaultValue": "1024"
-        },
-        "height": {
-            "type": "number",
-            "mutable": true,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "height",
-            "reflect": true,
-            "defaultValue": "1024"
-        },
-        "analyser": {
-            "type": "unknown",
-            "mutable": true,
-            "complexType": {
-                "original": "AnalyserNode",
-                "resolved": "AnalyserNode",
-                "references": {
-                    "AnalyserNode": {
-                        "location": "global"
-                    }
-                }
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            }
-        },
-        "renderer": {
-            "type": "unknown",
-            "mutable": false,
-            "complexType": {
-                "original": "AnalyserNode",
-                "resolved": "AnalyserNode",
-                "references": {
-                    "AnalyserNode": {
-                        "location": "global"
-                    }
-                }
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            }
+        "_bufferLength": {
+            "state": true
         },
         "_color": {
-            "type": "any",
-            "mutable": true,
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "_color",
-            "reflect": false
-        }
-    }; }
-    static get states() { return {
-        "canvas": {},
-        "canvasCTX": {},
-        "freqs": {},
-        "times": {},
-        "context": {},
-        "vertex": {},
-        "vertexShader": {},
-        "fragment": {},
-        "fragShader": {},
-        "fragTime": {},
-        "fragSpectrumArray": {},
-        "fragSpectrum": {},
-        "_bufferLength": {},
-        "_dataArray": {}
-    }; }
-    static get methods() { return {
+            "type": "Any",
+            "attr": "_color",
+            "mutable": true
+        },
+        "_dataArray": {
+            "state": true
+        },
+        "analyser": {
+            "type": "Any",
+            "attr": "analyser",
+            "mutable": true
+        },
+        "canvas": {
+            "state": true
+        },
+        "canvasCTX": {
+            "state": true
+        },
+        "color": {
+            "type": String,
+            "attr": "color"
+        },
         "connect": {
-            "complexType": {
-                "signature": "(context: AudioContext, destination?: any) => Promise<this>",
-                "parameters": [{
-                        "tags": [],
-                        "text": ""
-                    }, {
-                        "tags": [],
-                        "text": ""
-                    }],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    },
-                    "AudioContext": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<this>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
+        },
+        "context": {
+            "state": true
+        },
+        "element": {
+            "elementRef": true
+        },
+        "for": {
+            "type": String,
+            "attr": "for",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "fragment": {
+            "state": true
+        },
+        "fragShader": {
+            "state": true
+        },
+        "fragSpectrum": {
+            "state": true
+        },
+        "fragSpectrumArray": {
+            "state": true
+        },
+        "fragTime": {
+            "state": true
+        },
+        "freqs": {
+            "state": true
+        },
+        "height": {
+            "type": Number,
+            "attr": "height",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "renderer": {
+            "type": "Any",
+            "attr": "renderer"
+        },
+        "size": {
+            "type": Number,
+            "attr": "size"
+        },
+        "smoothing": {
+            "type": Number,
+            "attr": "smoothing"
+        },
+        "times": {
+            "state": true
+        },
+        "type": {
+            "type": String,
+            "attr": "type",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "vertex": {
+            "state": true
+        },
+        "vertexShader": {
+            "state": true
+        },
+        "width": {
+            "type": Number,
+            "attr": "width",
+            "reflectToAttr": true,
+            "mutable": true
         }
     }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:web-audio-visualizer:**/"; }
 }

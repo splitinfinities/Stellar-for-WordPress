@@ -1,4 +1,3 @@
-import { h } from "@stencil/core";
 import { blurringEase } from "../../../utils";
 export class ToggleOption {
     constructor() {
@@ -113,334 +112,108 @@ export class ToggleOption {
             this.tooltip && h("stellar-tooltip", { align: "bottom-left" }, this.tooltip)));
     }
     static get is() { return "stellar-toggle-option"; }
-    static get originalStyleUrls() { return {
-        "$": ["toggle-option.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["toggle-option.css"]
-    }; }
     static get properties() { return {
-        "type": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "type",
-            "reflect": true,
-            "defaultValue": "\"checkbox\""
+        "_type": {
+            "state": true
+        },
+        "blur": {
+            "state": true
         },
         "checked": {
-            "type": "boolean",
-            "mutable": true,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "checked",
-            "reflect": true,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "checked",
+            "reflectToAttr": true,
+            "mutable": true
         },
         "checkedDefault": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "checked-default",
-            "reflect": false,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "checked-default"
         },
-        "single": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "single",
-            "reflect": true
-        },
-        "icon": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "icon",
-            "reflect": true
-        },
-        "tooltip": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "tooltip",
-            "reflect": false
-        },
-        "disabled": {
-            "type": "boolean",
-            "mutable": true,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "disabled",
-            "reflect": true
-        },
-        "for": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "for",
-            "reflect": false,
-            "defaultValue": "\"\""
-        },
-        "name": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "name",
-            "reflect": true
+        "confirm": {
+            "method": true
         },
         "default": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "default",
-            "reflect": false,
-            "defaultValue": "\"\""
+            "type": String,
+            "attr": "default"
         },
-        "value": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "value",
-            "reflect": false
+        "disabled": {
+            "type": Boolean,
+            "attr": "disabled",
+            "reflectToAttr": true,
+            "mutable": true
         },
-        "required": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "required",
-            "reflect": false
+        "ease": {
+            "state": true
+        },
+        "element": {
+            "elementRef": true
+        },
+        "focused": {
+            "state": true
+        },
+        "for": {
+            "type": String,
+            "attr": "for"
+        },
+        "icon": {
+            "type": Boolean,
+            "attr": "icon",
+            "reflectToAttr": true
         },
         "inline": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "inline",
-            "reflect": false
+            "type": Boolean,
+            "attr": "inline"
         },
-        "size": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "size",
-            "reflect": false
+        "input": {
+            "state": true
+        },
+        "name": {
+            "type": String,
+            "attr": "name",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "required": {
+            "type": Boolean,
+            "attr": "required"
         },
         "selectedCopy": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "selected-copy",
-            "reflect": false,
-            "defaultValue": "\"Selected!\""
-        }
-    }; }
-    static get states() { return {
-        "input": {},
-        "_type": {},
-        "focused": {},
-        "blur": {},
-        "ease": {}
-    }; }
-    static get events() { return [{
-            "method": "change",
-            "name": "change",
-            "bubbles": true,
-            "cancelable": true,
-            "composed": true,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            }
-        }]; }
-    static get methods() { return {
-        "confirm": {
-            "complexType": {
-                "signature": "() => Promise<void>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "type": String,
+            "attr": "selected-copy"
+        },
+        "single": {
+            "type": Boolean,
+            "attr": "single",
+            "reflectToAttr": true
+        },
+        "size": {
+            "type": Boolean,
+            "attr": "size"
+        },
+        "tooltip": {
+            "type": String,
+            "attr": "tooltip",
+            "mutable": true
+        },
+        "type": {
+            "type": String,
+            "attr": "type",
+            "reflectToAttr": true
         },
         "updateSelected": {
-            "complexType": {
-                "signature": "(value: boolean) => Promise<void>",
-                "parameters": [{
-                        "tags": [],
-                        "text": ""
-                    }],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
+        },
+        "value": {
+            "type": String,
+            "attr": "value"
         }
     }; }
-    static get elementRef() { return "element"; }
+    static get events() { return [{
+            "name": "change",
+            "method": "change",
+            "bubbles": true,
+            "cancelable": true,
+            "composed": true
+        }]; }
+    static get style() { return "/**style-placeholder:stellar-toggle-option:**/"; }
 }

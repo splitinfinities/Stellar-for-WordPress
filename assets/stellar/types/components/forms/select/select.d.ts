@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Select {
     element: HTMLElement;
@@ -61,8 +62,8 @@ export declare class Select {
     focusPreviousOption(): Promise<void>;
     closeOthers(): void;
     handleTitleClick(): void;
-    renderLabel(): any;
-    renderErrors(): any;
-    renderEmptyButton(): any;
-    render(): any;
+    renderLabel(): JSX.Element;
+    renderErrors(): JSX.Element;
+    renderEmptyButton(): JSX.Element;
+    render(): JSX.Element;
 }

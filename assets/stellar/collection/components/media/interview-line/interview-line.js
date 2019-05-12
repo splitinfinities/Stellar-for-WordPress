@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 export class InterviewLine {
     constructor() {
         this.in = 6000;
@@ -11,67 +10,22 @@ export class InterviewLine {
                 h("slot", null))));
     }
     static get is() { return "stellar-interview-line"; }
-    static get originalStyleUrls() { return {
-        "$": ["interview-line.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["interview-line.css"]
-    }; }
     static get properties() { return {
+        "complement": {
+            "type": Boolean,
+            "attr": "complement"
+        },
+        "element": {
+            "elementRef": true
+        },
         "in": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "in",
-            "reflect": false,
-            "defaultValue": "6000"
+            "type": Number,
+            "attr": "in"
         },
         "out": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "out",
-            "reflect": false,
-            "defaultValue": "8300"
-        },
-        "complement": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "complement",
-            "reflect": false,
-            "defaultValue": "false"
+            "type": Number,
+            "attr": "out"
         }
     }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-interview-line:**/"; }
 }

@@ -1,9 +1,13 @@
-import { h, Host } from '@stencil/core';
 import properties from 'css-custom-properties';
 export class Blur {
     constructor() {
         this.vertical = 0;
         this.horizontal = 0;
+    }
+    hostData() {
+        return {
+            id: this.element.id || this.generatedId
+        };
     }
     supported_match() {
         return navigator.userAgent.toLowerCase().indexOf('firefox') === -1 &&
@@ -52,78 +56,37 @@ export class Blur {
         return `blur-${getRandomInt(0, 1000)}`;
     }
     render() {
-        return h(Host, { id: this.element.id || this.generatedId },
+        return [
             h("slot", null),
             this.supported() && h("svg", { class: "blur-svg" },
                 h("defs", null,
                     h("filter", { id: this.generatedId + "-filter" },
-                        h("feGaussianBlur", { id: this.generatedId + "-gaussian", in: "SourceGraphic", stdDeviation: `${this.horizontal},${this.vertical}` })))));
+                        h("feGaussianBlur", { id: this.generatedId + "-gaussian", in: "SourceGraphic", stdDeviation: `${this.horizontal},${this.vertical}` }))))
+        ];
     }
     static get is() { return "stellar-blur"; }
-    static get originalStyleUrls() { return {
-        "$": ["blur.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["blur.css"]
-    }; }
     static get properties() { return {
-        "vertical": {
-            "type": "number",
-            "mutable": true,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "vertical",
-            "reflect": true,
-            "defaultValue": "0"
+        "element": {
+            "elementRef": true
+        },
+        "generatedId": {
+            "state": true
         },
         "horizontal": {
-            "type": "number",
-            "mutable": true,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "horizontal",
-            "reflect": true,
-            "defaultValue": "0"
-        }
-    }; }
-    static get states() { return {
-        "generatedId": {}
-    }; }
-    static get methods() { return {
+            "type": Number,
+            "attr": "horizontal",
+            "reflectToAttr": true,
+            "mutable": true
+        },
         "setBlurFilter": {
-            "complexType": {
-                "signature": "() => Promise<void>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
+        },
+        "vertical": {
+            "type": Number,
+            "attr": "vertical",
+            "reflectToAttr": true,
+            "mutable": true
         }
     }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-blur:**/"; }
 }

@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Tab {
     element: HTMLElement;
@@ -15,7 +16,7 @@ export declare class Tab {
     componentDidLoad(): void;
     handleClick(e: any): Promise<void>;
     handleIndicatorPosition(): void;
-    renderNotifications(): any;
-    renderTitle(): any;
-    render(): any;
+    renderNotifications(): JSX.Element;
+    renderTitle(): JSX.Element;
+    render(): JSX.Element;
 }

@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Video {
     element: HTMLElement;
@@ -42,5 +43,5 @@ export declare class Video {
     toggle(): Promise<void>;
     stop(): Promise<void>;
     skipTo(time: any): Promise<void>;
-    render(): any;
+    render(): JSX.Element;
 }

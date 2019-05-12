@@ -1,42 +1,14 @@
-import { h } from '@stencil/core';
 import { properties, ResizeObserver } from '../../../utils';
 export class Card {
     constructor() {
-        /**
-         * Renders a shadow on the card
-         */
         this.shadow = "medium";
-        /**
-         * Let's a card be flippable
-         */
         this.flippable = false;
-        /**
-         * Renders a flipped card
-         */
         this.flipped = false;
-        /**
-         * Sets the padding inside of the button. Can be small, medium, or large.
-         */
         this.padding = "medium";
-        /**
-         * Sets the element to render the card as - an anchor tag, a button, or a div.
-         */
         this.tag = "div";
-        /**
-         * Sets the href if the card is a link.
-         */
         this.href = "#";
-        /**
-         * Sets the name if the card is a button.
-         */
         this.name = "";
-        /**
-         * Sets the value if the card is a button.
-         */
         this.value = "#";
-        /**
-         * Sets the href on the anchor tag if the button is a link.
-         */
         this.flip_icon = "cog";
         this.rotationLimit = 0.75;
         this.transition = false;
@@ -106,15 +78,10 @@ export class Card {
             }, this.element);
         }, 250);
     }
-    async click(e) {
-        if (e) {
-            e.stopPropagation();
-            e.preventDefault();
-        }
+    async click() {
         if (this.for) {
             const target = this.for.split(":");
             if (target[0] === "modal") {
-                // @ts-ignore
                 const modal = document.querySelector(`stellar-modal[name="${target[1]}"]`);
                 modal.open();
             }
@@ -139,7 +106,6 @@ export class Card {
             value: this.value,
             type: this.type
         };
-        // @ts-ignore
         return (h(this.tag, Object.assign({}, childProps, { class: "stencil-route-link" !== this.tag ? "wrap" : "", anchorClass: "stencil-route-link" === this.tag ? "wrap" : "", onClick: (e) => { this.click(e); } }),
             this.flippable && [
                 h("stellar-button", { tag: "button", ghost: true, class: "flip-button", onClick: (e) => { e.stopPropagation(); e.preventDefault(); this.flip_card(e); } },
@@ -153,275 +119,92 @@ export class Card {
     }
     static get is() { return "stellar-card"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["card.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["card.css"]
-    }; }
     static get properties() { return {
-        "shadow": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string|\"light\"|\"medium\"|\"heavy\"",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "Renders a shadow on the card"
-            },
-            "attribute": "shadow",
-            "reflect": false,
-            "defaultValue": "\"medium\""
+        "element": {
+            "elementRef": true
         },
-        "flippable": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "Let's a card be flippable"
-            },
-            "attribute": "flippable",
-            "reflect": true,
-            "defaultValue": "false"
-        },
-        "flipped": {
-            "type": "boolean",
-            "mutable": true,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "Renders a flipped card"
-            },
-            "attribute": "flipped",
-            "reflect": true,
-            "defaultValue": "false"
-        },
-        "padding": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string|\"small\"|\"medium\"|\"large\"",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "Sets the padding inside of the button. Can be small, medium, or large."
-            },
-            "attribute": "padding",
-            "reflect": true,
-            "defaultValue": "\"medium\""
-        },
-        "tag": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "\"stencil-route-link\"|\"a\"|\"button\"|\"div\"",
-                "resolved": "\"a\" | \"button\" | \"div\" | \"stencil-route-link\"",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "Sets the element to render the card as - an anchor tag, a button, or a div."
-            },
-            "attribute": "tag",
-            "reflect": false,
-            "defaultValue": "\"div\""
-        },
-        "type": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "Sets the element to render the card as - an anchor tag, a button, or a div."
-            },
-            "attribute": "type",
-            "reflect": false
-        },
-        "href": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "Sets the href if the card is a link."
-            },
-            "attribute": "href",
-            "reflect": false,
-            "defaultValue": "\"#\""
-        },
-        "name": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "Sets the name if the card is a button."
-            },
-            "attribute": "name",
-            "reflect": false,
-            "defaultValue": "\"\""
-        },
-        "value": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "Sets the value if the card is a button."
-            },
-            "attribute": "value",
-            "reflect": false,
-            "defaultValue": "\"#\""
-        },
-        "for": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "Sets the href on the anchor tag if the button is a link."
-            },
-            "attribute": "for",
-            "reflect": false
+        "flip_card": {
+            "method": true
         },
         "flip_icon": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "Sets the href on the anchor tag if the button is a link."
-            },
-            "attribute": "flip_icon",
-            "reflect": false,
-            "defaultValue": "\"cog\""
+            "type": String,
+            "attr": "flip_icon"
+        },
+        "flippable": {
+            "type": Boolean,
+            "attr": "flippable",
+            "reflectToAttr": true
+        },
+        "flipped": {
+            "type": Boolean,
+            "attr": "flipped",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "for": {
+            "type": String,
+            "attr": "for"
+        },
+        "height": {
+            "state": true
+        },
+        "href": {
+            "type": String,
+            "attr": "href"
+        },
+        "middleX": {
+            "state": true
+        },
+        "middleY": {
+            "state": true
+        },
+        "name": {
+            "type": String,
+            "attr": "name"
+        },
+        "padding": {
+            "type": String,
+            "attr": "padding",
+            "reflectToAttr": true
+        },
+        "ro": {
+            "state": true
+        },
+        "rotationLimit": {
+            "state": true
+        },
+        "shadow": {
+            "type": String,
+            "attr": "shadow"
+        },
+        "tag": {
+            "type": String,
+            "attr": "tag"
         },
         "transition": {
-            "type": "boolean",
-            "mutable": true,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "transition",
-            "reflect": true,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "transition",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "type": {
+            "type": String,
+            "attr": "type"
+        },
+        "value": {
+            "type": String,
+            "attr": "value"
+        },
+        "width": {
+            "state": true
         }
-    }; }
-    static get states() { return {
-        "width": {},
-        "height": {},
-        "middleX": {},
-        "middleY": {},
-        "rotationLimit": {},
-        "ro": {}
     }; }
     static get events() { return [{
-            "method": "flip",
             "name": "flip",
+            "method": "flip",
             "bubbles": true,
             "cancelable": true,
-            "composed": true,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            }
+            "composed": true
         }]; }
-    static get methods() { return {
-        "flip_card": {
-            "complexType": {
-                "signature": "(e?: UIEvent) => Promise<void>",
-                "parameters": [{
-                        "tags": [],
-                        "text": ""
-                    }],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    },
-                    "UIEvent": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
-        }
-    }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-card:**/"; }
 }

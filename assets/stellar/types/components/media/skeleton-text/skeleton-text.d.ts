@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class SkeletonText {
     element: HTMLElement;
     as: string | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
@@ -5,5 +6,5 @@ export declare class SkeletonText {
     loading: boolean;
     observer: IntersectionObserver;
     componentWillLoad(): void;
-    render(): any;
+    render(): JSX.Element;
 }

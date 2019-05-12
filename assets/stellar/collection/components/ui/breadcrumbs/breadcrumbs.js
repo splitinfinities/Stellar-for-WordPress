@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 export class Breadcrumbs {
     constructor() {
         this.icon = 'analytics';
@@ -30,138 +29,38 @@ export class Breadcrumbs {
     }
     static get is() { return "stellar-breadcrumbs"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["breadcrumbs.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["breadcrumbs.css"]
-    }; }
     static get properties() { return {
-        "icon": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "icon",
-            "reflect": false,
-            "defaultValue": "'analytics'"
-        },
-        "icon_src": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "icon_src",
-            "reflect": false
-        },
-        "icon_size": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "icon_size",
-            "reflect": false,
-            "defaultValue": "0.85"
-        },
-        "home": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "home",
-            "reflect": false,
-            "defaultValue": "\"/\""
-        },
-        "label": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "label",
-            "reflect": false,
-            "defaultValue": "\"Home\""
+        "color": {
+            "type": String,
+            "attr": "color"
         },
         "description": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "description",
-            "reflect": false,
-            "defaultValue": "\"An icon that shows the main page you're on\""
+            "type": String,
+            "attr": "description"
         },
-        "color": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "color",
-            "reflect": false,
-            "defaultValue": "\"blue5\""
+        "el": {
+            "elementRef": true
+        },
+        "home": {
+            "type": String,
+            "attr": "home"
+        },
+        "icon": {
+            "type": String,
+            "attr": "icon"
+        },
+        "icon_size": {
+            "type": Number,
+            "attr": "icon_size"
+        },
+        "icon_src": {
+            "type": String,
+            "attr": "icon_src"
+        },
+        "label": {
+            "type": String,
+            "attr": "label"
         }
     }; }
-    static get elementRef() { return "el"; }
+    static get style() { return "/**style-placeholder:stellar-breadcrumbs:**/"; }
 }

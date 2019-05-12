@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Card {
     element: HTMLElement;
     input: HTMLInputElement;
@@ -21,7 +22,7 @@ export declare class Card {
     handleError(error: any): void;
     setError(error: string): Promise<void>;
     prepareStripe(): void;
-    renderPhone(): any;
-    renderZip(): any;
-    render(): any;
+    renderPhone(): JSX.Element;
+    renderZip(): JSX.Element;
+    render(): JSX.Element;
 }

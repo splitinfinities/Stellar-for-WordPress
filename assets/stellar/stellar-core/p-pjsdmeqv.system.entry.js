@@ -1,1 +1,0 @@
-System.register(["./p-afdfa3ab.system.js"],function(t){"use strict";var e;return{setters:[function(t){e=t.c}],execute:function(){var r=function(){function t(t){e(this,t)}return t.prototype.render=function(){return""},t}();t("web_audio_visualizer_shader",r)}}});

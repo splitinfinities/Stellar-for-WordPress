@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Comment {
     element: HTMLElement;
     content: any;
@@ -5,5 +6,5 @@ export declare class Comment {
     empty: boolean;
     componentWillLoad(): void;
     componentDidLoad(): void;
-    render(): any;
+    render(): JSX.Element;
 }

@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 export class Steps {
     async steps() {
         if (!this.stepsList || this.stepsList.length === 0) {
@@ -23,68 +22,28 @@ export class Steps {
             h("slot", null)));
     }
     static get is() { return "stellar-steps"; }
-    static get originalStyleUrls() { return {
-        "$": ["steps.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["steps.css"]
-    }; }
     static get properties() { return {
-        "name": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "name",
-            "reflect": true
-        }
-    }; }
-    static get states() { return {
-        "stepsList": {},
-        "contentsList": {}
-    }; }
-    static get methods() { return {
-        "steps": {
-            "complexType": {
-                "signature": "() => Promise<any[]>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<any[]>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
-        },
         "contents": {
-            "complexType": {
-                "signature": "() => Promise<any[]>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<any[]>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
+        },
+        "contentsList": {
+            "state": true
+        },
+        "element": {
+            "elementRef": true
+        },
+        "name": {
+            "type": String,
+            "attr": "name",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "steps": {
+            "method": true
+        },
+        "stepsList": {
+            "state": true
         }
     }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-steps:**/"; }
 }

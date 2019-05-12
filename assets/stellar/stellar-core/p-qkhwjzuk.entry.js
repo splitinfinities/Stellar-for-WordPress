@@ -1,1 +1,0 @@
-import{c as t,d as s}from"./p-9ed7c17e.js";class e{constructor(s){t(this,s)}render(){return s("section",null,s("slot",null))}static get style(){return":host,:host *,:host :after,:host :before{-webkit-box-sizing:border-box;box-sizing:border-box}:host{display:block}:host ::slotted(stellar-comment){margin-top:1rem}"}}export{e as stellar_comments};

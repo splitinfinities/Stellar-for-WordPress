@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 export class Starscape {
     render() {
         return (h("stellar-parallax", null,
@@ -8,11 +7,10 @@ export class Starscape {
                 h("div", { class: "stars" }))));
     }
     static get is() { return "stellar-starscape"; }
-    static get originalStyleUrls() { return {
-        "$": ["starscape.css"]
+    static get properties() { return {
+        "element": {
+            "elementRef": true
+        }
     }; }
-    static get styleUrls() { return {
-        "$": ["starscape.css"]
-    }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-starscape:**/"; }
 }

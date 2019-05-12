@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Content {
     element: HTMLElement;
     open: boolean;
@@ -7,5 +8,5 @@ export declare class Content {
     blur: number;
     parent: any;
     handleActive(event: CustomEvent): Promise<void>;
-    render(): any;
+    render(): JSX.Element;
 }

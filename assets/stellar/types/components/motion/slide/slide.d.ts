@@ -1,3 +1,10 @@
+import '../../../stencil.core';
 export declare class Slide {
-    render(): any;
+    hostData(): {
+        class: {
+            'slide-zoom': boolean;
+            'swiper-slide': boolean;
+        };
+    };
+    render(): JSX.Element;
 }

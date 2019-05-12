@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 export class Scatter {
     constructor() {
         this.float = false;
@@ -41,103 +40,31 @@ export class Scatter {
     }
     static get is() { return "stellar-scatter"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["scatter.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["scatter.css"]
-    }; }
     static get properties() { return {
-        "float": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "float",
-            "reflect": true,
-            "defaultValue": "false"
+        "colors": {
+            "type": Boolean,
+            "attr": "colors"
         },
-        "min": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "min",
-            "reflect": false,
-            "defaultValue": "0"
+        "element": {
+            "elementRef": true
+        },
+        "float": {
+            "type": Boolean,
+            "attr": "float",
+            "reflectToAttr": true
         },
         "max": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "max",
-            "reflect": false,
-            "defaultValue": "100"
+            "type": Number,
+            "attr": "max"
+        },
+        "min": {
+            "type": Number,
+            "attr": "min"
         },
         "sizes": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "sizes",
-            "reflect": false,
-            "defaultValue": "false"
-        },
-        "colors": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "colors",
-            "reflect": false,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "sizes"
         }
     }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-scatter:**/"; }
 }

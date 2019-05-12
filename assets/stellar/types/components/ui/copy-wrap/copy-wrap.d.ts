@@ -1,5 +1,6 @@
+import '../../../stencil.core';
 export declare class CopyWrap {
     align: string;
     full: boolean;
-    render(): any;
+    render(): JSX.Element;
 }

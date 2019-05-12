@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import { EventEmitter } from "../../../stencil.core";
 export declare class ToggleOption {
     element: HTMLElement;
@@ -31,8 +32,8 @@ export declare class ToggleOption {
     onFocus(): void;
     onBlur(): void;
     onKeyUp(e: any): void;
-    renderCheckbox(): any;
-    renderRadioBlock(): any;
-    renderCheckBlock(): any;
-    render(): any;
+    renderCheckbox(): JSX.Element;
+    renderRadioBlock(): JSX.Element;
+    renderCheckBlock(): JSX.Element;
+    render(): JSX.Element;
 }

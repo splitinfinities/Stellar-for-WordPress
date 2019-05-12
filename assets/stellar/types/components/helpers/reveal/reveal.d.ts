@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Scatter {
     element: HTMLElement;
     animation: "fadeIn" | "fadeInUp" | "fadeInDown";
@@ -14,5 +15,5 @@ export declare class Scatter {
     calculateTiming(): Promise<void>;
     out(): Promise<void>;
     in(): Promise<void>;
-    render(): any;
+    render(): JSX.Element;
 }

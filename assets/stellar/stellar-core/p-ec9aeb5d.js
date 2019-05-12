@@ -1,1 +1,0 @@
-const t=function(t,e){if(!t)throw e||"Assertion failed!";return t},e=function(t){return new Promise(e=>setTimeout(e,t))};export{e as a,t as b};

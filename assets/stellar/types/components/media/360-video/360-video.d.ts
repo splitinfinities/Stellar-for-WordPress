@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Video360 {
     element: HTMLElement;
     src: string;
@@ -7,5 +8,5 @@ export declare class Video360 {
     viewer: any;
     video: HTMLElement;
     componentDidLoad(): void;
-    render(): any[];
+    render(): JSX.Element[];
 }

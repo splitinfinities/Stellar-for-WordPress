@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Form {
     element: HTMLElement;
@@ -23,5 +24,5 @@ export declare class Form {
         valid: boolean;
     }>;
     submit_form(): Promise<void>;
-    render(): any;
+    render(): JSX.Element;
 }

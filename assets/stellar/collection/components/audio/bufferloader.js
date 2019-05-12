@@ -1,13 +1,11 @@
 export class BufferLoader {
     constructor(context, urlList, callback) {
         this.loadBuffer = function (url, index) {
-            // Load buffer asynchronously
             var request = new XMLHttpRequest();
             request.open("GET", url, true);
             request.responseType = "arraybuffer";
             var loader = this;
             request.onload = function () {
-                // Asynchronously decode the audio file data in request.response
                 loader.context.decodeAudioData(request.response, function (buffer) {
                     if (!buffer) {
                         alert('error decoding file data: ' + url);

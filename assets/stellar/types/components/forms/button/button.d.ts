@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Button {
     element: HTMLElement;
     /**
@@ -75,11 +76,11 @@ export declare class Button {
     processing: boolean;
     ghost: boolean;
     click(): Promise<boolean>;
-    renderSVG(): any;
-    renderButton(): any;
-    renderSubmit(): any;
-    renderLink(): any;
-    renderAppLink(): any;
-    renderSpan(): any;
-    render(): any[];
+    renderSVG(): JSX.Element;
+    renderButton(): JSX.Element;
+    renderSubmit(): JSX.Element;
+    renderLink(): JSX.Element;
+    renderAppLink(): JSX.Element;
+    renderSpan(): JSX.Element;
+    render(): JSX.Element[];
 }

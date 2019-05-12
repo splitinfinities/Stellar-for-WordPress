@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 export class Comments {
     render() {
         return (h("section", null,
@@ -6,13 +5,10 @@ export class Comments {
     }
     static get is() { return "stellar-comments"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["comments.css"]
+    static get properties() { return {
+        "comments": {
+            "state": true
+        }
     }; }
-    static get styleUrls() { return {
-        "$": ["comments.css"]
-    }; }
-    static get states() { return {
-        "comments": {}
-    }; }
+    static get style() { return "/**style-placeholder:stellar-comments:**/"; }
 }

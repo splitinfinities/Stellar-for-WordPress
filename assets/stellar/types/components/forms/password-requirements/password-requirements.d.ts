@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class PasswordRequirements {
     element: HTMLElement;
     for: string;
@@ -15,12 +16,12 @@ export declare class PasswordRequirements {
     readonly fs: "fs7" | "fs6" | "fs4" | "fs5";
     readonly icon: "fs6" | "fs4" | "fs5" | "fs1";
     handleValueChange(): void;
-    renderLength(): any;
-    renderUppercase(): any;
-    renderNumber(): any;
-    renderSymbol(): any;
-    renderCommonPasswords(): any;
-    renderCommonNames(): any;
-    renderRepeatedKeys(): any;
-    render(): any[];
+    renderLength(): JSX.Element;
+    renderUppercase(): JSX.Element;
+    renderNumber(): JSX.Element;
+    renderSymbol(): JSX.Element;
+    renderCommonPasswords(): JSX.Element;
+    renderCommonNames(): JSX.Element;
+    renderRepeatedKeys(): JSX.Element;
+    render(): JSX.Element[];
 }

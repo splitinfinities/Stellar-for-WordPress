@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 export class CopyWrap {
     constructor() {
         this.align = "left";
@@ -9,48 +8,17 @@ export class CopyWrap {
     }
     static get is() { return "copy-wrap"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["copy-wrap.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["copy-wrap.css"]
-    }; }
     static get properties() { return {
         "align": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "align",
-            "reflect": true,
-            "defaultValue": "\"left\""
+            "type": String,
+            "attr": "align",
+            "reflectToAttr": true
         },
         "full": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "full",
-            "reflect": true,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "full",
+            "reflectToAttr": true
         }
     }; }
+    static get style() { return "/**style-placeholder:copy-wrap:**/"; }
 }

@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Scatter {
     element: HTMLElement;
     float: boolean;
@@ -11,5 +12,5 @@ export declare class Scatter {
     fontScale(): number;
     colorScale(): number;
     colorSwatch(): "base" | "complement";
-    render(): any;
+    render(): JSX.Element;
 }

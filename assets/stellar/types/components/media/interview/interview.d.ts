@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Interview {
     element: HTMLElement;
     randomId: number;
@@ -33,5 +34,5 @@ export declare class Interview {
     toggle(): Promise<void>;
     handleClick(): Promise<void>;
     handleCurrentClick(): void;
-    render(): any;
+    render(): JSX.Element;
 }

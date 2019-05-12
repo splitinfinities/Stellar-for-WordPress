@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Progress {
     element: HTMLElement;
@@ -9,6 +10,10 @@ export declare class Progress {
      * Sets the maximum cap for steps in the progress bar
      */
     max: number;
+    /**
+     * Sets the maximum cap for steps in the progress bar
+     */
+    indeterminate: boolean;
     /**
      * Allows the progress bar to be clicked on, to help the user to navigate through the progressing content.
      */
@@ -33,10 +38,10 @@ export declare class Progress {
     wrapper: "stellar-blur" | "div";
     blur: number;
     ease: TweenInstance;
-    valueChange: EventEmitter;
+    change: EventEmitter;
     componentWillLoad(): void;
     observeValue(): void;
     handleClick(e: any): void;
     progress(secondary?: any): number;
-    render(): any;
+    render(): JSX.Element;
 }

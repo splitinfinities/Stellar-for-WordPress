@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 export class GroupOverflow {
     constructor() {
         this.size = "medium";
@@ -16,48 +15,20 @@ export class GroupOverflow {
     }
     static get is() { return "stellar-group-overflow"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["group-overflow.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["group-overflow.css"]
-    }; }
     static get properties() { return {
         "count": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "count",
-            "reflect": false
+            "type": Number,
+            "attr": "count"
+        },
+        "element": {
+            "elementRef": true
         },
         "size": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "size",
-            "reflect": true,
-            "defaultValue": "\"medium\""
+            "type": String,
+            "attr": "size",
+            "reflectToAttr": true,
+            "mutable": true
         }
     }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-group-overflow:**/"; }
 }

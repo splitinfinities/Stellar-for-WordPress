@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import { default as eqjs } from 'eq.js';
 import Sortable from '@shopify/draggable/lib/sortable';
 import SwapAnimation from '@shopify/draggable/lib/plugins/swap-animation';
@@ -68,177 +67,59 @@ export class Grid {
             h("slot", null));
     }
     static get is() { return "stellar-grid"; }
-    static get originalStyleUrls() { return {
-        "$": ["grid.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["grid.css"]
-    }; }
     static get properties() { return {
-        "cols": {
-            "type": "any",
-            "mutable": false,
-            "complexType": {
-                "original": "number|string",
-                "resolved": "number | string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "cols",
-            "reflect": true,
-            "defaultValue": "\"auto\""
-        },
-        "compact": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "compact",
-            "reflect": true,
-            "defaultValue": "false"
-        },
-        "padding": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "padding",
-            "reflect": true,
-            "defaultValue": "false"
+        "__swappable": {
+            "state": true
         },
         "align": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "align",
-            "reflect": true,
-            "defaultValue": "\"items-start\""
+            "type": String,
+            "attr": "align",
+            "reflectToAttr": true
+        },
+        "cols": {
+            "type": "Any",
+            "attr": "cols",
+            "reflectToAttr": true
+        },
+        "compact": {
+            "type": Boolean,
+            "attr": "compact",
+            "reflectToAttr": true
+        },
+        "element": {
+            "elementRef": true
+        },
+        "order": {
+            "state": true
+        },
+        "padding": {
+            "type": Boolean,
+            "attr": "padding",
+            "reflectToAttr": true
+        },
+        "refresh": {
+            "method": true
         },
         "responsive": {
-            "type": "any",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean|string",
-                "resolved": "boolean | string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "responsive",
-            "reflect": true,
-            "defaultValue": "true"
+            "type": "Any",
+            "attr": "responsive",
+            "reflectToAttr": true
         },
         "swappable": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "swappable",
-            "reflect": false,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "swappable"
         },
         "swappableSelector": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "swappable-selector",
-            "reflect": false,
-            "defaultValue": "\"stellar-card\""
+            "type": String,
+            "attr": "swappable-selector"
         }
-    }; }
-    static get states() { return {
-        "order": {},
-        "__swappable": {}
     }; }
     static get events() { return [{
-            "method": "orderChanged",
             "name": "orderChanged",
+            "method": "orderChanged",
             "bubbles": true,
             "cancelable": true,
-            "composed": true,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            }
+            "composed": true
         }]; }
-    static get methods() { return {
-        "refresh": {
-            "complexType": {
-                "signature": "() => Promise<void>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
-        }
-    }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-grid:**/"; }
 }

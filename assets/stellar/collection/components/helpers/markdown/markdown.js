@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import showdown from 'showdown';
 export class Markdown {
     constructor() {
@@ -56,52 +55,27 @@ export class Markdown {
     }
     static get is() { return "stellar-markdown"; }
     static get properties() { return {
-        "src": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "src",
-            "reflect": false
-        },
         "codeString": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "code-string",
-            "reflect": false
+            "type": String,
+            "attr": "code-string",
+            "watchCallbacks": ["onCodeStringChange"]
+        },
+        "converted": {
+            "state": true
+        },
+        "element": {
+            "elementRef": true
+        },
+        "raw": {
+            "state": true
+        },
+        "showdown": {
+            "state": true
+        },
+        "src": {
+            "type": String,
+            "attr": "src",
+            "watchCallbacks": ["onSrcChange"]
         }
     }; }
-    static get states() { return {
-        "converted": {},
-        "raw": {},
-        "showdown": {}
-    }; }
-    static get elementRef() { return "element"; }
-    static get watchers() { return [{
-            "propName": "codeString",
-            "methodName": "onCodeStringChange"
-        }, {
-            "propName": "src",
-            "methodName": "onSrcChange"
-        }]; }
 }

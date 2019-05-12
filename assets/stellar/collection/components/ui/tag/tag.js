@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import properties from 'css-custom-properties';
 export class Tag {
     constructor() {
@@ -19,102 +18,33 @@ export class Tag {
     }
     static get is() { return "stellar-tag"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["tag.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["tag.css"]
-    }; }
     static get properties() { return {
-        "size": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "size",
-            "reflect": true
+        "color": {
+            "type": String,
+            "attr": "color"
         },
-        "pill": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "pill",
-            "reflect": true,
-            "defaultValue": "false"
+        "element": {
+            "elementRef": true
         },
         "outline": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "outline",
-            "reflect": true,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "outline",
+            "reflectToAttr": true
         },
-        "color": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "color",
-            "reflect": false,
-            "defaultValue": "\"cyan5\""
+        "pill": {
+            "type": Boolean,
+            "attr": "pill",
+            "reflectToAttr": true
+        },
+        "size": {
+            "type": String,
+            "attr": "size",
+            "reflectToAttr": true
         },
         "textColor": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "text-color",
-            "reflect": false,
-            "defaultValue": "\"white\""
+            "type": String,
+            "attr": "text-color"
         }
     }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-tag:**/"; }
 }

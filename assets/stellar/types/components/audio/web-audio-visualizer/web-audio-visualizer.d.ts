@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class WebAudioVisualizer {
     element: HTMLElement;
     canvas: HTMLCanvasElement;
@@ -30,5 +31,5 @@ export declare class WebAudioVisualizer {
     draw(): void;
     clearBackground: () => void;
     getFrequencyValue(freq: any): number;
-    render(): any;
+    render(): JSX.Element;
 }

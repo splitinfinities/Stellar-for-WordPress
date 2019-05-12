@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Image360 {
     element: HTMLElement;
     src: string;
@@ -14,5 +15,5 @@ export declare class Image360 {
     handleOffScreen(): void;
     prepare(): void;
     destroy(): void;
-    render(): any;
+    render(): JSX.Element;
 }

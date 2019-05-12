@@ -1,15 +1,19 @@
+import '../../../stencil.core';
+import { EventEmitter } from '../../../stencil.core';
 export declare class Playlist {
     element: HTMLElement;
-    dark: Boolean;
+    visualizationColor: string;
     autoplay: boolean;
-    current: number;
-    currentTrack: CurrentSongInterface;
-    playlist: string;
+    playlist: "show" | "hide";
+    name: string;
     remember: boolean;
     artwork: boolean;
     view: "playlist" | "art";
     playing: boolean;
     load: boolean;
+    loading: boolean;
+    current: number;
+    currentTrack: CurrentSongInterface;
     currentTime: number | string;
     duration: number | string;
     visualizer: HTMLWebAudioVisualizerElement;
@@ -19,18 +23,21 @@ export declare class Playlist {
     playlistItems: NodeListOf<HTMLStellarSongElement>;
     currentPlaylistItem: HTMLStellarSongElement;
     context: any;
+    load_songs: EventEmitter;
     componentWillLoad(): void;
     componentDidLoad(): void;
     handleProgressClick(): void;
     handleTimeUpdates(): void;
     handleKeydown(event: any): void;
+    handleSongLoaded(event: any): Promise<void>;
     loadFromStorage(): void;
     prepare(element: any): Promise<void>;
-    play(): Promise<void>;
+    play(skipDefault?: boolean): Promise<void>;
     pause(): Promise<void>;
     next(): Promise<void>;
     previous(): Promise<void>;
     togglePlaylist(): void;
     toggleAlbumArtView(): void;
-    render(): any;
+    handlePlay(): Promise<void>;
+    render(): JSX.Element;
 }

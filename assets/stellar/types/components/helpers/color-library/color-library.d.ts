@@ -1,4 +1,5 @@
+import '../../../stencil.core';
 export declare class ColorLibrary {
-    renderColorPallette(color: any): any[];
-    render(): any;
+    renderColorPallette(color: any): JSX.Element[];
+    render(): JSX.Element;
 }

@@ -1,4 +1,5 @@
+import '../../../stencil.core';
 export declare class Comments {
     comments: any;
-    render(): any;
+    render(): JSX.Element;
 }

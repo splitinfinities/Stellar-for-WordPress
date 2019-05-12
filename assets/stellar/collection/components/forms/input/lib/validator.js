@@ -130,7 +130,6 @@ export class Validator {
     }
     checkMatches() {
         if (check.isIn("match", this.methods)) {
-            // @ts-ignore
             if (this.element.__match.value !== this.element.value) {
                 this.addError("password_match_warning", "These passwords don't match");
             }

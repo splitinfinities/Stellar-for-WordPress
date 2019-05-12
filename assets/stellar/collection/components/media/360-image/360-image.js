@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import * as Kaleidoscope from "kaleidoscopejs";
 export class Image360 {
     constructor() {
@@ -13,9 +12,6 @@ export class Image360 {
     addIntersectionObserver() {
         if ('IntersectionObserver' in window) {
             this.io = new IntersectionObserver((data) => {
-                // because there will only ever be one instance
-                // of the element we are observing
-                // we can just use data[0]
                 if (data[0].isIntersecting) {
                     this.handleInScreen();
                 }
@@ -56,89 +52,42 @@ export class Image360 {
             !this.ready && h("skeleton-img", { width: this.width, height: this.height }));
     }
     static get is() { return "stellar-360-image"; }
-    static get originalStyleUrls() { return {
-        "$": ["360-image.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["360-image.css"]
-    }; }
     static get properties() { return {
-        "src": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "src",
-            "reflect": true
-        },
-        "poster": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "poster",
-            "reflect": true
-        },
-        "width": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "width",
-            "reflect": true,
-            "defaultValue": "1280"
+        "element": {
+            "elementRef": true
         },
         "height": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "height",
-            "reflect": true,
-            "defaultValue": "720"
+            "type": Number,
+            "attr": "height",
+            "reflectToAttr": true
+        },
+        "image": {
+            "state": true
+        },
+        "io": {
+            "state": true
+        },
+        "poster": {
+            "type": String,
+            "attr": "poster",
+            "reflectToAttr": true
+        },
+        "ready": {
+            "state": true
+        },
+        "src": {
+            "type": String,
+            "attr": "src",
+            "reflectToAttr": true
+        },
+        "viewer": {
+            "state": true
+        },
+        "width": {
+            "type": Number,
+            "attr": "width",
+            "reflectToAttr": true
         }
     }; }
-    static get states() { return {
-        "viewer": {},
-        "image": {},
-        "io": {},
-        "ready": {}
-    }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-360-image:**/"; }
 }

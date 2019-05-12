@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class VideoInterview {
     element: HTMLElement;
     randomId: number;
@@ -12,6 +13,7 @@ export declare class VideoInterview {
     io: IntersectionObserver;
     loaded: boolean;
     loading: boolean;
+    seekable: boolean;
     updateFunc: Function;
     duration: number;
     current: number;
@@ -32,8 +34,7 @@ export declare class VideoInterview {
     skipTo(time: number): Promise<void>;
     pause(): Promise<void>;
     toggle(): Promise<void>;
-    handlePlay(): Promise<void>;
     handleClick(): void;
     handleCurrentClick(): void;
-    render(): any;
+    render(): JSX.Element;
 }

@@ -1,15 +1,8 @@
-import { h } from '@stencil/core';
 import { shouldBeAnInput, hasIncrements, hasValue, isDatePicker, Validator, Tokenfield } from "./lib";
 import { zxcvbn, TinyDatePicker, moment } from '../../../utils';
 export class Input {
     constructor() {
-        /**
-         * The kind of element that the Input should be rendered as
-         */
         this.type = "text";
-        /**
-         * The pre-set value to pass to the input element
-         */
         this.requirements = false;
         this.color = "theme";
         this.placeholder = "Enter a value";
@@ -23,13 +16,11 @@ export class Input {
         this.wrap = "soft";
         this.dateType = "day";
         this.step = 1;
-        // Files
         this.multipleFileCaption = '{count} files';
         this.replace_placeholder = "Replace file";
         this.files = [];
         this.multiple = false;
         this.droppable = false;
-        // Validation
         this.required = false;
         this.novalidate = false;
         this.icon = false;
@@ -122,7 +113,6 @@ export class Input {
     handleIncrement(event) {
         event.preventDefault();
         if (this.is_date_type) {
-            // @ts-ignore
             this.value = moment(this.value).add(1, `${this.dateType}s`).format('YYYY-MM-DD');
             this.datepicker.close();
         }
@@ -134,7 +124,6 @@ export class Input {
     handleDecrement(event) {
         event.preventDefault();
         if (this.is_date_type) {
-            // @ts-ignore
             this.value = moment(this.value).subtract(1, `${this.dateType}s`).format('YYYY-MM-DD');
             this.datepicker.close();
         }
@@ -147,7 +136,6 @@ export class Input {
         if (event.keyCode === 13 || event.keyCode === 38) {
             event.preventDefault();
             if (this.is_date_type) {
-                // @ts-ignore
                 this.value = moment(this.value).add(1, `${this.dateType}s`).format('YYYY-MM-DD');
                 this.datepicker.close();
             }
@@ -161,7 +149,6 @@ export class Input {
         if (event.keyCode === 13 || event.keyCode === 40) {
             event.preventDefault();
             if (this.is_date_type) {
-                // @ts-ignore
                 this.value = moment(this.value).subtract(1, `${this.dateType}s`).format('YYYY-MM-DD');
                 this.datepicker.close();
             }
@@ -290,7 +277,6 @@ export class Input {
         var g = parseInt(hexcolor.substr(3, 2), 16);
         var b = parseInt(hexcolor.substr(4, 2), 16);
         var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-        // Return new color if to dark, else return the original
         return (yiq > 150);
     }
     renderLabel() {
@@ -406,865 +392,256 @@ export class Input {
     }
     static get is() { return "stellar-input"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["input.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["input.css"]
-    }; }
     static get properties() { return {
-        "type": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "The kind of element that the Input should be rendered as"
-            },
-            "attribute": "type",
-            "reflect": true,
-            "defaultValue": "\"text\""
+        "__match": {
+            "state": true
         },
-        "name": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "The name of the input element"
-            },
-            "attribute": "name",
-            "reflect": true
+        "__previousValue": {
+            "state": true
         },
-        "value": {
-            "type": "any",
-            "mutable": true,
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "The pre-set value to pass to the input element"
-            },
-            "attribute": "value",
-            "reflect": true
+        "_fileLabel": {
+            "state": true
         },
-        "default": {
-            "type": "any",
-            "mutable": true,
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "The pre-set value to pass to the input element"
-            },
-            "attribute": "default",
-            "reflect": true
-        },
-        "requirements": {
-            "type": "boolean",
-            "mutable": true,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": "The pre-set value to pass to the input element"
-            },
-            "attribute": "requirements",
-            "reflect": true,
-            "defaultValue": "false"
-        },
-        "size": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "size",
-            "reflect": true
-        },
-        "color": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "color",
-            "reflect": false,
-            "defaultValue": "\"theme\""
-        },
-        "label": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "label",
-            "reflect": true
-        },
-        "description": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "description",
-            "reflect": false
-        },
-        "tooltip": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "tooltip",
-            "reflect": false
-        },
-        "placeholder": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "placeholder",
-            "reflect": true,
-            "defaultValue": "\"Enter a value\""
-        },
-        "autocomplete": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "autocomplete",
-            "reflect": false
-        },
-        "disabled": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "disabled",
-            "reflect": false
-        },
-        "readonly": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "readonly",
-            "reflect": false,
-            "defaultValue": "false"
-        },
-        "autofocus": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "autofocus",
-            "reflect": false,
-            "defaultValue": "false"
-        },
-        "focused": {
-            "type": "boolean",
-            "mutable": true,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "focused",
-            "reflect": true,
-            "defaultValue": "false"
-        },
-        "spellcheck": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "spellcheck",
-            "reflect": false,
-            "defaultValue": "true"
-        },
-        "maxlength": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "maxlength",
-            "reflect": false,
-            "defaultValue": "1000"
-        },
-        "cols": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "cols",
-            "reflect": false,
-            "defaultValue": "30"
-        },
-        "rows": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "rows",
-            "reflect": false,
-            "defaultValue": "5"
-        },
-        "wrap": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "wrap",
-            "reflect": false,
-            "defaultValue": "\"soft\""
-        },
-        "dateType": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "\"month\"|\"year\"|\"day\"",
-                "resolved": "\"day\" | \"month\" | \"year\"",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "date-type",
-            "reflect": false,
-            "defaultValue": "\"day\""
-        },
-        "min": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "min",
-            "reflect": false
-        },
-        "max": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "max",
-            "reflect": false
-        },
-        "step": {
-            "type": "number",
-            "mutable": false,
-            "complexType": {
-                "original": "number",
-                "resolved": "number",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "step",
-            "reflect": false,
-            "defaultValue": "1"
-        },
-        "multipleFileCaption": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "multiple-file-caption",
-            "reflect": false,
-            "defaultValue": "'{count} files'"
-        },
-        "replace_placeholder": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "replace_placeholder",
-            "reflect": false,
-            "defaultValue": "\"Replace file\""
-        },
-        "files": {
-            "type": "unknown",
-            "mutable": true,
-            "complexType": {
-                "original": "Array<any>",
-                "resolved": "any[]",
-                "references": {
-                    "Array": {
-                        "location": "global"
-                    }
-                }
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "defaultValue": "[]"
-        },
-        "multiple": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "multiple",
-            "reflect": false,
-            "defaultValue": "false"
-        },
-        "droppable": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "droppable",
-            "reflect": false,
-            "defaultValue": "false"
+        "_multipleFileUploadsLabel": {
+            "state": true
         },
         "accept": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "accept",
-            "reflect": false
+            "type": String,
+            "attr": "accept"
         },
-        "required": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "required",
-            "reflect": false,
-            "defaultValue": "false"
+        "autocomplete": {
+            "type": String,
+            "attr": "autocomplete"
         },
-        "novalidate": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "novalidate",
-            "reflect": false,
-            "defaultValue": "false"
+        "autofocus": {
+            "type": Boolean,
+            "attr": "autofocus"
         },
-        "validates": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "validates",
-            "reflect": false
+        "color": {
+            "type": String,
+            "attr": "color"
         },
-        "match": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "match",
-            "reflect": false
+        "cols": {
+            "type": Number,
+            "attr": "cols"
         },
-        "tokenField": {
-            "type": "any",
-            "mutable": true,
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "token-field",
-            "reflect": false
+        "datepicker": {
+            "state": true
         },
-        "icon": {
-            "type": "boolean",
-            "mutable": true,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "icon",
-            "reflect": true,
-            "defaultValue": "false"
-        }
-    }; }
-    static get states() { return {
-        "input": {},
-        "__previousValue": {},
-        "datepicker": {},
-        "_multipleFileUploadsLabel": {},
-        "_fileLabel": {},
-        "__match": {},
-        "status": {},
-        "validator": {},
-        "level": {},
-        "strength": {},
-        "generatedId": {}
-    }; }
-    static get events() { return [{
-            "method": "change",
-            "name": "change",
-            "bubbles": true,
-            "cancelable": true,
-            "composed": true,
-            "docs": {
-                "tags": [],
-                "text": "Public: Changed event"
-            },
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            }
-        }, {
-            "method": "focusing",
-            "name": "focusing",
-            "bubbles": true,
-            "cancelable": true,
-            "composed": true,
-            "docs": {
-                "tags": [],
-                "text": "Public: Focus event"
-            },
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            }
-        }, {
-            "method": "bluring",
-            "name": "bluring",
-            "bubbles": true,
-            "cancelable": true,
-            "composed": true,
-            "docs": {
-                "tags": [],
-                "text": "Public: Blur event"
-            },
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            }
-        }]; }
-    static get methods() { return {
+        "dateType": {
+            "type": String,
+            "attr": "date-type"
+        },
+        "default": {
+            "type": "Any",
+            "attr": "default",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "description": {
+            "type": String,
+            "attr": "description"
+        },
+        "disabled": {
+            "type": Boolean,
+            "attr": "disabled"
+        },
+        "droppable": {
+            "type": Boolean,
+            "attr": "droppable"
+        },
+        "element": {
+            "elementRef": true
+        },
+        "files": {
+            "type": "Any",
+            "attr": "files",
+            "mutable": true
+        },
+        "focused": {
+            "type": Boolean,
+            "attr": "focused",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "generatedId": {
+            "state": true
+        },
         "getDatePicker": {
-            "complexType": {
-                "signature": "() => Promise<any>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<any>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
         },
         "getId": {
-            "complexType": {
-                "signature": "() => Promise<string>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<string>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
-        },
-        "val": {
-            "complexType": {
-                "signature": "() => Promise<any>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<any>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
         },
         "getStrength": {
-            "complexType": {
-                "signature": "() => Promise<object>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<object>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
         },
-        "setStrength": {
-            "complexType": {
-                "signature": "(value: number) => Promise<void>",
-                "parameters": [{
-                        "tags": [],
-                        "text": ""
-                    }],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+        "icon": {
+            "type": Boolean,
+            "attr": "icon",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "input": {
+            "state": true
         },
         "invalid": {
-            "complexType": {
-                "signature": "(message: string | boolean, valid?: boolean, level?: number) => Promise<void>",
-                "parameters": [{
-                        "tags": [],
-                        "text": ""
-                    }, {
-                        "tags": [],
-                        "text": ""
-                    }, {
-                        "tags": [],
-                        "text": ""
-                    }],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
+        },
+        "label": {
+            "type": String,
+            "attr": "label",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "level": {
+            "state": true
+        },
+        "match": {
+            "type": String,
+            "attr": "match"
+        },
+        "max": {
+            "type": Number,
+            "attr": "max"
+        },
+        "maxlength": {
+            "type": Number,
+            "attr": "maxlength"
+        },
+        "min": {
+            "type": Number,
+            "attr": "min"
+        },
+        "multiple": {
+            "type": Boolean,
+            "attr": "multiple"
+        },
+        "multipleFileCaption": {
+            "type": String,
+            "attr": "multiple-file-caption"
+        },
+        "name": {
+            "type": String,
+            "attr": "name",
+            "reflectToAttr": true
+        },
+        "novalidate": {
+            "type": Boolean,
+            "attr": "novalidate"
+        },
+        "placeholder": {
+            "type": String,
+            "attr": "placeholder",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "readonly": {
+            "type": Boolean,
+            "attr": "readonly"
+        },
+        "replace_placeholder": {
+            "type": String,
+            "attr": "replace_placeholder"
+        },
+        "required": {
+            "type": Boolean,
+            "attr": "required"
+        },
+        "requirements": {
+            "type": Boolean,
+            "attr": "requirements",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "rows": {
+            "type": Number,
+            "attr": "rows"
+        },
+        "setStrength": {
+            "method": true
+        },
+        "size": {
+            "type": String,
+            "attr": "size",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "spellcheck": {
+            "type": Boolean,
+            "attr": "spellcheck"
+        },
+        "status": {
+            "state": true
+        },
+        "step": {
+            "type": Number,
+            "attr": "step"
+        },
+        "strength": {
+            "state": true
+        },
+        "tokenField": {
+            "type": "Any",
+            "attr": "token-field",
+            "mutable": true
+        },
+        "tooltip": {
+            "type": String,
+            "attr": "tooltip"
+        },
+        "type": {
+            "type": String,
+            "attr": "type",
+            "reflectToAttr": true
+        },
+        "val": {
+            "method": true
         },
         "validate": {
-            "complexType": {
-                "signature": "() => Promise<FormResult>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    },
-                    "FormResult": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<FormResult>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
+        },
+        "validates": {
+            "type": String,
+            "attr": "validates"
+        },
+        "validator": {
+            "state": true
+        },
+        "value": {
+            "type": "Any",
+            "attr": "value",
+            "reflectToAttr": true,
+            "mutable": true,
+            "watchCallbacks": ["handleValueChange"]
+        },
+        "wrap": {
+            "type": String,
+            "attr": "wrap"
         }
     }; }
-    static get elementRef() { return "element"; }
-    static get watchers() { return [{
-            "propName": "value",
-            "methodName": "handleValueChange"
+    static get events() { return [{
+            "name": "change",
+            "method": "change",
+            "bubbles": true,
+            "cancelable": true,
+            "composed": true
+        }, {
+            "name": "focusing",
+            "method": "focusing",
+            "bubbles": true,
+            "cancelable": true,
+            "composed": true
+        }, {
+            "name": "bluring",
+            "method": "bluring",
+            "bubbles": true,
+            "cancelable": true,
+            "composed": true
         }]; }
     static get listeners() { return [{
             "name": "keydown",
-            "method": "handleKeyDown",
-            "target": undefined,
-            "capture": false,
-            "passive": false
+            "method": "handleKeyDown"
         }]; }
+    static get style() { return "/**style-placeholder:stellar-input:**/"; }
 }

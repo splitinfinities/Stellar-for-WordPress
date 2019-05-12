@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import "ionicons";
 export declare class Asset {
     src: string;
@@ -7,5 +8,5 @@ export declare class Asset {
     ariaLabel: string;
     componentWillLoad(): void;
     block: boolean;
-    render(): any;
+    render(): JSX.Element;
 }

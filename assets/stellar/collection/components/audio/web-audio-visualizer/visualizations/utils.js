@@ -1,10 +1,3 @@
-/**
- *
- * Sound Math stuff
- *
- * Based on https://codepen.io/prakhar625/pen/zddKRj?editors=0010s
- *
-*/
 export function fractionate(val, minVal, maxVal) {
     return (val - minVal) / (maxVal - minVal);
 }

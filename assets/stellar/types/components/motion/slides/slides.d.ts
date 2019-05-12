@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Slides {
     private container;
@@ -83,6 +84,9 @@ export declare class Slides {
     componentDidLoad(): void;
     componentDidUnload(): void;
     private initSlides;
+    hostData(): {
+        "tabIndex": number;
+    };
     /**
      * Update the underlying slider implementation. Call this if you've added or removed
      * child slides.
@@ -144,5 +148,5 @@ export declare class Slides {
     blurStart(): void;
     blurEnd(): void;
     private normalizeOptions;
-    render(): any;
+    render(): JSX.Element;
 }

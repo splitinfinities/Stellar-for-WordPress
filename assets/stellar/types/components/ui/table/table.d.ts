@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Table {
     element: HTMLElement;
     name: string;
@@ -7,5 +8,5 @@ export declare class Table {
     tableChangeHandler(): void;
     componentWillLoad(): void;
     componentDidLoad(): void;
-    render(): any[];
+    render(): JSX.Element[];
 }

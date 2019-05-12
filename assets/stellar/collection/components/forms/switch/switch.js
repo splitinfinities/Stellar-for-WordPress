@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 export class Switch {
     constructor() {
         this.checked = false;
@@ -27,87 +26,31 @@ export class Switch {
             h("slot", null)));
     }
     static get is() { return "stellar-switch"; }
-    static get originalStyleUrls() { return {
-        "$": ["switch.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["switch.css"]
-    }; }
     static get properties() { return {
+        "activate": {
+            "method": true
+        },
         "checked": {
-            "type": "boolean",
+            "type": Boolean,
+            "attr": "checked",
+            "reflectToAttr": true,
             "mutable": true,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "checked",
-            "reflect": true,
-            "defaultValue": "false"
+            "watchCallbacks": ["handleChecked"]
         },
         "checkedDefault": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "checked-default",
-            "reflect": false,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "checked-default"
+        },
+        "el": {
+            "elementRef": true
         }
     }; }
     static get events() { return [{
-            "method": "change",
             "name": "change",
+            "method": "change",
             "bubbles": true,
             "cancelable": true,
-            "composed": true,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            }
+            "composed": true
         }]; }
-    static get methods() { return {
-        "activate": {
-            "complexType": {
-                "signature": "() => Promise<void>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
-        }
-    }; }
-    static get elementRef() { return "el"; }
-    static get watchers() { return [{
-            "propName": "checked",
-            "methodName": "handleChecked"
-        }]; }
+    static get style() { return "/**style-placeholder:stellar-switch:**/"; }
 }

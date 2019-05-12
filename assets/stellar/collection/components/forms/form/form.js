@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import { asyncForEach, form2js } from '../../../utils';
 export class Form {
     constructor() {
@@ -79,275 +78,72 @@ export class Form {
             h("slot", null)));
     }
     static get is() { return "stellar-form"; }
-    static get originalStyleUrls() { return {
-        "$": ["form.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["form.css"]
-    }; }
     static get properties() { return {
-        "ajax": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "ajax",
-            "reflect": false,
-            "defaultValue": "false"
+        "acceptCharset": {
+            "type": String,
+            "attr": "accept-charset"
         },
         "action": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "action",
-            "reflect": false
+            "type": String,
+            "attr": "action"
         },
-        "method": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "method",
-            "reflect": false,
-            "defaultValue": "\"get\""
-        },
-        "acceptCharset": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "accept-charset",
-            "reflect": false
+        "ajax": {
+            "type": Boolean,
+            "attr": "ajax"
         },
         "autocomplete": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "autocomplete",
-            "reflect": false,
-            "defaultValue": "\"on\""
+            "type": String,
+            "attr": "autocomplete"
+        },
+        "element": {
+            "elementRef": true
         },
         "enctype": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "enctype",
-            "reflect": false,
-            "defaultValue": "\"multipart/form-data\""
+            "type": String,
+            "attr": "enctype"
+        },
+        "method": {
+            "type": String,
+            "attr": "method"
         },
         "name": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "name",
-            "reflect": false
+            "type": String,
+            "attr": "name"
         },
         "novalidate": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "novalidate",
-            "reflect": false,
-            "defaultValue": "false"
-        },
-        "target": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "target",
-            "reflect": false
-        }
-    }; }
-    static get states() { return {
-        "selectors": {}
-    }; }
-    static get events() { return [{
-            "method": "submit",
-            "name": "submit",
-            "bubbles": true,
-            "cancelable": true,
-            "composed": true,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "complexType": {
-                "original": "any",
-                "resolved": "any",
-                "references": {}
-            }
-        }]; }
-    static get methods() { return {
-        "register": {
-            "complexType": {
-                "signature": "(selectors: string[]) => Promise<void>",
-                "parameters": [{
-                        "tags": [],
-                        "text": ""
-                    }],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "type": Boolean,
+            "attr": "novalidate"
         },
         "refresh": {
-            "complexType": {
-                "signature": "() => Promise<void>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
+        },
+        "register": {
+            "method": true
+        },
+        "selectors": {
+            "state": true
         },
         "state": {
-            "complexType": {
-                "signature": "() => Promise<{ els: any; json: any; results: FormResult[]; formData: any; valid: boolean; }>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    },
-                    "FormResult": {
-                        "location": "global"
-                    },
-                    "HTMLStellarInputElement": {
-                        "location": "global"
-                    },
-                    "HTMLStellarSelectElement": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<{ els: any; json: any; results: FormResult[]; formData: any; valid: boolean; }>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
         },
         "submit_form": {
-            "complexType": {
-                "signature": "() => Promise<void>",
-                "parameters": [],
-                "references": {
-                    "Promise": {
-                        "location": "global"
-                    }
-                },
-                "return": "Promise<void>"
-            },
-            "docs": {
-                "text": "",
-                "tags": []
-            }
+            "method": true
+        },
+        "target": {
+            "type": String,
+            "attr": "target"
         }
     }; }
-    static get elementRef() { return "element"; }
+    static get events() { return [{
+            "name": "submit",
+            "method": "submit",
+            "bubbles": true,
+            "cancelable": true,
+            "composed": true
+        }]; }
     static get listeners() { return [{
             "name": "keydown",
-            "method": "handleEnter",
-            "target": undefined,
-            "capture": false,
-            "passive": false
+            "method": "handleEnter"
         }]; }
+    static get style() { return "/**style-placeholder:stellar-form:**/"; }
 }

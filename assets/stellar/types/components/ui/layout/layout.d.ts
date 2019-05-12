@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class Layout {
     element: HTMLElement;
     type: string;
@@ -7,5 +8,5 @@ export declare class Layout {
     componentWillLoad(): void;
     componentDidLoad(): void;
     refresh(): Promise<void>;
-    render(): any;
+    render(): JSX.Element;
 }

@@ -1,3 +1,4 @@
+import '../../../stencil.core';
 export declare class AnimateText {
     element: HTMLElement;
     method: string | "glitch" | "lettering" | "weight" | "fade";
@@ -7,5 +8,5 @@ export declare class AnimateText {
     blurVertical(): void;
     componentWillLoad(): void;
     componentDidLoad(): void;
-    render(): any;
+    render(): JSX.Element;
 }

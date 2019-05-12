@@ -25,6 +25,7 @@ class SENDO {
 	public $append_captured_js = Array();
 	public $css = Array();
 	public $chrome_shown = true;
+	public $esm = true;
 
 	/**
 	 * Capture type and/or attributes (used for hinting during capture)
@@ -34,6 +35,7 @@ class SENDO {
 	protected $_capture_lock;
 	protected $_capture_script_attrs = null;
 	protected $_capture_type;
+
 
 	/**
 	 * Open graph default model for SDO tags
@@ -506,6 +508,10 @@ class SENDO {
 
 		elseif ($type === 'connecting') {
 			include __DIR__ . '/../vendor/sendo/connecting.php';
+		}
+
+		elseif ($type === 'sharing') {
+			include __DIR__ . '/../vendor/sendo/sharing.php';
 		}
 
 		elseif ($type === 'bodyclass') {

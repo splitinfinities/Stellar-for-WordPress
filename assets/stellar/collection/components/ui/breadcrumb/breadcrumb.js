@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 export class Breadcrumb {
     constructor() {
         this.href = "/";
@@ -15,136 +14,41 @@ export class Breadcrumb {
     }
     static get is() { return "stellar-breadcrumb"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["breadcrumb.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["breadcrumb.css"]
-    }; }
     static get properties() { return {
         "color": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "color",
-            "reflect": false
-        },
-        "href": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "href",
-            "reflect": false,
-            "defaultValue": "\"/\""
-        },
-        "target": {
-            "type": "string",
-            "mutable": false,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "target",
-            "reflect": false,
-            "defaultValue": "\"_self\""
-        },
-        "label": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "label",
-            "reflect": false,
-            "defaultValue": "\"Breadcrumb link\""
+            "type": String,
+            "attr": "color"
         },
         "disabled": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "disabled",
-            "reflect": false,
-            "defaultValue": "false"
+            "type": Boolean,
+            "attr": "disabled"
+        },
+        "element": {
+            "elementRef": true
         },
         "first": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "first",
-            "reflect": true
+            "type": Boolean,
+            "attr": "first",
+            "reflectToAttr": true
+        },
+        "href": {
+            "type": String,
+            "attr": "href"
+        },
+        "label": {
+            "type": String,
+            "attr": "label",
+            "mutable": true
         },
         "last": {
-            "type": "boolean",
-            "mutable": false,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "last",
-            "reflect": true
+            "type": Boolean,
+            "attr": "last",
+            "reflectToAttr": true
+        },
+        "target": {
+            "type": String,
+            "attr": "target"
         }
     }; }
-    static get elementRef() { return "element"; }
+    static get style() { return "/**style-placeholder:stellar-breadcrumb:**/"; }
 }

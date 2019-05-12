@@ -1,6 +1,6 @@
 <header class="flex items-center flex-start">
 	<div class="ml3 mr3 mv3" style="height: 3rem; width: 3rem;">
-		<?php include "assets/stellar/dist/collection/global/vector/mark.svg" ?>
+		<?php include "assets/vector/mark.svg" ?>
 	</div>
 	<stellar-tabs class="mla mr-auto mb0" style="border: 0;">
 		<?php $menu = wp_nav_menu([

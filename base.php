@@ -39,12 +39,12 @@ if ( $content_transient && $sendo_transient && ! is_user_logged_in( ) ) {
 	// Make an empty array for this page's keywords
 	$keywords = [];
 
-	if (get_field('seo_page_keywords', 'option') || get_field('seo_page_keywords')) {
-		$page_keywords = (gettype(get_field('seo_page_keywords')) === "array" && count(get_field('seo_page_keywords')) >= 0 && get_field('seo_page_keywords')['keyword'] !== null) ? get_field('seo_page_keywords') : false;
+	if (get_field('seo_page_keywords', 'option')  || get_field('seo_page_keywords'))  {
+		$page_keywords = (gettype(get_field('seo_page_keywords')) === "array" && count(get_field('seo_page_keywords')) > 0) ? get_field('seo_page_keywords') : false;
 
-		$keywords_to_get = ($page_keywords) ? $page_keywords : get_field('seo_page_keywords', 'option');
+		$keywords_to_get = (count($page_keywords) > 0) ? $page_keywords : get_field('seo_page_keywords', 'option');
 
-		if (gettype($keywords_to_get) === "array") {
+		if (count($keywords_to_get) > 0) {
 			foreach ($keywords_to_get as $key => $value) {
 				$keywords[] = $value['keyword'];
 			}

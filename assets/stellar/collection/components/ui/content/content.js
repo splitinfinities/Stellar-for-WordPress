@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import { blurringEase } from '../../../utils';
 export class Content {
     constructor() {
@@ -35,77 +34,41 @@ export class Content {
     }
     static get is() { return "stellar-content"; }
     static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() { return {
-        "$": ["content.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["content.css"]
-    }; }
     static get properties() { return {
-        "open": {
-            "type": "boolean",
-            "mutable": true,
-            "complexType": {
-                "original": "boolean",
-                "resolved": "boolean",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "open",
-            "reflect": true,
-            "defaultValue": "false"
+        "behavior": {
+            "type": String,
+            "attr": "behavior",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "blur": {
+            "state": true
+        },
+        "ease": {
+            "state": true
+        },
+        "element": {
+            "elementRef": true
         },
         "for": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "for",
-            "reflect": true
+            "type": String,
+            "attr": "for",
+            "reflectToAttr": true,
+            "mutable": true
         },
-        "behavior": {
-            "type": "string",
-            "mutable": true,
-            "complexType": {
-                "original": "string",
-                "resolved": "string",
-                "references": {}
-            },
-            "required": false,
-            "optional": false,
-            "docs": {
-                "tags": [],
-                "text": ""
-            },
-            "attribute": "behavior",
-            "reflect": true
+        "open": {
+            "type": Boolean,
+            "attr": "open",
+            "reflectToAttr": true,
+            "mutable": true
+        },
+        "parent": {
+            "state": true
         }
     }; }
-    static get states() { return {
-        "ease": {},
-        "blur": {},
-        "parent": {}
-    }; }
-    static get elementRef() { return "element"; }
     static get listeners() { return [{
-            "name": "contentChange",
-            "method": "handleActive",
-            "target": "document",
-            "capture": false,
-            "passive": false
+            "name": "document:contentChange",
+            "method": "handleActive"
         }]; }
+    static get style() { return "/**style-placeholder:stellar-content:**/"; }
 }

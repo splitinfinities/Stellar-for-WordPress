@@ -1,4 +1,3 @@
-import { h } from '@stencil/core';
 import { colors } from '../../../utils';
 export class ColorLibrary {
     renderColorPallette(color) {
@@ -37,10 +36,5 @@ export class ColorLibrary {
             this.renderColorPallette("pink")));
     }
     static get is() { return "stellar-color-library"; }
-    static get originalStyleUrls() { return {
-        "$": ["color-library.css"]
-    }; }
-    static get styleUrls() { return {
-        "$": ["color-library.css"]
-    }; }
+    static get style() { return "/**style-placeholder:stellar-color-library:**/"; }
 }

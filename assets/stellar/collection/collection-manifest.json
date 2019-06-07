@@ -2468,19 +2468,39 @@
     {
       "tag": "stellar-markdown",
       "dependencies": [
-        "copy-wrap"
+        "copy-wrap",
+        "stellar-card",
+        "stellar-code",
+        "stellar-input"
       ],
       "componentClass": "Markdown",
       "componentPath": "components/helpers/markdown/markdown.js",
-      "styles": {},
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/helpers/markdown/markdown.css"
+          ]
+        }
+      },
       "props": [
         {
           "name": "codeString",
           "type": "String",
+          "mutable": true,
           "attr": "code-string",
           "watch": [
             "onCodeStringChange"
           ]
+        },
+        {
+          "name": "editable",
+          "type": "Boolean",
+          "attr": "editable"
+        },
+        {
+          "name": "flavor",
+          "type": "String",
+          "attr": "flavor"
         },
         {
           "name": "src",

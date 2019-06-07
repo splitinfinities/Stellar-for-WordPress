@@ -1,8 +1,22 @@
 import '../../../stencil.core';
 export declare class Markdown {
     element: HTMLElement;
+    /**
+     * Used to reference an external markdown file
+     *
+     * @type string
+     * @memberof Markdown
+     */
     src: string;
+    /**
+     * Used to set
+     *
+     * @type {string}
+     * @memberof Markdown
+     */
     codeString: string;
+    flavor: "github" | "original" | "vanilla";
+    editable: boolean;
     converted: string;
     raw: string;
     showdown: any;
@@ -14,5 +28,5 @@ export declare class Markdown {
     convertMarkdown(): void;
     replaceAll(str: any, find: any, replace: any): any;
     fetchMarkdown(): Promise<void>;
-    render(): JSX.Element[];
+    render(): JSX.Element;
 }

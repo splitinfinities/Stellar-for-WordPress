@@ -1,9 +1,18 @@
 import showdown from 'showdown';
 export class Markdown {
     constructor() {
+        this.flavor = "vanilla";
+        this.editable = false;
         this.showdown = new showdown.Converter();
     }
     componentWillLoad() {
+        this.showdown.setFlavor(this.flavor);
+        this.showdown.setOption('omitExtraWLInCodeBlocks', true);
+        this.showdown.setOption('ghCompatibleHeaderId', true);
+        this.showdown.setOption('tables', true);
+        this.showdown.setOption('tablesHeaderId', true);
+        this.showdown.setOption('tasklists', true);
+        this.showdown.setOption('emoji', true);
         this.convert();
     }
     onCodeStringChange() {
@@ -31,10 +40,8 @@ export class Markdown {
     }
     convertMarkdown() {
         let converted = this.showdown.makeHtml(this.raw);
-        converted = this.replaceAll(converted, "<pre", "<stellar-code-block");
-        converted = this.replaceAll(converted, "</pre", "</stellar-code-block");
-        converted = this.replaceAll(converted, "<code", "<template");
-        converted = this.replaceAll(converted, "</code", "</template");
+        converted = this.replaceAll(converted, "<pre><code>", "<stellar-code><template>");
+        converted = this.replaceAll(converted, "</pre></code>", "</template></stellar-code>");
         this.converted = converted;
     }
     replaceAll(str, find, replace) {
@@ -47,24 +54,40 @@ export class Markdown {
         this.convertMarkdown();
     }
     render() {
-        return [
-            h("slot", null),
-            h("copy-wrap", { full: true, class: "wrap" },
-                h("div", { innerHTML: this.converted }))
-        ];
+        if (this.editable) {
+            return h("stellar-card", null,
+                h("section", null,
+                    h("copy-wrap", { full: true, class: "wrap" },
+                        h("div", { innerHTML: this.converted }))),
+                h("footer", { class: "bg-theme-base0" },
+                    h("stellar-input", { type: "textarea", default: this.codeString, onChange: (e) => { this.codeString = e.detail; this.convert(); } })));
+        }
+        else {
+            return h("copy-wrap", { full: true, class: "wrap" },
+                h("div", { innerHTML: this.converted }));
+        }
     }
     static get is() { return "stellar-markdown"; }
     static get properties() { return {
         "codeString": {
             "type": String,
             "attr": "code-string",
+            "mutable": true,
             "watchCallbacks": ["onCodeStringChange"]
         },
         "converted": {
             "state": true
         },
+        "editable": {
+            "type": Boolean,
+            "attr": "editable"
+        },
         "element": {
             "elementRef": true
+        },
+        "flavor": {
+            "type": String,
+            "attr": "flavor"
         },
         "raw": {
             "state": true
@@ -78,4 +101,5 @@ export class Markdown {
             "watchCallbacks": ["onSrcChange"]
         }
     }; }
+    static get style() { return "/**style-placeholder:stellar-markdown:**/"; }
 }

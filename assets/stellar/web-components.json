@@ -1067,12 +1067,22 @@
       "attributes": [
         {
           "label": "code-string",
+          "description": "Used to set",
+          "required": false
+        },
+        {
+          "label": "editable",
+          "description": "",
+          "required": false
+        },
+        {
+          "label": "flavor",
           "description": "",
           "required": false
         },
         {
           "label": "src",
-          "description": "",
+          "description": "Used to reference an external markdown file",
           "required": false
         }
       ]

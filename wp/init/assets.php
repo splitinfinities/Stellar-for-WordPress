@@ -22,7 +22,7 @@ function prepare_scripts() {
 	enqueue_load($base_assets);
 }
 add_action('wp_enqueue_scripts', 'prepare_scripts', 100);
-add_action('admin_enqueue_scripts', 'prepare_scripts');
+add_action('admin_enqueue_scripts', 'prepare_scripts', 100000000);
 
 add_filter( 'script_loader_tag', 'add_id_to_script', 10, 3 );
 
@@ -59,9 +59,13 @@ function enqueue_load($assets) {
 	 */
 	if (!is_admin()) {
 		wp_deregister_script('jquery');
+		$deps = false;
+	} else {
+		$deps = array(  );
 	}
 
-	wp_enqueue_style('app.css', $assets['app.css'], false, null);
+
+	wp_enqueue_style('app.css', $assets['app.css'], $deps, null);
 
 	if (sendo()->esm) {
 		wp_enqueue_script('app.esm.js', $assets['app.esm.js'], array(), null, true);
@@ -71,4 +75,35 @@ function enqueue_load($assets) {
 	}
 
 	wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.3.1.min.js', array(), null, true);
+}
+
+add_action('admin_head', 'admin_css_overrides');
+
+function admin_css_overrides() {
+  echo '<style>
+	a {
+		color: #0073aa;
+	}
+	.current {
+		color: white !important
+	}
+
+	.ac_match, .subsubsub a.current {
+		color: #000 !important;
+	}
+
+	h1, h2, h3, h4, h5, h6, p {
+		max-width: initial;
+		line-height: 1.4;
+	}
+
+	h2 {
+		max-width: initial;
+		font-size: 1.3em;
+	}
+
+	.fs7, p {
+		font-size: .825rem;
+	}
+  </style>';
 }

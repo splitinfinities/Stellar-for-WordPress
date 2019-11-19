@@ -36,5 +36,5 @@ export declare class HighchartsModel implements Options {
     xAxis?: (XAxisOptions | Array<XAxisOptions>);
     yAxis?: (YAxisOptions | Array<YAxisOptions>);
     zAxis?: (ZAxisOptions | Array<ZAxisOptions>);
-    serialize(): this;
+    serialize(): any;
 }

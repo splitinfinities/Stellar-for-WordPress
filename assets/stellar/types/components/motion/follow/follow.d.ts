@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Follow {
     element: HTMLElement;
     type: "scroll" | "cursor";
@@ -11,5 +10,5 @@ export declare class Follow {
     attachScroll(): void;
     attachCursor(): void;
     minmaxx(x: any): any;
-    render(): JSX.Element;
+    render(): any;
 }

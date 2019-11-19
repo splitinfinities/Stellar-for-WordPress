@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Picture {
     element: HTMLElement;
     figure: HTMLElement;
@@ -29,6 +28,6 @@ export declare class Picture {
     prepareSources(): void;
     setBackgroundImage(): void;
     updateAspectRatio(): void;
-    renderPicture(): JSX.Element[];
-    render(): JSX.Element;
+    renderPicture(): any[];
+    render(): any;
 }

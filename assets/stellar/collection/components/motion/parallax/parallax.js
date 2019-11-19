@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import Rellax from 'rellax';
 export class Parallax {
     componentWillLoad() {
@@ -15,13 +16,31 @@ export class Parallax {
         return (h("slot", null));
     }
     static get is() { return "stellar-parallax"; }
-    static get properties() { return {
-        "relax": {
-            "state": true
-        },
+    static get originalStyleUrls() { return {
+        "$": ["parallax.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["parallax.css"]
+    }; }
+    static get states() { return {
+        "relax": {}
+    }; }
+    static get methods() { return {
         "reload": {
-            "method": true
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-parallax:**/"; }
 }

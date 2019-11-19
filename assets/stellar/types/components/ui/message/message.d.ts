@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Message {
     element: HTMLElement;
     type: "alert" | "error" | "info" | "success";
@@ -10,9 +9,6 @@ export declare class Message {
     striped: boolean;
     theme: string;
     componentWillLoad(): void;
-    hostData(): {
-        class: string;
-    };
     handleClose(): void;
-    render(): JSX.Element;
+    render(): any;
 }

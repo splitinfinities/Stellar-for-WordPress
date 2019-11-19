@@ -24,6 +24,14 @@
     background: transparent;
 }
 
+:host([padding="none"]) {
+    --padding: 0rem;
+}
+
+:host([padding="tiny"]) {
+    --padding: 0.5rem;
+}
+
 :host([padding="small"]) {
     --padding: 1rem;
 }

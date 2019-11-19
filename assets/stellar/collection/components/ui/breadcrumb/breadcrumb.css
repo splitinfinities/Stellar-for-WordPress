@@ -3,12 +3,13 @@
 }
 
 :host {
+	--clip-path: polygon(1em 100%, 0% 0%, calc(100% - 1em) 0%, 100% 100%, calc(100% - 1em) 100%, 0% 100%);
+	--clip-path-first: polygon(0 100%, 0% 0%, calc(100% - 1em) 0%, 100% 100%, calc(100% - 1em) 100%, 0% 100%);
 	display: flex;
 	position: relative;
 	align-items: center;
 	justify-content: center;
-	clip-path: polygon(1em 100%, 0% 0%, calc(100% - 1em) 0%, 100% 100%, calc(100% - 1em) 100%, 0% 100%);
-	clip-path: polygon(calc(100% - .5em) 0, 100% 50%, calc(100% - 0.5em) 100%, 0 100%, calc(0% + 0.5em) 50%, 0 0);
+	clip-path: var(--clip-path);
 	margin: 0 0 0 -0.35em;
 	background: var(--white);
 	text-align: center;
@@ -19,8 +20,19 @@
 :host a:hover,
 :host a:focus,
 :host(:focus-within) {
-	background: var(--theme-base5);
+	background: var(--theme-base0);
+	color: var(--theme-base9);
+}
+
+:host([first]) a:hover,
+:host([first]) a:focus,
+:host([first]:focus-within) {
+	background: var(--theme-base9);
 	color: white;
+}
+
+:host ::slotted(*) {
+	--margin: 0;
 }
 
 :host a {
@@ -51,12 +63,13 @@
 	margin: 0 -0.25rem 0 -0.15em;
     position: sticky;
     left: -.5rem;
-    z-index: 2;
+	z-index: 2;
+	clip-path: var(--clip-path-first);
 }
 
 :host([first]) a {
-    padding-left: 1.25em;
-    padding-right: 1.25em;
+    padding-left: 1.5em;
+    padding-right: 1.75em;
 }
 
 :host([first]) a stellar-asset {

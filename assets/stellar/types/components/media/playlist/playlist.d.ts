@@ -1,8 +1,8 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Playlist {
     element: HTMLElement;
     visualizationColor: string;
+    visualizationType: "bars" | "bars2" | "wave" | "circle";
     autoplay: boolean;
     playlist: "show" | "hide";
     name: string;
@@ -26,6 +26,7 @@ export declare class Playlist {
     load_songs: EventEmitter;
     componentWillLoad(): void;
     componentDidLoad(): void;
+    cycleVisualizations(): void;
     handleProgressClick(): void;
     handleTimeUpdates(): void;
     handleKeydown(event: any): void;
@@ -39,5 +40,5 @@ export declare class Playlist {
     togglePlaylist(): void;
     toggleAlbumArtView(): void;
     handlePlay(): Promise<void>;
-    render(): JSX.Element;
+    render(): any;
 }

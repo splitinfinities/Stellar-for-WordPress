@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace.js';
 import 'prismjs/components/prism-typescript';
@@ -28,7 +27,7 @@ export declare class Code {
     clipboard(): Promise<void>;
     setCode(code: any): Promise<void>;
     getCode(): void;
-    renderPreview(): JSX.Element;
-    renderCode(): JSX.Element;
-    render(): JSX.Element;
+    renderPreview(): any;
+    renderCode(): any;
+    render(): any;
 }

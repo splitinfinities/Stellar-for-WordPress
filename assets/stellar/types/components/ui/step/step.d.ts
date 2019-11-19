@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Step {
     element: HTMLElement;
@@ -11,6 +10,6 @@ export declare class Step {
     contentChange: EventEmitter;
     componentWillLoad(): void;
     handleClick(): void;
-    renderTitle(): JSX.Element;
-    render(): JSX.Element;
+    renderTitle(): any;
+    render(): any;
 }

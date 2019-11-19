@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Markdown {
     element: HTMLElement;
     /**
@@ -28,5 +27,5 @@ export declare class Markdown {
     convertMarkdown(): void;
     replaceAll(str: any, find: any, replace: any): any;
     fetchMarkdown(): Promise<void>;
-    render(): JSX.Element;
+    render(): any;
 }

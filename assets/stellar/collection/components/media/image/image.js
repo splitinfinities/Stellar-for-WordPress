@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import { delay, properties, mediumZoom } from '../../../utils';
 import { ColorThief } from './vendor/colorThief.js';
 export class Picture {
@@ -44,6 +45,9 @@ export class Picture {
     addIntersectionObserver() {
         if ('IntersectionObserver' in window) {
             this.io = new IntersectionObserver((data) => {
+                // because there will only ever be one instance
+                // of the element we are observing
+                // we can just use data[0]
                 if (data[0].isIntersecting) {
                     this.handleImage();
                     this.removeIntersectionObserver();
@@ -55,6 +59,7 @@ export class Picture {
             this.io.observe(this.element);
         }
         else {
+            // fall back to setTimeout for Safari and IE
             setTimeout(() => {
                 this.handleImage();
             }, 300);
@@ -137,70 +142,170 @@ export class Picture {
     }
     static get is() { return "stellar-image"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["image.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["image.css"]
+    }; }
+    static get assetsDirs() { return ["./vendor"]; }
     static get properties() { return {
-        "active": {
-            "state": true,
-            "watchCallbacks": ["handleActive"]
-        },
-        "aspectRatio": {
-            "state": true
-        },
-        "bg": {
-            "type": String,
-            "attr": "bg",
-            "mutable": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "figure": {
-            "state": true
-        },
-        "height": {
-            "type": Number,
-            "attr": "height"
-        },
-        "io": {
-            "state": true
+        "poster": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "poster",
+            "reflect": false
         },
         "large": {
-            "type": String,
-            "attr": "large",
-            "mutable": true
-        },
-        "medium": {
-            "method": true
-        },
-        "nozoom": {
-            "type": Boolean,
-            "attr": "nozoom",
-            "reflectToAttr": true
-        },
-        "palette": {
-            "state": true
-        },
-        "poster": {
-            "type": String,
-            "attr": "poster",
+            "type": "string",
             "mutable": true,
-            "watchCallbacks": ["handlePosterChange"]
-        },
-        "sources": {
-            "state": true
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "large",
+            "reflect": false
         },
         "type": {
-            "type": String,
-            "attr": "type",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "\"background\"|\"picture\"",
+                "resolved": "\"background\" | \"picture\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "type",
+            "reflect": true,
+            "defaultValue": "\"picture\""
         },
         "width": {
-            "type": Number,
-            "attr": "width"
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "width",
+            "reflect": false
         },
-        "zoom": {
-            "state": true
+        "height": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "height",
+            "reflect": false
+        },
+        "nozoom": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "nozoom",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "bg": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "bg",
+            "reflect": false,
+            "defaultValue": "\"auto\""
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-image:**/"; }
+    static get states() { return {
+        "figure": {},
+        "aspectRatio": {},
+        "sources": {},
+        "io": {},
+        "active": {},
+        "zoom": {},
+        "palette": {}
+    }; }
+    static get methods() { return {
+        "medium": {
+            "complexType": {
+                "signature": "() => Promise<any>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<any>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "poster",
+            "methodName": "handlePosterChange"
+        }, {
+            "propName": "active",
+            "methodName": "handleActive"
+        }]; }
 }

@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Tag {
     element: HTMLElement;
     size: string;
@@ -7,5 +6,5 @@ export declare class Tag {
     color: string;
     textColor: string;
     componentWillLoad(): void;
-    render(): JSX.Element;
+    render(): any;
 }

@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 export class ParallaxSection {
     constructor() {
         this.speed = 1;
@@ -14,22 +15,66 @@ export class ParallaxSection {
         return (h("slot", null));
     }
     static get is() { return "stellar-parallax-section"; }
+    static get originalStyleUrls() { return {
+        "$": ["parallax-section.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["parallax-section.css"]
+    }; }
     static get properties() { return {
-        "element": {
-            "elementRef": true
-        },
-        "layer": {
-            "type": Number,
-            "attr": "layer"
+        "speed": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "speed",
+            "reflect": false,
+            "defaultValue": "1"
         },
         "percentage": {
-            "type": Number,
-            "attr": "percentage"
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "percentage",
+            "reflect": false
         },
-        "speed": {
-            "type": Number,
-            "attr": "speed"
+        "layer": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "layer",
+            "reflect": false,
+            "defaultValue": "1"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-parallax-section:**/"; }
+    static get elementRef() { return "element"; }
 }

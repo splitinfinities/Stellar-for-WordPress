@@ -1,7 +1,7 @@
-import '../../../stencil.core';
 export declare class Image360 {
     element: HTMLElement;
     src: string;
+    nolazyload: boolean;
     poster: string;
     width: number;
     height: number;
@@ -15,5 +15,5 @@ export declare class Image360 {
     handleOffScreen(): void;
     prepare(): void;
     destroy(): void;
-    render(): JSX.Element;
+    render(): any;
 }

@@ -1,7 +1,9 @@
+import { h } from '@stencil/core';
 import { asTime } from '../../../utils';
 export class Playlist {
     constructor() {
         this.visualizationColor = "gray";
+        this.visualizationType = "bars";
         this.autoplay = false;
         this.playlist = "show";
         this.name = "Playlist";
@@ -46,6 +48,21 @@ export class Playlist {
         }
         this.handleTimeUpdates();
         this.handleProgressClick();
+    }
+    cycleVisualizations() {
+        // this.view === "art" ? "circle" : "bars";
+        if (this.visualizationType === "circle") {
+            this.visualizationType = "bars";
+        }
+        else if (this.visualizationType === "bars") {
+            this.visualizationType = "bars2";
+        }
+        else if (this.visualizationType === "bars2") {
+            this.visualizationType = "wave";
+        }
+        else if (this.visualizationType === "wave") {
+            this.visualizationType = "circle";
+        }
     }
     handleProgressClick() {
         this.progress.addEventListener('click', (e) => {
@@ -115,7 +132,9 @@ export class Playlist {
         this.playing = true;
         await this.audio.play();
         if (!this.context) {
-            var context = new AudioContext();
+            // @ts-ignore
+            const context = new (window.AudioContext || window.webkitAudioContext)();
+            ;
             const src = context.createMediaElementSource(this.audio);
             const waanalyser = await this.visualizer.connect(context);
             src.connect(waanalyser.analyser);
@@ -177,7 +196,6 @@ export class Playlist {
         }
     }
     async handlePlay() {
-        console.log(this.load);
         if (!this.load) {
             this.load = true;
             this.load_songs.emit({});
@@ -191,11 +209,20 @@ export class Playlist {
                 h("button", { class: "playlist", onClick: () => this.togglePlaylist() },
                     h("h6", { class: "list" },
                         h("stellar-asset", { name: "musical-notes" }),
-                        "list"))),
+                        "list")),
+                h("button", { class: "switch-view", onClick: () => this.toggleAlbumArtView(), "data-playing": this.playing },
+                    h("h6", { class: "list" },
+                        (this.view === "art")
+                            ? h("stellar-asset", { name: "albums" })
+                            : h("stellar-asset", { name: "radio" }),
+                        (this.view === "art")
+                            ? "Art"
+                            : "Player")),
+                h("stellar-color-picker", { val: this.visualizationColor, notransparent: true, onChange: (e) => { this.visualizationColor = e.detail; } })),
             h("div", { class: "playlist-playing" },
                 h("button", { onClick: () => { this.handlePlay(); }, class: "toggle-button", "data-playing": this.playing }, (this.playing)
-                    ? h("ion-icon", { name: "md-pause" })
-                    : h("ion-icon", { name: "md-play" })),
+                    ? h("stellar-asset", { name: "pause" })
+                    : h("stellar-asset", { name: "play" })),
                 !this.load && h("stellar-button", { tag: "button", size: "tiny", onClick: () => { this.load = true; this.load_songs.emit({}); } },
                     "Load ",
                     this.name || "this playlist"),
@@ -206,138 +233,358 @@ export class Playlist {
                     h("div", { class: "playlist-playing-image" },
                         this.loading && h("stellar-progress", { indeterminate: true }),
                         !this.loading && (this.currentTrack.picture !== undefined) && h("img", { src: this.currentTrack.picture, onClick: () => this.toggleAlbumArtView() })),
-                h("web-audio-visualizer", { type: this.view === "art" ? "circle" : "bars", color: this.visualizationColor })),
+                (!this.load && this.currentTrack.picture === undefined) && h("skeleton-img", { width: 1024, height: 1024, block: true, loading: true }),
+                h("web-audio-visualizer", { type: this.visualizationType, color: this.visualizationColor, onClick: () => { this.cycleVisualizations(); }, width: 1024, height: this.view === "art" ? 1024 : 256 }),
+                h("div", { class: `playlist-progress ${this.load ? "load" : "noload"}` },
+                    h("h6", { id: "currentTime" }, this.currentTime),
+                    h("h6", { id: "totalTime" }, this.duration),
+                    h("progress", { id: "progress", max: "100", value: this.progress_value }))),
             h("div", { id: "controls", class: "controls" },
                 h("button", { onClick: () => this.previous(), class: "button previous" },
                     h("stellar-asset", { name: "skip-backward" })),
                 h("button", { onClick: () => this.next(), class: "button next" },
                     h("stellar-asset", { name: "skip-forward" }))),
-            h("div", { class: "playlist-progress" },
-                h("h6", { id: "currentTime" }, this.currentTime),
-                h("h6", { id: "totalTime" }, this.duration),
-                h("progress", { id: "progress", max: "100", value: this.progress_value })),
             h("audio", { id: "playlist-audio", preload: "auto", tabindex: "0", controls: true },
                 h("source", { id: "source", type: "audio/mp3" })),
             h("div", { id: "playlist", class: `playlist-list ${this.playlist}` }, this.load && h("slot", null))));
     }
     static get is() { return "stellar-playlist"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["playlist.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["playlist.css"]
+    }; }
     static get properties() { return {
-        "artwork": {
-            "type": Boolean,
-            "attr": "artwork",
-            "reflectToAttr": true,
-            "mutable": true
+        "visualizationColor": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "visualization-color",
+            "reflect": true,
+            "defaultValue": "\"gray\""
         },
-        "audio": {
-            "state": true
+        "visualizationType": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "\"bars\"|\"bars2\"|\"wave\"|\"circle\"",
+                "resolved": "\"bars\" | \"bars2\" | \"circle\" | \"wave\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "visualization-type",
+            "reflect": true,
+            "defaultValue": "\"bars\""
         },
         "autoplay": {
-            "type": Boolean,
-            "attr": "autoplay"
-        },
-        "context": {
-            "state": true
-        },
-        "current": {
-            "state": true
-        },
-        "currentPlaylistItem": {
-            "state": true
-        },
-        "currentTime": {
-            "state": true
-        },
-        "currentTrack": {
-            "state": true
-        },
-        "duration": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "load": {
-            "type": Boolean,
-            "attr": "load",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "loading": {
-            "type": Boolean,
-            "attr": "loading"
-        },
-        "name": {
-            "type": String,
-            "attr": "name"
-        },
-        "next": {
-            "method": true
-        },
-        "pause": {
-            "method": true
-        },
-        "play": {
-            "method": true
-        },
-        "playing": {
-            "type": Boolean,
-            "attr": "playing",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "autoplay",
+            "reflect": false,
+            "defaultValue": "false"
         },
         "playlist": {
-            "type": String,
-            "attr": "playlist",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "\"show\"|\"hide\"",
+                "resolved": "\"hide\" | \"show\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "playlist",
+            "reflect": true,
+            "defaultValue": "\"show\""
         },
-        "playlistItems": {
-            "state": true
-        },
-        "prepare": {
-            "method": true
-        },
-        "previous": {
-            "method": true
-        },
-        "progress": {
-            "state": true
-        },
-        "progress_value": {
-            "state": true
+        "name": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": false,
+            "defaultValue": "\"Playlist\""
         },
         "remember": {
-            "type": Boolean,
-            "attr": "remember"
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "remember",
+            "reflect": false,
+            "defaultValue": "true"
+        },
+        "artwork": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "artwork",
+            "reflect": true,
+            "defaultValue": "false"
         },
         "view": {
-            "type": String,
-            "attr": "view",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "\"playlist\"|\"art\"",
+                "resolved": "\"art\" | \"playlist\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "view",
+            "reflect": true,
+            "defaultValue": "\"playlist\""
         },
-        "visualizationColor": {
-            "type": String,
-            "attr": "visualization-color"
+        "playing": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "playing",
+            "reflect": true,
+            "defaultValue": "false"
         },
-        "visualizer": {
-            "state": true
+        "load": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "load",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "loading": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "loading",
+            "reflect": true,
+            "defaultValue": "false"
         }
     }; }
+    static get states() { return {
+        "current": {},
+        "currentTrack": {},
+        "currentTime": {},
+        "duration": {},
+        "visualizer": {},
+        "audio": {},
+        "progress": {},
+        "progress_value": {},
+        "playlistItems": {},
+        "currentPlaylistItem": {},
+        "context": {}
+    }; }
     static get events() { return [{
-            "name": "load_songs",
             "method": "load_songs",
+            "name": "load_songs",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
+    static get methods() { return {
+        "prepare": {
+            "complexType": {
+                "signature": "(element: any) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "play": {
+            "complexType": {
+                "signature": "(skipDefault?: boolean) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "pause": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "next": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "previous": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
     static get listeners() { return [{
             "name": "keydown",
-            "method": "handleKeydown"
+            "method": "handleKeydown",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }, {
             "name": "loaded",
-            "method": "handleSongLoaded"
+            "method": "handleSongLoaded",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }]; }
-    static get style() { return "/**style-placeholder:stellar-playlist:**/"; }
 }

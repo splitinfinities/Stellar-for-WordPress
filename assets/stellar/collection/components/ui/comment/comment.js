@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 export class Comment {
     constructor() {
         this.empty = false;
@@ -7,6 +8,7 @@ export class Comment {
     }
     componentDidLoad() {
         if (this.element.querySelector('stellar-avatar')) {
+            // @ts-ignore
             this.element.querySelector('stellar-avatar').tabIndex = -1;
             this.name = this.element.querySelector('stellar-avatar').name;
         }
@@ -22,23 +24,50 @@ export class Comment {
     }
     static get is() { return "stellar-comment"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["comment.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["comment.css"]
+    }; }
     static get properties() { return {
         "content": {
-            "type": "Any",
-            "attr": "content",
-            "mutable": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "empty": {
-            "state": true
+            "type": "any",
+            "mutable": true,
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "content",
+            "reflect": false
         },
         "name": {
-            "type": "Any",
-            "attr": "name",
-            "mutable": true
+            "type": "any",
+            "mutable": true,
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": false
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-comment:**/"; }
+    static get states() { return {
+        "empty": {}
+    }; }
+    static get elementRef() { return "element"; }
 }

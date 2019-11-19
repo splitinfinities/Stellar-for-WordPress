@@ -1,3 +1,4 @@
+import { h } from "@stencil/core";
 export class Toggle {
     constructor() {
         this.type = "checkbox";
@@ -10,6 +11,7 @@ export class Toggle {
     componentWillLoad() {
         const options = this.element.querySelectorAll('stellar-toggle-option');
         const values = [];
+        // @ts-ignore
         options.forEach((option) => {
             option.type = this.type;
             option.for = this.name;
@@ -37,6 +39,7 @@ export class Toggle {
             const values = [];
             this.value = [];
             if (this.type === "checkbox" || this.type === "checkbox-block") {
+                // @ts-ignore
                 options.forEach((option) => {
                     if (option === event.detail.element && event.detail.element.checked) {
                         values.push(event.detail.value);
@@ -47,8 +50,6 @@ export class Toggle {
                 if (event.detail.element.checked) {
                     values.push(event.detail.value);
                 }
-                else {
-                }
             }
             this.value = values;
             this.change.emit(this.value);
@@ -56,6 +57,7 @@ export class Toggle {
     }
     updateChecked() {
         const options = this.element.querySelectorAll('stellar-toggle-option');
+        // @ts-ignore
         options.forEach((option) => {
             option.type = this.type;
             option.for = this.name;
@@ -89,91 +91,272 @@ export class Toggle {
         ];
     }
     static get is() { return "stellar-toggle"; }
+    static get originalStyleUrls() { return {
+        "$": ["toggle.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["toggle.css"]
+    }; }
     static get properties() { return {
-        "card": {
-            "type": "Any",
-            "attr": "card"
-        },
-        "description": {
-            "type": String,
-            "attr": "description",
-            "mutable": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "error": {
-            "state": true
-        },
-        "flip": {
-            "type": Boolean,
-            "attr": "flip"
-        },
-        "form": {
-            "state": true
-        },
-        "label": {
-            "type": String,
-            "attr": "label"
+        "type": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string|\"checkbox\"|\"radio\"|\"radio-block\"|\"checkbox-block\"",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "type",
+            "reflect": false,
+            "defaultValue": "\"checkbox\""
         },
         "name": {
-            "type": String,
-            "attr": "name",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": true,
+            "defaultValue": "\"\""
         },
-        "novalidate": {
-            "type": Boolean,
-            "attr": "novalidate",
-            "reflectToAttr": true
-        },
-        "required": {
-            "type": Boolean,
-            "attr": "required"
-        },
-        "single": {
-            "type": Boolean,
-            "attr": "single"
-        },
-        "size": {
-            "type": String,
-            "attr": "size"
+        "description": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "description",
+            "reflect": false
         },
         "stacked": {
-            "type": Boolean,
-            "attr": "stacked",
-            "reflectToAttr": true
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "stacked",
+            "reflect": true,
+            "defaultValue": "false"
         },
-        "status": {
-            "state": true
+        "flip": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "flip",
+            "reflect": false,
+            "defaultValue": "false"
         },
-        "type": {
-            "type": String,
-            "attr": "type",
-            "mutable": true
+        "required": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "required",
+            "reflect": false
         },
-        "valid": {
-            "state": true
+        "single": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "single",
+            "reflect": false
         },
-        "validate": {
-            "method": true
+        "size": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "size",
+            "reflect": false
+        },
+        "novalidate": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "novalidate",
+            "reflect": true
+        },
+        "card": {
+            "type": "any",
+            "mutable": false,
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "card",
+            "reflect": false,
+            "defaultValue": "\"div\""
+        },
+        "label": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "label",
+            "reflect": false
         },
         "value": {
-            "type": String,
-            "attr": "value",
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string|string[]",
+                "resolved": "string | string[]",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "value",
+            "reflect": false
         }
     }; }
+    static get states() { return {
+        "form": {},
+        "valid": {},
+        "error": {},
+        "status": {}
+    }; }
     static get events() { return [{
-            "name": "change",
             "method": "change",
+            "name": "change",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
+    static get methods() { return {
+        "validate": {
+            "complexType": {
+                "signature": "() => Promise<FormResult>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    },
+                    "FormResult": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<FormResult>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
     static get listeners() { return [{
-            "name": "change",
-            "method": "toggleChangedHandler"
+            "name": "changeToggle",
+            "method": "toggleChangedHandler",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }]; }
-    static get style() { return "/**style-placeholder:stellar-toggle:**/"; }
 }

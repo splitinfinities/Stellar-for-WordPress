@@ -1,4 +1,5 @@
 export const bars = (arg) => {
+    // Draw the frequency domain chart.
     for (var i = 0; i < arg.analyser.frequencyBinCount; i++) {
         var value = arg.freqs[i];
         var percent = value / 256;

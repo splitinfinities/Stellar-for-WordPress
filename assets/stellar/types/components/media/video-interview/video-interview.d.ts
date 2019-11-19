@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class VideoInterview {
     element: HTMLElement;
     randomId: number;
@@ -36,5 +35,5 @@ export declare class VideoInterview {
     toggle(): Promise<void>;
     handleClick(): void;
     handleCurrentClick(): void;
-    render(): JSX.Element;
+    render(): any;
 }

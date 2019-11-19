@@ -1,3 +1,4 @@
+import { h } from "@stencil/core";
 import { blurringEase } from "../../../utils";
 export class ToggleOption {
     constructor() {
@@ -29,7 +30,7 @@ export class ToggleOption {
         this.input = this.element.querySelector('input.input');
         if (this.checkedDefault) {
             this.checked = this.checkedDefault;
-            this.change.emit({ element: this.element, value: this.value, checked: this.input.checked });
+            this.changeToggle.emit({ element: this.element, value: this.value, checked: this.checked });
         }
     }
     updateRealType() {
@@ -44,21 +45,18 @@ export class ToggleOption {
         }
     }
     async confirm() {
-        console.log(this.input);
         if (this.input.checked !== this.checked) {
             this.checked = this.input.checked;
         }
     }
     async updateSelected(value) {
         this.input.checked = value;
-        this.checked = value;
-        this.change.emit({ element: this.element, value: this.value, checked: this.input.checked });
+        this.onToggleChange();
     }
-    onToggleChange(e) {
-        e.stopPropagation();
+    onToggleChange() {
         this.checked = this.input.checked;
         this.ease.start();
-        this.change.emit({ element: this.element, value: this.value, checked: this.checked });
+        this.changeToggle.emit({ element: this.element, value: this.checked ? this.value : undefined, checked: this.checked });
     }
     onFocus() {
         this.focused = true;
@@ -66,10 +64,16 @@ export class ToggleOption {
     onBlur() {
         this.focused = false;
     }
-    onKeyUp(e) {
+    onClick() {
+        this.input.checked = !this.input.checked;
+        this.onToggleChange();
+    }
+    onKeyDown(e) {
         if (e.key === "Enter") {
+            e.preventDefault();
+            e.stopPropagation();
             this.input.checked = !this.input.checked;
-            this.onToggleChange(e);
+            this.onToggleChange();
         }
     }
     renderCheckbox() {
@@ -98,9 +102,10 @@ export class ToggleOption {
         }
     }
     render() {
-        return (h("label", null,
+        // @ts-ignore
+        return h("button", { type: "button", onClick: () => this.onClick(), onKeyDown: e => this.onKeyDown(e) },
             h("input", { type: "hidden", name: `${this.for}[${this.name}]`, value: this.default }),
-            h("input", { class: "input", type: this._type, id: `${this.for}_${this.name}_${this.value}`, name: `${this.for}[${this.name}]`, checked: this.checked, value: this.value, required: this.required, onChange: e => this.onToggleChange(e), onFocus: () => this.onFocus(), onBlur: () => this.onBlur(), onKeyUp: e => this.onKeyUp(e), onClick: e => { e.stopPropagation(); } }),
+            h("input", { class: "input", type: this._type, id: `${this.for}_${this.name}_${this.value}`, name: `${this.for}[${this.name}]`, checked: this.checked, value: this.value, required: this.required, onChange: (e) => { e.stopPropagation(); e.preventDefault(); }, onKeyDown: e => this.onKeyDown(e) }),
             this.renderCheckbox(),
             ["radio", "checkbox"].indexOf(this.type) !== -1 && h("p", null,
                 h("slot", null)),
@@ -109,111 +114,337 @@ export class ToggleOption {
             ["radio", "checkbox"].indexOf(this.type) === -1 &&
                 h("stellar-blur", { horizontal: this.blur, class: this.checked ? "status active" : "status" },
                     h("stellar-tag", { size: "small", color: "theme-base5" }, this.selectedCopy)),
-            this.tooltip && h("stellar-tooltip", { align: "bottom-left" }, this.tooltip)));
+            this.tooltip && h("stellar-tooltip", { align: "bottom-left" }, this.tooltip));
     }
     static get is() { return "stellar-toggle-option"; }
+    static get originalStyleUrls() { return {
+        "$": ["toggle-option.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["toggle-option.css"]
+    }; }
     static get properties() { return {
-        "_type": {
-            "state": true
-        },
-        "blur": {
-            "state": true
+        "type": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "type",
+            "reflect": true,
+            "defaultValue": "\"checkbox\""
         },
         "checked": {
-            "type": Boolean,
-            "attr": "checked",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "checked",
+            "reflect": true,
+            "defaultValue": "false"
         },
         "checkedDefault": {
-            "type": Boolean,
-            "attr": "checked-default"
-        },
-        "confirm": {
-            "method": true
-        },
-        "default": {
-            "type": String,
-            "attr": "default"
-        },
-        "disabled": {
-            "type": Boolean,
-            "attr": "disabled",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "ease": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "focused": {
-            "state": true
-        },
-        "for": {
-            "type": String,
-            "attr": "for"
-        },
-        "icon": {
-            "type": Boolean,
-            "attr": "icon",
-            "reflectToAttr": true
-        },
-        "inline": {
-            "type": Boolean,
-            "attr": "inline"
-        },
-        "input": {
-            "state": true
-        },
-        "name": {
-            "type": String,
-            "attr": "name",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "required": {
-            "type": Boolean,
-            "attr": "required"
-        },
-        "selectedCopy": {
-            "type": String,
-            "attr": "selected-copy"
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "checked-default",
+            "reflect": false,
+            "defaultValue": "false"
         },
         "single": {
-            "type": Boolean,
-            "attr": "single",
-            "reflectToAttr": true
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "single",
+            "reflect": true
         },
-        "size": {
-            "type": Boolean,
-            "attr": "size"
+        "icon": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "icon",
+            "reflect": true
         },
         "tooltip": {
-            "type": String,
-            "attr": "tooltip",
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "tooltip",
+            "reflect": false
         },
-        "type": {
-            "type": String,
-            "attr": "type",
-            "reflectToAttr": true
+        "disabled": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "disabled",
+            "reflect": true
         },
-        "updateSelected": {
-            "method": true
+        "for": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "for",
+            "reflect": false,
+            "defaultValue": "\"\""
+        },
+        "name": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": true
+        },
+        "default": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "default",
+            "reflect": false,
+            "defaultValue": "\"\""
         },
         "value": {
-            "type": String,
-            "attr": "value"
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "value",
+            "reflect": false
+        },
+        "required": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "required",
+            "reflect": false
+        },
+        "inline": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "inline",
+            "reflect": false
+        },
+        "size": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "size",
+            "reflect": false
+        },
+        "selectedCopy": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "selected-copy",
+            "reflect": false,
+            "defaultValue": "\"Selected!\""
         }
     }; }
+    static get states() { return {
+        "input": {},
+        "_type": {},
+        "focused": {},
+        "blur": {},
+        "ease": {}
+    }; }
     static get events() { return [{
-            "name": "change",
-            "method": "change",
+            "method": "changeToggle",
+            "name": "changeToggle",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
-    static get style() { return "/**style-placeholder:stellar-toggle-option:**/"; }
+    static get methods() { return {
+        "confirm": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "updateSelected": {
+            "complexType": {
+                "signature": "(value: boolean) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }

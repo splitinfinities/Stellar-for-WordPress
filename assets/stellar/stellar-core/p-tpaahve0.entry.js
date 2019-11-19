@@ -1,0 +1,1 @@
+import{d as r}from"./p-1da3eb99.js";class s{constructor(s){r(this,s)}render(){return""}}export{s as web_audio_visualizer_shader};

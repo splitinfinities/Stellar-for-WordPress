@@ -15,7 +15,7 @@ function prepare_scripts() {
 		'app.js' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core.js',
 		'app.esm.js' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core/stellar-core.esm.js',
 		'app.nomodule.js' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core/stellar-core.js',
-		'app.css' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core.css',
+		'app.css' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core/stellar-core.css',
 	);
 
 	// Embed resources that we need
@@ -43,7 +43,7 @@ function add_id_to_script( $tag, $handle, $source ) {
  */
 function enqueue_load($assets) {
 
-	sendo()->esm = false;
+	sendo()->esm = true;
 
 	// Embed all resources
 	$css_files = sendo()->css;

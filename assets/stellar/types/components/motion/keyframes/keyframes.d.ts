@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Follow {
     element: HTMLElement;
     src: string;
@@ -7,5 +6,5 @@ export declare class Follow {
     frame: number;
     componentWillLoad(): void;
     update(): void;
-    render(): JSX.Element;
+    render(): any;
 }

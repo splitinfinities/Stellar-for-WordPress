@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import showdown from 'showdown';
 export class Markdown {
     constructor() {
@@ -68,38 +69,107 @@ export class Markdown {
         }
     }
     static get is() { return "stellar-markdown"; }
+    static get originalStyleUrls() { return {
+        "$": ["markdown.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["markdown.css"]
+    }; }
     static get properties() { return {
+        "src": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [{
+                        "text": "string",
+                        "name": "type"
+                    }, {
+                        "text": "Markdown",
+                        "name": "memberof"
+                    }],
+                "text": "Used to reference an external markdown file"
+            },
+            "attribute": "src",
+            "reflect": false
+        },
         "codeString": {
-            "type": String,
-            "attr": "code-string",
+            "type": "string",
             "mutable": true,
-            "watchCallbacks": ["onCodeStringChange"]
-        },
-        "converted": {
-            "state": true
-        },
-        "editable": {
-            "type": Boolean,
-            "attr": "editable"
-        },
-        "element": {
-            "elementRef": true
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [{
+                        "text": "{string}",
+                        "name": "type"
+                    }, {
+                        "text": "Markdown",
+                        "name": "memberof"
+                    }],
+                "text": "Used to set"
+            },
+            "attribute": "code-string",
+            "reflect": false
         },
         "flavor": {
-            "type": String,
-            "attr": "flavor"
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "\"github\"|\"original\"|\"vanilla\"",
+                "resolved": "\"github\" | \"original\" | \"vanilla\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "flavor",
+            "reflect": false,
+            "defaultValue": "\"vanilla\""
         },
-        "raw": {
-            "state": true
-        },
-        "showdown": {
-            "state": true
-        },
-        "src": {
-            "type": String,
-            "attr": "src",
-            "watchCallbacks": ["onSrcChange"]
+        "editable": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "editable",
+            "reflect": false,
+            "defaultValue": "false"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-markdown:**/"; }
+    static get states() { return {
+        "converted": {},
+        "raw": {},
+        "showdown": {}
+    }; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "codeString",
+            "methodName": "onCodeStringChange"
+        }, {
+            "propName": "src",
+            "methodName": "onSrcChange"
+        }]; }
 }

@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Select {
     element: HTMLElement;
@@ -29,11 +28,11 @@ export declare class Select {
     blur: number;
     observer: MutationObserver;
     clear_confirm: boolean;
-    values: Array<string>;
     change: EventEmitter;
-    componentWillLoad(): void;
+    componentWillLoad(): Promise<void>;
     componentDidLoad(): Promise<void>;
     clearValue(): Promise<void>;
+    update_values(): Promise<void>;
     handleOpenChange(): void;
     handleMultipleChange(value: any): Promise<void>;
     mountedHandler(event: CustomEvent): Promise<void>;
@@ -48,7 +47,6 @@ export declare class Select {
     readable_value(): string;
     validate(): Promise<FormResult>;
     listen_to_values(): void;
-    update_values(): Promise<void>;
     option_elements(): Promise<NodeListOf<HTMLStellarItemElement>>;
     options(): Promise<Array<string>>;
     focusPaths(): Promise<{
@@ -62,8 +60,8 @@ export declare class Select {
     focusPreviousOption(): Promise<void>;
     closeOthers(): void;
     handleTitleClick(): void;
-    renderLabel(): JSX.Element;
-    renderErrors(): JSX.Element;
-    renderEmptyButton(): JSX.Element;
-    render(): JSX.Element;
+    renderLabel(): any;
+    renderErrors(): any;
+    renderEmptyButton(): any;
+    render(): any;
 }

@@ -1,4 +1,4 @@
-export { colors } from '../global/colors';
+export { colors } from '../utils/colors';
 import properties from 'css-custom-properties';
 import isHexColor from 'validator/lib/isHexColor';
 import delay from 'async-delay';
@@ -90,9 +90,12 @@ export function titleCase(str) {
 export var shuffle = function (array) {
     var currentIndex = array.length;
     var temporaryValue, randomIndex;
+    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
+        // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
+        // And swap it with the current element.
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
@@ -152,7 +155,7 @@ function detectColorScheme() {
         return;
     }
     function listener({ matches, media }) {
-        if (!matches) {
+        if (!matches) { // Not matching anymore = not interesting
             return;
         }
         if (media === DARK) {
@@ -168,20 +171,30 @@ function detectColorScheme() {
     mqLight.addListener(listener);
 }
 window['detectColorScheme'] = detectColorScheme;
+/**
+ * Test for pseudo-class support
+ * @param  {String} pseudoClass The pseudo-class
+ * @return {Boolean}            Returns true if supported
+ */
 var supportsPseudo = function (pseudoClass) {
+    // Get the document stylesheet
     var ss = document.styleSheets[0];
+    // Create a stylesheet if one doesn't exist
     if (!ss) {
         var el = document.createElement('style');
         document.head.appendChild(el);
         ss = document.styleSheets[0];
         document.head.removeChild(el);
     }
+    // Test the pseudo-class by trying to style with it
     var testPseudo = function () {
         try {
             if (!(/^:/).test(pseudoClass)) {
                 pseudoClass = ':' + pseudoClass;
             }
+            // @ts-ignore
             ss.insertRule('html' + pseudoClass + '{}', 0);
+            // @ts-ignore
             ss.deleteRule(0);
             return true;
         }
@@ -189,6 +202,7 @@ var supportsPseudo = function (pseudoClass) {
             return false;
         }
     };
+    // Run the test
     return testPseudo();
 };
 if (document && document.styleSheets && !supportsPseudo(':host-context(.dark-mode)')) {

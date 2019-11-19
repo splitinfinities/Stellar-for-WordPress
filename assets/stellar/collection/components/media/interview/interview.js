@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import ezClipboard from 'ez-clipboard';
 import properties from 'css-custom-properties';
 import { get_interview_lines, update_interview_lines } from './helpers';
@@ -35,6 +36,9 @@ export class Interview {
     addIntersectionObserver() {
         if ('IntersectionObserver' in window) {
             this.io = new IntersectionObserver((data) => {
+                // because there will only ever be one instance
+                // of the element we are observing
+                // we can just use data[0]
                 if (data[0].isIntersecting) {
                     this.handleInScreen();
                 }
@@ -125,7 +129,7 @@ export class Interview {
     render() {
         return (h("div", { class: "card", onDblClick: () => { this.handleClick(); } },
             !this.visible && h("div", null,
-                h("skeleton-img", { width: 1050, height: 600, loading: true }),
+                h("skeleton-img", { width: this.width, height: this.height, loading: true }),
                 h("div", { style: { "display": "none" } },
                     h("slot", null))),
             this.visible && h("section", null,
@@ -134,7 +138,7 @@ export class Interview {
                     h("slot", { name: "transcript" })),
                 h("web-audio", { name: `interview-${this.randomId}` },
                     h("web-audio-source", { src: this.src, name: "interview" })),
-                h("web-audio-visualizer", { for: `interview-${this.randomId}`, type: this.visualization, width: 1024, height: 1024, color: this.color }),
+                h("web-audio-visualizer", { for: `interview-${this.randomId}`, type: this.visualization, width: this.width, height: this.height, color: this.color }),
                 h("button", { class: this.loading ? "loading button" : (this.playing ? "playing button" : "button"), onClick: () => { this.handleClick(); } },
                     h("stellar-asset", { name: this.loading ? "sync" : (this.playing ? "pause" : "play"), class: this.loading ? "animation-spin" : "" })),
                 h("h3", null,
@@ -144,92 +148,227 @@ export class Interview {
                 h("stellar-progress", { value: this.current, max: this.duration, noease: true, blurable: false, slender: true, editable: true, onChange: (e) => { this.skipTo(e.detail.value); } }))));
     }
     static get is() { return "stellar-interview"; }
+    static get originalStyleUrls() { return {
+        "$": ["interview.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["interview.css"]
+    }; }
     static get properties() { return {
-        "aspectRatio": {
-            "type": Number,
-            "attr": "aspect-ratio",
-            "mutable": true
-        },
-        "audio": {
-            "state": true
-        },
-        "audio_source": {
-            "state": true
+        "src": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "src",
+            "reflect": false
         },
         "color": {
-            "type": String,
-            "attr": "color"
-        },
-        "current": {
-            "state": true
-        },
-        "duration": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "height": {
-            "type": Number,
-            "attr": "height",
-            "mutable": true
-        },
-        "interviewLines": {
-            "state": true
-        },
-        "io": {
-            "state": true
-        },
-        "loaded": {
-            "state": true
-        },
-        "loading": {
-            "state": true
-        },
-        "pause": {
-            "method": true
-        },
-        "play": {
-            "method": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "color",
+            "reflect": false,
+            "defaultValue": "\"white\""
         },
         "playing": {
-            "type": Boolean,
-            "attr": "playing",
-            "mutable": true
-        },
-        "randomId": {
-            "state": true
-        },
-        "skipTo": {
-            "method": true
-        },
-        "src": {
-            "type": String,
-            "attr": "src"
-        },
-        "toggle": {
-            "method": true
-        },
-        "updateFunc": {
-            "state": true
-        },
-        "visible": {
-            "state": true
-        },
-        "visualization": {
-            "type": String,
-            "attr": "visualization",
-            "mutable": true
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "playing",
+            "reflect": false,
+            "defaultValue": "false"
         },
         "width": {
-            "type": Number,
-            "attr": "width",
-            "mutable": true
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "width",
+            "reflect": false,
+            "defaultValue": "800"
+        },
+        "height": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "height",
+            "reflect": false,
+            "defaultValue": "800"
+        },
+        "aspectRatio": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "aspect-ratio",
+            "reflect": false,
+            "defaultValue": "100"
+        },
+        "visualization": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "\"circle\"|\"bars\"|\"wave\"|\"bars2\"",
+                "resolved": "\"bars\" | \"bars2\" | \"circle\" | \"wave\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "visualization",
+            "reflect": false,
+            "defaultValue": "\"bars2\""
         }
     }; }
+    static get states() { return {
+        "randomId": {},
+        "audio": {},
+        "audio_source": {},
+        "io": {},
+        "loaded": {},
+        "loading": {},
+        "visible": {},
+        "updateFunc": {},
+        "duration": {},
+        "current": {},
+        "interviewLines": {}
+    }; }
+    static get methods() { return {
+        "play": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "skipTo": {
+            "complexType": {
+                "signature": "(time: number) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "pause": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "toggle": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
     static get listeners() { return [{
             "name": "timeupdate",
-            "method": "handleTimeUpdate"
+            "method": "handleTimeUpdate",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }]; }
-    static get style() { return "/**style-placeholder:stellar-interview:**/"; }
 }

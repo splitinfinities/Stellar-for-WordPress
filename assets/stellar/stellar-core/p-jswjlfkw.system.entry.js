@@ -1,0 +1,1 @@
+System.register(["./p-6f2a0351.system.js"],function(t,e){"use strict";var r;return{setters:[function(t){r=t.d}],execute:function(){var e=function(){function t(t){r(this,t)}t.prototype.render=function(){return""};return t}();t("web_audio_visualizer_shader",e)}}});

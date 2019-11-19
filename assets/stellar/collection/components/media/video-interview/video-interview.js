@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import ezClipboard from 'ez-clipboard';
 import properties from 'css-custom-properties';
 import { get_interview_lines, update_interview_lines } from '../interview/helpers';
@@ -37,6 +38,9 @@ export class VideoInterview {
     addIntersectionObserver() {
         if ('IntersectionObserver' in window) {
             this.io = new IntersectionObserver((data) => {
+                // because there will only ever be one instance
+                // of the element we are observing
+                // we can just use data[0]
                 if (data[0].isIntersecting) {
                     this.handleInScreen();
                 }
@@ -71,7 +75,8 @@ export class VideoInterview {
     }
     async attachContext() {
         if (!this.context) {
-            this.context = new AudioContext();
+            // @ts-ignore
+            this.context = new (window.AudioContext || window.webkitAudioContext)();
             const src = this.context.createMediaElementSource(this.video.video_tag);
             if (!this.visualizer) {
                 this.visualizer = this.element.shadowRoot.querySelector('web-audio-visualizer');
@@ -116,10 +121,9 @@ export class VideoInterview {
     }
     render() {
         return (h("div", { class: "card", onDblClick: () => { this.handleClick(); } },
-            !this.visible && h("div", null,
-                h("skeleton-img", { width: 1050, height: 600, loading: true })),
+            h("skeleton-img", { width: this.width, height: this.height, loading: true }),
             this.visible && h("section", null,
-                h("stellar-video", { controls: false, autoplay: true, playsinline: true, trackInView: false, onTimeupdate: (e) => { this.handleTimeUpdate(e); } },
+                h("stellar-video", { controls: false, playsinline: true, trackInView: false, onTimeupdate: (e) => { this.handleTimeUpdate(e); } },
                     h("source", { src: this.src })),
                 h("div", { class: "transcript" },
                     h("slot", { name: "transcript" })),
@@ -134,94 +138,221 @@ export class VideoInterview {
     }
     static get is() { return "stellar-video-interview"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["video-interview.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["video-interview.css"]
+    }; }
     static get properties() { return {
-        "aspectRatio": {
-            "type": Number,
-            "attr": "aspect-ratio",
-            "mutable": true
+        "src": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "src",
+            "reflect": false
         },
         "color": {
-            "type": String,
-            "attr": "color"
-        },
-        "context": {
-            "state": true
-        },
-        "current": {
-            "state": true
-        },
-        "duration": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "height": {
-            "type": Number,
-            "attr": "height",
-            "mutable": true
-        },
-        "interviewLines": {
-            "state": true
-        },
-        "io": {
-            "state": true
-        },
-        "loaded": {
-            "state": true
-        },
-        "loading": {
-            "state": true
-        },
-        "pause": {
-            "method": true
-        },
-        "play": {
-            "method": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "color",
+            "reflect": false,
+            "defaultValue": "\"white\""
         },
         "playing": {
-            "type": Boolean,
-            "attr": "playing",
-            "mutable": true
-        },
-        "randomId": {
-            "state": true
-        },
-        "seekable": {
-            "state": true
-        },
-        "skipTo": {
-            "method": true
-        },
-        "src": {
-            "type": String,
-            "attr": "src"
-        },
-        "toggle": {
-            "method": true
-        },
-        "updateFunc": {
-            "state": true
-        },
-        "video": {
-            "state": true
-        },
-        "visible": {
-            "state": true
-        },
-        "visualization": {
-            "type": String,
-            "attr": "visualization",
-            "mutable": true
-        },
-        "visualizer": {
-            "state": true
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "playing",
+            "reflect": false
         },
         "width": {
-            "type": Number,
-            "attr": "width",
-            "mutable": true
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "width",
+            "reflect": false,
+            "defaultValue": "800"
+        },
+        "height": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "height",
+            "reflect": false,
+            "defaultValue": "800"
+        },
+        "aspectRatio": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "aspect-ratio",
+            "reflect": false,
+            "defaultValue": "100"
+        },
+        "visualization": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "\"circle\"|\"bars\"|\"wave\"|\"bars2\"",
+                "resolved": "\"bars\" | \"bars2\" | \"circle\" | \"wave\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "visualization",
+            "reflect": false,
+            "defaultValue": "\"bars2\""
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-video-interview:**/"; }
+    static get states() { return {
+        "randomId": {},
+        "video": {},
+        "io": {},
+        "loaded": {},
+        "loading": {},
+        "seekable": {},
+        "updateFunc": {},
+        "duration": {},
+        "current": {},
+        "interviewLines": {},
+        "visible": {},
+        "context": {},
+        "visualizer": {}
+    }; }
+    static get methods() { return {
+        "play": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "skipTo": {
+            "complexType": {
+                "signature": "(time: number) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "pause": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "toggle": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }

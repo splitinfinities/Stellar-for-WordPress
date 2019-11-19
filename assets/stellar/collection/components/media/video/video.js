@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import properties from 'css-custom-properties';
 export class Video {
     constructor() {
@@ -65,6 +66,9 @@ export class Video {
     addIntersectionObserver() {
         if ('IntersectionObserver' in window) {
             this.io = new IntersectionObserver((data) => {
+                // because there will only ever be one instance
+                // of the element we are observing
+                // we can just use data[0]
                 if (data[0].isIntersecting) {
                     this.handleInScreen();
                 }
@@ -78,13 +82,16 @@ export class Video {
             this.io.observe(this.element.querySelector('video'));
         }
         else {
+            // fall back to setTimeout for Safari and IE
             setTimeout(() => {
                 this.handleInScreen();
             }, 300);
         }
     }
     handleInScreen() {
-        this.video_tag.play();
+        if (this.autoplay) {
+            this.video_tag.play();
+        }
     }
     handleOffScreen() {
         this.video_tag.currentTime = 0;
@@ -121,126 +128,400 @@ export class Video {
             h("slot", null)));
     }
     static get is() { return "stellar-video"; }
+    static get originalStyleUrls() { return {
+        "$": ["video.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["video.css"]
+    }; }
     static get properties() { return {
-        "autoplay": {
-            "type": Boolean,
-            "attr": "autoplay"
-        },
-        "controls": {
-            "type": Boolean,
-            "attr": "controls"
-        },
-        "currentTime": {
-            "state": true
-        },
-        "duration": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "getDuration": {
-            "method": true
+        "width": {
+            "type": "number",
+            "mutable": true,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "width",
+            "reflect": true
         },
         "height": {
-            "type": Number,
-            "attr": "height",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "interval": {
-            "state": true
-        },
-        "io": {
-            "state": true
-        },
-        "muted": {
-            "type": Boolean,
-            "attr": "muted"
-        },
-        "overlay": {
-            "type": Boolean,
-            "attr": "overlay"
-        },
-        "pause": {
-            "method": true
-        },
-        "pausedTime": {
-            "state": true
-        },
-        "play": {
-            "method": true
-        },
-        "playing": {
-            "type": Boolean,
-            "attr": "playing",
+            "type": "number",
             "mutable": true,
-            "watchCallbacks": ["startInterval"]
-        },
-        "playsinline": {
-            "type": Boolean,
-            "attr": "playsinline"
-        },
-        "poster": {
-            "type": String,
-            "attr": "poster"
-        },
-        "preload": {
-            "type": String,
-            "attr": "preload"
-        },
-        "skipTo": {
-            "method": true
-        },
-        "startTime": {
-            "state": true
-        },
-        "stop": {
-            "method": true
-        },
-        "toggle": {
-            "method": true
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "height",
+            "reflect": true
         },
         "trackInView": {
-            "type": Boolean,
-            "attr": "track-in-view"
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "track-in-view",
+            "reflect": false,
+            "defaultValue": "true"
+        },
+        "preload": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "preload",
+            "reflect": false,
+            "defaultValue": "\"auto\""
+        },
+        "autoplay": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "autoplay",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "muted": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "muted",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "playsinline": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "playsinline",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "poster": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "poster",
+            "reflect": false
+        },
+        "controls": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "controls",
+            "reflect": false,
+            "defaultValue": "true"
+        },
+        "overlay": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "overlay",
+            "reflect": false
         },
         "video_tag": {
-            "type": "Any",
-            "attr": "video_tag",
-            "mutable": true
+            "type": "unknown",
+            "mutable": true,
+            "complexType": {
+                "original": "HTMLVideoElement",
+                "resolved": "HTMLVideoElement",
+                "references": {
+                    "HTMLVideoElement": {
+                        "location": "global"
+                    }
+                }
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            }
         },
-        "width": {
-            "type": Number,
-            "attr": "width",
-            "reflectToAttr": true,
-            "mutable": true
+        "playing": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "playing",
+            "reflect": false,
+            "defaultValue": "false"
         }
     }; }
+    static get states() { return {
+        "duration": {},
+        "startTime": {},
+        "pausedTime": {},
+        "currentTime": {},
+        "io": {},
+        "interval": {}
+    }; }
     static get events() { return [{
-            "name": "timeupdate",
             "method": "timeupdate",
+            "name": "timeupdate",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "played",
             "method": "played",
+            "name": "played",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "paused",
             "method": "paused",
+            "name": "paused",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "loaded",
             "method": "loaded",
+            "name": "loaded",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
-    static get style() { return "/**style-placeholder:stellar-video:**/"; }
+    static get methods() { return {
+        "getDuration": {
+            "complexType": {
+                "signature": "() => Promise<number>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<number>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "play": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "pause": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "toggle": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "stop": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "skipTo": {
+            "complexType": {
+                "signature": "(time: any) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "playing",
+            "methodName": "startInterval"
+        }]; }
 }

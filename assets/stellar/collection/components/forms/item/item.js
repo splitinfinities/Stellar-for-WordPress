@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import { injectHistory } from '@stencil/router';
 export class Item {
     constructor() {
@@ -24,6 +25,9 @@ export class Item {
             }
         }, 10);
     }
+    componentDidUnload() {
+        this.selectionChanged.emit(this);
+    }
     async data() {
         return {
             size: this.size,
@@ -44,6 +48,7 @@ export class Item {
     }
     async setFocus() {
         this.focused = true;
+        // @ts-ignore
         this.element.querySelector('.button').focus();
     }
     handleClick(e) {
@@ -78,12 +83,12 @@ export class Item {
             if (state) {
                 if (this.selected !== state.selected) {
                     var event = new CustomEvent('click');
-                    this.element.querySelector('.button').dispatchEvent(event);
+                    this.element.shadowRoot.querySelector('.button').dispatchEvent(event);
                 }
             }
             else {
                 var event = new CustomEvent('click');
-                this.element.querySelector('.button').dispatchEvent(event);
+                this.element.shadowRoot.querySelector('.button').dispatchEvent(event);
             }
         }
     }
@@ -94,150 +99,458 @@ export class Item {
     }
     static get is() { return "stellar-item"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["item.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["item.css"]
+    }; }
     static get properties() { return {
-        "apply": {
-            "method": true
-        },
-        "current": {
-            "state": true
-        },
-        "danger": {
-            "type": Boolean,
-            "attr": "danger",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "data": {
-            "method": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "fit": {
-            "type": Boolean,
-            "attr": "fit",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "focused": {
-            "type": Boolean,
-            "attr": "focused",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "history": {
-            "type": "Any",
-            "attr": "history"
-        },
-        "href": {
-            "type": String,
-            "attr": "href",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "label": {
-            "type": String,
-            "attr": "label",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "location": {
-            "type": "Any",
-            "attr": "location"
-        },
-        "multiple": {
-            "type": Boolean,
-            "attr": "multiple",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "route": {
-            "type": Boolean,
-            "attr": "route"
-        },
-        "select_item": {
-            "method": true
-        },
-        "selectable": {
-            "type": Boolean,
-            "attr": "selectable",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "selected": {
-            "type": Boolean,
-            "attr": "selected",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "setFocus": {
-            "method": true
-        },
-        "simple": {
-            "type": Boolean,
-            "attr": "simple",
-            "reflectToAttr": true,
-            "mutable": true
-        },
         "size": {
-            "type": String,
-            "attr": "size",
-            "mutable": true
-        },
-        "slotted": {
-            "state": true
-        },
-        "type": {
-            "type": String,
-            "attr": "type",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "size",
+            "reflect": false
         },
         "value": {
-            "type": String,
-            "attr": "value",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "value",
+            "reflect": true
         },
         "valueLabel": {
-            "type": String,
-            "attr": "value-label",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "value-label",
+            "reflect": true
+        },
+        "type": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "\"a\"|\"button\"|\"stencil-route-link\"",
+                "resolved": "\"a\" | \"button\" | \"stencil-route-link\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "type",
+            "reflect": true,
+            "defaultValue": "\"button\""
+        },
+        "label": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "label",
+            "reflect": true
+        },
+        "href": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "href",
+            "reflect": true,
+            "defaultValue": "\"#\""
         },
         "wrap": {
-            "type": Boolean,
-            "attr": "wrap",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "wrap",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "fit": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "fit",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "simple": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "simple",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "danger": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "danger",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "selected": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "selected",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "multiple": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "multiple",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "selectable": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "selectable",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "focused": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "focused",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "route": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "route",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "history": {
+            "type": "unknown",
+            "mutable": false,
+            "complexType": {
+                "original": "RouterHistory",
+                "resolved": "RouterHistory",
+                "references": {
+                    "RouterHistory": {
+                        "location": "import",
+                        "path": "@stencil/router"
+                    }
+                }
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            }
+        },
+        "location": {
+            "type": "unknown",
+            "mutable": false,
+            "complexType": {
+                "original": "LocationSegments",
+                "resolved": "LocationSegments",
+                "references": {
+                    "LocationSegments": {
+                        "location": "import",
+                        "path": "@stencil/router"
+                    }
+                }
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            }
         }
     }; }
+    static get states() { return {
+        "current": {},
+        "slotted": {}
+    }; }
     static get events() { return [{
-            "name": "selectionChanged",
             "method": "selectionChanged",
+            "name": "selectionChanged",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "mounted",
             "method": "mounted",
+            "name": "mounted",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "focusChanged",
             "method": "focusChanged",
+            "name": "focusChanged",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "blurChanged",
             "method": "blurChanged",
+            "name": "blurChanged",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
-    static get style() { return "/**style-placeholder:stellar-item:**/"; }
+    static get methods() { return {
+        "data": {
+            "complexType": {
+                "signature": "() => Promise<{ size: string; value: string; type: \"button\" | \"a\" | \"stencil-route-link\"; label: string; danger: boolean; slotted: any; }>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<{ size: string; value: string; type: \"button\" | \"a\" | \"stencil-route-link\"; label: string; danger: boolean; slotted: any; }>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "apply": {
+            "complexType": {
+                "signature": "(data: any) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "setFocus": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "select_item": {
+            "complexType": {
+                "signature": "(state?: { selected: boolean; }) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
 }
 if (injectHistory) {
     injectHistory(Item);

@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Accordion {
     element: HTMLElement;
     open: boolean;
@@ -19,5 +18,5 @@ export declare class Accordion {
     openClass(): "" | "open";
     updateTabIndex(): void;
     handleClick(): void;
-    render(): JSX.Element;
+    render(): any;
 }

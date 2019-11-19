@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Steps {
     element: HTMLElement;
     name: string;
@@ -7,5 +6,5 @@ export declare class Steps {
     steps(): Promise<HTMLStellarStepElement[]>;
     contents(): Promise<HTMLStellarContentElement[]>;
     componentWillLoad(): Promise<void>;
-    render(): JSX.Element;
+    render(): any;
 }

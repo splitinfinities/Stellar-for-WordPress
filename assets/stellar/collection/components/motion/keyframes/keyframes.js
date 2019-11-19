@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import { properties } from '../../../utils';
 export class Follow {
     constructor() {
@@ -21,28 +22,88 @@ export class Follow {
     }
     static get is() { return "stellar-keyframes"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["keyframes.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["keyframes.css"]
+    }; }
     static get properties() { return {
-        "element": {
-            "elementRef": true
-        },
-        "frame": {
-            "type": Number,
-            "attr": "frame",
-            "reflectToAttr": true,
-            "watchCallbacks": ["update"]
-        },
-        "height": {
-            "type": Number,
-            "attr": "height"
-        },
         "src": {
-            "type": String,
-            "attr": "src"
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "src",
+            "reflect": false
         },
         "width": {
-            "type": Number,
-            "attr": "width"
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "width",
+            "reflect": false,
+            "defaultValue": "400"
+        },
+        "height": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "height",
+            "reflect": false,
+            "defaultValue": "400"
+        },
+        "frame": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "frame",
+            "reflect": true,
+            "defaultValue": "1"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-keyframes:**/"; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "frame",
+            "methodName": "update"
+        }]; }
 }

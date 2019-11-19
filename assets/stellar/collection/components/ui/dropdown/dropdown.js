@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 import { blurringEase, focusWithin } from '../../../utils';
 focusWithin(document);
 export class Dropdown {
@@ -43,40 +44,94 @@ export class Dropdown {
     }
     static get is() { return "stellar-dropdown"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["dropdown.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["dropdown.css"]
+    }; }
     static get properties() { return {
-        "blur": {
-            "state": true
-        },
-        "ease": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
+        "position": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "\"left\"|\"center\"|\"right\"",
+                "resolved": "\"center\" | \"left\" | \"right\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "position",
+            "reflect": true,
+            "defaultValue": "\"center\""
         },
         "icon": {
-            "type": Boolean,
-            "attr": "icon"
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "icon",
+            "reflect": false,
+            "defaultValue": "false"
         },
         "label": {
-            "type": String,
-            "attr": "label"
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "label",
+            "reflect": false,
+            "defaultValue": "\"Dropdown\""
         },
         "open": {
-            "type": Boolean,
-            "attr": "open",
-            "reflectToAttr": true,
+            "type": "boolean",
             "mutable": true,
-            "watchCallbacks": ["observeOpen"]
-        },
-        "position": {
-            "type": String,
-            "attr": "position",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "timeout": {
-            "state": true
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "open",
+            "reflect": true,
+            "defaultValue": "false"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-dropdown:**/"; }
+    static get states() { return {
+        "ease": {},
+        "blur": {},
+        "timeout": {}
+    }; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "open",
+            "methodName": "observeOpen"
+        }]; }
 }

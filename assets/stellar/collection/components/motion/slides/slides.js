@@ -1,3 +1,4 @@
+import { h, Host } from '@stencil/core';
 import { Swiper } from './vendor/swiper.js';
 import { blurringEase } from '../../../utils';
 export class Slides {
@@ -33,6 +34,9 @@ export class Slides {
             });
             return ease;
         };
+        /**
+         * Show or hide the pager
+         */
         this.pager = true;
     }
     updateSwiperOptions() {
@@ -49,6 +53,7 @@ export class Slides {
     initSlides() {
         this.container = this.el.children[0];
         const finalOptions = this.normalizeOptions();
+        // init swiper core
         this.swiper = new Swiper(this.container, finalOptions);
         this.el.onmouseenter = () => {
             this.swiper.keyboard.enable();
@@ -63,56 +68,95 @@ export class Slides {
             this.swiper.keyboard.disable();
         };
     }
-    hostData() {
-        return {
-            "tabIndex": 0
-        };
-    }
+    /**
+     * Update the underlying slider implementation. Call this if you've added or removed
+     * child slides.
+     */
     async update() {
         this.swiper.update();
     }
+    /**
+     * Transition to the specified slide.
+     */
     async slideTo(index, speed, runCallbacks) {
         this.swiper.slideTo(index, speed, runCallbacks);
     }
+    /**
+     * Transition to the next slide.
+     */
     async slideNext(speed, runCallbacks) {
         this.swiper.slideNext(runCallbacks, speed);
     }
+    /**
+     * Transition to the previous slide.
+     */
     async slidePrev(speed, runCallbacks) {
         this.swiper.slidePrev(runCallbacks, speed);
     }
+    /**
+     * Get the index of the active slide.
+     */
     async getActiveIndex() {
         return this.swiper.activeIndex;
     }
+    /**
+     * Get the index of the previous slide.
+     */
     async getPreviousIndex() {
         return this.swiper.previousIndex;
     }
+    /**
+     * Get the total number of slides.
+     */
     async length() {
         return this.swiper.slides.length;
     }
+    /**
+     * Get whether or not the current slide is the last slide.
+     *
+     */
     async isEnd() {
         return this.swiper.isEnd;
     }
+    /**
+     * Get whether or not the current slide is the first slide.
+     */
     async isBeginning() {
         return this.swiper.isBeginning;
     }
+    /**
+     * Start auto play.
+     */
     async startAutoplay() {
         this.swiper.autoplay.start();
     }
+    /**
+     * Stop auto play.
+     */
     async stopAutoplay() {
         this.swiper.autoplay.stop();
     }
+    /**
+     * Lock or unlock the ability to slide to the next slides.
+     */
     async lockSwipeToNext(shouldLockSwipeToNext) {
         if (shouldLockSwipeToNext) {
             return this.swiper.lockSwipeToNext();
         }
         this.swiper.unlockSwipeToNext();
     }
+    /**
+     * Lock or unlock the ability to slide to the previous slides.
+     */
     async lockSwipeToPrev(shouldLockSwipeToPrev) {
         if (shouldLockSwipeToPrev) {
             return this.swiper.lockSwipeToPrev();
         }
         this.swiper.unlockSwipeToPrev();
     }
+    /**
+     * Lock or unlock the ability to slide to change slides.
+     */
     async lockSwipes(shouldLockSwipes) {
         if (shouldLockSwipes) {
             return this.swiper.lockSwipes();
@@ -130,10 +174,12 @@ export class Slides {
             this.slides = Array.from(this.el.querySelectorAll('stellar-slide'));
         }
         this.blur = -1;
+        // @ts-ignore
         const resize = new Event('resize');
         window.dispatchEvent(resize);
     }
     normalizeOptions() {
+        // Base options, can be changed
         const swiperOptions = {
             effect: this.effect,
             direction: this.direction,
@@ -228,6 +274,8 @@ export class Slides {
             lastSlideMessage: 'This is the last slide',
             grabCursor: true
         };
+        // Keep the event options separate, we dont want users
+        // overwriting these
         const eventOptions = {
             on: {
                 slideChangeStart: () => {
@@ -276,221 +324,773 @@ export class Slides {
                 }
             }
         };
+        // Merge the base, user options, and events together then pass to swiper
         return Object.assign({}, swiperOptions, this.options, eventOptions);
     }
     render() {
-        return (h("stellar-blur", { class: "swiper-container", horizontal: this.blur },
-            h("div", { class: "swiper-wrapper" },
-                h("slot", null)),
-            h("div", { class: {
-                    'swiper-pagination': true,
-                    hide: !this.pager
-                } })));
+        return h(Host, { tabIndex: 0 },
+            h("stellar-blur", { class: "swiper-container", horizontal: this.blur },
+                h("div", { class: "swiper-wrapper" },
+                    h("slot", null)),
+                h("div", { class: {
+                        'swiper-pagination': true,
+                        hide: !this.pager
+                    } })));
     }
     static get is() { return "stellar-slides"; }
+    static get originalStyleUrls() { return {
+        "$": ["slides.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["slides.css"]
+    }; }
+    static get assetsDirs() { return ["vendor"]; }
     static get properties() { return {
-        "autoHeight": {
-            "type": Boolean,
-            "attr": "auto-height",
-            "watchCallbacks": ["updateSwiperOptions"]
-        },
-        "blur": {
-            "state": true
-        },
-        "centeredSlides": {
-            "type": Boolean,
-            "attr": "centered-slides",
-            "watchCallbacks": ["updateSwiperOptions"]
-        },
-        "direction": {
-            "type": String,
-            "attr": "direction",
-            "watchCallbacks": ["updateSwiperOptions"]
-        },
-        "ease": {
-            "state": true
+        "options": {
+            "type": "any",
+            "mutable": false,
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": "Options to pass to the swiper instance.\nSee http://idangero.us/swiper/api/ for valid options"
+            },
+            "attribute": "options",
+            "reflect": false
         },
         "effect": {
-            "type": String,
-            "attr": "effect",
-            "reflectToAttr": true,
-            "watchCallbacks": ["updateSwiperOptions"]
-        },
-        "el": {
-            "elementRef": true
-        },
-        "getActiveIndex": {
-            "method": true
-        },
-        "getPreviousIndex": {
-            "method": true
-        },
-        "isBeginning": {
-            "method": true
-        },
-        "isEnd": {
-            "method": true
-        },
-        "length": {
-            "method": true
-        },
-        "lockSwipes": {
-            "method": true
-        },
-        "lockSwipeToNext": {
-            "method": true
-        },
-        "lockSwipeToPrev": {
-            "method": true
-        },
-        "loop": {
-            "type": Boolean,
-            "attr": "loop",
-            "watchCallbacks": ["updateSwiperOptions"]
-        },
-        "nested": {
-            "type": Boolean,
-            "attr": "nested",
-            "watchCallbacks": ["updateSwiperOptions"]
-        },
-        "options": {
-            "type": "Any",
-            "attr": "options",
-            "watchCallbacks": ["updateSwiperOptions"]
-        },
-        "pager": {
-            "type": Boolean,
-            "attr": "pager"
-        },
-        "pagination": {
-            "type": Boolean,
-            "attr": "pagination",
-            "watchCallbacks": ["updateSwiperOptions"]
-        },
-        "slideNext": {
-            "method": true
-        },
-        "slidePrev": {
-            "method": true
-        },
-        "slides": {
-            "state": true
-        },
-        "slidesPerView": {
-            "type": Number,
-            "attr": "slides-per-view",
-            "watchCallbacks": ["updateSwiperOptions"]
-        },
-        "slideTo": {
-            "method": true
-        },
-        "spaceBetween": {
-            "type": Number,
-            "attr": "space-between"
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "\"slide\"|\"fade\"|\"cube\"|\"coverflow\"|\"flip\"",
+                "resolved": "\"coverflow\" | \"cube\" | \"fade\" | \"flip\" | \"slide\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "effect",
+            "reflect": true,
+            "defaultValue": "\"slide\""
         },
         "speed": {
-            "type": Number,
-            "attr": "speed",
-            "watchCallbacks": ["updateSwiperOptions"]
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "speed",
+            "reflect": false,
+            "defaultValue": "300"
         },
-        "startAutoplay": {
-            "method": true
+        "direction": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "\"horizontal\"|\"vertical\"",
+                "resolved": "\"horizontal\" | \"vertical\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "direction",
+            "reflect": false,
+            "defaultValue": "\"horizontal\""
         },
-        "stopAutoplay": {
-            "method": true
+        "autoHeight": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "auto-height",
+            "reflect": false,
+            "defaultValue": "false"
         },
-        "update": {
-            "method": true
+        "nested": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "nested",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "pagination": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "pagination",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "loop": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "loop",
+            "reflect": false,
+            "defaultValue": "false"
         },
         "watchSlidesProgress": {
-            "type": Boolean,
-            "attr": "watch-slides-progress",
-            "watchCallbacks": ["updateSwiperOptions"]
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "watch-slides-progress",
+            "reflect": false,
+            "defaultValue": "false"
         },
         "watchSlidesVisibility": {
-            "type": Boolean,
-            "attr": "watch-slides-visibility",
-            "watchCallbacks": ["updateSwiperOptions"]
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "watch-slides-visibility",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "slidesPerView": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "slides-per-view",
+            "reflect": false,
+            "defaultValue": "3"
+        },
+        "centeredSlides": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "centered-slides",
+            "reflect": false,
+            "defaultValue": "true"
+        },
+        "spaceBetween": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "space-between",
+            "reflect": false,
+            "defaultValue": "20"
+        },
+        "pager": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": "Show or hide the pager"
+            },
+            "attribute": "pager",
+            "reflect": false,
+            "defaultValue": "true"
         }
     }; }
+    static get states() { return {
+        "blur": {},
+        "ease": {},
+        "slides": {}
+    }; }
     static get events() { return [{
-            "name": "ionSlideWillChange",
             "method": "ionSlideWillChange",
+            "name": "ionSlideWillChange",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted before the active slide has changed."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlideDidChange",
             "method": "ionSlideDidChange",
+            "name": "ionSlideDidChange",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted after the active slide has changed."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlideNextStart",
             "method": "ionSlideNextStart",
+            "name": "ionSlideNextStart",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted when the next slide has started."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlidePrevStart",
             "method": "ionSlidePrevStart",
+            "name": "ionSlidePrevStart",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted when the previous slide has started."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlideNextEnd",
             "method": "ionSlideNextEnd",
+            "name": "ionSlideNextEnd",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted when the next slide has ended."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlidePrevEnd",
             "method": "ionSlidePrevEnd",
+            "name": "ionSlidePrevEnd",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted when the previous slide has ended."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlideTransitionStart",
             "method": "ionSlideTransitionStart",
+            "name": "ionSlideTransitionStart",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted when the slide transition has started."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlideTransitionEnd",
             "method": "ionSlideTransitionEnd",
+            "name": "ionSlideTransitionEnd",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted when the slide transition has ended."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlideDrag",
             "method": "ionSlideDrag",
+            "name": "ionSlideDrag",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted when the slider is actively being moved."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlideReachStart",
             "method": "ionSlideReachStart",
+            "name": "ionSlideReachStart",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted when the slider is at its initial position."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlideReachEnd",
             "method": "ionSlideReachEnd",
+            "name": "ionSlideReachEnd",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted when the slider is at the last slide."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlideTouchStart",
             "method": "ionSlideTouchStart",
+            "name": "ionSlideTouchStart",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted when the user first touches the slider."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }, {
-            "name": "ionSlideTouchEnd",
             "method": "ionSlideTouchEnd",
+            "name": "ionSlideTouchEnd",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": "Emitted when the user releases the touch."
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
         }]; }
-    static get style() { return "/**style-placeholder:stellar-slides:**/"; }
+    static get methods() { return {
+        "update": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "Update the underlying slider implementation. Call this if you've added or removed\nchild slides.",
+                "tags": []
+            }
+        },
+        "slideTo": {
+            "complexType": {
+                "signature": "(index: number, speed?: number, runCallbacks?: boolean) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }, {
+                        "tags": [],
+                        "text": ""
+                    }, {
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "Transition to the specified slide.",
+                "tags": []
+            }
+        },
+        "slideNext": {
+            "complexType": {
+                "signature": "(speed?: number, runCallbacks?: boolean) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }, {
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "Transition to the next slide.",
+                "tags": []
+            }
+        },
+        "slidePrev": {
+            "complexType": {
+                "signature": "(speed?: number, runCallbacks?: boolean) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }, {
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "Transition to the previous slide.",
+                "tags": []
+            }
+        },
+        "getActiveIndex": {
+            "complexType": {
+                "signature": "() => Promise<number>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<number>"
+            },
+            "docs": {
+                "text": "Get the index of the active slide.",
+                "tags": []
+            }
+        },
+        "getPreviousIndex": {
+            "complexType": {
+                "signature": "() => Promise<number>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<number>"
+            },
+            "docs": {
+                "text": "Get the index of the previous slide.",
+                "tags": []
+            }
+        },
+        "length": {
+            "complexType": {
+                "signature": "() => Promise<number>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<number>"
+            },
+            "docs": {
+                "text": "Get the total number of slides.",
+                "tags": []
+            }
+        },
+        "isEnd": {
+            "complexType": {
+                "signature": "() => Promise<boolean>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<boolean>"
+            },
+            "docs": {
+                "text": "Get whether or not the current slide is the last slide.",
+                "tags": []
+            }
+        },
+        "isBeginning": {
+            "complexType": {
+                "signature": "() => Promise<boolean>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<boolean>"
+            },
+            "docs": {
+                "text": "Get whether or not the current slide is the first slide.",
+                "tags": []
+            }
+        },
+        "startAutoplay": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "Start auto play.",
+                "tags": []
+            }
+        },
+        "stopAutoplay": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "Stop auto play.",
+                "tags": []
+            }
+        },
+        "lockSwipeToNext": {
+            "complexType": {
+                "signature": "(shouldLockSwipeToNext: boolean) => Promise<any>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<any>"
+            },
+            "docs": {
+                "text": "Lock or unlock the ability to slide to the next slides.",
+                "tags": []
+            }
+        },
+        "lockSwipeToPrev": {
+            "complexType": {
+                "signature": "(shouldLockSwipeToPrev: boolean) => Promise<any>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<any>"
+            },
+            "docs": {
+                "text": "Lock or unlock the ability to slide to the previous slides.",
+                "tags": []
+            }
+        },
+        "lockSwipes": {
+            "complexType": {
+                "signature": "(shouldLockSwipes: boolean) => Promise<any>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<any>"
+            },
+            "docs": {
+                "text": "Lock or unlock the ability to slide to change slides.",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "el"; }
+    static get watchers() { return [{
+            "propName": "options",
+            "methodName": "updateSwiperOptions"
+        }, {
+            "propName": "effect",
+            "methodName": "updateSwiperOptions"
+        }, {
+            "propName": "speed",
+            "methodName": "updateSwiperOptions"
+        }, {
+            "propName": "direction",
+            "methodName": "updateSwiperOptions"
+        }, {
+            "propName": "autoHeight",
+            "methodName": "updateSwiperOptions"
+        }, {
+            "propName": "pagination",
+            "methodName": "updateSwiperOptions"
+        }, {
+            "propName": "nested",
+            "methodName": "updateSwiperOptions"
+        }, {
+            "propName": "loop",
+            "methodName": "updateSwiperOptions"
+        }, {
+            "propName": "watchSlidesProgress",
+            "methodName": "updateSwiperOptions"
+        }, {
+            "propName": "watchSlidesVisibility",
+            "methodName": "updateSwiperOptions"
+        }, {
+            "propName": "slidesPerView",
+            "methodName": "updateSwiperOptions"
+        }, {
+            "propName": "centeredSlides",
+            "methodName": "updateSwiperOptions"
+        }]; }
 }

@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class Dropdown {
     element: HTMLElement;
     position: "left" | "center" | "right";
@@ -11,5 +10,5 @@ export declare class Dropdown {
     componentDidLoad(): void;
     observeOpen(): void;
     onToggle(): void;
-    render(): JSX.Element;
+    render(): any;
 }

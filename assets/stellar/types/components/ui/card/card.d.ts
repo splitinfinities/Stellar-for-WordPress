@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 import { ResizeObserver } from '../../../utils';
 export declare class Card {
@@ -6,7 +5,7 @@ export declare class Card {
     /**
      * Renders a shadow on the card
      */
-    shadow: string | "light" | "medium" | "heavy";
+    shadow: "light" | "medium" | "heavy";
     /**
      * Let's a card be flippable
      */
@@ -18,13 +17,13 @@ export declare class Card {
     /**
      * Sets the padding inside of the button. Can be small, medium, or large.
      */
-    padding: string | "small" | "medium" | "large";
+    padding: "none" | "tiny" | "small" | "medium" | "large";
     /**
      * Sets the element to render the card as - an anchor tag, a button, or a div.
      */
     tag: "stencil-route-link" | "a" | "button" | "div";
     /**
-     * Sets the element to render the card as - an anchor tag, a button, or a div.
+     * Sets the type on a button
      */
     type: string;
     /**
@@ -47,22 +46,12 @@ export declare class Card {
      * Sets the href on the anchor tag if the button is a link.
      */
     flip_icon: string;
-    width: number;
-    height: number;
-    middleX: number;
-    middleY: number;
-    rotationLimit: number;
     ro: ResizeObserver;
-    transition: boolean;
     flip: EventEmitter;
-    refresh(): void;
     componentDidLoad(): void;
     addResizeObserver(): void;
     updateFlippableCardHeight(): void;
-    addRotation(): void;
-    animateRotation(event: any): Promise<void>;
-    removeRotation(): Promise<void>;
     click(): Promise<boolean>;
     flip_card(e?: UIEvent): Promise<void>;
-    render(): JSX.Element;
+    render(): any;
 }

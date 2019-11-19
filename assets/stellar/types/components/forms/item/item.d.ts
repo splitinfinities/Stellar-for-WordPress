@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 import { RouterHistory, LocationSegments } from '@stencil/router';
 export declare class Item {
@@ -28,6 +27,7 @@ export declare class Item {
     blurChanged: EventEmitter;
     componentWillLoad(): void;
     componentDidLoad(): void;
+    componentDidUnload(): void;
     data(): Promise<{
         size: string;
         value: string;
@@ -45,5 +45,5 @@ export declare class Item {
     select_item(state?: {
         selected: boolean;
     }): Promise<void>;
-    render(): JSX.Element;
+    render(): any;
 }

@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Switch {
     el: HTMLElement;
@@ -8,5 +7,5 @@ export declare class Switch {
     componentDidLoad(): void;
     activate(): Promise<void>;
     handleChecked(): void;
-    render(): JSX.Element;
+    render(): any;
 }

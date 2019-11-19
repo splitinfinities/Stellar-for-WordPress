@@ -1,7 +1,8 @@
+import { h } from '@stencil/core';
 import { properties } from '../../../utils';
 export class Follow {
     constructor() {
-        this.type = "scroll";
+        this.type = "cursor";
         this.distance = 0.5;
         this.padding = 40;
     }
@@ -22,18 +23,20 @@ export class Follow {
             this.attachScroll();
         }
         else if (this.type === "cursor") {
-            this.attachScroll();
             this.attachCursor();
         }
     }
     attachScroll() {
         properties.set({ "--top": `${window.pageYOffset + this.offset}px` }, this.element);
+        // @ts-ignore
         window.addEventListener("scroll", () => {
             properties.set({ "--top": `${window.pageYOffset + this.offset}px` }, this.element);
         }, { passive: true });
     }
     attachCursor() {
+        // @ts-ignore
         window.addEventListener("mousemove", (e) => {
+            properties.set({ "--top": `${e.clientY}px` }, this.element);
             properties.set({ "--left": `${this.minmaxx(e.clientX)}px` }, this.element);
         }, { passive: true });
         window.addEventListener("deviceorientation", (e) => {
@@ -59,24 +62,74 @@ export class Follow {
     }
     static get is() { return "stellar-follow"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["follow.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["follow.css"]
+    }; }
     static get properties() { return {
-        "distance": {
-            "type": Number,
-            "attr": "distance",
-            "watchCallbacks": ["update"]
+        "type": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "\"scroll\"|\"cursor\"",
+                "resolved": "\"cursor\" | \"scroll\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "type",
+            "reflect": false,
+            "defaultValue": "\"cursor\""
         },
-        "element": {
-            "elementRef": true
+        "distance": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "distance",
+            "reflect": false,
+            "defaultValue": "0.5"
         },
         "padding": {
-            "type": Number,
-            "attr": "padding"
-        },
-        "type": {
-            "type": String,
-            "attr": "type",
-            "watchCallbacks": ["update"]
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "padding",
+            "reflect": false,
+            "defaultValue": "40"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-follow:**/"; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "type",
+            "methodName": "update"
+        }, {
+            "propName": "distance",
+            "methodName": "update"
+        }]; }
 }

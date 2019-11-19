@@ -1,15 +1,18 @@
+import { h } from '@stencil/core';
 export class WebAudioSequencer {
     constructor() {
         this.name = "web_audio_sequencer";
         this.autoplay = false;
         this.taps = 4;
         this.context = () => {
+            // @ts-ignore
             return document.querySelector('web-audio').get_context();
         };
         this.noteTime = 0.0;
         this.currentTap = 0;
         this.totalPlayTime = 0.0;
         this.custom = () => {
+            // do nothing
         };
     }
     componentDidLoad() {
@@ -19,6 +22,7 @@ export class WebAudioSequencer {
     }
     schedule() {
         var currentTime = this.context().currentTime;
+        // The sequence starts at startTime, so normalize currentTime so that it's 0 at the start of the sequence.
         currentTime -= this.startTime;
         while (this.noteTime < currentTime + 0.005) {
             this.totalPlayTime = this.noteTime + this.startTime;
@@ -33,15 +37,18 @@ export class WebAudioSequencer {
         }, 0);
     }
     advance() {
+        // Setting tempo to 60 BPM just for now
         var secondsPerBeat = 60 / this.tempo;
         this.currentTap++;
         if (this.currentTap == this.taps) {
             this.currentTap = 0;
         }
+        // 0.25 because each square is a 16th note
         this.noteTime += 0.25 * secondsPerBeat;
     }
     async play() {
         if (!this.context()) {
+            // @ts-ignore
             await document.querySelector('web-audio').connect_the_world();
         }
         this.iterations = 0;
@@ -63,52 +70,139 @@ export class WebAudioSequencer {
     static get is() { return "web-audio-sequencer"; }
     static get encapsulation() { return "shadow"; }
     static get properties() { return {
-        "autoplay": {
-            "type": Boolean,
-            "attr": "autoplay"
-        },
-        "context": {
-            "state": true
-        },
-        "currentTap": {
-            "state": true
-        },
-        "custom": {
-            "type": "Any",
-            "attr": "custom"
-        },
-        "iterations": {
-            "state": true
-        },
         "name": {
-            "type": String,
-            "attr": "name"
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": false,
+            "defaultValue": "\"web_audio_sequencer\""
         },
-        "noteTime": {
-            "state": true
-        },
-        "play": {
-            "method": true
-        },
-        "startTime": {
-            "state": true
-        },
-        "stop": {
-            "method": true
+        "autoplay": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "autoplay",
+            "reflect": false,
+            "defaultValue": "false"
         },
         "taps": {
-            "type": Number,
-            "attr": "taps"
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "taps",
+            "reflect": false,
+            "defaultValue": "4"
         },
         "tempo": {
-            "type": Number,
-            "attr": "tempo"
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "tempo",
+            "reflect": false
         },
-        "timer": {
-            "state": true
+        "custom": {
+            "type": "unknown",
+            "mutable": false,
+            "complexType": {
+                "original": "Function",
+                "resolved": "Function",
+                "references": {
+                    "Function": {
+                        "location": "global"
+                    }
+                }
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "defaultValue": "() => {\n    // do nothing\n  }"
+        }
+    }; }
+    static get states() { return {
+        "context": {},
+        "iterations": {},
+        "startTime": {},
+        "noteTime": {},
+        "currentTap": {},
+        "totalPlayTime": {},
+        "timer": {}
+    }; }
+    static get methods() { return {
+        "play": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
         },
-        "totalPlayTime": {
-            "state": true
+        "stop": {
+            "complexType": {
+                "signature": "() => Promise<void>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
         }
     }; }
 }

@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Song {
     element: HTMLElement;
@@ -33,5 +32,5 @@ export declare class Song {
     switching(): Promise<void>;
     getIndex(): Promise<number>;
     setIndex(value: any): Promise<void>;
-    render(): JSX.Element;
+    render(): any;
 }

@@ -1,4 +1,6 @@
+import { h } from '@stencil/core';
 import delay from 'await-delay';
+import Pluralize from 'pluralize';
 export class Select {
     constructor() {
         this.name = "select";
@@ -9,30 +11,33 @@ export class Select {
         this.valueLabel = undefined;
         this.blur = 0;
         this.clear_confirm = false;
-        this.values = [];
     }
-    componentWillLoad() {
+    async componentWillLoad() {
         if (this.multiple) {
             this.value = [];
         }
-        this.listen_to_values();
+        const options = await this.option_elements();
+        // @ts-ignore
+        options.forEach((element) => {
+            element.selectable = true;
+            if (this.multiple) {
+                element.multiple = true;
+            }
+        });
     }
     async componentDidLoad() {
+        this.listen_to_values();
         this.current = this.element.shadowRoot.querySelector('stellar-item.current');
-        if (this.multiple) {
-            const options = await this.option_elements();
-            options.forEach((element) => {
-                element.multiple = true;
-            });
-        }
         if (this.default) {
             if (typeof this.default === "object" && this.default.constructor.name === "Array") {
                 this.default.forEach((value) => {
-                    this.element.querySelector(`stellar-item[value="${value}"]`).select_item();
+                    // @ts-ignore
+                    this.element.querySelector(`stellar-item[value="${value}"]`).select_item({ selected: true });
                 });
             }
             else {
-                this.element.querySelector(`stellar-item[value="${this.default}"]`).select_item();
+                // @ts-ignore
+                this.element.querySelector(`stellar-item[value="${this.default}"]`).select_item({ selected: true });
             }
         }
     }
@@ -41,7 +46,6 @@ export class Select {
             await delay(100);
             this.clear_confirm = false;
             this.value = [];
-            this.values = [];
             const options = await this.option_elements();
             Array.from(options).forEach((element) => {
                 element.selected = false;
@@ -52,11 +56,38 @@ export class Select {
             this.clear_confirm = true;
         }
     }
+    async update_values() {
+        if (this.multiple) {
+            const option_elements = await this.option_elements();
+            let values = [];
+            // @ts-ignore
+            option_elements.forEach((option) => {
+                if (!option.multiple) {
+                    option.multiple = true;
+                }
+                if (option.selected) {
+                    values.push(option.value);
+                }
+            });
+            this.value = values;
+            this.change.emit(this.value);
+        }
+        else {
+            const options = await this.option_elements();
+            Array.from(options).forEach((el) => {
+                if (el.classList.contains('current')) {
+                    this.value = el.value;
+                }
+            });
+        }
+    }
     handleOpenChange() {
+        // @ts-ignore
         this.element.shadowRoot.querySelector('button.select-title').focus();
     }
     async handleMultipleChange(value) {
         const options = await this.option_elements();
+        // @ts-ignore
         options.forEach((element) => {
             element.multiple = value;
         });
@@ -66,6 +97,7 @@ export class Select {
         if (this.multiple) {
             const option_elements = await this.option_elements();
             let values = [];
+            // @ts-ignore
             option_elements.forEach((option) => {
                 option.selectable = true;
                 if (this.value && this.value.includes(option.value) && !data.element.selected) {
@@ -81,6 +113,7 @@ export class Select {
             this.value = data.element.selected ? data.element.value : this.value;
             if (this.value) {
                 const options = await this.option_elements();
+                // @ts-ignore
                 options.forEach((element) => {
                     element.selectable = true;
                     if (this.value === element.value) {
@@ -96,6 +129,7 @@ export class Select {
             data.selected = !data.selected;
             const option_elements = await this.option_elements();
             let values = [];
+            // @ts-ignore
             option_elements.forEach((option) => {
                 if (this.value && this.value.includes(option.value) && data.value !== option.value) {
                     option.selected = true;
@@ -110,6 +144,7 @@ export class Select {
         else {
             if (!data.element.classList.contains("current")) {
                 const options = await this.option_elements();
+                // @ts-ignore
                 options.forEach((element) => {
                     element.selected = false;
                 });
@@ -164,16 +199,20 @@ export class Select {
         }
     }
     readable_value() {
+        let language;
+        // @ts-ignore
         if (typeof this.value === "object") {
             if (this.value.length === 0) {
+                language = Pluralize(this.verbiage, this.value.length);
                 if (this.placeholderInverted) {
-                    return `All ${this.verbiage}(s) selected`;
+                    return `All ${language} selected`;
                 }
                 else {
-                    return `No ${this.verbiage}(s) selected`;
+                    return `No ${language} selected`;
                 }
             }
-            return `${this.value.length} ${this.verbiage}${this.value.length > 1 ? "s" : ""}`;
+            language = Pluralize(this.verbiage, this.value.length, true);
+            return `${language} selected`;
         }
         else if (typeof this.value === "string") {
             return this.valueLabel || this.value.toString() || `Select ${this.verbiageAn ? "an" : "a"} ${this.verbiage}`;
@@ -190,11 +229,13 @@ export class Select {
             errors: [],
         };
         if (!this.novalidate) {
+            // @ts-ignore
             if (!this.value) {
                 status.valid = false;
                 status.errors.push({ message: 'This field is required.' });
             }
             const options = await this.options();
+            // @ts-ignore
             if (!options.includes(this.value)) {
                 status.valid = false;
                 status.errors.push({ message: `"${this.value}" isn't a valid option.` });
@@ -208,7 +249,7 @@ export class Select {
         var config = { childList: true, subtree: true };
         var callback = (mutationsList) => {
             for (var mutation of mutationsList) {
-                if (mutation.type == 'childList') {
+                if (mutation.type == 'childList' || mutation.type == 'subtree') {
                     this.update_values();
                 }
             }
@@ -216,24 +257,13 @@ export class Select {
         this.observer = new MutationObserver(callback);
         this.observer.observe(targetNode, config);
     }
-    async update_values() {
-        const values = Array.from(this.element.querySelectorAll('stellar-item'));
-        this.values = values.map((element) => {
-            if (this.multiple) {
-                element.multiple = true;
-            }
-            if (element.valueLabel && element.selected) {
-                this.valueLabel = element.valueLabel;
-            }
-            return element.value;
-        });
-    }
     async option_elements() {
         return this.element.querySelectorAll('stellar-item:not(.current)');
     }
     async options() {
         const elements = await this.option_elements();
         const options = [];
+        // @ts-ignore
         elements.forEach((option) => {
             options.push(option.value);
         });
@@ -244,7 +274,9 @@ export class Select {
         let next = undefined;
         let previous = undefined;
         const elements = await this.options();
+        // @ts-ignore
         elements.forEach((element, index) => {
+            // @ts-ignore
             if (element.hasFocus()) {
                 previous = elements[index - 1];
                 current = element;
@@ -259,6 +291,7 @@ export class Select {
         return { previous, current, next };
     }
     focusFirstItem() {
+        //@ts-ignore
         this.element.querySelector('.select-list stellar-item:first-of-type').focus();
     }
     focusElement(element) {
@@ -291,7 +324,7 @@ export class Select {
     renderLabel() {
         if (this.label) {
             return h("div", { class: "label-wrapper" },
-                h("stellar-label", { onClick: () => { this.focusFirstItem(); } }, this.label),
+                h("stellar-label", { size: this.size, onClick: () => { this.focusFirstItem(); } }, this.label),
                 this.renderEmptyButton());
         }
     }
@@ -301,7 +334,7 @@ export class Select {
         }
     }
     renderEmptyButton() {
-        return this.multiple && this.value && this.value.length > 0 && h("stellar-button", { tag: "button", size: "tiny", ghost: true, class: "theme-red", onClick: (e) => { e.stopPropagation(); this.clearValue(); } },
+        return this.multiple && this.value && this.value.length > 0 && h("stellar-button", { class: "clear-button", tag: "button", size: "tiny", ghost: true, onClick: (e) => { e.stopPropagation(); this.clearValue(); } },
             h("stellar-asset", { name: "close", class: "fs4 mr1" }),
             this.clear_confirm ? `Clear ${this.value.length} selections?` : `Clear`);
     }
@@ -326,175 +359,535 @@ export class Select {
     }
     static get is() { return "stellar-select"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["select.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["select.css"]
+    }; }
     static get properties() { return {
-        "blur": {
-            "state": true
-        },
-        "clear_confirm": {
-            "state": true
-        },
-        "current": {
-            "state": true
-        },
-        "default": {
-            "type": "Any",
-            "attr": "default"
-        },
-        "description": {
-            "type": String,
-            "attr": "description",
-            "mutable": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "focused": {
-            "type": Boolean,
-            "attr": "focused",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "footer": {
-            "type": Boolean,
-            "attr": "footer"
-        },
-        "inline": {
-            "type": Boolean,
-            "attr": "inline",
-            "reflectToAttr": true,
-            "mutable": true
+        "name": {
+            "type": "any",
+            "mutable": true,
+            "complexType": {
+                "original": "string|boolean",
+                "resolved": "boolean | string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": true,
+            "defaultValue": "\"select\""
         },
         "label": {
-            "type": String,
-            "attr": "label",
-            "mutable": true
-        },
-        "multiple": {
-            "type": Boolean,
-            "attr": "multiple",
-            "reflectToAttr": true,
+            "type": "string",
             "mutable": true,
-            "watchCallbacks": ["handleMultipleChange"]
-        },
-        "name": {
-            "type": "Any",
-            "attr": "name",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "novalidate": {
-            "type": Boolean,
-            "attr": "novalidate"
-        },
-        "observer": {
-            "state": true
-        },
-        "open": {
-            "type": Boolean,
-            "attr": "open",
-            "reflectToAttr": true,
-            "mutable": true,
-            "watchCallbacks": ["handleOpenChange"]
-        },
-        "option_elements": {
-            "method": true
-        },
-        "options": {
-            "method": true
-        },
-        "other": {
-            "type": Boolean,
-            "attr": "other"
-        },
-        "overlay": {
-            "type": Boolean,
-            "attr": "overlay",
-            "reflectToAttr": true
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "label",
+            "reflect": false
         },
         "placeholder": {
-            "type": String,
-            "attr": "placeholder",
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "placeholder",
+            "reflect": false,
+            "defaultValue": "\"Choose something...\""
         },
-        "placeholderInverted": {
-            "type": Boolean,
-            "attr": "placeholder-inverted"
-        },
-        "processing": {
-            "type": Boolean,
-            "attr": "processing"
-        },
-        "required": {
-            "type": Boolean,
-            "attr": "required"
-        },
-        "size": {
-            "type": String,
-            "attr": "size",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "status": {
-            "state": true
+        "description": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "description",
+            "reflect": false
         },
         "tooltip": {
-            "type": String,
-            "attr": "tooltip",
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "tooltip",
+            "reflect": false
         },
-        "validate": {
-            "method": true
+        "inline": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "inline",
+            "reflect": true
         },
-        "value": {
-            "type": String,
-            "attr": "value",
-            "reflectToAttr": true,
-            "mutable": true
+        "multiple": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "multiple",
+            "reflect": true
         },
-        "valueLabel": {
-            "type": String,
-            "attr": "value-label"
+        "other": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "other",
+            "reflect": false
         },
-        "values": {
-            "state": true
+        "placeholderInverted": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "placeholder-inverted",
+            "reflect": false
+        },
+        "size": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "size",
+            "reflect": true
+        },
+        "required": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "required",
+            "reflect": false,
+            "defaultValue": "false"
+        },
+        "processing": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "processing",
+            "reflect": false
+        },
+        "focused": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "focused",
+            "reflect": true
+        },
+        "open": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "open",
+            "reflect": true,
+            "defaultValue": "false"
+        },
+        "footer": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "footer",
+            "reflect": false
+        },
+        "novalidate": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "novalidate",
+            "reflect": false
         },
         "verbiage": {
-            "type": String,
-            "attr": "verbiage"
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "verbiage",
+            "reflect": false,
+            "defaultValue": "\"selection\""
         },
         "verbiageAn": {
-            "type": Boolean,
-            "attr": "verbiage-an"
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "verbiage-an",
+            "reflect": false
+        },
+        "overlay": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "overlay",
+            "reflect": true
+        },
+        "value": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "Array<string>|string",
+                "resolved": "string | string[]",
+                "references": {
+                    "Array": {
+                        "location": "global"
+                    }
+                }
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "value",
+            "reflect": true
+        },
+        "valueLabel": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "value-label",
+            "reflect": false,
+            "defaultValue": "undefined"
+        },
+        "default": {
+            "type": "any",
+            "mutable": false,
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "default",
+            "reflect": false
         }
     }; }
+    static get states() { return {
+        "current": {},
+        "status": {},
+        "blur": {},
+        "observer": {},
+        "clear_confirm": {}
+    }; }
     static get events() { return [{
-            "name": "change",
             "method": "change",
+            "name": "change",
             "bubbles": true,
             "cancelable": true,
-            "composed": true
+            "composed": true,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "complexType": {
+                "original": "any",
+                "resolved": "any",
+                "references": {}
+            }
+        }]; }
+    static get methods() { return {
+        "validate": {
+            "complexType": {
+                "signature": "() => Promise<FormResult>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    },
+                    "FormResult": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<FormResult>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "option_elements": {
+            "complexType": {
+                "signature": "() => Promise<NodeListOf<any>>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    },
+                    "NodeListOf": {
+                        "location": "global"
+                    },
+                    "HTMLStellarItemElement": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<NodeListOf<any>>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        },
+        "options": {
+            "complexType": {
+                "signature": "() => Promise<string[]>",
+                "parameters": [],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    },
+                    "Array": {
+                        "location": "global"
+                    },
+                    "HTMLStellarItemElement": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<string[]>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "open",
+            "methodName": "handleOpenChange"
+        }, {
+            "propName": "multiple",
+            "methodName": "handleMultipleChange"
         }]; }
     static get listeners() { return [{
             "name": "mounted",
-            "method": "mountedHandler"
+            "method": "mountedHandler",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }, {
             "name": "selectionChanged",
-            "method": "selectionChangedHandler"
+            "method": "selectionChangedHandler",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }, {
             "name": "focusChanged",
-            "method": "selectedFocusChangedHandler"
+            "method": "selectedFocusChangedHandler",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }, {
             "name": "blurChanged",
-            "method": "selectedBlurChangedHandler"
+            "method": "selectedBlurChangedHandler",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }, {
-            "name": "window:click",
-            "method": "handleNotClick"
+            "name": "click",
+            "method": "handleNotClick",
+            "target": "window",
+            "capture": false,
+            "passive": false
         }, {
             "name": "keydown",
-            "method": "handleEscapeKey"
+            "method": "handleEscapeKey",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }, {
             "name": "keydown",
-            "method": "handleArrowKeys"
+            "method": "handleArrowKeys",
+            "target": undefined,
+            "capture": false,
+            "passive": false
         }]; }
-    static get style() { return "/**style-placeholder:stellar-select:**/"; }
 }

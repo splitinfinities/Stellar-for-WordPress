@@ -1,0 +1,1 @@
+import{d as s,f as r,g as t}from"./p-1da3eb99.js";class e{constructor(r){s(this,r)}render(){return r("slot",null)}get element(){return t(this)}}export{e as stellar_scroll_z_section};

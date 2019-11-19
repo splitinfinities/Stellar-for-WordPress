@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 export declare class SkeletonImg {
     element: HTMLElement;
     width: number;
@@ -8,5 +7,5 @@ export declare class SkeletonImg {
     icon: boolean;
     observer: IntersectionObserver;
     componentWillLoad(): void;
-    render(): JSX.Element[];
+    render(): any[];
 }

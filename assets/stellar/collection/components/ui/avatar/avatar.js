@@ -1,7 +1,8 @@
+import { h, Host } from '@stencil/core';
 import { titleCase, colors } from '../../../utils';
 export class Avatar {
     constructor() {
-        this.tooltip = false;
+        this.notooltip = false;
         this.size = "medium";
         this.color = "auto";
         this.name = "Stellar";
@@ -12,17 +13,13 @@ export class Avatar {
     }
     componentWillLoad() {
         this.colors = Object.keys(colors).filter((color) => {
+            // @ts-ignore
             return !["base", "white", "black"].includes(color);
         });
         if (this.color === "auto") {
             this.colorAuto = true;
         }
         this.formatName();
-    }
-    hostData() {
-        return {
-            class: `theme-${this.color}`
-        };
     }
     formatName() {
         if (this.processing) {
@@ -50,72 +47,176 @@ export class Avatar {
         }
     }
     render() {
-        return (h("button", { class: "wrapper", title: `You tabbed on an Avatar for ${this.name}` },
-            this.processing && h("div", { class: "processing" },
-                h("stellar-avatar", { src: "Loading" })),
-            h("div", { class: "content" },
-                h("div", { class: "spacer" }),
-                h("div", { class: "letter", title: this.name }, this.initials),
-                this.src && h("img", { src: this.src, alt: this.name })),
-            this.tooltip && h("stellar-tooltip", null, this.name)));
+        return h(Host, { class: `theme-${this.color}` },
+            h("button", { class: "wrapper", title: `You tabbed on an Avatar for ${this.name}` },
+                this.processing && h("div", { class: "processing" },
+                    h("stellar-avatar", { src: "Loading" })),
+                h("div", { class: "content" },
+                    h("div", { class: "spacer" }),
+                    h("div", { class: "letter", title: this.name }, this.initials),
+                    this.src && h("img", { src: this.src, alt: this.name })),
+                !this.notooltip && h("stellar-tooltip", null, this.name)));
     }
     static get is() { return "stellar-avatar"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["avatar.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["avatar.css"]
+    }; }
     static get properties() { return {
-        "color": {
-            "type": String,
-            "attr": "color",
-            "reflectToAttr": true,
-            "mutable": true
+        "src": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "src",
+            "reflect": false
         },
-        "colorAuto": {
-            "state": true
-        },
-        "colors": {
-            "state": true
-        },
-        "element": {
-            "elementRef": true
-        },
-        "initials": {
-            "type": String,
-            "attr": "initials",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "name": {
-            "type": String,
-            "attr": "name",
-            "reflectToAttr": true,
-            "mutable": true,
-            "watchCallbacks": ["formatName"]
-        },
-        "processing": {
-            "type": Boolean,
-            "attr": "processing",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "shape": {
-            "type": String,
-            "attr": "shape",
-            "reflectToAttr": true,
-            "mutable": true
+        "notooltip": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "notooltip",
+            "reflect": false,
+            "defaultValue": "false"
         },
         "size": {
-            "type": String,
-            "attr": "size",
-            "reflectToAttr": true,
-            "mutable": true
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "size",
+            "reflect": true,
+            "defaultValue": "\"medium\""
         },
-        "src": {
-            "type": String,
-            "attr": "src"
+        "color": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "color",
+            "reflect": true,
+            "defaultValue": "\"auto\""
         },
-        "tooltip": {
-            "type": Boolean,
-            "attr": "tooltip"
+        "name": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": true,
+            "defaultValue": "\"Stellar\""
+        },
+        "initials": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "initials",
+            "reflect": true,
+            "defaultValue": "\"ST\""
+        },
+        "shape": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "\"circle\"|\"square\"|\"rectangle\"|\"diamond\"|\"hexagon\"|\"star\"|\"message\"",
+                "resolved": "\"circle\" | \"diamond\" | \"hexagon\" | \"message\" | \"rectangle\" | \"square\" | \"star\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "shape",
+            "reflect": true,
+            "defaultValue": "\"square\""
+        },
+        "processing": {
+            "type": "boolean",
+            "mutable": true,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "processing",
+            "reflect": true,
+            "defaultValue": "false"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-avatar:**/"; }
+    static get states() { return {
+        "colorAuto": {},
+        "colors": {}
+    }; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "name",
+            "methodName": "formatName"
+        }]; }
 }

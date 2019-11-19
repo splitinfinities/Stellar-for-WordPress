@@ -1,17 +1,27 @@
+import { h } from '@stencil/core';
 import * as Kaleidoscope from "kaleidoscopejs";
 export class Image360 {
     constructor() {
+        this.nolazyload = false;
         this.width = 1280;
         this.height = 720;
         this.ready = false;
     }
     componentDidLoad() {
         this.image = this.element.querySelector(".image");
-        this.addIntersectionObserver();
+        if (this.nolazyload) {
+            this.prepare();
+        }
+        else {
+            this.addIntersectionObserver();
+        }
     }
     addIntersectionObserver() {
         if ('IntersectionObserver' in window) {
             this.io = new IntersectionObserver((data) => {
+                // because there will only ever be one instance
+                // of the element we are observing
+                // we can just use data[0]
                 if (data[0].isIntersecting) {
                     this.handleInScreen();
                 }
@@ -52,42 +62,107 @@ export class Image360 {
             !this.ready && h("skeleton-img", { width: this.width, height: this.height }));
     }
     static get is() { return "stellar-360-image"; }
+    static get originalStyleUrls() { return {
+        "$": ["360-image.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["360-image.css"]
+    }; }
     static get properties() { return {
-        "element": {
-            "elementRef": true
+        "src": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "src",
+            "reflect": true
         },
-        "height": {
-            "type": Number,
-            "attr": "height",
-            "reflectToAttr": true
-        },
-        "image": {
-            "state": true
-        },
-        "io": {
-            "state": true
+        "nolazyload": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "nolazyload",
+            "reflect": false,
+            "defaultValue": "false"
         },
         "poster": {
-            "type": String,
-            "attr": "poster",
-            "reflectToAttr": true
-        },
-        "ready": {
-            "state": true
-        },
-        "src": {
-            "type": String,
-            "attr": "src",
-            "reflectToAttr": true
-        },
-        "viewer": {
-            "state": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "poster",
+            "reflect": true
         },
         "width": {
-            "type": Number,
-            "attr": "width",
-            "reflectToAttr": true
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "width",
+            "reflect": true,
+            "defaultValue": "1280"
+        },
+        "height": {
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "height",
+            "reflect": true,
+            "defaultValue": "720"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-360-image:**/"; }
+    static get states() { return {
+        "viewer": {},
+        "image": {},
+        "io": {},
+        "ready": {}
+    }; }
+    static get elementRef() { return "element"; }
 }

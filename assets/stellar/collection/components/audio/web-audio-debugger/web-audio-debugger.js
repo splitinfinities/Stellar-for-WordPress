@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 export class WebAudioDebugger {
     constructor() {
         this.history = [];
@@ -21,17 +22,57 @@ export class WebAudioDebugger {
     }
     static get is() { return "web-audio-debugger"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["web-audio-debugger.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["web-audio-debugger.css"]
+    }; }
     static get properties() { return {
-        "addHistory": {
-            "method": true
-        },
         "count": {
-            "type": Number,
-            "attr": "count"
-        },
-        "history": {
-            "state": true
+            "type": "number",
+            "mutable": false,
+            "complexType": {
+                "original": "number",
+                "resolved": "number",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "count",
+            "reflect": false,
+            "defaultValue": "50"
         }
     }; }
-    static get style() { return "/**style-placeholder:web-audio-debugger:**/"; }
+    static get states() { return {
+        "history": {}
+    }; }
+    static get methods() { return {
+        "addHistory": {
+            "complexType": {
+                "signature": "(string: History) => Promise<void>",
+                "parameters": [{
+                        "tags": [],
+                        "text": ""
+                    }],
+                "references": {
+                    "Promise": {
+                        "location": "global"
+                    },
+                    "History": {
+                        "location": "global"
+                    }
+                },
+                "return": "Promise<void>"
+            },
+            "docs": {
+                "text": "",
+                "tags": []
+            }
+        }
+    }; }
 }

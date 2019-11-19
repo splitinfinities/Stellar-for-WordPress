@@ -1,4 +1,3 @@
-import '../../../stencil.core';
 import { EventEmitter } from '../../../stencil.core';
 export declare class Progress {
     element: HTMLElement;
@@ -43,5 +42,5 @@ export declare class Progress {
     observeValue(): void;
     handleClick(e: any): void;
     progress(secondary?: any): number;
-    render(): JSX.Element;
+    render(): any;
 }

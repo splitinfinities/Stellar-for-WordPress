@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 export class Callout {
     constructor() {
         this.type = "default";
@@ -47,19 +48,41 @@ export class Callout {
     }
     static get is() { return "stellar-callout"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["callout.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["callout.css"]
+    }; }
     static get properties() { return {
-        "element": {
-            "elementRef": true
-        },
-        "theme": {
-            "state": true,
-            "watchCallbacks": ["handleTheme"]
-        },
         "type": {
-            "type": String,
-            "attr": "type",
-            "watchCallbacks": ["handleType"]
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "\"alert\"|\"error\"|\"info\"|\"success\"|\"default\"",
+                "resolved": "\"alert\" | \"default\" | \"error\" | \"info\" | \"success\"",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "type",
+            "reflect": false,
+            "defaultValue": "\"default\""
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-callout:**/"; }
+    static get states() { return {
+        "theme": {}
+    }; }
+    static get elementRef() { return "element"; }
+    static get watchers() { return [{
+            "propName": "theme",
+            "methodName": "handleTheme"
+        }, {
+            "propName": "type",
+            "methodName": "handleType"
+        }]; }
 }

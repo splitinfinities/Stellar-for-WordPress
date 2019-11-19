@@ -1,3 +1,4 @@
+import { h } from '@stencil/core';
 export class Asset {
     constructor() {
         this.name = "person";
@@ -16,37 +17,117 @@ export class Asset {
     }
     static get is() { return "stellar-asset"; }
     static get encapsulation() { return "shadow"; }
+    static get originalStyleUrls() { return {
+        "$": ["asset.css"]
+    }; }
+    static get styleUrls() { return {
+        "$": ["asset.css"]
+    }; }
     static get properties() { return {
-        "align": {
-            "type": String,
-            "attr": "align",
-            "reflectToAttr": true
-        },
-        "ariaLabel": {
-            "type": String,
-            "attr": "aria-label",
-            "reflectToAttr": true,
-            "mutable": true
-        },
-        "block": {
-            "type": Boolean,
-            "attr": "block"
-        },
-        "language": {
-            "type": String,
-            "attr": "language",
-            "reflectToAttr": true
+        "src": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "src",
+            "reflect": true
         },
         "name": {
-            "type": String,
-            "attr": "name",
-            "reflectToAttr": true
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "name",
+            "reflect": true,
+            "defaultValue": "\"person\""
         },
-        "src": {
-            "type": String,
-            "attr": "src",
-            "reflectToAttr": true
+        "language": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "language",
+            "reflect": true,
+            "defaultValue": "\"ios-\""
+        },
+        "align": {
+            "type": "string",
+            "mutable": false,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "align",
+            "reflect": true
+        },
+        "ariaLabel": {
+            "type": "string",
+            "mutable": true,
+            "complexType": {
+                "original": "string",
+                "resolved": "string",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "aria-label",
+            "reflect": true
+        },
+        "block": {
+            "type": "boolean",
+            "mutable": false,
+            "complexType": {
+                "original": "boolean",
+                "resolved": "boolean",
+                "references": {}
+            },
+            "required": false,
+            "optional": false,
+            "docs": {
+                "tags": [],
+                "text": ""
+            },
+            "attribute": "block",
+            "reflect": false,
+            "defaultValue": "false"
         }
     }; }
-    static get style() { return "/**style-placeholder:stellar-asset:**/"; }
 }

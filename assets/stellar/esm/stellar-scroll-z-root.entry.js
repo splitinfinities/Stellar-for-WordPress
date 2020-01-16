@@ -1,11 +1,13 @@
-import { d as registerInstance, f as h, g as getElement } from './stellar-core-1e602ba1.js';
-import './chunk-40f083d9.js';
-import { a as properties } from './chunk-d0cf38d8.js';
-import './chunk-27460e3f.js';
-import './chunk-f26db59a.js';
-import './chunk-cf2c1f95.js';
+import { r as registerInstance, h, d as getElement } from './index-bcfb4a9f.js';
+import './index-320c6878.js';
+import './_commonjsHelpers-ae1b5db5.js';
+import { p as properties } from './css-custom-properties.min-dfcc36c1.js';
+import './main-07539eea.js';
+import './moment-b6827264.js';
 
-class ScrollZRoot {
+const ScrollZRootCss = ":host{contain:content;height:calc(var(--sectionHeight) * 1px);display:block;opacity:calc(var(--cameraZ) + 1);will-change:opacity;-webkit-transition:opacity 200ms ease 0s;transition:opacity 200ms ease 0s}:host .container{position:fixed;top:0;left:0;width:100%;height:100%;-webkit-perspective:calc(var(--scenePerspective) * var(--cameraSpeed) * 1px);perspective:calc(var(--scenePerspective) * var(--cameraSpeed) * 1px);-webkit-perspective-origin:calc(var(--scenePerspectiveOriginX) * 1%) calc(var(--scenePerspectiveOriginY) * 1%);perspective-origin:calc(var(--scenePerspectiveOriginX) * 1%) calc(var(--scenePerspectiveOriginY) * 1%);will-change:perspective-origin;-webkit-transform:translate3d(0, 0, 0);transform:translate3d(0, 0, 0)}:host .scene{position:absolute;top:0;height:100vh;width:100%;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;-webkit-transform:translateZ(calc(var(--cameraZ) * 1px));transform:translateZ(calc(var(--cameraZ) * 1px));will-change:transform}:host ::slotted(stellar-scroll-z-section){position:absolute;display:block;width:100%;top:40%;z-index:2}@media only screen and(min-width: 600px){:host ::slotted(stellar-scroll-z-section){width:45%}}";
+
+const ScrollZRoot = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.initialOriginX = 50;
@@ -43,9 +45,12 @@ class ScrollZRoot {
             maxGap: 10
         };
         this.setSceneHeight();
+        this.scatter();
+    }
+    async scatter() {
         this.sections.forEach((section, index) => {
-            const x = `${this.randomFloat(-40, 150)}%`;
-            const y = `${this.randomFloat(-100, 100)}%`;
+            const x = `calc(${this.randomFloat(-30, 30)}rem + 50%)`;
+            const y = `calc(${this.randomFloat(-30, 30)}rem + 50%)`;
             const z = `calc(var(--itemZ) * var(--cameraSpeed) * ${index} * -1px)`;
             section.style.setProperty('transform', `translate3D(${x}, ${y}, ${z})`);
         });
@@ -83,7 +88,7 @@ class ScrollZRoot {
         return h("div", { class: "container" }, h("div", { class: "scene" }, h("slot", null)));
     }
     get element() { return getElement(this); }
-    static get style() { return ":host{height:calc(var(--sectionHeight) * 1px);display:block;opacity:calc(var(--cameraZ) + 1);will-change:opacity;-webkit-transition:opacity .2s ease 0s;transition:opacity .2s ease 0s}:host .container{position:fixed;top:0;left:0;width:100%;height:100%;-webkit-perspective:calc(var(--scenePerspective) * var(--cameraSpeed) * 1px);perspective:calc(var(--scenePerspective) * var(--cameraSpeed) * 1px);-webkit-perspective-origin:calc(var(--scenePerspectiveOriginX) * 1%) calc(var(--scenePerspectiveOriginY) * 1%);perspective-origin:calc(var(--scenePerspectiveOriginX) * 1%) calc(var(--scenePerspectiveOriginY) * 1%);will-change:perspective-origin;-webkit-transform:translateZ(0);transform:translateZ(0)}:host .scene{position:absolute;top:0;height:100vh;width:100%;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;-webkit-transform:translateZ(calc(var(--cameraZ) * 1px));transform:translateZ(calc(var(--cameraZ) * 1px));will-change:transform}:host ::slotted(stellar-scroll-z-section){position:absolute;display:block;width:100%;top:40%}\@media only screen and (min-width:600px){:host ::slotted(stellar-scroll-z-section){width:45%}}"; }
-}
+    static get style() { return ScrollZRootCss; }
+};
 
 export { ScrollZRoot as stellar_scroll_z_root };

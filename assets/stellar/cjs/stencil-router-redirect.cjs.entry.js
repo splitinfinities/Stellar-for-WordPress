@@ -2,8 +2,9 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-const __chunk_4 = require('./chunk-ab16519d.js');
+const index = require('./index-88c31836.js');
+require('./index-9d31ce96.js');
+const activeRouter = require('./active-router-986d3a3b.js');
 
 // Get the URL for this route link without the root from the router
 const getUrl = (url, root) => {
@@ -13,18 +14,18 @@ const getUrl = (url, root) => {
     }
     return root + url;
 };
-class Redirect {
+const Redirect = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
     }
     componentWillLoad() {
         if (this.history && this.root && this.url) {
             return this.history.replace(getUrl(this.url, this.root));
         }
     }
-    get el() { return __chunk_1.getElement(this); }
-}
-__chunk_4.ActiveRouter.injectProps(Redirect, [
+    get el() { return index.getElement(this); }
+};
+activeRouter.ActiveRouter.injectProps(Redirect, [
     'history',
     'root'
 ]);

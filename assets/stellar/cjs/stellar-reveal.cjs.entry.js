@@ -2,89 +2,49 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-require('./chunk-ee96ca86.js');
-const __chunk_3 = require('./chunk-61a48f92.js');
-const __chunk_7 = require('./chunk-6f88c1d7.js');
+const index = require('./index-88c31836.js');
 
-class Scatter {
+const RevealCss = "stellar-reveal{contain:content}@-webkit-keyframes slide-up{0%{-webkit-transform:translateY(var(--distance));transform:translateY(var(--distance))}100%{opacity:1}}@keyframes slide-up{0%{-webkit-transform:translateY(var(--distance));transform:translateY(var(--distance))}100%{opacity:1}}@-webkit-keyframes slide-down{0%{-webkit-transform:translateY(var(--distance));transform:translateY(var(--distance))}100%{opacity:1}}@keyframes slide-down{0%{-webkit-transform:translateY(var(--distance));transform:translateY(var(--distance))}100%{opacity:1}}@-webkit-keyframes slide-right{0%{-webkit-transform:translateX(var(--distance));transform:translateX(var(--distance))}100%{opacity:1}}@keyframes slide-right{0%{-webkit-transform:translateX(var(--distance));transform:translateX(var(--distance))}100%{opacity:1}}@-webkit-keyframes slide-left{0%{-webkit-transform:translateX(var(--distance));transform:translateX(var(--distance))}100%{opacity:1}}@keyframes slide-left{0%{-webkit-transform:translateX(var(--distance));transform:translateX(var(--distance))}100%{opacity:1}}.reveal{opacity:0;-webkit-animation-fill-mode:forwards;animation-fill-mode:forwards;-webkit-animation-timing-function:ease;animation-timing-function:ease;-webkit-animation-duration:500ms;animation-duration:500ms}.slide-up{-webkit-animation-name:slide-up;animation-name:slide-up}.slide-down{-webkit-animation-name:slide-down;animation-name:slide-down}.slide-right{-webkit-animation-name:slide-right;animation-name:slide-right}.slide-left{-webkit-animation-name:slide-right;animation-name:slide-right}";
+
+const Reveal = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
-        this.animation = "fadeInUp";
-        this.outAnimation = "fadeOut";
-        this.delay = 100;
-        this.timing = 50;
-        this.active = false;
-    }
-    componentWillLoad() {
-        this.children = Array.from(this.element.children);
+        index.registerInstance(this, hostRef);
+        /**
+         * Direction the element moves when animating in
+         */
+        this.direction = 'up';
+        /**
+         * How long to delay the animation (ms)
+         */
+        this.delay = 0;
+        /**
+         * How long the animation runs (ms)
+         */
+        this.duration = 500;
+        /**
+         * How far the element moves in the animation (% of element width/height)
+         */
+        this.animationDistance = '30%';
+        /**
+         * How much of the element must be visible before it animates (% of element height)
+         */
+        this.triggerDistance = '33%';
     }
     componentDidLoad() {
-        this.addIntersectionObserver();
+        const animationDistance = this.direction === 'right' || this.direction === 'down' ? '-' + this.animationDistance : this.animationDistance;
+        this.element.querySelector('.reveal').style.setProperty('--distance', animationDistance);
     }
-    addIntersectionObserver() {
-        if ('IntersectionObserver' in window) {
-            this.io = new IntersectionObserver((data) => {
-                // because there will only ever be one instance
-                // of the element we are observing
-                // we can just use data[0]
-                if (data[0].isIntersecting) {
-                    setTimeout(() => {
-                        this.active = true;
-                        this.in();
-                    }, 350);
-                    this.removeIntersectionObserver();
-                }
-            }, {
-                rootMargin: '50%',
-                threshold: [0]
-            });
-            this.io.observe(this.element.parentElement);
-        }
-        else {
-            // fall back to setTimeout for Safari and IE
-            setTimeout(() => {
-                this.in();
-            }, 300);
-        }
-    }
-    removeIntersectionObserver() {
-        if (this.io) {
-            this.io.disconnect();
-            this.io = null;
-        }
-    }
-    async calculateTiming() {
-        const time = 1000 + (this.children.length * this.delay);
-        await __chunk_7.delay(time);
-    }
-    async out() {
-        __chunk_3.properties.set({
-            "--animation": this.outAnimation
-        }, this.element);
-        this.children.forEach((element, index) => {
-            // @ts-ignore
-            element.style.setProperty('animation-delay', `${this.delay * index}ms`);
-            element.style.setProperty('animation-timing', `${this.timing}ms`);
-        });
-        return await this.calculateTiming();
-    }
-    async in() {
-        __chunk_3.properties.set({
-            "--animation": this.animation
-        }, this.element);
-        this.children.forEach((element, index) => {
-            // @ts-ignore
-            element.style.setProperty('animation-delay', `${this.delay * index}ms`);
-            element.style.setProperty('animation-timing', `${this.timing}ms`);
-        });
-        return await this.calculateTiming();
+    in() {
+        this.element.querySelector('.reveal').classList.add(`slide-${this.direction}`);
     }
     render() {
-        return (__chunk_1.h("slot", null));
+        return (index.h("div", { class: "reveal", style: {
+                animationDuration: `${this.duration}ms`,
+                animationDelay: `${this.delay}ms`
+            } }, index.h("slot", null), index.h("stellar-intersection", { element: this.element, multiple: true, in: this.in.bind(this), margin: this.triggerDistance })));
     }
-    get element() { return __chunk_1.getElement(this); }
-    static get style() { return ":host{display:contents;--animation:fadeIn}:host ::slotted(*){opacity:0}:host([active]) ::slotted(*){-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-timing-function:var(--ease);animation-timing-function:var(--ease);-webkit-animation-name:var(--animation);animation-name:var(--animation)}"; }
-}
+    get element() { return index.getElement(this); }
+    static get style() { return RevealCss; }
+};
 
-exports.stellar_reveal = Scatter;
+exports.stellar_reveal = Reveal;

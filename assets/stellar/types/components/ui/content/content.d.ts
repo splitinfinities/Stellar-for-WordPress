@@ -6,6 +6,9 @@ export declare class Content {
     ease: TweenInstance;
     blur: number;
     parent: any;
+    tab: HTMLStellarTabElement;
+    componentWillLoad(): void;
+    handleOpen(): void;
     handleActive(event: CustomEvent): Promise<void>;
     render(): any;
 }

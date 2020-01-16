@@ -12,9 +12,8 @@ export declare class WebAudioSequencer {
     custom: Function;
     timer: any;
     componentDidLoad(): void;
-    schedule(): void;
+    schedule(): Promise<void>;
     advance(): void;
     play(): Promise<void>;
     stop(): Promise<void>;
-    render(): any[];
 }

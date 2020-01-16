@@ -1,4 +1,5 @@
-import { EventEmitter } from '../../../stencil.core';
+import { EventEmitter } from '@stencil/core';
+import "ionicons";
 export declare class Select {
     element: HTMLElement;
     name: string | boolean;
@@ -10,7 +11,7 @@ export declare class Select {
     multiple: boolean;
     other: boolean;
     placeholderInverted: boolean;
-    size: string;
+    size: "tiny" | "small" | "medium" | "large";
     required: boolean;
     processing: boolean;
     focused: boolean;
@@ -23,12 +24,22 @@ export declare class Select {
     value: Array<string> | string;
     valueLabel: string;
     default: any;
-    current: any;
+    loading: boolean;
+    fit: boolean;
+    wrap: boolean;
+    resize: boolean | "full";
+    autoSelectFirst: boolean;
+    /**
+     * Sets the button or link as an outlined button.
+     */
+    dark: boolean;
+    titleItem: HTMLStellarItemElement;
     status: FormResult;
     blur: number;
     observer: MutationObserver;
+    language: string;
     clear_confirm: boolean;
-    change: EventEmitter;
+    update: EventEmitter;
     componentWillLoad(): Promise<void>;
     componentDidLoad(): Promise<void>;
     clearValue(): Promise<void>;
@@ -44,7 +55,7 @@ export declare class Select {
     handleNotClick(e: any): void;
     handleEscapeKey(event: any): void;
     handleArrowKeys(ev: KeyboardEvent): void;
-    readable_value(): string;
+    updateLanguage(): void;
     validate(): Promise<FormResult>;
     listen_to_values(): void;
     option_elements(): Promise<NodeListOf<HTMLStellarItemElement>>;

@@ -5,6 +5,8 @@ export declare class Group {
     count: number;
     extras: Array<Element>;
     componentWillLoad(): void;
+    sizes(): void;
+    buttons(): void;
     resultantExtras(): any[];
     render(): any[];
 }

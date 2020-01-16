@@ -1,5 +1,6 @@
-import { EventEmitter } from '../../../stencil.core';
+import { EventEmitter } from '@stencil/core';
 import { ResizeObserver } from '../../../utils';
+import "ionicons";
 export declare class Card {
     element: HTMLElement;
     /**
@@ -10,6 +11,10 @@ export declare class Card {
      * Let's a card be flippable
      */
     flippable: boolean;
+    /**
+     * Let's a card be flippable
+     */
+    flipReady: boolean;
     /**
      * Renders a flipped card
      */
@@ -43,15 +48,25 @@ export declare class Card {
      */
     for: string;
     /**
+     * Removes the resize observer
+     */
+    noresize: boolean;
+    /**
      * Sets the href on the anchor tag if the button is a link.
      */
-    flip_icon: string;
+    flipIcon: string;
+    dark: boolean;
     ro: ResizeObserver;
+    flipTimeout: any;
     flip: EventEmitter;
+    originalHeight: number;
     componentDidLoad(): void;
     addResizeObserver(): void;
-    updateFlippableCardHeight(): void;
+    updateFlippableCardHeight(): Promise<void>;
+    updateBackCardHeight(): Promise<boolean>;
+    handleKeyUp(): Promise<void>;
     click(): Promise<boolean>;
+    handleFlipped(): Promise<void>;
     flip_card(e?: UIEvent): Promise<void>;
     render(): any;
 }

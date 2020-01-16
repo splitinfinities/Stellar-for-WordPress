@@ -2,18 +2,26 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
+const index = require('./index-88c31836.js');
+require('./index-9d31ce96.js');
+const theme = require('./theme-1038bd3c.js');
 
-class Toggle {
+const ToggleCss = "stellar-toggle{contain:content;-webkit-box-sizing:border-box;box-sizing:border-box;display:block;font-family:inherit}stellar-toggle+stellar-toggle{margin-top:3rem}stellar-grid stellar-toggle+stellar-toggle{margin-top:0 !important}stellar-toggle *{-webkit-box-sizing:border-box;box-sizing:border-box}stellar-toggle ::-moz-selection,stellar-toggle *::-moz-selection{background:var(--theme-base2) !important}stellar-toggle ::selection,stellar-toggle *::selection{background:var(--theme-base2) !important}stellar-toggle .label{margin-bottom:.5rem;line-height:1.69;color:var(--gray9);font-size:1rem;font-weight:600}stellar-toggle stellar-card .item{padding:1rem}stellar-toggle stellar-grid{width:100%;--width:18.5rem}stellar-toggle[stacked] stellar-grid{--width:100%}stellar-toggle[stacked] stellar-grid .grid{width:100%;grid-gap:0}stellar-toggle[stacked] stellar-toggle-option label{border:0;border-radius:0;-webkit-box-shadow:none;box-shadow:none}stellar-toggle[stacked] stellar-toggle-option+stellar-toggle-option label{border-top:1px solid var(--gray2)}stellar-toggle[dark][stacked] stellar-toggle-option+stellar-toggle-option label{border-top:1px solid var(--black)}";
+
+const Toggle = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.type = "checkbox";
         this.name = "";
         this.stacked = false;
         this.flip = false;
+        /**
+         * Sets the button or link as an outlined button.
+         */
+        this.dark = false;
         this.card = "div";
         this.valid = true;
-        this.change = __chunk_1.createEvent(this, "change", 7);
+        this.update = index.createEvent(this, "update", 7);
     }
     componentWillLoad() {
         const options = this.element.querySelectorAll('stellar-toggle-option');
@@ -59,7 +67,7 @@ class Toggle {
                 }
             }
             this.value = values;
-            this.change.emit(this.value);
+            this.update.emit(this.value);
         }
     }
     updateChecked() {
@@ -72,27 +80,28 @@ class Toggle {
     }
     renderValidation() {
         if (this.error) {
-            return (__chunk_1.h("p", { class: "validation" }, this.error));
+            return (index.h("p", { class: "validation" }, this.error));
         }
     }
     renderBlock() {
-        return (__chunk_1.h("div", null, this.renderValidation(), __chunk_1.h(this.card, { padding: "tiny" }, __chunk_1.h("stellar-grid", { cols: this.stacked ? "1" : "auto", compact: true }, __chunk_1.h("slot", null)))));
+        return (index.h("div", null, this.renderValidation(), index.h(this.card, { padding: "tiny" }, index.h("stellar-grid", { cols: this.stacked ? "1" : "auto", compact: true }, index.h("slot", null)))));
     }
     renderPlain() {
         return [
-            __chunk_1.h("slot", null),
+            index.h("slot", null),
             this.renderValidation()
         ];
     }
     render() {
         return [
-            this.label && __chunk_1.h("stellar-label", null, this.label),
-            __chunk_1.h("div", { "data-type": this.type, onClick: e => { e.stopPropagation(); } }, ["radio", "checkbox"].indexOf(this.type) === -1 && this.renderBlock(), ["radio", "checkbox"].indexOf(this.type) !== -1 && this.renderPlain()),
-            this.description && __chunk_1.h("stellar-label", { size: "small", underneath: true }, this.description)
+            this.label && index.h("stellar-label", null, this.label),
+            index.h("div", { "data-type": this.type, onClick: e => { e.stopPropagation(); } }, ["radio", "checkbox"].indexOf(this.type) === -1 && this.renderBlock(), ["radio", "checkbox"].indexOf(this.type) !== -1 && this.renderPlain()),
+            this.description && index.h("stellar-label", { size: "small", underneath: true }, this.description)
         ];
     }
-    get element() { return __chunk_1.getElement(this); }
-    static get style() { return "stellar-toggle{-webkit-box-sizing:border-box;box-sizing:border-box;display:block;font-family:inherit}stellar-toggle+stellar-toggle{margin-top:3rem}stellar-grid stellar-toggle+stellar-toggle{margin-top:0!important}stellar-toggle *{-webkit-box-sizing:border-box;box-sizing:border-box}stellar-toggle ::-moz-selection{background:var(--theme-base2)!important}stellar-toggle ::selection{background:var(--theme-base2)!important}stellar-toggle .label{margin-bottom:.5rem;line-height:1.69;color:var(--gray9);font-size:1rem;font-weight:600}stellar-toggle stellar-card .item{padding:1rem}stellar-toggle stellar-grid{width:100%;--width:18.5rem}stellar-toggle[stacked] stellar-grid{--width:100%}stellar-toggle[stacked] stellar-grid .grid{width:100%;grid-gap:0}stellar-toggle[stacked] stellar-toggle-option label{border:0;border-radius:0;-webkit-box-shadow:none;box-shadow:none}stellar-toggle[stacked] stellar-toggle-option+stellar-toggle-option label{border-top:1px solid var(--gray2)}.dark-mode stellar-toggle[stacked] stellar-toggle-option+stellar-toggle-option label{border-top:1px solid var(--black)}"; }
-}
+    get element() { return index.getElement(this); }
+    static get style() { return ToggleCss; }
+};
+theme.Tunnel.injectProps(Toggle, ['dark']);
 
 exports.stellar_toggle = Toggle;

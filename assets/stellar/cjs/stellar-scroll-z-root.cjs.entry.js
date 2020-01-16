@@ -2,16 +2,18 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-require('./chunk-ee96ca86.js');
-const __chunk_3 = require('./chunk-61a48f92.js');
-require('./chunk-73f3d344.js');
-require('./chunk-73f7b312.js');
-require('./chunk-e87c7d7e.js');
+const index = require('./index-88c31836.js');
+require('./index-d326a972.js');
+require('./_commonjsHelpers-3fc1f64e.js');
+const cssCustomProperties_min = require('./css-custom-properties.min-d46e7f9d.js');
+require('./main-6214461c.js');
+require('./moment-fd045425.js');
 
-class ScrollZRoot {
+const ScrollZRootCss = ":host{contain:content;height:calc(var(--sectionHeight) * 1px);display:block;opacity:calc(var(--cameraZ) + 1);will-change:opacity;-webkit-transition:opacity 200ms ease 0s;transition:opacity 200ms ease 0s}:host .container{position:fixed;top:0;left:0;width:100%;height:100%;-webkit-perspective:calc(var(--scenePerspective) * var(--cameraSpeed) * 1px);perspective:calc(var(--scenePerspective) * var(--cameraSpeed) * 1px);-webkit-perspective-origin:calc(var(--scenePerspectiveOriginX) * 1%) calc(var(--scenePerspectiveOriginY) * 1%);perspective-origin:calc(var(--scenePerspectiveOriginX) * 1%) calc(var(--scenePerspectiveOriginY) * 1%);will-change:perspective-origin;-webkit-transform:translate3d(0, 0, 0);transform:translate3d(0, 0, 0)}:host .scene{position:absolute;top:0;height:100vh;width:100%;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;-webkit-transform:translateZ(calc(var(--cameraZ) * 1px));transform:translateZ(calc(var(--cameraZ) * 1px));will-change:transform}:host ::slotted(stellar-scroll-z-section){position:absolute;display:block;width:100%;top:40%;z-index:2}@media only screen and(min-width: 600px){:host ::slotted(stellar-scroll-z-section){width:45%}}";
+
+const ScrollZRoot = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.initialOriginX = 50;
         this.initialOriginY = 30;
         this.itemZ = 10;
@@ -32,7 +34,7 @@ class ScrollZRoot {
     }
     prepare() {
         this.sections = Array.from(this.element.querySelectorAll('stellar-scroll-z-section'));
-        __chunk_3.properties.set({
+        cssCustomProperties_min.properties.set({
             '--scenePerspective': this.scenePerspective,
             '--scenePerspectiveOriginX': this.initialOriginX,
             '--scenePerspectiveOriginY': this.initialOriginY,
@@ -47,9 +49,12 @@ class ScrollZRoot {
             maxGap: 10
         };
         this.setSceneHeight();
+        this.scatter();
+    }
+    async scatter() {
         this.sections.forEach((section, index) => {
-            const x = `${this.randomFloat(-40, 150)}%`;
-            const y = `${this.randomFloat(-100, 100)}%`;
+            const x = `calc(${this.randomFloat(-30, 30)}rem + 50%)`;
+            const y = `calc(${this.randomFloat(-30, 30)}rem + 50%)`;
             const z = `calc(var(--itemZ) * var(--cameraSpeed) * ${index} * -1px)`;
             section.style.setProperty('transform', `translate3D(${x}, ${y}, ${z})`);
         });
@@ -84,10 +89,10 @@ class ScrollZRoot {
         document.documentElement.style.setProperty("--scenePerspectiveOriginY", `${newPerspectiveOriginY}`);
     }
     render() {
-        return __chunk_1.h("div", { class: "container" }, __chunk_1.h("div", { class: "scene" }, __chunk_1.h("slot", null)));
+        return index.h("div", { class: "container" }, index.h("div", { class: "scene" }, index.h("slot", null)));
     }
-    get element() { return __chunk_1.getElement(this); }
-    static get style() { return ":host{height:calc(var(--sectionHeight) * 1px);display:block;opacity:calc(var(--cameraZ) + 1);will-change:opacity;-webkit-transition:opacity .2s ease 0s;transition:opacity .2s ease 0s}:host .container{position:fixed;top:0;left:0;width:100%;height:100%;-webkit-perspective:calc(var(--scenePerspective) * var(--cameraSpeed) * 1px);perspective:calc(var(--scenePerspective) * var(--cameraSpeed) * 1px);-webkit-perspective-origin:calc(var(--scenePerspectiveOriginX) * 1%) calc(var(--scenePerspectiveOriginY) * 1%);perspective-origin:calc(var(--scenePerspectiveOriginX) * 1%) calc(var(--scenePerspectiveOriginY) * 1%);will-change:perspective-origin;-webkit-transform:translateZ(0);transform:translateZ(0)}:host .scene{position:absolute;top:0;height:100vh;width:100%;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;-webkit-transform:translateZ(calc(var(--cameraZ) * 1px));transform:translateZ(calc(var(--cameraZ) * 1px));will-change:transform}:host ::slotted(stellar-scroll-z-section){position:absolute;display:block;width:100%;top:40%}\@media only screen and (min-width:600px){:host ::slotted(stellar-scroll-z-section){width:45%}}"; }
-}
+    get element() { return index.getElement(this); }
+    static get style() { return ScrollZRootCss; }
+};
 
 exports.stellar_scroll_z_root = ScrollZRoot;

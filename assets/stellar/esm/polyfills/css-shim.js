@@ -335,7 +335,7 @@ function getSelectors(root, index) {
                 selectors.push({
                     selector: selector,
                     declarations: declarations,
-                    specificity: computeSpecificity(selector),
+                    specificity: computeSpecificity(),
                     nu: index
                 });
             });
@@ -376,7 +376,13 @@ function normalizeValue(value) {
 }
 function getActiveSelectors(hostEl, hostScopeMap, globalScopes) {
     // computes the css scopes that might affect this particular element
-    var scopes = globalScopes.concat(getScopesForElement(hostScopeMap, hostEl));
+    // avoiding using spread arrays to avoid ts helper fns when in es5
+    var scopes = [];
+    var scopesForElement = getScopesForElement(hostScopeMap, hostEl);
+    // globalScopes are always took into account
+    globalScopes.forEach(function (s) { return scopes.push(s); });
+    // the parent scopes are computed by walking parent dom until <html> is reached
+    scopesForElement.forEach(function (s) { return scopes.push(s); });
     // each scope might have an array of associated selectors
     // let's flatten the complete array of selectors from all the scopes
     var selectorSet = getSelectorsForScopes(scopes);
@@ -413,7 +419,7 @@ function sortSelectors(selectors) {
     return selectors;
 }
 function matches(el, selector) {
-    return el.matches(selector);
+    return selector === ':root' || selector === 'html' || el.matches(selector);
 }
 function parseCSS(original) {
     var ast = parse(original);
@@ -423,35 +429,39 @@ function parseCSS(original) {
         original: original,
         template: template,
         selectors: selectors,
-        isDynamic: template.length > 1
+        usesCssVars: template.length > 1
     };
 }
 function addGlobalStyle(globalScopes, styleEl) {
-    var css = parseCSS(styleEl.innerHTML);
+    if (globalScopes.some(function (css) { return css.styleEl === styleEl; })) {
+        return false;
+    }
+    var css = parseCSS(styleEl.textContent);
     css.styleEl = styleEl;
     globalScopes.push(css);
+    return true;
 }
 function updateGlobalScopes(scopes) {
     var selectors = getSelectorsForScopes(scopes);
     var props = resolveValues(selectors);
     scopes.forEach(function (scope) {
-        if (scope.isDynamic) {
-            scope.styleEl.innerHTML = executeTemplate(scope.template, props);
+        if (scope.usesCssVars) {
+            scope.styleEl.textContent = executeTemplate(scope.template, props);
         }
     });
 }
-function reScope(scope, cssScopeId) {
+function reScope(scope, scopeId) {
     var template = scope.template.map(function (segment) {
         return (typeof segment === 'string')
-            ? replaceScope(segment, scope.cssScopeId, cssScopeId)
+            ? replaceScope(segment, scope.scopeId, scopeId)
             : segment;
     });
     var selectors = scope.selectors.map(function (sel) {
-        return Object.assign({}, sel, { selector: replaceScope(sel.selector, scope.cssScopeId, cssScopeId) });
+        return Object.assign(Object.assign({}, sel), { selector: replaceScope(sel.selector, scope.scopeId, scopeId) });
     });
-    return Object.assign({}, scope, { template: template,
+    return Object.assign(Object.assign({}, scope), { template: template,
         selectors: selectors,
-        cssScopeId: cssScopeId });
+        scopeId: scopeId });
 }
 function replaceScope(original, oldScopeId, newScopeId) {
     original = replaceAll(original, "\\." + oldScopeId, "." + newScopeId);
@@ -461,23 +471,32 @@ function replaceAll(input, find, replace) {
     return input.replace(new RegExp(find, 'g'), replace);
 }
 function loadDocument(doc, globalScopes) {
+    loadDocumentStyles(doc, globalScopes);
     return loadDocumentLinks(doc, globalScopes).then(function () {
-        loadDocumentStyles(doc, globalScopes);
+        updateGlobalScopes(globalScopes);
     });
+}
+function startWatcher(doc, globalScopes) {
+    var mutation = new MutationObserver(function () {
+        if (loadDocumentStyles(doc, globalScopes)) {
+            updateGlobalScopes(globalScopes);
+        }
+    });
+    mutation.observe(document.head, { childList: true });
 }
 function loadDocumentLinks(doc, globalScopes) {
     var promises = [];
-    var linkElms = doc.querySelectorAll('link[rel="stylesheet"][href]');
+    var linkElms = doc.querySelectorAll('link[rel="stylesheet"][href]:not([data-no-shim])');
     for (var i = 0; i < linkElms.length; i++) {
         promises.push(addGlobalLink(doc, globalScopes, linkElms[i]));
     }
     return Promise.all(promises);
 }
 function loadDocumentStyles(doc, globalScopes) {
-    var styleElms = doc.querySelectorAll('style');
-    for (var i = 0; i < styleElms.length; i++) {
-        addGlobalStyle(globalScopes, styleElms[i]);
-    }
+    var styleElms = Array.from(doc.querySelectorAll('style:not([data-styles]):not([data-no-shim])'));
+    return styleElms
+        .map(function (style) { return addGlobalStyle(globalScopes, style); })
+        .some(Boolean);
 }
 function addGlobalLink(doc, globalScopes, linkElm) {
     var url = linkElm.href;
@@ -487,7 +506,8 @@ function addGlobalLink(doc, globalScopes, linkElm) {
                 text = fixRelativeUrls(text, url);
             }
             var styleEl = doc.createElement('style');
-            styleEl.innerHTML = text;
+            styleEl.setAttribute('data-styles', '');
+            styleEl.textContent = text;
             addGlobalStyle(globalScopes, styleEl);
             linkElm.parentNode.insertBefore(styleEl, linkElm);
             linkElm.remove();
@@ -511,7 +531,7 @@ function hasCssVariables(css) {
     return css.indexOf('var(') > -1 || CSS_VARIABLE_REGEXP.test(css);
 }
 // This regexp find all url() usages with relative urls
-var CSS_URL_REGEXP = /url[\s]*\([\s]*['"]?(?![http|/])([^\'\"\)]*)[\s]*['"]?\)[\s]*/gim;
+var CSS_URL_REGEXP = /url[\s]*\([\s]*['"]?(?!(?:https?|data)\:|\/)([^\'\"\)]*)[\s]*['"]?\)[\s]*/gim;
 function hasRelativeUrls(css) {
     CSS_URL_REGEXP.lastIndex = 0;
     return CSS_URL_REGEXP.test(css);
@@ -536,11 +556,17 @@ var CustomStyle = /** @class */ (function () {
         this.hostScopeMap = new WeakMap();
         this.globalScopes = [];
         this.scopesMap = new Map();
+        this.didInit = false;
     }
     CustomStyle.prototype.initShim = function () {
         var _this = this;
+        if (this.didInit || !this.win.requestAnimationFrame) {
+            return Promise.resolve();
+        }
+        this.didInit = true;
         return new Promise(function (resolve) {
             _this.win.requestAnimationFrame(function () {
+                startWatcher(_this.doc, _this.globalScopes);
                 loadDocument(_this.doc, _this.globalScopes).then(function () { return resolve(); });
             });
         });
@@ -552,37 +578,38 @@ var CustomStyle = /** @class */ (function () {
         });
     };
     CustomStyle.prototype.addGlobalStyle = function (styleEl) {
-        addGlobalStyle(this.globalScopes, styleEl);
-        this.updateGlobal();
+        if (addGlobalStyle(this.globalScopes, styleEl)) {
+            this.updateGlobal();
+        }
     };
-    CustomStyle.prototype.createHostStyle = function (hostEl, cssScopeId, cssText) {
+    CustomStyle.prototype.createHostStyle = function (hostEl, cssScopeId, cssText, isScoped) {
         if (this.hostScopeMap.has(hostEl)) {
             throw new Error('host style already created');
         }
-        var baseScope = this.registerHostTemplate(cssText, cssScopeId);
-        var isDynamicScoped = !!(baseScope.isDynamic && baseScope.cssScopeId);
-        var needStyleEl = isDynamicScoped || !baseScope.styleEl;
+        var baseScope = this.registerHostTemplate(cssText, cssScopeId, isScoped);
         var styleEl = this.doc.createElement('style');
-        if (!needStyleEl) {
-            styleEl.innerHTML = cssText;
+        styleEl.setAttribute('data-no-shim', '');
+        if (!baseScope.usesCssVars) {
+            // This component does not use (read) css variables
+            styleEl.textContent = cssText;
+        }
+        else if (isScoped) {
+            // This component is dynamic: uses css var and is scoped
+            styleEl['s-sc'] = cssScopeId = baseScope.scopeId + "-" + this.count;
+            styleEl.textContent = '/*needs update*/';
+            this.hostStyleMap.set(hostEl, styleEl);
+            this.hostScopeMap.set(hostEl, reScope(baseScope, cssScopeId));
+            this.count++;
         }
         else {
-            if (isDynamicScoped) {
-                styleEl['s-sc'] = cssScopeId = baseScope.cssScopeId + "-" + this.count;
-                styleEl.innerHTML = '/*needs update*/';
-                this.hostStyleMap.set(hostEl, styleEl);
-                this.hostScopeMap.set(hostEl, reScope(baseScope, cssScopeId));
-                this.count++;
+            // This component uses css vars, but it's no-encapsulation (global static)
+            baseScope.styleEl = styleEl;
+            if (!baseScope.usesCssVars) {
+                styleEl.textContent = executeTemplate(baseScope.template, {});
             }
-            else {
-                baseScope.styleEl = styleEl;
-                if (!baseScope.isDynamic) {
-                    styleEl.innerHTML = executeTemplate(baseScope.template, {});
-                }
-                this.globalScopes.push(baseScope);
-                this.updateGlobal();
-                this.hostScopeMap.set(hostEl, baseScope);
-            }
+            this.globalScopes.push(baseScope);
+            this.updateGlobal();
+            this.hostScopeMap.set(hostEl, baseScope);
         }
         return styleEl;
     };
@@ -596,33 +623,32 @@ var CustomStyle = /** @class */ (function () {
     };
     CustomStyle.prototype.updateHost = function (hostEl) {
         var scope = this.hostScopeMap.get(hostEl);
-        if (scope && scope.isDynamic && scope.cssScopeId) {
+        if (scope && scope.usesCssVars && scope.isScoped) {
             var styleEl = this.hostStyleMap.get(hostEl);
             if (styleEl) {
                 var selectors = getActiveSelectors(hostEl, this.hostScopeMap, this.globalScopes);
                 var props = resolveValues(selectors);
-                styleEl.innerHTML = executeTemplate(scope.template, props);
+                styleEl.textContent = executeTemplate(scope.template, props);
             }
         }
     };
     CustomStyle.prototype.updateGlobal = function () {
         updateGlobalScopes(this.globalScopes);
     };
-    CustomStyle.prototype.registerHostTemplate = function (cssText, scopeId) {
+    CustomStyle.prototype.registerHostTemplate = function (cssText, scopeId, isScoped) {
         var scope = this.scopesMap.get(scopeId);
         if (!scope) {
             scope = parseCSS(cssText);
-            scope.cssScopeId = scopeId;
+            scope.scopeId = scopeId;
+            scope.isScoped = isScoped;
             this.scopesMap.set(scopeId, scope);
         }
         return scope;
     };
     return CustomStyle;
 }());
-var win = window;
-function needsShim() {
-    return !(win.CSS && win.CSS.supports && win.CSS.supports('color', 'var(--c)'));
-}
-if (!win.__stencil_cssshim && needsShim()) {
-    win.__stencil_cssshim = new CustomStyle(win, document);
-}
+(function (win) {
+    if (win && !win.__stencil_cssshim && (!(win.CSS && win.CSS.supports && win.CSS.supports('color', 'var(--c)')))) {
+        win.__stencil_cssshim = new CustomStyle(win, win.document);
+    }
+})(typeof window !== 'undefined' && window);

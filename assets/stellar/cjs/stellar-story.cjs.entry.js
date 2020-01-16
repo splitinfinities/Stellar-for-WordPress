@@ -2,11 +2,11 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-const __chunk_2 = require('./chunk-ee96ca86.js');
-const __chunk_16 = require('./chunk-be3d3ed7.js');
+const index = require('./index-88c31836.js');
+const _commonjsHelpers = require('./_commonjsHelpers-3fc1f64e.js');
+const index$1 = require('./index-1978083c.js');
 
-var lib = __chunk_2.createCommonjsModule(function (module, exports) {
+var lib = _commonjsHelpers.createCommonjsModule(function (module, exports) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", {
 
 
 
-var _raf2 = _interopRequireDefault(__chunk_16.raf_1);
+var _raf2 = _interopRequireDefault(index$1.raf_1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -229,16 +229,16 @@ var updateOffsetsOnResize = function updateOffsetsOnResize(els) {
 exports.default = init;
 });
 
-const parallaxis = __chunk_2.unwrapExports(lib);
+const parallaxis = _commonjsHelpers.unwrapExports(lib);
 
-class Story {
+const Story = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.target = "story";
     }
     componentWillLoad() {
         parallaxis({ className: this.target });
     }
-}
+};
 
 exports.stellar_story = Story;

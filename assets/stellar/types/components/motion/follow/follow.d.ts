@@ -5,7 +5,7 @@ export declare class Follow {
     padding: number;
     componentWillLoad(): void;
     componentDidLoad(): void;
-    readonly offset: number;
+    get offset(): number;
     update(): void;
     attachScroll(): void;
     attachCursor(): void;

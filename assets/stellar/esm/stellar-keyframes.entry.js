@@ -1,11 +1,13 @@
-import { d as registerInstance, f as h, g as getElement } from './stellar-core-1e602ba1.js';
-import './chunk-40f083d9.js';
-import { a as properties } from './chunk-d0cf38d8.js';
-import './chunk-27460e3f.js';
-import './chunk-f26db59a.js';
-import './chunk-cf2c1f95.js';
+import { r as registerInstance, h, d as getElement } from './index-bcfb4a9f.js';
+import './index-320c6878.js';
+import './_commonjsHelpers-ae1b5db5.js';
+import { p as properties } from './css-custom-properties.min-dfcc36c1.js';
+import './main-07539eea.js';
+import './moment-b6827264.js';
 
-class Follow {
+const KeyframesCss = ":host{--position:var(--position, 0);display:block;width:100%;height:100%;max-width:var(--width);max-height:var(--height);contain:content}:host .background{background-position:var(--position);background-size:cover;width:var(--width);height:var(--height);display:block}";
+
+const Keyframes = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.width = 400;
@@ -30,7 +32,7 @@ class Follow {
     static get watchers() { return {
         "frame": ["update"]
     }; }
-    static get style() { return ":host{--position:var(--position,0);display:block;width:100%;height:100%;max-width:var(--width);max-height:var(--height)}:host .background{background-position:var(--position);background-size:cover;width:var(--width);height:var(--height);display:block}"; }
-}
+    static get style() { return KeyframesCss; }
+};
 
-export { Follow as stellar_keyframes };
+export { Keyframes as stellar_keyframes };

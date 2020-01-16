@@ -1,4 +1,4 @@
-import { EventEmitter } from '../../../stencil.core';
+import { EventEmitter } from '@stencil/core';
 export declare class Video {
     element: HTMLElement;
     width: number;
@@ -11,20 +11,21 @@ export declare class Video {
     poster: string;
     controls: boolean;
     overlay: boolean;
+    playing: boolean;
     duration: number;
     startTime: number;
     pausedTime: number;
     currentTime: number;
-    video_tag: HTMLVideoElement;
-    playing: boolean;
-    io: IntersectionObserver;
     interval: any;
-    timeupdate: EventEmitter;
+    update: EventEmitter;
     played: EventEmitter;
     paused: EventEmitter;
     loaded: EventEmitter;
+    video_tag: HTMLVideoElement;
+    componentWillLoad(): void;
     componentDidLoad(): void;
-    readonly eventData: {
+    videoElement(): Promise<HTMLVideoElement>;
+    get eventData(): {
         playing: boolean;
         currentTime: number;
         pausedTime: number;
@@ -33,9 +34,8 @@ export declare class Video {
     };
     startInterval(): void;
     setDimensions(): void;
-    addIntersectionObserver(): void;
-    handleInScreen(): void;
-    handleOffScreen(): void;
+    in(): void;
+    out(): void;
     getDuration(): Promise<number>;
     play(): Promise<void>;
     pause(): Promise<void>;

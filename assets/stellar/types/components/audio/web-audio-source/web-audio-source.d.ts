@@ -1,4 +1,4 @@
-import { EventEmitter } from '../../../stencil.core';
+import { EventEmitter } from '@stencil/core';
 export declare class WebAudioSource {
     element: HTMLElement;
     webAudioWrapper: HTMLElement;
@@ -7,6 +7,7 @@ export declare class WebAudioSource {
     inert: boolean;
     midikey: number;
     midichannel: number;
+    prepared: boolean;
     status: string;
     effectsvolume: number;
     context: AudioContext;
@@ -15,6 +16,7 @@ export declare class WebAudioSource {
     dryGain: GainNode;
     channelGain: GainNode;
     effects: Array<object>;
+    instances: Array<object>;
     source: AudioBufferSourceNode;
     buffer: AudioBuffer;
     entry: string;
@@ -23,7 +25,7 @@ export declare class WebAudioSource {
     pausedTime: number;
     elapsedTime: number;
     playing: boolean;
-    timeupdate: EventEmitter;
+    update: EventEmitter;
     getBuffer(): Promise<AudioBuffer>;
     webAudio(): Promise<HTMLElement>;
     gain(place?: string): Promise<GainNode>;

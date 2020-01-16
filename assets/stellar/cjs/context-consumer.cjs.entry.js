@@ -2,22 +2,20 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
+const index = require('./index-88c31836.js');
 
-class ContextConsumer {
+const ContextConsumer = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.context = {};
         this.renderer = () => null;
     }
-    componentWillLoad() {
-        this.unsubscribe = () => {
-            if (this.subscribe != null) {
-                this.subscribe(this.el, 'context');
-            }
-        };
+    connectedCallback() {
+        if (this.subscribe != null) {
+            this.unsubscribe = this.subscribe(this.el, 'context');
+        }
     }
-    componentDidUnload() {
+    disconnectedCallback() {
         if (this.unsubscribe != null) {
             this.unsubscribe();
         }
@@ -25,7 +23,7 @@ class ContextConsumer {
     render() {
         return this.renderer(Object.assign({}, this.context));
     }
-    get el() { return __chunk_1.getElement(this); }
-}
+    get el() { return index.getElement(this); }
+};
 
 exports.context_consumer = ContextConsumer;

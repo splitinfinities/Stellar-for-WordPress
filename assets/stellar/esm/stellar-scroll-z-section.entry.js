@@ -1,13 +1,9 @@
-import { d as registerInstance, f as h, g as getElement } from './stellar-core-1e602ba1.js';
+import { r as registerInstance } from './index-bcfb4a9f.js';
 
-class ScrollZSection {
+const ScrollZSection = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
     }
-    render() {
-        return h("slot", null);
-    }
-    get element() { return getElement(this); }
-}
+};
 
 export { ScrollZSection as stellar_scroll_z_section };

@@ -1,3 +1,4 @@
+import "ionicons";
 export declare class Message {
     element: HTMLElement;
     type: "alert" | "error" | "info" | "success";
@@ -7,6 +8,7 @@ export declare class Message {
     name: string;
     shown: boolean;
     striped: boolean;
+    dark: boolean;
     theme: string;
     componentWillLoad(): void;
     handleClose(): void;

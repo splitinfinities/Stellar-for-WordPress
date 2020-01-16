@@ -1,4 +1,4 @@
-import { EventEmitter } from "../../../stencil.core";
+import { EventEmitter } from "@stencil/core";
 export declare class Toggle {
     element: HTMLElement;
     form: HTMLElement;
@@ -11,13 +11,17 @@ export declare class Toggle {
     single: boolean;
     size: string;
     novalidate: boolean;
+    /**
+     * Sets the button or link as an outlined button.
+     */
+    dark: boolean;
     card: any;
     label: string;
     value: string | string[];
     valid: boolean;
     error: string;
     status: any;
-    change: EventEmitter;
+    update: EventEmitter;
     componentWillLoad(): void;
     validate(): Promise<FormResult>;
     toggleChangedHandler(event: CustomEvent): void;

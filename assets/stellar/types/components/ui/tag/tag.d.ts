@@ -3,6 +3,7 @@ export declare class Tag {
     size: string;
     pill: boolean;
     outline: boolean;
+    dark: boolean;
     color: string;
     textColor: string;
     componentWillLoad(): void;

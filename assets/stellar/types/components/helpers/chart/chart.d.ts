@@ -11,9 +11,14 @@ export declare class Chart {
     remote: string;
     for: string;
     config: HighchartsModel;
+    dark: boolean;
+    exporting: boolean;
+    componentWillLoad(): void;
     handleConfig(): void;
     handleAttrs(): void;
     componentDidLoad(): void;
+    handResize(): void;
+    handleEscape(event: any): void;
     options(newOptions: any): Promise<void>;
     get_options(): Promise<any>;
     refresh(): Promise<void>;

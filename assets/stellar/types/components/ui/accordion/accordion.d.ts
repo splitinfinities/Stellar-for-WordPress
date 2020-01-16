@@ -1,9 +1,11 @@
+import "ionicons";
 export declare class Accordion {
     element: HTMLElement;
     open: boolean;
     tight: boolean;
     name: string;
     label: string;
+    dark: boolean;
     blur: number;
     ease: TweenInstance;
     expander: HTMLElement;

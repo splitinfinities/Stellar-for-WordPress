@@ -1,4 +1,4 @@
-import { EventEmitter } from '../../../stencil.core';
+import { EventEmitter } from '@stencil/core';
 export declare class Form {
     element: HTMLElement;
     ajax: boolean;
@@ -11,7 +11,7 @@ export declare class Form {
     novalidate: boolean;
     target: string;
     selectors: Array<string>;
-    submit: EventEmitter;
+    submitted: EventEmitter;
     handleEnter(event: any): void;
     register(selectors: string[]): Promise<void>;
     refresh(): Promise<void>;

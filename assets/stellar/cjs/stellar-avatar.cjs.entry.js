@@ -2,27 +2,31 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-require('./chunk-ee96ca86.js');
-require('./chunk-61a48f92.js');
-const __chunk_10 = require('./chunk-73f3d344.js');
-require('./chunk-73f7b312.js');
-require('./chunk-e87c7d7e.js');
+const index = require('./index-88c31836.js');
+const index$1$1 = require('./index-d326a972.js');
+require('./_commonjsHelpers-3fc1f64e.js');
+require('./css-custom-properties.min-d46e7f9d.js');
+require('./main-6214461c.js');
+require('./moment-fd045425.js');
+require('./index-9d31ce96.js');
+const theme = require('./theme-1038bd3c.js');
 
-class Avatar {
+const AvatarCss = ":host,:host *,:host *:before,:host *:after{-webkit-box-sizing:border-box;box-sizing:border-box}:host{contain:content;display:inline-block;width:var(--avatar-size);max-height:var(--avatar-size);font-size:var(--avatar-font-size);--avatar-color:var(--theme-base7, var(--red7));--avatar-color-dark:var(--theme-base5, var(--red5));--avatar-font-color:var(--white);--avatar-size:var(--ms4);--avatar-font-size:var(--ms1);--avatar-text-shadow:0 0 0px rgba(255, 255, 255, .4);-webkit-filter:drop-shadow(var(--drop-shadow));filter:drop-shadow(var(--drop-shadow))}:host([size='tiny']){--avatar-size:var(--ms1);--avatar-font-size:var(--ms-2)}:host([size='small']){--avatar-size:var(--ms3);--avatar-font-size:var(--ms-1)}:host([size='medium']){--avatar-size:var(--ms6);--avatar-font-size:var(--ms3)}:host([size='large']){--avatar-size:calc(var(--ms8) + 0.1em);--avatar-font-size:var(--ms5)}:host .wrapper{display:block;position:relative;z-index:0;width:100%;max-width:2.2em;font:inherit;font-size:var(--avatar-font-size);-webkit-appearance:none;-moz-appearance:none;appearance:none;border:none;padding:0;background:transparent}:host .content{overflow:hidden;position:relative}:host .spacer{display:block;background:var(--avatar-color);background:linear-gradient(45deg, var(--avatar-color) 0%, var(--avatar-color-dark) 100%);padding-top:100%;width:100%;height:0}:host .letter{display:-ms-flexbox;display:flex;position:absolute;top:0;left:0;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;z-index:1;width:100%;height:100%;text-align:center;text-transform:lowercase;line-height:100%;padding:0.35em 0.4em 0.2em;color:var(--avatar-font-color);font-size:var(--avatar-font-size);font-weight:600;text-shadow:var(--avatar-text-shadow)}:host img{position:absolute;top:50%;right:50%;bottom:50%;left:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);z-index:1;border-radius:inherit;background:var(--white);width:100%;height:auto;color:transparent;-o-object-fit:cover;object-fit:cover}:host([shape='circle']) .wrapper,:host([shape='circle']) .content,:host([shape='circle']) .spacer{border-radius:100%}:host([shape='rectangle']) .spacer{padding-top:60%}:host([shape='diamond']) .spacer{-webkit-clip-path:polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);clip-path:polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)}:host([shape='hexagon']) .spacer{-webkit-clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)}:host([shape='star']) .spacer{-webkit-clip-path:polygon(50% 0%, 64% 27%, 98% 35%, 74% 57%, 79% 91%, 50% 76%, 21% 91%, 25% 57%, 2% 35%, 36% 28%);clip-path:polygon(50% 0%, 64% 27%, 98% 35%, 74% 57%, 79% 91%, 50% 76%, 21% 91%, 25% 57%, 2% 35%, 36% 28%)}:host([shape='message']) .spacer{-webkit-clip-path:polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);clip-path:polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%)}:host([processing]) .letter{background:url(\"spinner.svg\") no-repeat 50% 50%/50% 50%;color:transparent}:host([processing][size='large']) .letter{background-size:32px}:host([processing][size='medium']) .letter{background-size:16px}:host([dark]){--avatar-color:var(--theme-base8, var(--red8));--avatar-color-dark:var(--theme-base6, var(--red6));--avatar-font-color:var(--black);--avatar-text-shadow:0 0 0px rgba(0, 0, 0, .4)}";
+
+const Avatar = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.notooltip = false;
-        this.size = "medium";
         this.color = "auto";
         this.name = "Stellar";
         this.initials = "ST";
         this.shape = "square";
         this.processing = false;
+        this.dark = false;
         this.colorAuto = false;
     }
     componentWillLoad() {
-        this.colors = Object.keys(__chunk_10.colors).filter((color) => {
+        this.colors = Object.keys(index$1$1.colors).filter((color) => {
             // @ts-ignore
             return !["base", "white", "black"].includes(color);
         });
@@ -44,7 +48,7 @@ class Avatar {
             this.initials = "ST";
         }
         else {
-            var the_name = __chunk_10.titleCase(this.name);
+            var the_name = index$1$1.titleCase(this.name);
             if (this.size === "large" || this.size === "medium") {
                 this.initials = the_name.replace(/[^A-Z]/g, '').substring(0, 2);
             }
@@ -57,13 +61,14 @@ class Avatar {
         }
     }
     render() {
-        return __chunk_1.h(__chunk_1.Host, { class: `theme-${this.color}` }, __chunk_1.h("button", { class: "wrapper", title: `You tabbed on an Avatar for ${this.name}` }, this.processing && __chunk_1.h("div", { class: "processing" }, __chunk_1.h("stellar-avatar", { src: "Loading" })), __chunk_1.h("div", { class: "content" }, __chunk_1.h("div", { class: "spacer" }), __chunk_1.h("div", { class: "letter", title: this.name }, this.initials), this.src && __chunk_1.h("img", { src: this.src, alt: this.name })), !this.notooltip && __chunk_1.h("stellar-tooltip", null, this.name)));
+        return index.h(index.Host, { class: `theme-${this.color}` }, index.h("button", { class: "wrapper", title: `You tabbed on an Avatar for ${this.name}`, onFocus: () => { this.focus = true; }, onBlur: () => { this.focus = false; } }, this.processing && index.h("div", { class: "processing" }, index.h("stellar-avatar", { src: "Loading" })), index.h("div", { class: "content" }, index.h("div", { class: "spacer" }), index.h("div", { class: "letter", title: this.name }, this.initials), this.src && index.h("img", { src: this.src, alt: this.name })), !this.notooltip && index.h("stellar-tooltip", { focused: this.focus }, this.name)));
     }
-    get element() { return __chunk_1.getElement(this); }
+    get element() { return index.getElement(this); }
     static get watchers() { return {
         "name": ["formatName"]
     }; }
-    static get style() { return ":host,:host *,:host :after,:host :before{-webkit-box-sizing:border-box;box-sizing:border-box}:host{display:inline-block;width:var(--avatar-size);max-height:var(--avatar-size);font-size:var(--avatar-font-size);--avatar-color:var(--theme-base7,var(--red7));--avatar-color-dark:var(--theme-base5,var(--red5));--avatar-font-color:var(--white);--avatar-size:2.2em;--avatar-font-size:1.8rem;--avatar-text-shadow:0 0 0px hsla(0,0%,100%,0.4);-webkit-filter:drop-shadow(var(--drop-shadow));filter:drop-shadow(var(--drop-shadow))}:host([size=large]){--avatar-font-size:3.6rem}:host([size=medium]){--avatar-font-size:1.8rem}:host([size=small]){--avatar-font-size:1rem}:host([size=tiny]){--avatar-font-size:.8rem}:host .wrapper{display:block;position:relative;z-index:0;width:100%;max-width:2.2em;font:inherit;font-size:var(--avatar-font-size);-webkit-appearance:none;-moz-appearance:none;appearance:none;border:none;padding:0;background:transparent}:host .content{overflow:hidden;position:relative}:host .spacer{display:block;background:var(--avatar-color);background:linear-gradient(45deg,var(--avatar-color),var(--avatar-color-dark));padding-top:100%;width:100%;height:0}:host .letter{display:-ms-flexbox;display:flex;top:0;left:0;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;height:100%;text-align:center;text-transform:lowercase;line-height:100%;padding:.35em .4em .2em;color:var(--avatar-font-color);font-size:var(--avatar-font-size);font-weight:600;text-shadow:var(--avatar-text-shadow)}:host .letter,:host img{position:absolute;z-index:1;width:100%}:host img{top:50%;right:50%;bottom:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);border-radius:inherit;background:var(--white);height:auto;color:transparent;-o-object-fit:cover;object-fit:cover}:host([shape=circle]) .content,:host([shape=circle]) .spacer,:host([shape=circle]) .wrapper{border-radius:100%}:host([shape=rectangle]) .spacer{padding-top:60%}:host([shape=diamond]) .spacer{-webkit-clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}:host([shape=hexagon]) .spacer{-webkit-clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}:host([shape=star]) .spacer{-webkit-clip-path:polygon(50% 0,64% 27%,98% 35%,74% 57%,79% 91%,50% 76%,21% 91%,25% 57%,2% 35%,36% 28%);clip-path:polygon(50% 0,64% 27%,98% 35%,74% 57%,79% 91%,50% 76%,21% 91%,25% 57%,2% 35%,36% 28%)}:host([shape=message]) .spacer{-webkit-clip-path:polygon(0 0,100% 0,100% 75%,75% 75%,75% 100%,50% 75%,0 75%);clip-path:polygon(0 0,100% 0,100% 75%,75% 75%,75% 100%,50% 75%,0 75%)}:host([processing]) .letter{background:url(spinner.svg) no-repeat 50% 50%/50% 50%;color:transparent}:host([processing][size=large]) .letter{background-size:32px}:host([processing][size=medium]) .letter{background-size:16px}:host-context(.dark-mode):host{--avatar-color:var(--theme-base8,var(--red8));--avatar-color-dark:var(--theme-base6,var(--red6));--avatar-font-color:var(--black);--avatar-text-shadow:0 0 0px rgba(0,0,0,0.4)}"; }
-}
+    static get style() { return AvatarCss; }
+};
+theme.Tunnel.injectProps(Avatar, ['dark']);
 
 exports.stellar_avatar = Avatar;

@@ -2,18 +2,21 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-require('./chunk-ee96ca86.js');
-const __chunk_3 = require('./chunk-61a48f92.js');
-const __chunk_10 = require('./chunk-73f3d344.js');
-require('./chunk-73f7b312.js');
-require('./chunk-e87c7d7e.js');
-const __chunk_13 = require('./chunk-bd36b48f.js');
-const __chunk_14 = require('./chunk-43be6af3.js');
+const index = require('./index-88c31836.js');
+require('./index-9b3c8604.js');
+const index$1$1 = require('./index-d326a972.js');
+require('./_commonjsHelpers-3fc1f64e.js');
+const cssCustomProperties_min = require('./css-custom-properties.min-d46e7f9d.js');
+require('./main-6214461c.js');
+require('./moment-fd045425.js');
+const index$2 = require('./index-82f55a74.js');
+const helpers = require('./helpers-4f8034dc.js');
 
-class Interview {
+const InterviewCss = "stellar-interview{--width:800px;--height:800px;display:block;contain:content}stellar-interview div.card{position:relative;display:block;width:auto;height:auto;margin:auto;overflow:hidden}stellar-interview div.card section{height:inherit;display:block;position:relative;padding-top:0 !important}stellar-interview web-audio-visualizer{position:absolute;top:auto;left:0;right:0;bottom:0;width:100%;height:60%;pointer-events:none;z-index:2}stellar-interview web-audio-visualizer[type=\"circle\"]{height:100%}stellar-interview web-audio-visualizer[type=\"bars2\"]{width:80%;left:10%;right:10%}stellar-interview stellar-image,stellar-interview stellar-360-image,stellar-interview stellar-video,stellar-interview stellar-360-video{--gradient:radial-gradient(circle at 30% 107%, var(--theme-base5) 0%, var(--theme-base8) 5%, var(--theme-complement8) 45%, var(--theme-complement5) 60%, var(--theme-base5) 90%);position:relative;z-index:1;display:block}stellar-interview stellar-progress{position:absolute;top:0;left:0;width:100%;z-index:9}stellar-interview stellar-progress .progress{border:0}stellar-interview h3{color:white}stellar-interview stellar-unit{position:absolute;bottom:1rem;z-index:2;color:white !important;font-weight:700}stellar-interview stellar-unit.current{left:1rem}stellar-interview stellar-unit.duration{right:1rem}stellar-interview .transcript{position:absolute;bottom:0;width:70%;left:15%;z-index:5;pointer-events:none}stellar-interview .button{position:absolute;-webkit-transition:all .35s var(--ease) 0s, background .175s var(--ease) 0s;transition:all .35s var(--ease) 0s, background .175s var(--ease) 0s;width:9rem;height:9rem;top:50%;right:50%;-webkit-transform:translate(50%, -50%);transform:translate(50%, -50%);border-radius:100%;padding:0;border:0;z-index:3;-webkit-appearance:none;-moz-appearance:none;appearance:none;background:white;text-align:center;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;z-index:4;outline:0;cursor:pointer;padding-left:1rem;mix-blend-mode:soft-light}stellar-interview .button:hover,stellar-interview .button:focus{-webkit-transform:translate(50%, -50%) scale(1.1);transform:translate(50%, -50%) scale(1.1);mix-blend-mode:hard-light}stellar-interview .button ion-icon{font-size:7rem;margin:auto;display:block}stellar-interview .button.loading{padding:0}stellar-interview .button.playing{width:2.8rem;height:2.8rem;top:2.2rem;right:1.8rem;padding:0;background:transparent;-webkit-transition:all .35s var(--ease) 0s, background .175s var(--ease) 0s;transition:all .35s var(--ease) 0s, background .175s var(--ease) 0s}stellar-interview .button.playing ion-icon{font-size:2.8rem}";
+
+const Interview = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.randomId = Math.floor(Math.random() * 6) + 1;
         this.color = "white";
         this.playing = false;
@@ -29,7 +32,7 @@ class Interview {
         this.cache = new WeakMap();
     }
     componentWillLoad() {
-        __chunk_3.properties.set({
+        cssCustomProperties_min.properties.set({
             "--width": `${this.width}px`,
             "--height": `${this.height}px`,
             "--aspectRatio": `${this.aspectRatio}%`
@@ -37,44 +40,17 @@ class Interview {
     }
     async componentDidLoad() {
         if (!this.interviewLines) {
-            this.interviewLines = __chunk_14.get_interview_lines(this.element);
+            this.interviewLines = helpers.get_interview_lines(this.element);
         }
-        __chunk_14.update_interview_lines(this.interviewLines, this.cache, this.time);
-        this.addIntersectionObserver();
+        helpers.update_interview_lines(this.interviewLines, this.cache, this.time);
     }
-    addIntersectionObserver() {
-        if ('IntersectionObserver' in window) {
-            this.io = new IntersectionObserver((data) => {
-                // because there will only ever be one instance
-                // of the element we are observing
-                // we can just use data[0]
-                if (data[0].isIntersecting) {
-                    this.handleInScreen();
-                }
-                else {
-                    this.handleOffScreen();
-                }
-            }, {
-                rootMargin: '50%',
-                threshold: [0]
-            });
-            this.io.observe(this.element);
-        }
-    }
-    handleTimeUpdate(event) {
+    handleUpdate(event) {
         this.current = Math.abs(Math.round(event.detail.time * 1000));
         this.duration = Math.round(event.detail.duration * 1000);
-        __chunk_14.update_interview_lines(this.interviewLines, this.cache, this.time);
+        helpers.update_interview_lines(this.interviewLines, this.cache, this.time);
     }
     get time() {
         return this.current;
-    }
-    async handleInScreen() {
-        await __chunk_10.delay(1000);
-        this.visible = true;
-        await __chunk_10.delay(100);
-        this.audio = this.element.querySelector('web-audio');
-        this.audio_source = await this.audio.source("interview");
     }
     async attachContext() {
         if (!this.loaded) {
@@ -90,7 +66,14 @@ class Interview {
             this.loading = false;
         }
     }
-    async handleOffScreen() {
+    async in() {
+        await index$1$1.delay(1000);
+        this.visible = true;
+        await index$1$1.delay(100);
+        this.audio = this.element.querySelector('web-audio');
+        this.audio_source = await this.audio.source("interview");
+    }
+    async out() {
         this.pause();
     }
     async play() {
@@ -133,13 +116,13 @@ class Interview {
         }
     }
     handleCurrentClick() {
-        __chunk_13.ezClipboard.copyPlain(this.current);
+        index$2.ezClipboard.copyPlain(this.current);
     }
     render() {
-        return (__chunk_1.h("div", { class: "card", onDblClick: () => { this.handleClick(); } }, !this.visible && __chunk_1.h("div", null, __chunk_1.h("skeleton-img", { width: this.width, height: this.height, loading: true }), __chunk_1.h("div", { style: { "display": "none" } }, __chunk_1.h("slot", null))), this.visible && __chunk_1.h("section", null, __chunk_1.h("slot", null), __chunk_1.h("div", { class: "transcript" }, __chunk_1.h("slot", { name: "transcript" })), __chunk_1.h("web-audio", { name: `interview-${this.randomId}` }, __chunk_1.h("web-audio-source", { src: this.src, name: "interview" })), __chunk_1.h("web-audio-visualizer", { for: `interview-${this.randomId}`, type: this.visualization, width: this.width, height: this.height, color: this.color }), __chunk_1.h("button", { class: this.loading ? "loading button" : (this.playing ? "playing button" : "button"), onClick: () => { this.handleClick(); } }, __chunk_1.h("stellar-asset", { name: this.loading ? "sync" : (this.playing ? "pause" : "play"), class: this.loading ? "animation-spin" : "" })), __chunk_1.h("h3", null, __chunk_1.h("stellar-unit", { class: "current", value: this.current, from: "ms", to: "s", onClick: () => { this.handleCurrentClick(); } })), __chunk_1.h("h3", null, __chunk_1.h("stellar-unit", { class: "duration", value: this.duration, from: "ms", to: "s" })), __chunk_1.h("stellar-progress", { value: this.current, max: this.duration, noease: true, blurable: false, slender: true, editable: true, onChange: (e) => { this.skipTo(e.detail.value); } }))));
+        return (index.h("div", { class: "card", onDblClick: () => { this.handleClick(); } }, !this.visible && index.h("div", null, index.h("skeleton-img", { width: this.width, height: this.height, loading: true }), index.h("div", { style: { "display": "none" } }, index.h("slot", null))), this.visible && index.h("section", null, index.h("slot", null), index.h("div", { class: "transcript" }, index.h("slot", { name: "transcript" })), index.h("web-audio", { name: `interview-${this.randomId}` }, index.h("web-audio-source", { src: this.src, name: "interview" })), index.h("web-audio-visualizer", { for: `interview-${this.randomId}`, type: this.visualization, width: this.width, height: this.height, color: this.color }), index.h("button", { class: this.loading ? "loading button" : (this.playing ? "playing button" : "button"), onClick: () => { this.handleClick(); } }, index.h("ion-icon", { name: this.loading ? "sync" : (this.playing ? "pause" : "play"), class: this.loading ? "animation-spin" : "" })), index.h("h3", null, index.h("stellar-unit", { class: "current", value: this.current, from: "ms", to: "s", onClick: () => { this.handleCurrentClick(); } })), index.h("h3", null, index.h("stellar-unit", { class: "duration", value: this.duration, from: "ms", to: "s" })), index.h("stellar-progress", { value: this.current, max: this.duration, noease: true, blurable: false, slender: true, editable: true, onUpdate: (e) => { this.skipTo(e.detail.value); } })), index.h("stellar-intersection", { element: this.element, multiple: true, in: this.in.bind(this), out: this.out.bind(this) })));
     }
-    get element() { return __chunk_1.getElement(this); }
-    static get style() { return "stellar-interview{--width:800px;--height:800px;display:block}stellar-interview div.card{position:relative;display:block;width:auto;height:auto;margin:auto;overflow:hidden}stellar-interview div.card section{height:inherit;display:block;position:relative;padding-top:0!important}stellar-interview web-audio-visualizer{position:absolute;top:auto;left:0;right:0;bottom:0;width:100%;height:60%;pointer-events:none;z-index:2}stellar-interview web-audio-visualizer[type=circle]{height:100%}stellar-interview web-audio-visualizer[type=bars2]{width:80%;left:10%;right:10%}stellar-interview stellar-360-image,stellar-interview stellar-360-video,stellar-interview stellar-image,stellar-interview stellar-video{--gradient:radial-gradient(circle at 30% 107%,var(--theme-base5) 0%,var(--theme-base8) 5%,var(--theme-complement8) 45%,var(--theme-complement5) 60%,var(--theme-base5) 90%);position:relative;z-index:1;display:block}stellar-interview stellar-progress{position:absolute;top:0;left:0;width:100%;z-index:9}stellar-interview stellar-progress .progress{border:0}stellar-interview h3{color:#fff}stellar-interview stellar-unit{position:absolute;bottom:1rem;z-index:2;color:#fff!important;font-weight:700}stellar-interview stellar-unit.current{left:1rem}stellar-interview stellar-unit.duration{right:1rem}stellar-interview .transcript{position:absolute;bottom:0;width:70%;left:15%;z-index:5;pointer-events:none}stellar-interview .button{position:absolute;-webkit-transition:all .35s var(--ease) 0s,background .175s var(--ease) 0s;transition:all .35s var(--ease) 0s,background .175s var(--ease) 0s;width:9rem;height:9rem;top:50%;right:50%;-webkit-transform:translate(50%,-50%);transform:translate(50%,-50%);border-radius:100%;padding:0;border:0;z-index:3;-webkit-appearance:none;-moz-appearance:none;appearance:none;background:#fff;text-align:center;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;z-index:4;outline:0;cursor:pointer;padding-left:1rem;mix-blend-mode:soft-light}stellar-interview .button:focus,stellar-interview .button:hover{-webkit-transform:translate(50%,-50%) scale(1.1);transform:translate(50%,-50%) scale(1.1);mix-blend-mode:hard-light}stellar-interview .button stellar-asset{font-size:7rem;margin:auto;display:block}stellar-interview .button.loading{padding:0}stellar-interview .button.playing{width:2.8rem;height:2.8rem;top:2.2rem;right:1.8rem;padding:0;background:transparent;-webkit-transition:all .35s var(--ease) 0s,background .175s var(--ease) 0s;transition:all .35s var(--ease) 0s,background .175s var(--ease) 0s}stellar-interview .button.playing stellar-asset{font-size:2.8rem}"; }
-}
+    get element() { return index.getElement(this); }
+    static get style() { return InterviewCss; }
+};
 
 exports.stellar_interview = Interview;

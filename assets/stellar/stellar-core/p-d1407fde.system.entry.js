@@ -1,0 +1,1 @@
+System.register(["./p-de1c7c63.system.js"],(function(e){"use strict";var t;return{setters:[function(e){t=e.r}],execute:function(){var r=e("web_audio_visualizer_shader",function(){function e(e){t(this,e)}e.prototype.render=function(){return""};return e}())}}}));

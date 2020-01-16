@@ -1,4 +1,6 @@
-import { EventEmitter } from '../../../stencil.core';
+import { EventEmitter } from '@stencil/core';
+import './vendor/jsmediatags';
+import "ionicons";
 export declare class Song {
     element: HTMLElement;
     src: string;
@@ -14,9 +16,8 @@ export declare class Song {
     error: Object;
     songChanged: EventEmitter;
     loaded: EventEmitter;
-    readonly url: string;
+    get url(): string;
     componentWillLoad(): Promise<void>;
-    componentDidLoad(): void;
     songChangedHandler(): void;
     updateDetails(details: any): void;
     load(): Promise<void>;

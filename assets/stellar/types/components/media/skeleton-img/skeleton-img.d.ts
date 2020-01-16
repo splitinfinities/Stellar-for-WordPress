@@ -1,3 +1,4 @@
+import "ionicons";
 export declare class SkeletonImg {
     element: HTMLElement;
     width: number;
@@ -5,7 +6,7 @@ export declare class SkeletonImg {
     block: boolean;
     loading: boolean;
     icon: boolean;
-    observer: IntersectionObserver;
-    componentWillLoad(): void;
-    render(): any[];
+    in(): void;
+    out(): void;
+    render(): any;
 }

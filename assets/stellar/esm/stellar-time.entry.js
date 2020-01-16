@@ -1,7 +1,9 @@
-import { d as registerInstance } from './stellar-core-1e602ba1.js';
-import { a as moment } from './chunk-cf2c1f95.js';
+import { r as registerInstance } from './index-bcfb4a9f.js';
+import { m as moment } from './moment-b6827264.js';
 
-class Time {
+const TimeCss = "stellar-time{contain:content;all:inherit}";
+
+const Time = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.format = "MMMM Do YYYY, h:mm:ss a";
@@ -25,7 +27,7 @@ class Time {
     static get watchers() { return {
         "value": ["prepareResult"]
     }; }
-    static get style() { return "stellar-time{all:inherit}"; }
-}
+    static get style() { return TimeCss; }
+};
 
 export { Time as stellar_time };

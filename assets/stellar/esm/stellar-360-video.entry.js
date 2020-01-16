@@ -1,7 +1,7 @@
-import { d as registerInstance, f as h, g as getElement } from './stellar-core-1e602ba1.js';
-import { b as video } from './chunk-af15ecc2.js';
+import { r as registerInstance, h, H as Host, d as getElement } from './index-bcfb4a9f.js';
+import { v as video } from './kaleidoscope.es-5946172c.js';
 
-class Video360 {
+const Video360 = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.width = 1280;
@@ -9,26 +9,24 @@ class Video360 {
     }
     componentDidLoad() {
         this.video = this.element.querySelector(".video");
-        this.viewer = new video({
-            source: this.src,
-            container: this.video,
-            width: this.width,
-            height: this.height,
-            autoplay: true,
-            muted: true,
-            loop: true
-        });
-        this.viewer.render();
-        this.viewer.play();
+        if (this.video && this.src) {
+            this.viewer = new video({
+                source: this.src,
+                container: this.video,
+                width: this.width,
+                height: this.height,
+                autoplay: true,
+                muted: true,
+                loop: true
+            });
+            this.viewer.render();
+            this.viewer.play();
+        }
     }
     render() {
-        return [
-            h("div", { class: "video" }),
-            h("div", { class: "overlay" })
-        ];
+        return h(Host, null, h("div", { class: "video" }), h("div", { class: "overlay" }));
     }
     get element() { return getElement(this); }
-    static get style() { return "stellar-360-video{display:block;position:relative}stellar-360-video canvas{display:block;width:100%!important;height:auto!important}stellar-360-video .overlay{opacity:.3;z-index:3;pointer-events:none;background:var(--gradient,none);mix-blend-mode:var(--blend,multiply);position:absolute;top:0;left:0;width:100%;height:100%}"; }
-}
+};
 
 export { Video360 as stellar_360_video };

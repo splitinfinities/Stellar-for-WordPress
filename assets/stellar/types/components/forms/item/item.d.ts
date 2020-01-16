@@ -1,5 +1,6 @@
-import { EventEmitter } from '../../../stencil.core';
+import { EventEmitter } from '@stencil/core';
 import { RouterHistory, LocationSegments } from '@stencil/router';
+import "ionicons";
 export declare class Item {
     element: HTMLElement;
     size: string;
@@ -12,15 +13,21 @@ export declare class Item {
     fit: boolean;
     simple: boolean;
     danger: boolean;
+    /**
+     * Sets the button or link as an outlined button.
+     */
+    dark: boolean;
     selected: boolean;
     multiple: boolean;
     selectable: boolean;
     focused: boolean;
+    selectTitle: boolean;
     route: boolean;
     history: RouterHistory;
     location: LocationSegments;
     current: boolean;
     slotted: any;
+    select: HTMLStellarSelectElement;
     selectionChanged: EventEmitter;
     mounted: EventEmitter;
     focusChanged: EventEmitter;
@@ -28,13 +35,14 @@ export declare class Item {
     componentWillLoad(): void;
     componentDidLoad(): void;
     componentDidUnload(): void;
+    componentDidUpdate(): void;
     data(): Promise<{
         size: string;
         value: string;
         type: "a" | "button" | "stencil-route-link";
         label: string;
         danger: boolean;
-        slotted: any;
+        slotted: string;
     }>;
     apply(data: any): Promise<void>;
     setFocus(): Promise<void>;

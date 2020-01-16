@@ -1,6 +1,8 @@
-import { d as registerInstance, f as h, g as getElement } from './stellar-core-1e602ba1.js';
+import { r as registerInstance, h, d as getElement } from './index-bcfb4a9f.js';
 
-class Steps {
+const StepsCss = "stellar-steps{display:block;contain:content;width:100%;height:4rem}stellar-steps .step-list{position:relative;width:100%;height:100%;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:justify;justify-content:space-between}stellar-steps .indicator{background:red}";
+
+const Steps = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
     }
@@ -26,7 +28,7 @@ class Steps {
         return (h("div", { class: "step-list", role: "tablist" }, h("slot", null)));
     }
     get element() { return getElement(this); }
-    static get style() { return "stellar-steps{display:block;width:100%;height:4rem}stellar-steps .step-list{position:relative;width:100%;height:100%;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:justify;justify-content:space-between}stellar-steps .indicator{background:red}"; }
-}
+    static get style() { return StepsCss; }
+};
 
 export { Steps as stellar_steps };

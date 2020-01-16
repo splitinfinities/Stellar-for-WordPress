@@ -1,16 +1,40 @@
-import { d as registerInstance, f as h, h as Host } from './stellar-core-1e602ba1.js';
+import { r as registerInstance, e as createEvent, h, H as Host, g as getElement } from './index-36b06d19.js';
 
-class Slide {
+const SlideCss = "stellar-slide{display:block;width:var(--width, 100%);height:100%;contain:content}stellar-slide stellar-image,stellar-slide stellar-video{height:100%;--object-fit:cover;--figure-height:100%}.slide-zoom{text-align:center;display:block;width:100%}.swiper-slide{text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;position:relative;display:-ms-flexbox;display:flex;-ms-flex-negative:0;flex-shrink:0;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%;font-size:18px}.swiper-slide img{width:auto;max-width:100%;height:auto;max-height:100%}";
+
+const Slide = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
+        this.width = "auto";
+        this.swiper = false;
+        this.visible = false;
+        this.switched = createEvent(this, "switched", 7);
+    }
+    componentWillLoad() {
+        if (this.el.closest('stellar-slides, stellar-simple-slides')) {
+            this.swiper = (this.el.closest('stellar-slides, stellar-simple-slides').nodeName === "STELLAR-SLIDES");
+        }
+    }
+    onVisible() {
+        this.switched.emit({ slideId: this.slideId, visible: this.visible });
+    }
+    in() {
+        this.visible = true;
+    }
+    out() {
+        this.visible = false;
     }
     render() {
-        return h(Host, { class: {
-                'slide-zoom': true,
-                'swiper-slide': true
-            } }, h("slot", null));
+        return h(Host, { style: { '--width': this.width }, class: {
+                'slide-zoom': this.swiper,
+                'swiper-slide': this.swiper,
+            } }, h("slot", null), h("stellar-intersection", { element: this.el, multiple: true, in: this.in.bind(this), out: this.out.bind(this) }));
     }
-    static get style() { return "stellar-slide{display:block;width:100%;height:100%}.slide-zoom{display:block}.slide-zoom,.swiper-slide{text-align:center;width:100%}.swiper-slide{-webkit-box-sizing:border-box;box-sizing:border-box;position:relative;display:-ms-flexbox;display:flex;-ms-flex-negative:0;flex-shrink:0;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;height:100%;font-size:18px}.swiper-slide img{width:auto;max-width:100%;height:auto;max-height:100%}"; }
-}
+    get el() { return getElement(this); }
+    static get watchers() { return {
+        "visible": ["onVisible"]
+    }; }
+    static get style() { return SlideCss; }
+};
 
 export { Slide as stellar_slide };

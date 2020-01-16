@@ -1,4 +1,4 @@
-import { EventEmitter } from '../../../stencil.core';
+import { EventEmitter } from '@stencil/core';
 export declare class Slides {
     private container;
     private swiper;
@@ -66,16 +66,19 @@ export declare class Slides {
     autoHeight: boolean;
     nested: boolean;
     pagination: boolean;
+    initialSlide: number;
     loop: boolean;
     watchSlidesProgress: boolean;
     watchSlidesVisibility: boolean;
     slidesPerView: number;
     centeredSlides: boolean;
     spaceBetween: number;
+    blurring: boolean;
     blur: number;
     ease: Function;
     slides: any;
     updateSwiperOptions(): void;
+    instance(): Promise<any>;
     /**
      * Show or hide the pager
      */

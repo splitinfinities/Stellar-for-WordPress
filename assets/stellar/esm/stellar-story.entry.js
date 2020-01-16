@@ -1,6 +1,6 @@
-import { d as registerInstance } from './stellar-core-1e602ba1.js';
-import { a as createCommonjsModule, d as unwrapExports } from './chunk-40f083d9.js';
-import { a as raf_1 } from './chunk-b510dafe.js';
+import { r as registerInstance } from './index-bcfb4a9f.js';
+import { c as createCommonjsModule, u as unwrapExports } from './_commonjsHelpers-ae1b5db5.js';
+import { r as raf_1 } from './index-ef1c2b01.js';
 
 var lib = createCommonjsModule(function (module, exports) {
 
@@ -227,7 +227,7 @@ exports.default = init;
 
 const parallaxis = unwrapExports(lib);
 
-class Story {
+const Story = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.target = "story";
@@ -235,6 +235,6 @@ class Story {
     componentWillLoad() {
         parallaxis({ className: this.target });
     }
-}
+};
 
 export { Story as stellar_story };

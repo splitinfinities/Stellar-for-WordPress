@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-const __chunk_17 = require('./chunk-18e26907.js');
+const index = require('./index-88c31836.js');
+const helpers = require('./helpers-d0b0cbc8.js');
 
 const buildBiquadFilterNode = function (context, effectWC) {
     const biquadFilter = context.createBiquadFilter();
@@ -107,9 +107,9 @@ const biquadResponsiveToMouse = function (effect, effectWC) {
     })();
 };
 
-class WebAudioEffect {
+const WebAudioEffect = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.method = "lowshelf";
         this.value = 1.0;
         this.responds = null;
@@ -121,7 +121,7 @@ class WebAudioEffect {
         this.source = source;
         const webaudio = await source.webAudio();
         this._use = webaudio.querySelector(`web-audio-source[name=${this.use}]`);
-        if (__chunk_17.assert(this.type, `"${this.type}" is not a valid effect - Routing around to masterGain."`)) {
+        if (helpers.assert(this.type, `"${this.type}" is not a valid effect - Routing around to masterGain."`)) {
             if (this.type === "panner") ;
             else if (this.type === "listener") ;
             else if (this.type === "reverb") {
@@ -136,15 +136,13 @@ class WebAudioEffect {
                 // make a DelayNode
                 this.effect = buildDelayNode(this.context, this);
             }
-            else if (this.type === "compression") ;
-            else if (this.type === "distortion") ;
         }
         return this.effect;
     }
     effects() {
         return ["panner", "listener", "reverb", "delay", "compression", "distortion", "filter"];
     }
-    get element() { return __chunk_1.getElement(this); }
-}
+    get element() { return index.getElement(this); }
+};
 
 exports.web_audio_effect = WebAudioEffect;

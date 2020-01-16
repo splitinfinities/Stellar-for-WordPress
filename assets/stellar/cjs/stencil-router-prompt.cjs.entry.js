@@ -2,12 +2,13 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-const __chunk_4 = require('./chunk-ab16519d.js');
+const index = require('./index-88c31836.js');
+require('./index-9d31ce96.js');
+const activeRouter = require('./active-router-986d3a3b.js');
 
-class StencilRouterPrompt {
+const StencilRouterPrompt = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.when = true;
         this.message = '';
     }
@@ -46,13 +47,13 @@ class StencilRouterPrompt {
     render() {
         return null;
     }
-    get el() { return __chunk_1.getElement(this); }
+    get el() { return index.getElement(this); }
     static get watchers() { return {
         "message": ["updateMessage"],
         "when": ["updateMessage"]
     }; }
-}
-__chunk_4.ActiveRouter.injectProps(StencilRouterPrompt, [
+};
+activeRouter.ActiveRouter.injectProps(StencilRouterPrompt, [
     'history',
 ]);
 

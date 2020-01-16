@@ -1,10 +1,20 @@
-import { EventEmitter } from '../../../stencil.core';
+import { EventEmitter } from '@stencil/core';
+import "ionicons";
 export declare class Switch {
     el: HTMLElement;
     checked: boolean;
     checkedDefault: boolean;
-    change: EventEmitter;
+    name: string;
+    novalidate: boolean;
+    required: boolean;
+    status: FormResult;
+    update: EventEmitter;
+    /**
+     * Sets the button or link as an outlined button.
+     */
+    dark: boolean;
     componentDidLoad(): void;
+    validate(): Promise<FormResult>;
     activate(): Promise<void>;
     handleChecked(): void;
     render(): any;

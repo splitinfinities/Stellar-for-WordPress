@@ -1,4 +1,5 @@
-import { EventEmitter } from "../../../stencil.core";
+import { EventEmitter } from "@stencil/core";
+import "ionicons";
 export declare class ToggleOption {
     element: HTMLElement;
     input: HTMLInputElement;
@@ -9,6 +10,10 @@ export declare class ToggleOption {
     icon: boolean;
     tooltip: string;
     disabled: boolean;
+    /**
+     * Sets the button or link as an outlined button.
+     */
+    dark: boolean;
     for: string;
     name: string;
     default: string;

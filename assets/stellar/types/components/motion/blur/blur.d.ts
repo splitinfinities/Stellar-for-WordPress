@@ -3,10 +3,9 @@ export declare class Blur {
     vertical: number;
     horizontal: number;
     generatedId: string;
+    componentWillLoad(): void;
     supported_match(): boolean;
     supported(): any;
-    setBlurFilter(): Promise<void>;
-    componentDidLoad(): void;
     generateId(): string;
     render(): any;
 }

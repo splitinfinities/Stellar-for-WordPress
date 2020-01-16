@@ -2,11 +2,13 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
+const index = require('./index-88c31836.js');
 
-class Scatter {
+const ScatterCss = ":host{contain:content;position:relative;display:contents;width:100%;height:100%}:host ::slotted(*){position:absolute}:host([float]) ::slotted(*:nth-of-type(3n+1)){-webkit-animation-direction:alternate;animation-direction:alternate}:host([float]) ::slotted(*:nth-of-type(3n+2)){animation-direction:reverse}:host([float]) ::slotted(*:nth-of-type(3n+3)){animation-direction:alternate-reverse}:host([float]) ::slotted(*:nth-of-type(5n+1)){-webkit-animation:floating-x 10s infinite;animation:floating-x 10s infinite}:host([float]) ::slotted(*:nth-of-type(5n+2)){-webkit-animation:floating-x-spin 15s infinite;animation:floating-x-spin 15s infinite}:host([float]) ::slotted(*:nth-of-type(5n+3)){-webkit-animation:floating-x-full-spin 35s infinite;animation:floating-x-full-spin 35s infinite}:host([float]) ::slotted(*:nth-of-type(5n+4)){-webkit-animation:floating-x-full-spin-rel 20s infinite;animation:floating-x-full-spin-rel 20s infinite}:host([float]) ::slotted(*:nth-of-type(5n+5)){-webkit-animation:floating-x-full-spin 25s infinite;animation:floating-x-full-spin 25s infinite}";
+
+const Scatter = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.float = false;
         this.min = 0;
         this.max = 100;
@@ -43,10 +45,10 @@ class Scatter {
         return this.randomNumber() === 1 ? "base" : "complement";
     }
     render() {
-        return (__chunk_1.h("slot", null));
+        return (index.h("slot", null));
     }
-    get element() { return __chunk_1.getElement(this); }
-    static get style() { return ":host{position:relative;display:contents;width:100%;height:100%}:host ::slotted(*){position:absolute}:host([float]) ::slotted(:nth-of-type(3n+1)){-webkit-animation-direction:alternate;animation-direction:alternate}:host([float]) ::slotted(:nth-of-type(3n+2)){animation-direction:reverse}:host([float]) ::slotted(:nth-of-type(3n+3)){animation-direction:alternate-reverse}:host([float]) ::slotted(:nth-of-type(5n+1)){-webkit-animation:floating-x 10s infinite;animation:floating-x 10s infinite}:host([float]) ::slotted(:nth-of-type(5n+2)){-webkit-animation:floating-x-spin 15s infinite;animation:floating-x-spin 15s infinite}:host([float]) ::slotted(:nth-of-type(5n+3)){-webkit-animation:floating-x-full-spin 35s infinite;animation:floating-x-full-spin 35s infinite}:host([float]) ::slotted(:nth-of-type(5n+4)){-webkit-animation:floating-x-full-spin-rel 20s infinite;animation:floating-x-full-spin-rel 20s infinite}:host([float]) ::slotted(:nth-of-type(5n+5)){-webkit-animation:floating-x-full-spin 25s infinite;animation:floating-x-full-spin 25s infinite}"; }
-}
+    get element() { return index.getElement(this); }
+    static get style() { return ScatterCss; }
+};
 
 exports.stellar_scatter = Scatter;

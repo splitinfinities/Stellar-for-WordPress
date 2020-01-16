@@ -2,11 +2,13 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
+const index = require('./index-88c31836.js');
 
-class Steps {
+const StepsCss = "stellar-steps{display:block;contain:content;width:100%;height:4rem}stellar-steps .step-list{position:relative;width:100%;height:100%;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:justify;justify-content:space-between}stellar-steps .indicator{background:red}";
+
+const Steps = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
     }
     async steps() {
         if (!this.stepsList || this.stepsList.length === 0) {
@@ -27,10 +29,10 @@ class Steps {
         });
     }
     render() {
-        return (__chunk_1.h("div", { class: "step-list", role: "tablist" }, __chunk_1.h("slot", null)));
+        return (index.h("div", { class: "step-list", role: "tablist" }, index.h("slot", null)));
     }
-    get element() { return __chunk_1.getElement(this); }
-    static get style() { return "stellar-steps{display:block;width:100%;height:4rem}stellar-steps .step-list{position:relative;width:100%;height:100%;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:justify;justify-content:space-between}stellar-steps .indicator{background:red}"; }
-}
+    get element() { return index.getElement(this); }
+    static get style() { return StepsCss; }
+};
 
 exports.stellar_steps = Steps;

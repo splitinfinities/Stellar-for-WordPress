@@ -21,13 +21,14 @@ export declare class WebAudio {
     source(name: any): Promise<HTMLWebAudioSourceElement>;
     get_context(): Promise<AudioContext>;
     is_prepared(): Promise<Boolean>;
+    stop(): Promise<void>;
     /******************
      * Private behavior
      **/
     componentDidLoad(): void;
     connect_the_world(): Promise<boolean>;
     connect_context(): void;
-    connect_sources(): void;
+    connect_sources(): Promise<void>;
     build_sources(): Promise<void>;
     cache_sources(bufferList: any, source: any): Promise<void>;
     connect_visualizers(): Promise<void>;

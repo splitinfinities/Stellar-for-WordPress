@@ -1,5 +1,5 @@
-import { d as registerInstance, g as getElement } from './stellar-core-1e602ba1.js';
-import { a as assert } from './chunk-abb0512a.js';
+import { r as registerInstance, d as getElement } from './index-bcfb4a9f.js';
+import { a as assert } from './helpers-7badaa20.js';
 
 const buildBiquadFilterNode = function (context, effectWC) {
     const biquadFilter = context.createBiquadFilter();
@@ -103,7 +103,7 @@ const biquadResponsiveToMouse = function (effect, effectWC) {
     })();
 };
 
-class WebAudioEffect {
+const WebAudioEffect = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.method = "lowshelf";
@@ -132,8 +132,6 @@ class WebAudioEffect {
                 // make a DelayNode
                 this.effect = buildDelayNode(this.context, this);
             }
-            else if (this.type === "compression") ;
-            else if (this.type === "distortion") ;
         }
         return this.effect;
     }
@@ -141,6 +139,6 @@ class WebAudioEffect {
         return ["panner", "listener", "reverb", "delay", "compression", "distortion", "filter"];
     }
     get element() { return getElement(this); }
-}
+};
 
 export { WebAudioEffect as web_audio_effect };

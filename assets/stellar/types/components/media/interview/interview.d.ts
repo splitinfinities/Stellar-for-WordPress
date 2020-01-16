@@ -1,3 +1,4 @@
+import "ionicons";
 export declare class Interview {
     element: HTMLElement;
     randomId: number;
@@ -10,7 +11,6 @@ export declare class Interview {
     visualization: "circle" | "bars" | "wave" | "bars2";
     audio: HTMLWebAudioElement;
     audio_source: HTMLWebAudioSourceElement;
-    io: IntersectionObserver;
     loaded: boolean;
     loading: boolean;
     visible: boolean;
@@ -20,13 +20,12 @@ export declare class Interview {
     interviewLines: any;
     componentWillLoad(): void;
     componentDidLoad(): Promise<void>;
-    addIntersectionObserver(): void;
     cache: WeakMap<object, any>;
-    handleTimeUpdate(event: any): void;
-    readonly time: number;
-    handleInScreen(): Promise<void>;
+    handleUpdate(event: any): void;
+    get time(): number;
     attachContext(): Promise<void>;
-    handleOffScreen(): Promise<void>;
+    in(): Promise<void>;
+    out(): Promise<void>;
     play(): Promise<void>;
     skipTo(time: number): Promise<void>;
     pause(): Promise<void>;

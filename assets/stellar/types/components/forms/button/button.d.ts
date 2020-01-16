@@ -1,9 +1,10 @@
+import "ionicons";
 export declare class Button {
     element: HTMLElement;
     /**
      * Allows the button to render for different tags.
      */
-    tag: "button" | "submit" | "link" | "span" | "route-link";
+    tag: "button" | "submit" | "link" | "span" | "route-link" | "pjax";
     /**
      * Sets accessibility options on the buttons
      */
@@ -31,11 +32,11 @@ export declare class Button {
     /**
      * Sets the size of the button. Can be tiny, small, medium, or large.
      */
-    size: string | "tiny" | "small" | "medium" | "large";
+    size: "tiny" | "small" | "medium" | "large";
     /**
      * Sets the padding inside of the button. Can be small, medium, or large.
      */
-    padding: string | "small" | "medium" | "large";
+    padding: "tiny" | "small" | "medium" | "large";
     /**
      * Sets the button or link as a button with only an icon.
      */
@@ -71,13 +72,22 @@ export declare class Button {
     /**
      * Sets the button or link as an outlined button.
      */
+    contrast: boolean;
+    /**
+     * Sets the button or link as an outlined button.
+     */
     dark: boolean;
+    /**
+     * Sets the button or link as an outlined button.
+     */
+    pjax: boolean;
     /**
      * Sets the button or link as processing when clicked.
      */
     processable: boolean;
     processing: boolean;
     ghost: boolean;
+    componentWillLoad(): void;
     click(): Promise<boolean>;
     renderSVG(): any;
     renderButton(): any;

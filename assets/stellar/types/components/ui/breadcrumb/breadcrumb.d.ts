@@ -6,6 +6,7 @@ export declare class Breadcrumb {
     target: string;
     label: string;
     disabled: boolean;
+    dark: boolean;
     first: boolean;
     last: boolean;
     componentDidLoad(): void;

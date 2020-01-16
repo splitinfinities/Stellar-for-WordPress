@@ -2,23 +2,25 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-require('./chunk-ee96ca86.js');
-const __chunk_3 = require('./chunk-61a48f92.js');
-require('./chunk-73f3d344.js');
-require('./chunk-73f7b312.js');
-require('./chunk-e87c7d7e.js');
+const index = require('./index-88c31836.js');
+require('./index-d326a972.js');
+require('./_commonjsHelpers-3fc1f64e.js');
+const cssCustomProperties_min = require('./css-custom-properties.min-d46e7f9d.js');
+require('./main-6214461c.js');
+require('./moment-fd045425.js');
 
-class Follow {
+const FollowCss = ":host{--translate-y:calc(-50% + var(--top));--translate-x:calc(-50% + var(--left));position:fixed;top:0;left:0;z-index:20;-webkit-transform:translate3d(var(--translate-x),var(--translate-y), 0);transform:translate3d(var(--translate-x),var(--translate-y), 0);pointer-events:none;contain:content}";
+
+const Follow = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.type = "cursor";
         this.distance = 0.5;
         this.padding = 40;
     }
     componentWillLoad() {
         this.update();
-        __chunk_3.properties.set({ "--left": `50%`, "--top": `-3000px` }, this.element);
+        cssCustomProperties_min.properties.set({ "--left": `50%`, "--top": `-3000px` }, this.element);
     }
     componentDidLoad() {
         setTimeout(() => {
@@ -37,23 +39,23 @@ class Follow {
         }
     }
     attachScroll() {
-        __chunk_3.properties.set({ "--top": `${window.pageYOffset + this.offset}px` }, this.element);
+        cssCustomProperties_min.properties.set({ "--top": `${window.pageYOffset + this.offset}px` }, this.element);
         // @ts-ignore
         window.addEventListener("scroll", () => {
-            __chunk_3.properties.set({ "--top": `${window.pageYOffset + this.offset}px` }, this.element);
+            cssCustomProperties_min.properties.set({ "--top": `${window.pageYOffset + this.offset}px` }, this.element);
         }, { passive: true });
     }
     attachCursor() {
         // @ts-ignore
         window.addEventListener("mousemove", (e) => {
-            __chunk_3.properties.set({ "--top": `${e.clientY}px` }, this.element);
-            __chunk_3.properties.set({ "--left": `${this.minmaxx(e.clientX)}px` }, this.element);
+            cssCustomProperties_min.properties.set({ "--top": `${e.clientY}px` }, this.element);
+            cssCustomProperties_min.properties.set({ "--left": `${this.minmaxx(e.clientX)}px` }, this.element);
         }, { passive: true });
         window.addEventListener("deviceorientation", (e) => {
             const z = Math.abs(e.alpha);
             const value = z / 360;
             const percentage = value * 100;
-            __chunk_3.properties.set({ "--left": `${this.minmaxx(percentage)}px` }, this.element);
+            cssCustomProperties_min.properties.set({ "--left": `${this.minmaxx(percentage)}px` }, this.element);
         }, true);
     }
     minmaxx(x) {
@@ -68,14 +70,14 @@ class Follow {
         return x;
     }
     render() {
-        return __chunk_1.h("slot", null);
+        return index.h("slot", null);
     }
-    get element() { return __chunk_1.getElement(this); }
+    get element() { return index.getElement(this); }
     static get watchers() { return {
         "type": ["update"],
         "distance": ["update"]
     }; }
-    static get style() { return ":host{--translate-y:calc(-50% + var(--top));--translate-x:calc(-50% + var(--left));position:fixed;top:0;left:0;z-index:20;-webkit-transform:translate3d(var(--translate-x),var(--translate-y),0);transform:translate3d(var(--translate-x),var(--translate-y),0);pointer-events:none}"; }
-}
+    static get style() { return FollowCss; }
+};
 
 exports.stellar_follow = Follow;

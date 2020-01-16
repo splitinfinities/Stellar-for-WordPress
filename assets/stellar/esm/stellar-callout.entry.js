@@ -1,8 +1,13 @@
-import { d as registerInstance, f as h, g as getElement } from './stellar-core-1e602ba1.js';
+import { r as registerInstance, h, H as Host, d as getElement } from './index-bcfb4a9f.js';
+import './index-9ff8bd5c.js';
+import { T as Tunnel } from './theme-0e374e95.js';
 
-class Callout {
+const CalloutCss = ":host,:host *,:host *:before,:host *:after{-webkit-box-sizing:border-box;box-sizing:border-box}:host{contain:content;display:block;padding:2rem;background-color:var(--theme-base4)}:host .callout-wrap{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center}:host(.db) .callout-wrap{display:block}:host ::slotted(*){color:var(--gray9)}:host([dark]){background-color:var(--theme-base6)}";
+
+const Callout = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
+        this.dark = false;
         this.type = "default";
         this.theme = "gray";
     }
@@ -11,15 +16,6 @@ class Callout {
         this.element.setAttribute('aria-role', "status");
         this.element.setAttribute('tabindex', `0`);
         this.handleType();
-        this.handleTheme();
-    }
-    handleTheme() {
-        this.element.classList.forEach((c) => {
-            if (c.startsWith('theme-')) {
-                this.element.classList.remove(c);
-            }
-        });
-        this.element.classList.add(`theme-${this.theme}`);
     }
     handleType() {
         switch (this.type) {
@@ -45,14 +41,14 @@ class Callout {
         }
     }
     render() {
-        return (h("div", { class: "callout-wrap" }, h("slot", null)));
+        return h(Host, { class: `theme-${this.theme}` }, h("div", { class: "callout-wrap" }, h("slot", null)));
     }
     get element() { return getElement(this); }
     static get watchers() { return {
-        "theme": ["handleTheme"],
         "type": ["handleType"]
     }; }
-    static get style() { return ":host,:host *,:host :after,:host :before{-webkit-box-sizing:border-box;box-sizing:border-box}:host{display:block;padding:2rem;background-color:var(--theme-base4)}:host .callout-wrap{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center}:host(.db) .callout-wrap{display:block}:host ::slotted(*){color:var(--gray9)}:host-context(.dark-mode):host{background-color:var(--theme-base6)}"; }
-}
+    static get style() { return CalloutCss; }
+};
+Tunnel.injectProps(Callout, ['dark']);
 
 export { Callout as stellar_callout };

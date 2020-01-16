@@ -1,3 +1,4 @@
+import "ionicons";
 export declare class Breadcrumbs {
     el: HTMLElement;
     icon: string;
@@ -7,6 +8,8 @@ export declare class Breadcrumbs {
     home: string;
     label: string;
     description: string;
+    size: "tiny" | "small" | "medium" | "large";
+    dark: boolean;
     color: string;
     componentWillLoad(): void;
     updateBreadcrumbs(): void;

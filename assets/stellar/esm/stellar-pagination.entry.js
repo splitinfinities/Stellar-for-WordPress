@@ -1,11 +1,16 @@
-import { d as registerInstance, i as createEvent, f as h, g as getElement } from './stellar-core-1e602ba1.js';
-import './chunk-40f083d9.js';
-import { a as properties } from './chunk-d0cf38d8.js';
-import { a as blurringEase } from './chunk-27460e3f.js';
-import './chunk-f26db59a.js';
-import './chunk-cf2c1f95.js';
+import { r as registerInstance, e as createEvent, h, d as getElement } from './index-bcfb4a9f.js';
+import './index-c982b830.js';
+import { b as blurringEase } from './index-320c6878.js';
+import './_commonjsHelpers-ae1b5db5.js';
+import { p as properties } from './css-custom-properties.min-dfcc36c1.js';
+import './main-07539eea.js';
+import './moment-b6827264.js';
+import './index-9ff8bd5c.js';
+import { T as Tunnel } from './theme-0e374e95.js';
 
-class Pagination {
+const PaginationCss = ":host,:host *,:host *:before,:host *:after{-webkit-box-sizing:border-box;box-sizing:border-box}:host{display:block;color:var(--color);font-size:1.6rem;--color:var(--theme-base6);--hover:var(--theme-base9);text-align:center;contain:content}:host .pagination-container{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center}:host .indicator{position:absolute;top:.2rem;left:var(--indicator-left, 50%);-webkit-transition:all 220ms var(--ease) 0s;transition:all 220ms var(--ease) 0s;width:2.4rem;height:1.6rem;margin-left:-0.125em;background:var(--theme-base5);z-index:0;border-radius:100%}:host stellar-blur[horizontal=\"0\"] .indicator{height:2.4rem;top:-0.2rem}:host .pagination-wrap{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%}:host a{text-decoration:none;border-radius:100%}:host a.icon{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:2rem;height:2rem;color:var(--color)}:host a.icon:hover,:host a.icon:active{color:var(--hover)}:host a.current-number:hover,:host a.current-number:active,:host a.current-number:focus{color:white}:host .ellipsis{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:2rem;height:2rem;margin:0 0.25rem}:host .pages{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;margin:0 0.5rem;position:relative;-webkit-transition:all 200ms var(--ease) 0s;transition:all 200ms var(--ease) 0s}:host .number{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;color:currentColor;font-weight:700;-webkit-transition:all 200ms var(--ease) 0ms;transition:all 200ms var(--ease) 0ms;margin:1rem 0;width:0;height:0;opacity:1;z-index:1;padding:0;-webkit-transform:scale(0);transform:scale(0)}:host .number[data-visible=\"false\"]{-webkit-transform:scale(0);transform:scale(0)}:host .number[data-visible]{width:2rem;height:2rem;opacity:1;padding:0;margin:0 0.25em;-webkit-transform:scale(1);transform:scale(1)}:host .number:hover,:host .number:active{color:var(--hover)}:host .current-number{margin:1rem;color:white}:host .skip-button{margin-left:36px;line-height:0}:host *[data-hidden=yes]{display:none !important}:host .compact-pagination-container{display:-ms-flexbox;display:flex;-ms-flex-align:baseline;align-items:baseline}:host .compact-pagination-container stellar-input{width:5rem;--padding:0 1rem;margin:0 1rem}:host stellar-blur{position:absolute;width:100%;height:100%}:host([dark]) a.number:hover,:host([dark]) a.number:active,:host([dark]) a.number:focus{color:white}:host([dark]) .current-number{color:var(--gray9) !important}:host([dark]) a.icon:hover,:host([dark]) a.icon:active,:host([dark]) a.icon:focus{color:white}";
+
+const Pagination = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         /**
@@ -16,6 +21,7 @@ class Pagination {
         this.current = 1;
         this.padding = 2;
         this.color = "gray";
+        this.dark = false;
         this.url = "#page-{0}";
         this.__current = 1;
         this.__first = 1;
@@ -111,19 +117,19 @@ class Pagination {
     }
     renderFirstPageButton() {
         const hidden = (this.__current > 1) ? "no" : "yes";
-        return (h("a", { href: this.__firstPageUrl(), "data-page": this.__first, onClick: (event) => this.handleClick(event), class: "icon first", "data-hidden": hidden }, h("stellar-asset", { name: "skip-backward", block: true })));
+        return (h("a", { href: this.__firstPageUrl(), "data-page": this.__first, onClick: (event) => this.handleClick(event), class: "icon first", "data-hidden": hidden }, h("ion-icon", { name: "skip-backward" })));
     }
     renderPreviousPageButton() {
         const hidden = (typeof this.__previous === "number" && this.__current > 1) ? "no" : "yes";
-        return (h("a", { href: this.__previousPageUrl(), "data-page": this.__previous, onClick: (event) => this.handleClick(event), class: "icon previous", "data-hidden": hidden }, h("stellar-asset", { name: "rewind", block: true })));
+        return (h("a", { href: this.__previousPageUrl(), "data-page": this.__previous, onClick: (event) => this.handleClick(event), class: "icon previous", "data-hidden": hidden }, h("ion-icon", { name: "rewind" })));
     }
     renderNextPageButton() {
         const hidden = (typeof this.__next === "number" || this.__current < this.pages) ? "no" : "yes";
-        return (h("a", { href: this.__nextPageUrl(), "data-page": this.__next, onClick: (event) => this.handleClick(event), class: "icon next", "data-hidden": hidden }, h("stellar-asset", { name: "fastforward", block: true })));
+        return (h("a", { href: this.__nextPageUrl(), "data-page": this.__next, onClick: (event) => this.handleClick(event), class: "icon next", "data-hidden": hidden }, h("ion-icon", { name: "fastforward" })));
     }
     renderLastPageButton() {
         const hidden = (this.__current < this.pages) ? "no" : "yes";
-        return (h("a", { href: this.__lastPageUrl(), "data-page": this.__last, onClick: (event) => this.handleClick(event), class: "icon last", "data-hidden": hidden }, h("stellar-asset", { name: "skip-forward", block: true })));
+        return (h("a", { href: this.__lastPageUrl(), "data-page": this.__last, onClick: (event) => this.handleClick(event), class: "icon last", "data-hidden": hidden }, h("ion-icon", { name: "skip-forward" })));
     }
     renderPagesList() {
         return this.__surroundingPages.map((page) => {
@@ -150,7 +156,8 @@ class Pagination {
     static get watchers() { return {
         "__current": ["currentObserver"]
     }; }
-    static get style() { return ":host,:host *,:host :after,:host :before{-webkit-box-sizing:border-box;box-sizing:border-box}:host{display:block;color:var(--color);font-size:1.6rem;--color:var(--theme-base6);--hover:var(--theme-base9);text-align:center}:host .pagination-container{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center}:host .indicator{position:absolute;top:.2rem;left:var(--indicator-left,50%);-webkit-transition:all .22s var(--ease) 0s;transition:all .22s var(--ease) 0s;width:2.4rem;height:1.6rem;margin-left:-.125em;background:var(--theme-base5);z-index:0;border-radius:100%}:host stellar-blur[horizontal=\"0\"] .indicator{height:2.4rem;top:-.2rem}:host .pagination-wrap{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%}:host a{text-decoration:none;border-radius:100%}:host a.icon{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:2rem;height:2rem;color:var(--color)}:host a.icon:active,:host a.icon:hover{color:var(--hover)}:host a.current-number:active,:host a.current-number:focus,:host a.current-number:hover{color:#fff}:host .ellipsis{width:2rem;height:2rem;margin:0 .25rem}:host .ellipsis,:host .pages{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center}:host .pages{margin:0 .5rem;position:relative;-webkit-transition:all .2s var(--ease) 0s;transition:all .2s var(--ease) 0s}:host .number{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;color:currentColor;font-weight:700;-webkit-transition:all .2s var(--ease) 0ms;transition:all .2s var(--ease) 0ms;margin:1rem 0;width:0;height:0;opacity:1;z-index:1;padding:0}:host .number,:host .number[data-visible=false]{-webkit-transform:scale(0);transform:scale(0)}:host .number[data-visible]{width:2rem;height:2rem;opacity:1;padding:0;margin:0 .25em;-webkit-transform:scale(1);transform:scale(1)}:host .number:active,:host .number:hover{color:var(--hover)}:host .current-number{margin:1rem;color:#fff}:host .skip-button{margin-left:36px;line-height:0}:host [data-hidden=yes]{display:none!important}:host .compact-pagination-container{display:-ms-flexbox;display:flex;-ms-flex-align:baseline;align-items:baseline}:host .compact-pagination-container stellar-input{width:5rem;--padding:0 1rem;margin:0 1rem}:host stellar-blur{position:absolute;width:100%;height:100%}:host-context(.dark-mode):host a.number:active,:host-context(.dark-mode):host a.number:focus,:host-context(.dark-mode):host a.number:hover{color:#fff}:host-context(.dark-mode):host .current-number{color:var(--gray9)!important}:host-context(.dark-mode):host a.icon:active,:host-context(.dark-mode):host a.icon:focus,:host-context(.dark-mode):host a.icon:hover{color:#fff}"; }
-}
+    static get style() { return PaginationCss; }
+};
+Tunnel.injectProps(Pagination, ['dark']);
 
 export { Pagination as stellar_pagination };

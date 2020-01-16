@@ -1,41 +1,44 @@
-import { d as registerInstance, f as h } from './stellar-core-1e602ba1.js';
+import { r as registerInstance } from './index-bcfb4a9f.js';
 
-class WebAudioSequencer {
+const WebAudioSequencer = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.name = "web_audio_sequencer";
         this.autoplay = false;
         this.taps = 4;
-        this.context = () => {
+        this.context = async () => {
             // @ts-ignore
-            return document.querySelector('web-audio').get_context();
+            return await document.querySelector('web-audio').get_context();
         };
         this.noteTime = 0.0;
         this.currentTap = 0;
         this.totalPlayTime = 0.0;
-        this.custom = () => {
-            // do nothing
-        };
+        this.custom = async () => { };
     }
     componentDidLoad() {
         if (this.autoplay) {
             this.play();
         }
     }
-    schedule() {
-        var currentTime = this.context().currentTime;
+    async schedule() {
+        var currentTime = (await this.context()).currentTime;
         // The sequence starts at startTime, so normalize currentTime so that it's 0 at the start of the sequence.
         currentTime -= this.startTime;
         while (this.noteTime < currentTime + 0.005) {
-            this.totalPlayTime = this.noteTime + this.startTime;
-            if (this.currentTap === 0) {
-                this.iterations++;
+            try {
+                await this.custom();
+                this.totalPlayTime = this.noteTime + this.startTime;
+                if (this.currentTap === 0) {
+                    this.iterations++;
+                }
+                this.advance();
             }
-            this.custom();
-            this.advance();
+            catch (e) {
+                console.error(e);
+            }
         }
-        this.timer = setTimeout(() => {
-            this.schedule();
+        this.timer = setTimeout(async () => {
+            await this.schedule();
         }, 0);
     }
     advance() {
@@ -49,26 +52,22 @@ class WebAudioSequencer {
         this.noteTime += 0.25 * secondsPerBeat;
     }
     async play() {
-        if (!this.context()) {
+        if (!(await this.context())) {
             // @ts-ignore
             await document.querySelector('web-audio').connect_the_world();
         }
         this.iterations = 0;
-        this.startTime = this.context().currentTime + 0.005 || 0.005;
-        this.schedule();
+        this.startTime = (await this.context()).currentTime + 0.005 || 0.005;
+        await this.schedule();
     }
     async stop() {
         this.iterations = 0;
+        this.totalPlayTime = 0;
         this.startTime = null;
         this.currentTap = 0;
+        this.noteTime = 0;
         clearTimeout(this.timer);
     }
-    render() {
-        return [
-            h("button", { class: "play", onClick: () => { this.play(); } }, "Play"),
-            h("button", { class: "stop", onClick: () => { this.stop(); } }, "Stop")
-        ];
-    }
-}
+};
 
 export { WebAudioSequencer as web_audio_sequencer };

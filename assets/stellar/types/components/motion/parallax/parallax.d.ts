@@ -1,7 +1,8 @@
 export declare class Parallax {
-    relax: any;
+    el: HTMLElement;
+    center: boolean;
+    horizontal: boolean;
+    easeBoxes: any[];
     componentWillLoad(): void;
-    componentDidLoad(): void;
-    reload(): Promise<void>;
     render(): any;
 }

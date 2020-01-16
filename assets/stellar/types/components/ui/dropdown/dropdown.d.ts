@@ -1,14 +1,15 @@
+import "ionicons";
 export declare class Dropdown {
     element: HTMLElement;
     position: "left" | "center" | "right";
     icon: boolean;
+    iconName: string;
     label: string;
     open: boolean;
-    ease: TweenInstance;
-    blur: number;
-    timeout: any;
+    dark: boolean;
+    footer: boolean;
+    componentWillLoad(): void;
     componentDidLoad(): void;
-    observeOpen(): void;
     onToggle(): void;
     render(): any;
 }

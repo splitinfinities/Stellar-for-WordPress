@@ -1,3 +1,4 @@
+import "ionicons";
 export declare class PasswordRequirements {
     element: HTMLElement;
     for: string;
@@ -12,8 +13,8 @@ export declare class PasswordRequirements {
     commonNames: boolean;
     repeated: boolean;
     componentDidLoad(): void;
-    readonly fs: "fs7" | "fs6" | "fs4" | "fs5";
-    readonly icon: "fs6" | "fs4" | "fs5" | "fs1";
+    get fs(): "fs7" | "fs6" | "fs4" | "fs5";
+    get icon(): "fs6" | "fs4" | "fs5" | "fs1";
     handleValueChange(): void;
     renderLength(): any;
     renderUppercase(): any;

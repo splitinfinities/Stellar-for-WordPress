@@ -2,11 +2,11 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
+const index = require('./index-88c31836.js');
 
-class AsyncContent {
+const AsyncContent = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.content = '';
     }
     componentWillLoad() {
@@ -22,11 +22,11 @@ class AsyncContent {
         });
     }
     render() {
-        return (__chunk_1.h("div", { innerHTML: this.content }));
+        return (index.h("div", { innerHTML: this.content }));
     }
     static get watchers() { return {
         "documentLocation": ["fetchNewContent"]
     }; }
-}
+};
 
 exports.stencil_async_content = AsyncContent;

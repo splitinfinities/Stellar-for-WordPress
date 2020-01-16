@@ -1,4 +1,3 @@
-import "ionicons";
 export declare class Asset {
     src: string;
     name: string;

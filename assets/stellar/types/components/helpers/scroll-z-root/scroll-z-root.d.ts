@@ -17,6 +17,7 @@ export declare class ScrollZRoot {
     randomFloat(min: any, max: any): any;
     componentWillLoad(): void;
     prepare(): void;
+    scatter(): Promise<void>;
     setSceneHeight(): void;
     moveCamera(): void;
     moveCameraAngle(event: any): void;

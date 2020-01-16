@@ -2,16 +2,21 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-require('./chunk-ee96ca86.js');
-const __chunk_3 = require('./chunk-61a48f92.js');
-const __chunk_10 = require('./chunk-73f3d344.js');
-require('./chunk-73f7b312.js');
-require('./chunk-e87c7d7e.js');
+const index = require('./index-88c31836.js');
+require('./index-9b3c8604.js');
+const index$1$1 = require('./index-d326a972.js');
+require('./_commonjsHelpers-3fc1f64e.js');
+const cssCustomProperties_min = require('./css-custom-properties.min-d46e7f9d.js');
+require('./main-6214461c.js');
+require('./moment-fd045425.js');
+require('./index-9d31ce96.js');
+const theme = require('./theme-1038bd3c.js');
 
-class Pagination {
+const PaginationCss = ":host,:host *,:host *:before,:host *:after{-webkit-box-sizing:border-box;box-sizing:border-box}:host{display:block;color:var(--color);font-size:1.6rem;--color:var(--theme-base6);--hover:var(--theme-base9);text-align:center;contain:content}:host .pagination-container{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center}:host .indicator{position:absolute;top:.2rem;left:var(--indicator-left, 50%);-webkit-transition:all 220ms var(--ease) 0s;transition:all 220ms var(--ease) 0s;width:2.4rem;height:1.6rem;margin-left:-0.125em;background:var(--theme-base5);z-index:0;border-radius:100%}:host stellar-blur[horizontal=\"0\"] .indicator{height:2.4rem;top:-0.2rem}:host .pagination-wrap{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%}:host a{text-decoration:none;border-radius:100%}:host a.icon{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:2rem;height:2rem;color:var(--color)}:host a.icon:hover,:host a.icon:active{color:var(--hover)}:host a.current-number:hover,:host a.current-number:active,:host a.current-number:focus{color:white}:host .ellipsis{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:2rem;height:2rem;margin:0 0.25rem}:host .pages{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;margin:0 0.5rem;position:relative;-webkit-transition:all 200ms var(--ease) 0s;transition:all 200ms var(--ease) 0s}:host .number{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;color:currentColor;font-weight:700;-webkit-transition:all 200ms var(--ease) 0ms;transition:all 200ms var(--ease) 0ms;margin:1rem 0;width:0;height:0;opacity:1;z-index:1;padding:0;-webkit-transform:scale(0);transform:scale(0)}:host .number[data-visible=\"false\"]{-webkit-transform:scale(0);transform:scale(0)}:host .number[data-visible]{width:2rem;height:2rem;opacity:1;padding:0;margin:0 0.25em;-webkit-transform:scale(1);transform:scale(1)}:host .number:hover,:host .number:active{color:var(--hover)}:host .current-number{margin:1rem;color:white}:host .skip-button{margin-left:36px;line-height:0}:host *[data-hidden=yes]{display:none !important}:host .compact-pagination-container{display:-ms-flexbox;display:flex;-ms-flex-align:baseline;align-items:baseline}:host .compact-pagination-container stellar-input{width:5rem;--padding:0 1rem;margin:0 1rem}:host stellar-blur{position:absolute;width:100%;height:100%}:host([dark]) a.number:hover,:host([dark]) a.number:active,:host([dark]) a.number:focus{color:white}:host([dark]) .current-number{color:var(--gray9) !important}:host([dark]) a.icon:hover,:host([dark]) a.icon:active,:host([dark]) a.icon:focus{color:white}";
+
+const Pagination = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         /**
          * Public: Sets the max cap of pages you can skip through
          */
@@ -20,13 +25,14 @@ class Pagination {
         this.current = 1;
         this.padding = 2;
         this.color = "gray";
+        this.dark = false;
         this.url = "#page-{0}";
         this.__current = 1;
         this.__first = 1;
         this.__previous = false;
         this.__next = false;
         this.blur = 0;
-        this.ease = __chunk_10.blurringEase({
+        this.ease = index$1$1.blurringEase({
             end: 10,
             start: -1,
             duration: 125,
@@ -39,7 +45,7 @@ class Pagination {
                 this.affixDistance();
             },
         });
-        this.changed = __chunk_1.createEvent(this, "changed", 7);
+        this.changed = index.createEvent(this, "changed", 7);
     }
     __firstPageUrl() { return ""; }
     __previousPageUrl() { return ""; }
@@ -71,7 +77,7 @@ class Pagination {
     affixDistance() {
         const distance = this.element.shadowRoot.querySelector('.current-number');
         if (distance) {
-            __chunk_3.properties.set({
+            cssCustomProperties_min.properties.set({
                 "--indicator-left": `${distance.offsetLeft}px`
             }, this.element);
         }
@@ -115,46 +121,47 @@ class Pagination {
     }
     renderFirstPageButton() {
         const hidden = (this.__current > 1) ? "no" : "yes";
-        return (__chunk_1.h("a", { href: this.__firstPageUrl(), "data-page": this.__first, onClick: (event) => this.handleClick(event), class: "icon first", "data-hidden": hidden }, __chunk_1.h("stellar-asset", { name: "skip-backward", block: true })));
+        return (index.h("a", { href: this.__firstPageUrl(), "data-page": this.__first, onClick: (event) => this.handleClick(event), class: "icon first", "data-hidden": hidden }, index.h("ion-icon", { name: "skip-backward" })));
     }
     renderPreviousPageButton() {
         const hidden = (typeof this.__previous === "number" && this.__current > 1) ? "no" : "yes";
-        return (__chunk_1.h("a", { href: this.__previousPageUrl(), "data-page": this.__previous, onClick: (event) => this.handleClick(event), class: "icon previous", "data-hidden": hidden }, __chunk_1.h("stellar-asset", { name: "rewind", block: true })));
+        return (index.h("a", { href: this.__previousPageUrl(), "data-page": this.__previous, onClick: (event) => this.handleClick(event), class: "icon previous", "data-hidden": hidden }, index.h("ion-icon", { name: "rewind" })));
     }
     renderNextPageButton() {
         const hidden = (typeof this.__next === "number" || this.__current < this.pages) ? "no" : "yes";
-        return (__chunk_1.h("a", { href: this.__nextPageUrl(), "data-page": this.__next, onClick: (event) => this.handleClick(event), class: "icon next", "data-hidden": hidden }, __chunk_1.h("stellar-asset", { name: "fastforward", block: true })));
+        return (index.h("a", { href: this.__nextPageUrl(), "data-page": this.__next, onClick: (event) => this.handleClick(event), class: "icon next", "data-hidden": hidden }, index.h("ion-icon", { name: "fastforward" })));
     }
     renderLastPageButton() {
         const hidden = (this.__current < this.pages) ? "no" : "yes";
-        return (__chunk_1.h("a", { href: this.__lastPageUrl(), "data-page": this.__last, onClick: (event) => this.handleClick(event), class: "icon last", "data-hidden": hidden }, __chunk_1.h("stellar-asset", { name: "skip-forward", block: true })));
+        return (index.h("a", { href: this.__lastPageUrl(), "data-page": this.__last, onClick: (event) => this.handleClick(event), class: "icon last", "data-hidden": hidden }, index.h("ion-icon", { name: "skip-forward" })));
     }
     renderPagesList() {
         return this.__surroundingPages.map((page) => {
-            return (__chunk_1.h("a", { href: page.url, "data-page": page.number, "data-visible": page.visible, "data-current": page.current, onClick: (event) => this.handleClick(event), class: (page.number === this.__current || page.number === this.current) ? 'current-number number' : 'number' }, page.number));
+            return (index.h("a", { href: page.url, "data-page": page.number, "data-visible": page.visible, "data-current": page.current, onClick: (event) => this.handleClick(event), class: (page.number === this.__current || page.number === this.current) ? 'current-number number' : 'number' }, page.number));
         });
     }
     renderPagesPreviousEllipsis() {
         const hidden = ((this.__current - this.padding) > 1) ? "no" : "yes";
-        return (__chunk_1.h("div", { class: "ellipsis previous", "data-hidden": hidden }, "\u2026"));
+        return (index.h("div", { class: "ellipsis previous", "data-hidden": hidden }, "\u2026"));
     }
     renderPagesNextEllipsis() {
         const hidden = ((this.__current + this.padding + 1) < this.pages) ? "no" : "yes";
-        return (__chunk_1.h("div", { class: "ellipsis next", "data-hidden": hidden }, "\u2026"));
+        return (index.h("div", { class: "ellipsis next", "data-hidden": hidden }, "\u2026"));
     }
     render() {
         if (this.type === "full") {
-            return (__chunk_1.h("span", { class: "pagination-container" }, __chunk_1.h("div", { class: "pagination-wrap" }, this.renderFirstPageButton(), this.renderPreviousPageButton(), __chunk_1.h("div", { class: "pages" }, this.renderPagesPreviousEllipsis(), this.renderPagesList(), this.renderPagesNextEllipsis(), __chunk_1.h("stellar-blur", { horizontal: this.blur }, __chunk_1.h("div", { class: "indicator" }))), this.renderNextPageButton(), this.renderLastPageButton())));
+            return (index.h("span", { class: "pagination-container" }, index.h("div", { class: "pagination-wrap" }, this.renderFirstPageButton(), this.renderPreviousPageButton(), index.h("div", { class: "pages" }, this.renderPagesPreviousEllipsis(), this.renderPagesList(), this.renderPagesNextEllipsis(), index.h("stellar-blur", { horizontal: this.blur }, index.h("div", { class: "indicator" }))), this.renderNextPageButton(), this.renderLastPageButton())));
         }
         else if (this.type === "compact") {
-            return (__chunk_1.h("span", { class: "compact-pagination-container" }, __chunk_1.h("p", null, "Page"), __chunk_1.h("stellar-input", { type: "number", size: "small", max: this.pages, value: this.__current, min: 1, onChange: (e) => { this.handleChange(e); } }), "of ", this.pages));
+            return (index.h("span", { class: "compact-pagination-container" }, index.h("p", null, "Page"), index.h("stellar-input", { type: "number", size: "small", max: this.pages, value: this.__current, min: 1, onChange: (e) => { this.handleChange(e); } }), "of ", this.pages));
         }
     }
-    get element() { return __chunk_1.getElement(this); }
+    get element() { return index.getElement(this); }
     static get watchers() { return {
         "__current": ["currentObserver"]
     }; }
-    static get style() { return ":host,:host *,:host :after,:host :before{-webkit-box-sizing:border-box;box-sizing:border-box}:host{display:block;color:var(--color);font-size:1.6rem;--color:var(--theme-base6);--hover:var(--theme-base9);text-align:center}:host .pagination-container{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center}:host .indicator{position:absolute;top:.2rem;left:var(--indicator-left,50%);-webkit-transition:all .22s var(--ease) 0s;transition:all .22s var(--ease) 0s;width:2.4rem;height:1.6rem;margin-left:-.125em;background:var(--theme-base5);z-index:0;border-radius:100%}:host stellar-blur[horizontal=\"0\"] .indicator{height:2.4rem;top:-.2rem}:host .pagination-wrap{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:100%}:host a{text-decoration:none;border-radius:100%}:host a.icon{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;width:2rem;height:2rem;color:var(--color)}:host a.icon:active,:host a.icon:hover{color:var(--hover)}:host a.current-number:active,:host a.current-number:focus,:host a.current-number:hover{color:#fff}:host .ellipsis{width:2rem;height:2rem;margin:0 .25rem}:host .ellipsis,:host .pages{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center}:host .pages{margin:0 .5rem;position:relative;-webkit-transition:all .2s var(--ease) 0s;transition:all .2s var(--ease) 0s}:host .number{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;color:currentColor;font-weight:700;-webkit-transition:all .2s var(--ease) 0ms;transition:all .2s var(--ease) 0ms;margin:1rem 0;width:0;height:0;opacity:1;z-index:1;padding:0}:host .number,:host .number[data-visible=false]{-webkit-transform:scale(0);transform:scale(0)}:host .number[data-visible]{width:2rem;height:2rem;opacity:1;padding:0;margin:0 .25em;-webkit-transform:scale(1);transform:scale(1)}:host .number:active,:host .number:hover{color:var(--hover)}:host .current-number{margin:1rem;color:#fff}:host .skip-button{margin-left:36px;line-height:0}:host [data-hidden=yes]{display:none!important}:host .compact-pagination-container{display:-ms-flexbox;display:flex;-ms-flex-align:baseline;align-items:baseline}:host .compact-pagination-container stellar-input{width:5rem;--padding:0 1rem;margin:0 1rem}:host stellar-blur{position:absolute;width:100%;height:100%}:host-context(.dark-mode):host a.number:active,:host-context(.dark-mode):host a.number:focus,:host-context(.dark-mode):host a.number:hover{color:#fff}:host-context(.dark-mode):host .current-number{color:var(--gray9)!important}:host-context(.dark-mode):host a.icon:active,:host-context(.dark-mode):host a.icon:focus,:host-context(.dark-mode):host a.icon:hover{color:#fff}"; }
-}
+    static get style() { return PaginationCss; }
+};
+theme.Tunnel.injectProps(Pagination, ['dark']);
 
 exports.stellar_pagination = Pagination;

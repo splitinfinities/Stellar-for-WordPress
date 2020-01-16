@@ -1,4 +1,4 @@
-export declare class Card {
+export declare class Stripe {
     element: HTMLElement;
     input: HTMLInputElement;
     token: string;

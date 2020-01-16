@@ -1,7 +1,8 @@
-import { d as registerInstance, g as getElement } from './stellar-core-1e602ba1.js';
-import { a as ActiveRouter } from './chunk-8013bf55.js';
+import { r as registerInstance, d as getElement } from './index-bcfb4a9f.js';
+import './index-9ff8bd5c.js';
+import { A as ActiveRouter } from './active-router-e331149e.js';
 
-class StencilRouterPrompt {
+const StencilRouterPrompt = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.when = true;
@@ -47,7 +48,7 @@ class StencilRouterPrompt {
         "message": ["updateMessage"],
         "when": ["updateMessage"]
     }; }
-}
+};
 ActiveRouter.injectProps(StencilRouterPrompt, [
     'history',
 ]);

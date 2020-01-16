@@ -1,4 +1,5 @@
-import { EventEmitter } from '../../../stencil.core';
+import { EventEmitter } from '@stencil/core';
+import "ionicons";
 export declare class Playlist {
     element: HTMLElement;
     visualizationColor: string;
@@ -12,23 +13,24 @@ export declare class Playlist {
     playing: boolean;
     load: boolean;
     loading: boolean;
+    dark: boolean;
     current: number;
     currentTrack: CurrentSongInterface;
     currentTime: number | string;
     duration: number | string;
+    progressValue: number;
+    context: any;
+    load_songs: EventEmitter;
     visualizer: HTMLWebAudioVisualizerElement;
     audio: HTMLAudioElement;
     progress: HTMLProgressElement;
-    progress_value: number;
     playlistItems: NodeListOf<HTMLStellarSongElement>;
     currentPlaylistItem: HTMLStellarSongElement;
-    context: any;
-    load_songs: EventEmitter;
     componentWillLoad(): void;
     componentDidLoad(): void;
     cycleVisualizations(): void;
     handleProgressClick(): void;
-    handleTimeUpdates(): void;
+    handleUpdates(): void;
     handleKeydown(event: any): void;
     handleSongLoaded(event: any): Promise<void>;
     loadFromStorage(): void;

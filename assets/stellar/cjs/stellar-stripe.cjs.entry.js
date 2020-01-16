@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
+const index = require('./index-88c31836.js');
 
 const style = {
     iconStyle: 'solid',
@@ -34,9 +34,11 @@ const classes = {
     invalid: 'invalid',
 };
 
-class Card {
+const StripeCss = "stellar-stripe{contain:content;display:block}stellar-stripe .field{position:relative;margin-bottom:30px;width:100%}stellar-stripe label{display:block;margin-bottom:10px;line-height:1.69;color:#484849;color:var(--gray5);font-size:13px;font-weight:600}stellar-stripe .input{border:1px solid var(--gray2);border-radius:4px}stellar-stripe .input::-webkit-input-placeholder{-webkit-transition:color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);transition:color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);color:transparent}stellar-stripe .input::-moz-placeholder{-moz-transition:color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);transition:color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);color:transparent}stellar-stripe .input:-ms-input-placeholder{-ms-transition:color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);transition:color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);color:transparent}stellar-stripe .input.StripeElement{display:-ms-flexbox;display:flex;top:0;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;padding:20px;height:100%}stellar-stripe .input.StripeElement>div{width:100%}stellar-stripe .input.focused::-webkit-input-placeholder,stellar-stripe .input:not(.empty)::-webkit-input-placeholder{color:var(--gray2)}stellar-stripe .input.focused::-moz-placeholder,stellar-stripe .input:not(.empty)::-moz-placeholder{color:var(--gray2)}stellar-stripe .input.focused:-ms-input-placeholder,stellar-stripe .input:not(.empty):-ms-input-placeholder{color:var(--gray2)}stellar-stripe .input.focused+label,stellar-stripe .input:not(.empty)+label{cursor:default;-webkit-transform:scale(0.85) translateY(-25px);transform:scale(0.85) translateY(-25px);color:#aab7c4}stellar-stripe .input.focused+label{color:#24b47e}stellar-stripe .input.invalid+label{color:#ffa27b}stellar-stripe .input.focused+label+.baseline{background-color:#24b47e}stellar-stripe .input.focused.invalid+label+.baseline{background-color:#e25950}stellar-stripe .input input{appearance:none;-webkit-appearance:none;outline:none;border-style:none;-moz-appearance:none}stellar-stripe .validation{margin-top:10px;margin-bottom:0;color:var(--red5);font-size:14px;font-weight:500}stellar-stripe .validation span{display:block;padding:10px 0;line-height:1.4}stellar-stripe .validation span+span{border-top:1px solid var(--gray1)}";
+
+const Stripe = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.token = 'pk_test_6pRNASCoBOKtIshFeQd4XMUh';
         this.name = 'stripe';
         this.value = undefined;
@@ -44,7 +46,9 @@ class Card {
         this.state = "preparing";
     }
     componentWillLoad() {
-        this.stripe = window["Stripe"](this.token);
+        if (window["Stripe"]) {
+            this.stripe = window["Stripe"](this.token);
+        }
     }
     componentDidLoad() {
         this.connect();
@@ -113,16 +117,16 @@ class Card {
         this.card.mount(this.element.querySelector('#card'));
     }
     renderPhone() {
-        return (__chunk_1.h("stellar-input", { id: "phone", "data-tid": "stellar_stripe.form.phone", type: "tel", placeholder: "(941) 555-0123", required: true, label: "Phone number" }));
+        return (index.h("stellar-input", { id: "phone", "data-tid": "stellar_stripe.form.phone", type: "tel", placeholder: "(941) 555-0123", required: true, label: "Phone number" }));
     }
     renderZip() {
-        return (__chunk_1.h("stellar-input", { id: "zip", "data-tid": "stellar_stripe.form.postal_code", type: "text", placeholder: "94107", required: true, label: "ZIP" }));
+        return (index.h("stellar-input", { id: "zip", "data-tid": "stellar_stripe.form.postal_code", type: "text", placeholder: "94107", required: true, label: "ZIP" }));
     }
     render() {
-        return (__chunk_1.h("div", null, __chunk_1.h("input", { type: "hidden", class: "token", name: this.name, value: this.value }), __chunk_1.h("div", { class: "field" }, __chunk_1.h("label", { "data-for": "stellar_stripe.form.card" }, __chunk_1.h("p", { class: "label" }, "Card details")), __chunk_1.h("div", { "data-tid": "stellar_stripe.form.card", id: "card", class: "input" }), this.error && __chunk_1.h("p", { class: "validation" }, __chunk_1.h("span", null, this.error))), __chunk_1.h("stellar-grid", null, this.renderPhone(), this.renderZip())));
+        return (index.h("div", null, index.h("input", { type: "hidden", class: "token", name: this.name, value: this.value }), index.h("div", { class: "field" }, index.h("label", { "data-for": "stellar_stripe.form.card" }, index.h("p", { class: "label" }, "Card details")), index.h("div", { "data-tid": "stellar_stripe.form.card", id: "card", class: "input" }), this.error && index.h("p", { class: "validation" }, index.h("span", null, this.error))), index.h("stellar-grid", null, this.renderPhone(), this.renderZip())));
     }
-    get element() { return __chunk_1.getElement(this); }
-    static get style() { return "stellar-stripe{display:block}stellar-stripe .field{position:relative;margin-bottom:30px;width:100%}stellar-stripe label{display:block;margin-bottom:10px;line-height:1.69;color:#484849;color:var(--gray5);font-size:13px;font-weight:600}stellar-stripe .input{border:1px solid var(--gray2);border-radius:4px}stellar-stripe .input::-webkit-input-placeholder{-webkit-transition:color .3s cubic-bezier(.165,.84,.44,1);transition:color .3s cubic-bezier(.165,.84,.44,1);color:transparent}stellar-stripe .input::-moz-placeholder{-webkit-transition:color .3s cubic-bezier(.165,.84,.44,1);transition:color .3s cubic-bezier(.165,.84,.44,1);color:transparent}stellar-stripe .input:-ms-input-placeholder{-webkit-transition:color .3s cubic-bezier(.165,.84,.44,1);transition:color .3s cubic-bezier(.165,.84,.44,1);color:transparent}stellar-stripe .input.StripeElement{display:-ms-flexbox;display:flex;top:0;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;padding:20px;height:100%}stellar-stripe .input.StripeElement>div{width:100%}stellar-stripe .input.focused::-webkit-input-placeholder,stellar-stripe .input:not(.empty)::-webkit-input-placeholder{color:var(--gray2)}stellar-stripe .input.focused::-moz-placeholder,stellar-stripe .input:not(.empty)::-moz-placeholder{color:var(--gray2)}stellar-stripe .input.focused:-ms-input-placeholder,stellar-stripe .input:not(.empty):-ms-input-placeholder{color:var(--gray2)}stellar-stripe .input.focused+label,stellar-stripe .input:not(.empty)+label{cursor:default;-webkit-transform:scale(.85) translateY(-25px);transform:scale(.85) translateY(-25px);color:#aab7c4}stellar-stripe .input.focused+label{color:#24b47e}stellar-stripe .input.invalid+label{color:#ffa27b}stellar-stripe .input.focused+label+.baseline{background-color:#24b47e}stellar-stripe .input.focused.invalid+label+.baseline{background-color:#e25950}stellar-stripe .input input{appearance:none;-webkit-appearance:none;outline:none;border-style:none;-moz-appearance:none}stellar-stripe .validation{margin-top:10px;margin-bottom:0;color:var(--red5);font-size:14px;font-weight:500}stellar-stripe .validation span{display:block;padding:10px 0;line-height:1.4}stellar-stripe .validation span+span{border-top:1px solid var(--gray1)}"; }
-}
+    get element() { return index.getElement(this); }
+    static get style() { return StripeCss; }
+};
 
-exports.stellar_stripe = Card;
+exports.stellar_stripe = Stripe;

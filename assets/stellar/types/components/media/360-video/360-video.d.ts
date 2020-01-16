@@ -7,5 +7,5 @@ export declare class Video360 {
     viewer: any;
     video: HTMLElement;
     componentDidLoad(): void;
-    render(): any[];
+    render(): any;
 }

@@ -1,4 +1,5 @@
-import { EventEmitter } from '../../../stencil.core';
+import { EventEmitter } from '@stencil/core';
+import "ionicons";
 export declare class Pagination {
     element: HTMLElement;
     /**
@@ -9,6 +10,7 @@ export declare class Pagination {
     current: number;
     padding: number;
     color: string;
+    dark: boolean;
     url: any;
     __surroundingPages: any;
     __current: number;

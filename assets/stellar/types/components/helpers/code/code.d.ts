@@ -15,12 +15,14 @@ export declare class Code {
     observer: MutationObserver;
     preview: boolean;
     feature: boolean;
+    dark: boolean;
     code: string;
     raw: string;
     componentWillLoad(): void;
     componentDidLoad(): void;
     componentWillUpdate(): void;
     componentDidUpdate(): void;
+    handleCodeStringUpdate(): void;
     replaceAll(str: any, find: any, replace: any): any;
     highlight(): Promise<void>;
     result(): Promise<string>;

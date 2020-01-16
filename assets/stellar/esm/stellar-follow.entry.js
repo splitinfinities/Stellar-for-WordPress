@@ -1,11 +1,13 @@
-import { d as registerInstance, f as h, g as getElement } from './stellar-core-1e602ba1.js';
-import './chunk-40f083d9.js';
-import { a as properties } from './chunk-d0cf38d8.js';
-import './chunk-27460e3f.js';
-import './chunk-f26db59a.js';
-import './chunk-cf2c1f95.js';
+import { r as registerInstance, h, d as getElement } from './index-bcfb4a9f.js';
+import './index-320c6878.js';
+import './_commonjsHelpers-ae1b5db5.js';
+import { p as properties } from './css-custom-properties.min-dfcc36c1.js';
+import './main-07539eea.js';
+import './moment-b6827264.js';
 
-class Follow {
+const FollowCss = ":host{--translate-y:calc(-50% + var(--top));--translate-x:calc(-50% + var(--left));position:fixed;top:0;left:0;z-index:20;-webkit-transform:translate3d(var(--translate-x),var(--translate-y), 0);transform:translate3d(var(--translate-x),var(--translate-y), 0);pointer-events:none;contain:content}";
+
+const Follow = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.type = "cursor";
@@ -71,7 +73,7 @@ class Follow {
         "type": ["update"],
         "distance": ["update"]
     }; }
-    static get style() { return ":host{--translate-y:calc(-50% + var(--top));--translate-x:calc(-50% + var(--left));position:fixed;top:0;left:0;z-index:20;-webkit-transform:translate3d(var(--translate-x),var(--translate-y),0);transform:translate3d(var(--translate-x),var(--translate-y),0);pointer-events:none}"; }
-}
+    static get style() { return FollowCss; }
+};
 
 export { Follow as stellar_follow };

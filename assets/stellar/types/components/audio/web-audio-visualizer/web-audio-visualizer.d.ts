@@ -1,6 +1,5 @@
 export declare class WebAudioVisualizer {
     element: HTMLElement;
-    canvas: HTMLCanvasElement;
     canvasCTX: any | WebGLRenderingContext | CanvasRenderingContext2D;
     for: string;
     type: string | "wave" | "bars" | "circle" | "bars2";
@@ -24,6 +23,7 @@ export declare class WebAudioVisualizer {
     _bufferLength: AnalyserNode;
     _dataArray: AnalyserNode;
     _color: any;
+    canvas: HTMLCanvasElement;
     componentWillLoad(): void;
     componentDidLoad(): void;
     handleColorChange(): void;

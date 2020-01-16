@@ -1,19 +1,17 @@
-import { d as registerInstance, g as getElement } from './stellar-core-1e602ba1.js';
+import { r as registerInstance, d as getElement } from './index-bcfb4a9f.js';
 
-class ContextConsumer {
+const ContextConsumer = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.context = {};
         this.renderer = () => null;
     }
-    componentWillLoad() {
-        this.unsubscribe = () => {
-            if (this.subscribe != null) {
-                this.subscribe(this.el, 'context');
-            }
-        };
+    connectedCallback() {
+        if (this.subscribe != null) {
+            this.unsubscribe = this.subscribe(this.el, 'context');
+        }
     }
-    componentDidUnload() {
+    disconnectedCallback() {
         if (this.unsubscribe != null) {
             this.unsubscribe();
         }
@@ -22,6 +20,6 @@ class ContextConsumer {
         return this.renderer(Object.assign({}, this.context));
     }
     get el() { return getElement(this); }
-}
+};
 
 export { ContextConsumer as context_consumer };

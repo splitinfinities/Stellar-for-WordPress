@@ -1,0 +1,1 @@
+import{r as l,h as e}from"./p-ea8e8140.js";const s=class{constructor(e){l(this,e)}render(){return e("div",null,e("stellar-docs-header",null),e("stellar-layout",{size:"large",type:"sidebar"},e("aside",null,e("stellar-docs-navigation",null)),e("main",null,e("h1",null,"Home!"))))}};export{s as stellar_docs_home};

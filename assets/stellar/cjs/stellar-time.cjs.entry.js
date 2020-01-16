@@ -2,12 +2,14 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-const __chunk_12 = require('./chunk-e87c7d7e.js');
+const index = require('./index-88c31836.js');
+const moment = require('./moment-fd045425.js');
 
-class Time {
+const TimeCss = "stellar-time{contain:content;all:inherit}";
+
+const Time = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.format = "MMMM Do YYYY, h:mm:ss a";
         this.relative = false;
     }
@@ -15,7 +17,7 @@ class Time {
         this.prepareResult();
     }
     prepareResult() {
-        this.instance = __chunk_12.moment(this.value);
+        this.instance = moment.moment(this.value);
         if (this.relative) {
             this.result = this.instance.fromNow();
         }
@@ -29,7 +31,7 @@ class Time {
     static get watchers() { return {
         "value": ["prepareResult"]
     }; }
-    static get style() { return "stellar-time{all:inherit}"; }
-}
+    static get style() { return TimeCss; }
+};
 
 exports.stellar_time = Time;

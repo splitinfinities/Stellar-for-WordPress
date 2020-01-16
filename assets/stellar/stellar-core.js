@@ -13,14 +13,16 @@
   var scriptElm = doc.createElement('script');
   scriptElm.setAttribute('type', 'module');
   scriptElm.src = url + '/stellar-core.esm.js';
-  doc.head.appendChild(scriptElm);
   warn.push(scriptElm.outerHTML);
+  scriptElm.setAttribute('data-stencil-namespace', 'stellar-core');
+  doc.head.appendChild(scriptElm);
 
   scriptElm = doc.createElement('script');
   scriptElm.setAttribute('nomodule', '');
   scriptElm.src = url + '/stellar-core.js';
-  doc.head.appendChild(scriptElm);
   warn.push(scriptElm.outerHTML);
+  scriptElm.setAttribute('data-stencil-namespace', 'stellar-core');
+  doc.head.appendChild(scriptElm);
 
   console.warn(warn.join('\n'));
 

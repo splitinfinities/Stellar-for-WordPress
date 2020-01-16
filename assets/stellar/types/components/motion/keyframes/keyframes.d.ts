@@ -1,4 +1,4 @@
-export declare class Follow {
+export declare class Keyframes {
     element: HTMLElement;
     src: string;
     width: number;

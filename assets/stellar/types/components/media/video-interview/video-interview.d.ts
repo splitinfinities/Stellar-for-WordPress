@@ -1,6 +1,6 @@
+import "ionicons";
 export declare class VideoInterview {
     element: HTMLElement;
-    randomId: number;
     src: string;
     color: string;
     playing: boolean;
@@ -8,8 +8,8 @@ export declare class VideoInterview {
     height: number;
     aspectRatio: number;
     visualization: "circle" | "bars" | "wave" | "bars2";
+    randomId: number;
     video: HTMLStellarVideoElement;
-    io: IntersectionObserver;
     loaded: boolean;
     loading: boolean;
     seekable: boolean;
@@ -22,13 +22,12 @@ export declare class VideoInterview {
     visualizer: HTMLWebAudioVisualizerElement;
     componentWillLoad(): void;
     componentDidLoad(): Promise<void>;
-    addIntersectionObserver(): void;
     cache: WeakMap<object, any>;
-    handleTimeUpdate(event: any): void;
-    readonly time: number;
-    handleInScreen(): Promise<void>;
+    handleUpdate(event: any): void;
+    get time(): number;
     attachContext(): Promise<void>;
-    handleOffScreen(): Promise<void>;
+    in(): Promise<void>;
+    out(): Promise<void>;
     play(): Promise<void>;
     skipTo(time: number): Promise<void>;
     pause(): Promise<void>;

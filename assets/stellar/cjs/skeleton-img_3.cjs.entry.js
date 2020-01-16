@@ -2,55 +2,45 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-const __chunk_2 = require('./chunk-ee96ca86.js');
-const __chunk_3 = require('./chunk-61a48f92.js');
-const __chunk_10 = require('./chunk-73f3d344.js');
-require('./chunk-73f7b312.js');
-require('./chunk-e87c7d7e.js');
+const index = require('./index-88c31836.js');
+require('./index-9b3c8604.js');
+const index$1$1 = require('./index-d326a972.js');
+const _commonjsHelpers = require('./_commonjsHelpers-3fc1f64e.js');
+require('./css-custom-properties.min-d46e7f9d.js');
+require('./main-6214461c.js');
+require('./moment-fd045425.js');
+require('./index-9d31ce96.js');
+const theme$1 = require('./theme-1038bd3c.js');
 
-class SkeletonImg {
+const SkeletonImgCss = "skeleton-img{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;display:block;position:relative;margin-bottom:1rem;border-radius:4px;overflow:hidden;max-width:var(--width);max-height:var(--height);contain:content}skeleton-img svg{display:block;width:100%;height:auto;overflow:hidden}skeleton-img svg rect{fill:var(--theme-base5)}skeleton-img[loading]{position:relative}skeleton-img[loading]::before{content:\"\";display:block;position:absolute;top:0;right:0;bottom:0;left:-100%;background-color:var(--theme-base5);background-image:linear-gradient(45deg, var(--theme-base5) 0%, var(--theme-base5) 20%, var(--theme-base3) 40%, var(--theme-base4) 61%, var(--theme-base5) 80%, var(--theme-base5) 100%);width:300%;height:100%;-webkit-transform:translateX(calc(var(--width) * -1.75));transform:translateX(calc(var(--width) * -1.75))}skeleton-img[loading].visible::before{-webkit-animation:1.25s linear 0s shimmer infinite forwards;animation:1.25s linear 0s shimmer infinite forwards}skeleton-img ion-icon{position:absolute;top:50%;right:50%;bottom:50%;left:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%);width:var(--icon-width);height:var(--icon-height)}@-webkit-keyframes shimmer{0%{opacity:0;-webkit-transform:translateX(calc(var(--width) * -1.75));transform:translateX(calc(var(--width) * -1.75))}10%{opacity:1}90%{opacity:1}100%{opacity:0;-webkit-transform:translateX(calc(var(--width) * 1.75));transform:translateX(calc(var(--width) * 1.75))}}@keyframes shimmer{0%{opacity:0;-webkit-transform:translateX(calc(var(--width) * -1.75));transform:translateX(calc(var(--width) * -1.75))}10%{opacity:1}90%{opacity:1}100%{opacity:0;-webkit-transform:translateX(calc(var(--width) * 1.75));transform:translateX(calc(var(--width) * 1.75))}}";
+
+const SkeletonImg = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.width = 600;
         this.height = 300;
         this.block = false;
         this.loading = false;
         this.icon = false;
     }
-    componentWillLoad() {
-        if (this.block) ;
-        else {
-            __chunk_3.properties.set({
-                '--width': `${this.width}px`,
-                '--height': `${this.height}px`
-            }, this.element);
-        }
-        this.observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.intersectionRatio > 0) {
-                    this.element.classList.add('visible');
-                }
-                else {
-                    this.element.classList.remove('visible');
-                }
-            });
-        });
-        this.observer.observe(this.element);
+    in() {
+        this.element.classList.add('visible');
+    }
+    out() {
+        this.element.classList.remove('visible');
     }
     render() {
-        return [
-            this.loading && this.icon && __chunk_1.h("stellar-asset", { name: "spinning-bubbles", color: "gray25" }),
-            __chunk_1.h("svg", { width: this.width, height: this.height }, __chunk_1.h("rect", { width: this.width, height: this.height }))
-        ];
+        return index.h(index.Host, { style: !this.block && { '--width': `${this.width}px`, '--height': `${this.height}px` } }, this.loading && this.icon && index.h("ion-icon", { name: "spinning-bubbles", color: "gray25" }), index.h("svg", { width: this.width, height: this.height }, index.h("rect", { width: this.width, height: this.height })), index.h("stellar-intersection", { element: this.element, multiple: true, in: this.in.bind(this), out: this.out.bind(this) }));
     }
-    get element() { return __chunk_1.getElement(this); }
-    static get style() { return "skeleton-img{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;display:block;position:relative;margin-bottom:1rem;border-radius:4px;overflow:hidden;max-width:var(--width);max-height:var(--height)}skeleton-img svg{display:block;width:100%;height:auto;overflow:hidden}skeleton-img svg rect{fill:var(--theme-base5)}skeleton-img[loading]{position:relative}skeleton-img[loading]:before{content:\"\";display:block;position:absolute;top:0;right:0;bottom:0;left:-100%;background-color:var(--theme-base5);background-image:linear-gradient(45deg,var(--theme-base5),var(--theme-base5) 20%,var(--theme-base3) 40%,var(--theme-base4) 61%,var(--theme-base5) 80%,var(--theme-base5));width:300%;height:100%;-webkit-transform:translateX(calc(var(--width) * -1.75));transform:translateX(calc(var(--width) * -1.75))}skeleton-img[loading].visible:before{-webkit-animation:shimmer 1.25s linear 0s infinite forwards;animation:shimmer 1.25s linear 0s infinite forwards}skeleton-img stellar-asset{position:absolute;top:50%;right:50%;bottom:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);width:var(--icon-width);height:var(--icon-height)}\@-webkit-keyframes shimmer{0%{opacity:0;-webkit-transform:translateX(calc(var(--width) * -1.75));transform:translateX(calc(var(--width) * -1.75))}10%{opacity:1}90%{opacity:1}to{opacity:0;-webkit-transform:translateX(calc(var(--width) * 1.75));transform:translateX(calc(var(--width) * 1.75))}}\@keyframes shimmer{0%{opacity:0;-webkit-transform:translateX(calc(var(--width) * -1.75));transform:translateX(calc(var(--width) * -1.75))}10%{opacity:1}90%{opacity:1}to{opacity:0;-webkit-transform:translateX(calc(var(--width) * 1.75));transform:translateX(calc(var(--width) * 1.75))}}"; }
-}
+    get element() { return index.getElement(this); }
+    static get style() { return SkeletonImgCss; }
+};
 
-class Progress {
+const ProgressCss = ":host,:host *,:host *:before,:host *:after{-webkit-box-sizing:border-box;box-sizing:border-box}:host{contain:content;display:block;position:relative;overflow:hidden;--border-radius:0.3rem;--time:124;--negative-time:-124}:host .blur-content{display:block;height:100%}:host([editable]){cursor:pointer}:host .progress{display:block;position:relative;-webkit-transition:all 0.25s var(--ease) 0ms;transition:all 0.25s var(--ease) 0ms;background:var(--gray0);width:100%;height:0.6rem;border-radius:var(--border-radius);overflow:hidden}:host([editable]:hover) .progress{height:2.4rem}:host .status,:host .secondary{position:absolute;top:0;right:0;bottom:0;left:-100%;-webkit-transition:all 0.35s var(--ease, ease-in-out) 0ms;transition:all 0.35s var(--ease, ease-in-out) 0ms;background:var(--theme-base5, var(--gray5));width:100%;z-index:2}:host .secondary{background:var(--theme-base3, var(--gray3));z-index:1}:host([slender]) .progress{border:0;height:0.2rem}:host([slender][editable]:hover) .progress{height:0.4rem}:host([noease]) .progress,:host([noease]) .status,:host([noease]) .secondary{-webkit-transition:none !important;transition:none !important}:host([indeterminate]){height:100px;width:100px}:host([indeterminate]) svg{-webkit-transform:rotate(0deg);transform:rotate(0deg);stroke:var(--theme-base5);-webkit-animation:rotate var(--ease) 9.2s infinite;animation:rotate var(--ease) 9.2s infinite}:host([indeterminate]) circle{stroke-dasharray:var(--time);stroke-dashoffset:var(--time);-webkit-animation:load var(--ease) 2.3s infinite;animation:load var(--ease) 2.3s infinite}:host([dark]) .progress{background:var(--theme-base9)}:host([dark]) .secondary{background:var(--theme-base7, var(--gray7));z-index:1}:host([dark]) circle{-webkit-animation:load-dark var(--ease) 2.3s infinite;animation:load-dark var(--ease) 2.3s infinite}@-webkit-keyframes load{0%{stroke:var(--theme-complement7)}50%{stroke-dashoffset:0;stroke:var(--theme-base5)}100%{stroke-dashoffset:var(--negative-time);stroke:var(--theme-base3)}}@keyframes load{0%{stroke:var(--theme-complement7)}50%{stroke-dashoffset:0;stroke:var(--theme-base5)}100%{stroke-dashoffset:var(--negative-time);stroke:var(--theme-base3)}}@-webkit-keyframes rotate{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}25%{-webkit-transform:rotate(90deg);transform:rotate(90deg)}50%{-webkit-transform:rotate(180deg);transform:rotate(180deg)}75%{-webkit-transform:rotate(270deg);transform:rotate(270deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes rotate{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}25%{-webkit-transform:rotate(90deg);transform:rotate(90deg)}50%{-webkit-transform:rotate(180deg);transform:rotate(180deg)}75%{-webkit-transform:rotate(270deg);transform:rotate(270deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@-webkit-keyframes load-dark{0%{stroke:var(--theme-complement5)}50%{stroke-dashoffset:0;stroke:var(--theme-base5)}75%{stroke:var(--theme-base7)}100%{stroke-dashoffset:var(--negative-time);stroke:var(--theme-complement7)}}@keyframes load-dark{0%{stroke:var(--theme-complement5)}50%{stroke-dashoffset:0;stroke:var(--theme-base5)}75%{stroke:var(--theme-base7)}100%{stroke-dashoffset:var(--negative-time);stroke:var(--theme-complement7)}}";
+
+const Progress = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         /**
          * Renders if this element is slender or not
          */
@@ -63,6 +53,10 @@ class Progress {
          * Sets the maximum cap for steps in the progress bar
          */
         this.indeterminate = false;
+        /**
+         * Sets the button or link as an outlined button.
+         */
+        this.dark = false;
         /**
          * Allows the progress bar to be clicked on, to help the user to navigate through the progressing content.
          */
@@ -86,7 +80,7 @@ class Progress {
         this.blurable = true;
         this.wrapper = "stellar-blur";
         this.blur = 0;
-        this.ease = __chunk_10.blurringEase({
+        this.ease = index$1$1.blurringEase({
             end: 20,
             start: -1,
             duration: 200,
@@ -98,7 +92,7 @@ class Progress {
                 this.ease.stop();
             },
         });
-        this.change = __chunk_1.createEvent(this, "change", 7);
+        this.update = index.createEvent(this, "update", 7);
     }
     componentWillLoad() {
         if (!this.blurable) {
@@ -121,7 +115,7 @@ class Progress {
                 rounded = Math.ceil(rounded);
             }
             this.value = rounded;
-            this.change.emit({
+            this.update.emit({
                 value: this.value
             });
         }
@@ -142,17 +136,18 @@ class Progress {
     }
     render() {
         if (this.indeterminate) {
-            return __chunk_1.h("svg", { viewBox: "0 0 100 100" }, __chunk_1.h("circle", { cx: "50", cy: "50", r: "20", "stroke-width": "4", fill: "none", "stroke-linecap": "round" }));
+            return index.h("svg", { viewBox: "0 0 100 100" }, index.h("circle", { cx: "50", cy: "50", r: "20", "stroke-width": "4", fill: "none", "stroke-linecap": "round" }));
         }
         // @ts-ignore
-        return (__chunk_1.h(this.wrapper, { class: "progress", horizontal: this.blur, onClick: (e) => { this.handleClick(e); } }, __chunk_1.h("div", { class: "status", style: { transform: `translate(${this.progress()}%, 0)` } }), this.secondary ? __chunk_1.h("div", { class: "secondary", style: { transform: `translate(${this.progress(true)}%, 0)` } }) : ""));
+        return (index.h(this.wrapper, { class: "progress", horizontal: this.blur, onClick: (e) => { this.handleClick(e); } }, index.h("div", { class: "status", style: { transform: `translate(${this.progress()}%, 0)` } }), this.secondary ? index.h("div", { class: "secondary", style: { transform: `translate(${this.progress(true)}%, 0)` } }) : ""));
     }
-    get element() { return __chunk_1.getElement(this); }
+    get element() { return index.getElement(this); }
     static get watchers() { return {
         "value": ["observeValue"]
     }; }
-    static get style() { return ":host,:host *,:host :after,:host :before{-webkit-box-sizing:border-box;box-sizing:border-box}:host{display:block;position:relative;overflow:hidden;--border-radius:0.3rem;--time:124;--negative-time:-124}:host .blur-content{display:block;height:100%}:host([editable]){cursor:pointer}:host .progress{display:block;position:relative;-webkit-transition:all .25s var(--ease) 0ms;transition:all .25s var(--ease) 0ms;background:var(--gray0);width:100%;height:.6rem;border-radius:var(--border-radius);overflow:hidden}:host([editable]:hover) .progress{height:2.4rem}:host .secondary,:host .status{position:absolute;top:0;right:0;bottom:0;left:-100%;-webkit-transition:all .35s var(--ease,ease-in-out) 0ms;transition:all .35s var(--ease,ease-in-out) 0ms;background:var(--theme-base5,var(--gray5));width:100%;z-index:2}:host .secondary{background:var(--theme-base3,var(--gray3));z-index:1}:host([slender]) .progress{border:0;height:.2rem}:host([slender][editable]:hover) .progress{height:.4rem}:host([noease]) .progress,:host([noease]) .secondary,:host([noease]) .status{-webkit-transition:none!important;transition:none!important}:host([indeterminate]){height:100px;width:100px}:host([indeterminate]) svg{-webkit-transform:rotate(0deg);transform:rotate(0deg);stroke:var(--theme-base5);-webkit-animation:rotate var(--ease) 9.2s infinite;animation:rotate var(--ease) 9.2s infinite}:host([indeterminate]) circle{stroke-dasharray:var(--time);stroke-dashoffset:var(--time);-webkit-animation:load var(--ease) 2.3s infinite;animation:load var(--ease) 2.3s infinite}:host-context(.dark-mode):host .progress{background:var(--theme-base9)}:host-context(.dark-mode):host .secondary{background:var(--theme-base7,var(--gray7));z-index:1}:host-context(.dark-mode):host circle{-webkit-animation:load-dark var(--ease) 2.3s infinite;animation:load-dark var(--ease) 2.3s infinite}\@-webkit-keyframes load{0%{stroke:var(--theme-complement7)}50%{stroke-dashoffset:0;stroke:var(--theme-base5)}to{stroke-dashoffset:var(--negative-time);stroke:var(--theme-base3)}}\@keyframes load{0%{stroke:var(--theme-complement7)}50%{stroke-dashoffset:0;stroke:var(--theme-base5)}to{stroke-dashoffset:var(--negative-time);stroke:var(--theme-base3)}}\@-webkit-keyframes rotate{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}25%{-webkit-transform:rotate(90deg);transform:rotate(90deg)}50%{-webkit-transform:rotate(180deg);transform:rotate(180deg)}75%{-webkit-transform:rotate(270deg);transform:rotate(270deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}\@keyframes rotate{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}25%{-webkit-transform:rotate(90deg);transform:rotate(90deg)}50%{-webkit-transform:rotate(180deg);transform:rotate(180deg)}75%{-webkit-transform:rotate(270deg);transform:rotate(270deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}\@-webkit-keyframes load-dark{0%{stroke:var(--theme-complement5)}50%{stroke-dashoffset:0;stroke:var(--theme-base5)}75%{stroke:var(--theme-base7)}to{stroke-dashoffset:var(--negative-time);stroke:var(--theme-complement7)}}\@keyframes load-dark{0%{stroke:var(--theme-complement5)}50%{stroke-dashoffset:0;stroke:var(--theme-base5)}75%{stroke:var(--theme-base7)}to{stroke-dashoffset:var(--negative-time);stroke:var(--theme-complement7)}}"; }
-}
+    static get style() { return ProgressCss; }
+};
+theme$1.Tunnel.injectProps(Progress, ['dark']);
 
 const bars = (arg) => {
     // Draw the frequency domain chart.
@@ -260,7 +255,7 @@ const wave = (arg) => {
     }
 };
 
-var rgbToHsl = __chunk_2.createCommonjsModule(function (module) {
+var rgbToHsl = _commonjsHelpers.createCommonjsModule(function (module) {
 (function() {
   module.exports = function(r, g, b) {
     var d, h, l, max, min, s;
@@ -295,7 +290,7 @@ var rgbToHsl = __chunk_2.createCommonjsModule(function (module) {
     return [h, s, l];
   };
 
-}).call(__chunk_2.commonjsGlobal);
+}).call(_commonjsHelpers.commonjsGlobal);
 });
 
 var hexToRgb = function hexToRgb (hex) {
@@ -339,9 +334,11 @@ var hexToHsl = function (hex) {
 	return [hsl[0], parseInt(hsl[1], 10), parseInt(hsl[2], 10)];
 };
 
-class WebAudioVisualizer {
+const WebAudioVisualizerCss = ":host{display:block}:host canvas{display:block;width:100%;height:100%}";
+
+const WebAudioVisualizer = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.for = "web_audio";
         this.type = "wave";
         this.smoothing = 0.7;
@@ -363,10 +360,10 @@ class WebAudioVisualizer {
     }
     handleColorChange() {
         if (["white", "black", "black-alt"].includes(this.color)) {
-            this._color = hexToHsl(__chunk_10.colors[this.color]);
+            this._color = hexToHsl(index$1$1.colors[this.color]);
         }
         else {
-            this._color = hexToHsl(__chunk_10.colors[this.color][5]);
+            this._color = hexToHsl(index$1$1.colors[this.color][5]);
         }
     }
     async connect(context, destination) {
@@ -410,14 +407,14 @@ class WebAudioVisualizer {
         return this.freqs[index];
     }
     render() {
-        return (__chunk_1.h("canvas", { id: "canvas" }));
+        return (index.h("canvas", { id: "canvas" }));
     }
-    get element() { return __chunk_1.getElement(this); }
+    get element() { return index.getElement(this); }
     static get watchers() { return {
         "color": ["handleColorChange"]
     }; }
-    static get style() { return ":host,:host canvas{display:block}:host canvas{width:100%;height:100%}"; }
-}
+    static get style() { return WebAudioVisualizerCss; }
+};
 
 exports.skeleton_img = SkeletonImg;
 exports.stellar_progress = Progress;

@@ -1,6 +1,6 @@
-import { d as registerInstance, f as h } from './stellar-core-1e602ba1.js';
+import { r as registerInstance, h } from './index-bcfb4a9f.js';
 
-class AsyncContent {
+const AsyncContent = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.content = '';
@@ -23,6 +23,6 @@ class AsyncContent {
     static get watchers() { return {
         "documentLocation": ["fetchNewContent"]
     }; }
-}
+};
 
 export { AsyncContent as stencil_async_content };

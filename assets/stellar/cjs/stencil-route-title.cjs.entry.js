@@ -2,18 +2,13 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const __chunk_1 = require('./stellar-core-f620c3d3.js');
-const __chunk_4 = require('./chunk-ab16519d.js');
+const index = require('./index-88c31836.js');
+require('./index-9d31ce96.js');
+const activeRouter = require('./active-router-986d3a3b.js');
 
-/**
-  * Updates the document title when found.
-  *
-  * @name RouteTitle
-  * @description
- */
-class RouteTitle {
+const RouteTitle = class {
     constructor(hostRef) {
-        __chunk_1.registerInstance(this, hostRef);
+        index.registerInstance(this, hostRef);
         this.titleSuffix = '';
         this.pageTitle = '';
     }
@@ -26,12 +21,12 @@ class RouteTitle {
     componentWillLoad() {
         this.updateDocumentTitle();
     }
-    get el() { return __chunk_1.getElement(this); }
+    get el() { return index.getElement(this); }
     static get watchers() { return {
         "pageTitle": ["updateDocumentTitle"]
     }; }
-}
-__chunk_4.ActiveRouter.injectProps(RouteTitle, [
+};
+activeRouter.ActiveRouter.injectProps(RouteTitle, [
     'titleSuffix',
 ]);
 

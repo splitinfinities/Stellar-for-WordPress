@@ -74,10 +74,29 @@ function enqueue_load($assets) {
 		wp_enqueue_script('app.js', $assets['app.js'], array(), null, true);
 	}
 
-	wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.3.1.min.js', array(), null, true);
+	wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.4.1.min.js', array(), null, true);
 }
 
 add_action('admin_head', 'admin_css_overrides');
+
+add_filter( 'wp_service_worker_navigation_caching_strategy', function() {
+    return WP_Service_Worker_Caching_Routes::STRATEGY_STALE_WHILE_REVALIDATE;
+} );
+
+add_filter( 'wp_service_worker_navigation_caching_strategy_args', function( $args ) {
+    $args['cacheName'] = 'pages';
+    $args['plugins']['expiration']['maxEntries'] = 50;
+    return $args;
+} );
+
+function get_manifest_update( $manifest ) {
+	// Add argument to $manifest array
+	$manifest['short_name'] = 'Launch';
+	$manifest['name'] = 'Launch Brewing';
+	return $manifest;
+}
+
+add_filter( 'web_app_manifest', 'get_manifest_update' );
 
 function admin_css_overrides() {
   echo '<style>

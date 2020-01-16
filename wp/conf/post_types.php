@@ -6,15 +6,15 @@
  */
 function init_custom_post_types() {
 	$post_types = array(
-		'components' => array(
-			'title' => "Components",
-			'singular' => "Component",
-			'plural' => "Components",
-			'slug' => "components",
+		'event' => array(
+			'title' => "Events",
+			'singular' => "Event",
+			'plural' => "Events",
+			'slug' => "event",
 			'position' => -1,
 			'has_archive' => true,
 			'menu_icon' => '',
-			'supports' => array('editor', 'title', 'permalink'),
+			'supports' => array('title', 'permalink'),
 			'taxonomies' => array()
 		)
 	);

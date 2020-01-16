@@ -33,7 +33,7 @@ if (isset($_SERVER['HTTP_X_PJAX']) && $_SERVER['HTTP_X_PJAX'] == 'true') {
 	printf('<link rel="icon" type="image/x-icon" href="%s">', $fav_ico);
 	printf('<link rel="icon" type="image/png" href="%s">', $fav_default);
 	printf('<link rel="alternate" type="application/rss+xml" title="%s Feed" href="%s">', get_bloginfo('name'), esc_url(get_feed_link()));
-	printf('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
+	printf('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">');
 }
 
 /* SEO */

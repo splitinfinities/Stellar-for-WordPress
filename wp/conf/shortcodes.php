@@ -37,7 +37,7 @@ function img_smart_image_shortcode( $attr, $content = null ) {
 		$image_large = wp_get_attachment_image_src( $attr['image_id'], 'full');
 		$image_medium = wp_get_attachment_image_src( $attr['image_id'], 'medium-hero-png');
 		$image_small = wp_get_attachment_image_src( $attr['image_id'], 'small-hero-png');
-		$placeholder = wp_get_attachment_image_src( $attr['image_id'], 'apple-square-76'); // update to
+		$placeholder = wp_get_attachment_image_src( $attr['image_id'], 'apple-square-76');
 
 		// Sets up the images array
 		$images = array(
@@ -49,14 +49,45 @@ function img_smart_image_shortcode( $attr, $content = null ) {
 			'(min-width:0px)' => make_href_root_relative($image_small[0]),
 		);
 
-		$attr["width"] = (strpos($image_large[0], '@2x') !== false) ? ($image_meta["width"] / 2) : $image_meta["width"];
-		$attr["height"] = (strpos($image_large[0], '@2x') !== false) ? ($image_meta["height"] / 2) : $image_meta["height"];
+		$attr["width"] = $image_meta["width"];
+		$attr["height"] = $image_meta["height"];
 
-		if (get_field('image_preload_color', $attr['image_id'])) {
-			$attr['color'] = get_field('image_preload_color', $attr['image_id']);
+		if (strpos($image_large[0], '@2x') !== false) {
+			$attr["width"] = ($image_meta["width"] / 2);
+			$attr["height"] = ($image_meta["height"] / 2);
 		}
 
-		$nozoom = in_array('nozoom', $attr) ? 'nozoom' : '';
+		if (strpos($image_large[0], '@3x') !== false) {
+			$attr["width"] = ($image_meta["width"] / 3);
+			$attr["height"] = ($image_meta["height"] / 3);
+		}
+
+		$attr["class"] = $attr["class"] . ' db';
+		$attr["intrinsicsize"] = $attr["width"] . " x " . $attr["height"];
+
+		if (get_field('transparent', $attr['image_id'])) {
+			$attr['bg'] = "transparent";
+		} else if (get_field('image_preload_color', $attr['image_id'])) {
+			$attr['bg'] = get_field('image_preload_color', $attr['image_id']);
+		}
+
+		if ($attr["priority"]) {
+			$arrContextOptions=array(
+				"ssl"=>array(
+					"verify_peer"=>false,
+					"verify_peer_name"=>false,
+				),
+			);  
+			$file = file_get_contents($placeholder[0], false, stream_context_create($arrContextOptions));
+			$data = base64_encode($file); 
+			$poster = "data:image/png;base64," . $data;
+			$style = "background-image: url($poster) 50% 50% / cover;";
+			$attr["style"] = ($attr["style"]) ? $attr["style"] . $style : $style;
+		} else {
+			$poster = make_href_root_relative($placeholder[0]);
+		}
+
+		$nozoom = (in_array('nozoom', $attr) || strpos( $attr["class"], 'nozoom') !== false || get_field('disable_zoom', $attr['image_id'])) ? 'nozoom' : '';
 
 		$block = in_array('block', $attr) ? 'block' : '';
 	}
@@ -66,7 +97,7 @@ function img_smart_image_shortcode( $attr, $content = null ) {
 	if ($is_360) {
 		$final_image = "<stellar-360-image src='" . make_href_root_relative($image_large[0])  . "'></stellar-360-image>";
 	} else {
-		$final_image = "<stellar-image " . array_to_html_attributes($attr) . ' ' . $nozoom . ' ' . $block . ' poster=' . make_href_root_relative($placeholder[0]) . '>';
+		$final_image = "<stellar-image " . array_to_html_attributes($attr) . ' ' . $nozoom . ' ' . $block . ' poster=' . $poster . '>';
 			foreach ($images as $media => $src) {
 				$final_image .= '<source media="' . $media . '" srcset="' . $src . '" />';
 			}

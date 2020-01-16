@@ -41,8 +41,8 @@ function splitinfinities_theme_activation_options_add_page() {
 
 	if (!$splitinfinities_activation_options) {
 		add_theme_page(
-			__('Theme Activation', 'tech_omaha'),
-			__('Theme Activation', 'tech_omaha'),
+			__('Theme Activation', 'splitinfinities'),
+			__('Theme Activation', 'splitinfinities'),
 			'edit_theme_options',
 			'theme_activation_options',
 			'splitinfinities_theme_activation_options_render_page'
@@ -73,60 +73,60 @@ function splitinfinities_get_theme_activation_options() {
  */
 function splitinfinities_theme_activation_options_render_page() { ?>
 <div class="wrap">
-	<h2><?php printf(__('%s Theme Activation', 'tech_omaha'), wp_get_theme()); ?></h2>
+	<h2><?php printf(__('%s Theme Activation', 'splitinfinities'), wp_get_theme()); ?></h2>
 	<div class="update-nag">
-		<?php _e('These settings are optional and should usually be used only on a fresh installation', 'tech_omaha'); ?>
+		<?php _e('These settings are optional and should usually be used only on a fresh installation', 'splitinfinities'); ?>
 	</div>
 	<?php settings_errors(); ?>
 
 	<form method="post" action="options.php">
 		<?php settings_fields('splitinfinities_activation_options'); ?>
 		<table class="form-table">
-			<tr valign="top"><th scope="row"><?php _e('Create static front page?', 'tech_omaha'); ?></th>
+			<tr valign="top"><th scope="row"><?php _e('Create static front page?', 'splitinfinities'); ?></th>
 				<td>
 					<fieldset>
-						<legend class="screen-reader-text"><span><?php _e('Create static front page?', 'tech_omaha'); ?></span></legend>
+						<legend class="screen-reader-text"><span><?php _e('Create static front page?', 'splitinfinities'); ?></span></legend>
 						<select name="splitinfinities_theme_activation_options[create_front_page]" id="create_front_page">
-							<option selected="selected" value="true"><?php echo _e('Yes', 'tech_omaha'); ?></option>
-							<option value="false"><?php echo _e('No', 'tech_omaha'); ?></option>
+							<option selected="selected" value="true"><?php echo _e('Yes', 'splitinfinities'); ?></option>
+							<option value="false"><?php echo _e('No', 'splitinfinities'); ?></option>
 						</select>
-						<p class="description"><?php printf(__('Create a page called Home and set it to be the static front page', 'tech_omaha')); ?></p>
+						<p class="description"><?php printf(__('Create a page called Home and set it to be the static front page', 'splitinfinities')); ?></p>
 					</fieldset>
 				</td>
 			</tr>
-			<tr valign="top"><th scope="row"><?php _e('Change permalink structure?', 'tech_omaha'); ?></th>
+			<tr valign="top"><th scope="row"><?php _e('Change permalink structure?', 'splitinfinities'); ?></th>
 				<td>
 					<fieldset>
-						<legend class="screen-reader-text"><span><?php _e('Update permalink structure?', 'tech_omaha'); ?></span></legend>
+						<legend class="screen-reader-text"><span><?php _e('Update permalink structure?', 'splitinfinities'); ?></span></legend>
 						<select name="splitinfinities_theme_activation_options[change_permalink_structure]" id="change_permalink_structure">
-							<option selected="selected" value="true"><?php echo _e('Yes', 'tech_omaha'); ?></option>
-							<option value="false"><?php echo _e('No', 'tech_omaha'); ?></option>
+							<option selected="selected" value="true"><?php echo _e('Yes', 'splitinfinities'); ?></option>
+							<option value="false"><?php echo _e('No', 'splitinfinities'); ?></option>
 						</select>
-						<p class="description"><?php printf(__('Change permalink structure to /&#37;postname&#37;/', 'tech_omaha')); ?></p>
+						<p class="description"><?php printf(__('Change permalink structure to /&#37;postname&#37;/', 'splitinfinities')); ?></p>
 					</fieldset>
 				</td>
 			</tr>
-			<tr valign="top"><th scope="row"><?php _e('Create navigation menu?', 'tech_omaha'); ?></th>
+			<tr valign="top"><th scope="row"><?php _e('Create navigation menu?', 'splitinfinities'); ?></th>
 				<td>
 					<fieldset>
-						<legend class="screen-reader-text"><span><?php _e('Create navigation menu?', 'tech_omaha'); ?></span></legend>
+						<legend class="screen-reader-text"><span><?php _e('Create navigation menu?', 'splitinfinities'); ?></span></legend>
 						<select name="splitinfinities_theme_activation_options[create_navigation_menus]" id="create_navigation_menus">
-							<option selected="selected" value="true"><?php echo _e('Yes', 'tech_omaha'); ?></option>
-							<option value="false"><?php echo _e('No', 'tech_omaha'); ?></option>
+							<option selected="selected" value="true"><?php echo _e('Yes', 'splitinfinities'); ?></option>
+							<option value="false"><?php echo _e('No', 'splitinfinities'); ?></option>
 						</select>
-						<p class="description"><?php printf(__('Create the Primary Navigation menu and set the location', 'tech_omaha')); ?></p>
+						<p class="description"><?php printf(__('Create the Primary Navigation menu and set the location', 'splitinfinities')); ?></p>
 					</fieldset>
 				</td>
 			</tr>
-			<tr valign="top"><th scope="row"><?php _e('Add pages to menu?', 'tech_omaha'); ?></th>
+			<tr valign="top"><th scope="row"><?php _e('Add pages to menu?', 'splitinfinities'); ?></th>
 				<td>
 					<fieldset>
-						<legend class="screen-reader-text"><span><?php _e('Add pages to menu?', 'tech_omaha'); ?></span></legend>
+						<legend class="screen-reader-text"><span><?php _e('Add pages to menu?', 'splitinfinities'); ?></span></legend>
 						<select name="splitinfinities_theme_activation_options[add_pages_to_primary_navigation]" id="add_pages_to_primary_navigation">
-							<option selected="selected" value="true"><?php echo _e('Yes', 'tech_omaha'); ?></option>
-							<option value="false"><?php echo _e('No', 'tech_omaha'); ?></option>
+							<option selected="selected" value="true"><?php echo _e('Yes', 'splitinfinities'); ?></option>
+							<option value="false"><?php echo _e('No', 'splitinfinities'); ?></option>
 						</select>
-						<p class="description"><?php printf(__('Add all current published pages to the Primary Navigation', 'tech_omaha')); ?></p>
+						<p class="description"><?php printf(__('Add all current published pages to the Primary Navigation', 'splitinfinities')); ?></p>
 					</fieldset>
 				</td>
 			</tr>
@@ -153,7 +153,7 @@ function splitinfinities_theme_activation_action() {
 	if ($splitinfinities_theme_activation_options['create_front_page'] === 'true') {
 		$splitinfinities_theme_activation_options['create_front_page'] = false;
 
-		$default_pages = array(__('Home', 'tech_omaha'));
+		$default_pages = array(__('Home', 'splitinfinities'));
 		$existing_pages = get_pages();
 		$temp = array();
 
@@ -174,7 +174,7 @@ function splitinfinities_theme_activation_action() {
 			wp_insert_post($add_default_pages);
 		}
 
-		$home = get_page_by_title(__('Home', 'tech_omaha'));
+		$home = get_page_by_title(__('Home', 'splitinfinities'));
 		update_option('show_on_front', 'page');
 		update_option('page_on_front', $home->ID);
 
@@ -200,10 +200,10 @@ function splitinfinities_theme_activation_action() {
 
 		$splitinfinities_nav_theme_mod = false;
 
-		$primary_nav = wp_get_nav_menu_object(__('Primary Navigation', 'tech_omaha'));
+		$primary_nav = wp_get_nav_menu_object(__('Primary Navigation', 'splitinfinities'));
 
 		if (!$primary_nav) {
-			$primary_nav_id = wp_create_nav_menu(__('Primary Navigation', 'tech_omaha'), array('slug' => 'primary_navigation'));
+			$primary_nav_id = wp_create_nav_menu(__('Primary Navigation', 'splitinfinities'), array('slug' => 'primary_navigation'));
 			$splitinfinities_nav_theme_mod['primary_navigation'] = $primary_nav_id;
 		} else {
 			$splitinfinities_nav_theme_mod['primary_navigation'] = $primary_nav->term_id;
@@ -217,7 +217,7 @@ function splitinfinities_theme_activation_action() {
 	if ($splitinfinities_theme_activation_options['add_pages_to_primary_navigation'] === 'true') {
 		$splitinfinities_theme_activation_options['add_pages_to_primary_navigation'] = false;
 
-		$primary_nav = wp_get_nav_menu_object(__('Primary Navigation', 'tech_omaha'));
+		$primary_nav = wp_get_nav_menu_object(__('Primary Navigation', 'splitinfinities'));
 		$primary_nav_term_id = (int) $primary_nav->term_id;
 		$menu_items= wp_get_nav_menu_items($primary_nav_term_id);
 

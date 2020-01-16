@@ -118,7 +118,6 @@ function splitinfinities_swap_all_image_tags($content) {
 add_filter('the_content','splitinfinities_swap_all_image_tags');
 add_filter('acf_the_content','splitinfinities_swap_all_image_tags');
 
-
 function my_mce_buttons_2( $buttons ) {
 	array_unshift( $buttons, 'styleselect' );
 	return $buttons;
@@ -316,6 +315,69 @@ function my_tiny_mce_before_init( $mceInit ) {
 					'title' => 'Text shadow Bottom Right',
 					'classes' => 'long-shadow-br',
 					'selector' => 'p,h1,h2,h3,h4,h5,h6',
+					'wrapper' => true,
+				),
+			)
+		),
+		array(
+			'title' => 'Images',
+			'items' => array(
+				array(
+					'title' => 'Flourish',
+					'classes' => 'flourish',
+					'selector' => '*',
+					'wrapper' => false,
+				),
+				array(
+					'title' => 'Block',
+					'classes' => 'mw-100',
+					'selector' => 'img',
+					'wrapper' => false,
+				),
+				array(
+					'title' => 'Disable zoom',
+					'classes' => 'nozoom',
+					'selector' => 'img',
+					'wrapper' => false,
+				),
+			)
+		),
+		array(
+			'title' => 'Lists',
+			'items' => array(
+				array(
+					'title' => 'Grouped',
+					'classes' => 'group',
+					'selector' => 'ul,ol',
+					'wrapper' => true,
+				),
+			)
+		),
+		array(
+			'title' => 'Display',
+			'items' => array(
+				array(
+					'title' => 'Block',
+					'classes' => 'db',
+					'selector' => '*',
+					'wrapper' => true,
+				),
+				array(
+					'title' => 'Inline Block',
+					'classes' => 'dib',
+					'selector' => '*',
+					'wrapper' => true,
+				),
+				array(
+					'title' => 'Float Left',
+					'classes' => 'fl',
+					'selector' => '*',
+					'wrapper' => true,
+				),
+				array(
+					'title' => 'Float Right',
+					'classes' => 'fr',
+					'selector' => '*',
 					'wrapper' => true,
 				),
 			)
@@ -625,10 +687,23 @@ add_action( 'admin_init', 'my_theme_add_editor_styles' );
 function misha_allowed_block_types( $allowed_blocks ) {
 	$allowed_blocks = array(
 		'acf/hero',
+		'acf/mosiac',
+		'acf/pagelist',
+		'acf/events',
 		'acf/content',
 		'acf/grid',
+		'acf/spacer',
+		'acf/tabs',
 	);
 
 	return $allowed_blocks;
 }
 add_filter( 'allowed_block_types', 'misha_allowed_block_types', 10, 2 );
+
+wp_register_script('aa_js_googlemaps_script', 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDwDhY20PU4F89wF7xNQPZZgyjl0L7IwIw'); // with Google Maps API fix
+wp_enqueue_script('aa_js_googlemaps_script');
+
+function splitinfinities_acf_init() {	
+	acf_update_setting('google_api_key', 'AIzaSyDwDhY20PU4F89wF7xNQPZZgyjl0L7IwIw');
+}
+add_action('acf/init', 'splitinfinities_acf_init');

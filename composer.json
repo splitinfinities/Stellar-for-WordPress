@@ -1,0 +1,7 @@
+{
+    "require": {
+        "pgrimaud/instagram-user-feed": "^5.0",
+        "facebook/graph-sdk": "^5.7",
+        "j7mbo/twitter-api-php": "^1.0"
+    }
+}

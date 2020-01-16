@@ -1,15 +1,43 @@
-<footer>
-	<stellar-layout class="db relative" size="small">
-		<stellar-starscape></stellar-starscape>
-			<stellar-grid padding="small">
-				<stellar-card class="overflow-hidden bg-theme-base5" tag="a" href="/hire-me" style="--border: 0;--padding:0;" padding="none">
-					<section>
-					<copy-wrap class="relative z-1 pa4" align="center">
-						<h1 class="fs-large white fs1 mb4 lh-solid long-shadow-bl fw7 complement-red">Like what you see?!</h1>
-					</copy-wrap>
-					<stellar-button class="relative z-2 theme-orange" block="block">Hire me!</stellar-button>
-				</section>
-			</stellar-card>
+<footer class="bg-black relative">
+	<stellar-layout size="large">
+		<stellar-grid style="--grid-gap: 3rem;">
+			<div>
+				<p class="white ttu b tracked fw9 mb3"><?php echo wp_get_nav_menu_name("footer_one") ?></p>
+				<?php wp_nav_menu([
+					'theme_location' => 'footer_one',
+					'walker' => new SPLITINFINITIES_Walker_Anchors
+				]); ?>
+			</div>
+
+			<div>
+				<p class="white ttu b tracked fw9 mb3"><?php echo wp_get_nav_menu_name("footer_two") ?></p>
+				<?php wp_nav_menu([
+					'theme_location' => 'footer_two',
+					'walker' => new SPLITINFINITIES_Walker_Anchors
+				]); ?>
+			</div>
+
+			<div>
+				<p class="white ttu b tracked fw9 mb3"><?php echo wp_get_nav_menu_name("footer_three") ?></p>
+				<?php wp_nav_menu([
+					'theme_location' => 'footer_three',
+					'walker' => new SPLITINFINITIES_Walker_Anchors
+				]); ?>
+			</div>
+
+			<div>
+				<p class="white ttu b tracked fw9 mb3"><?php echo wp_get_nav_menu_name("footer_four") ?></p>
+				<?php wp_nav_menu([
+					'theme_location' => 'footer_four',
+					'walker' => new SPLITINFINITIES_Walker_SocialText
+				]); ?>
+			</div>
+			<div class="invert bl b--white pl4 h-100">
+				<?php echo do_shortcode('[caldera_form id="CF5df069d9a57f9"]') ?>
+			</div>
 		</stellar-grid>
+	</stellar-layout>
+	<stellar-layout class="bt b--base" size="large" padding="tiny">
+		<p class="base">&copy; <?php echo date("Y"); ?> <?php get_bloginfo() ?>. All rights reserved. </p>
 	</stellar-layout>
 </footer>

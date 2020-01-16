@@ -5,6 +5,8 @@
  * Please note that missing files *will* produce a fatal error.
  */
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 $mandatory_includes = [
 	'wp/init.php',                    // Initial theme setup and constants
 	'wp/init/plugins.php',            // Plugin mandatory plugins
@@ -28,6 +30,11 @@ $features_append = [
 	'wp/init/htmlcompression.php',    // includes the HTML compression class
 	'wp/init/sendo.php',              // SENDO
 	'wp/init/wrapper.php',            // Theme wrapper class
+	'wp/api/facebook.php',            // Facebook API
+	'wp/api/twitter.php',             // Twitter API
+	'wp/api/dribbble.php',            // Dribbble API
+	'wp/api/vimeo.php',               // Vimeo API
+	'wp/api/instagram.php',           // Instagram API
 ];
 
 $includes = array_merge($mandatory_includes, $features_append);

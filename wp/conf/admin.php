@@ -10,9 +10,7 @@ function splitinfinities_login_logo() {
 	?>
 		<script>
 			setTimeout(() => {
-				console.log("<?php echo $image_source; ?>");
 				var head = document.querySelector('#login h1');
-
 				head.innerHTML = '<img src="<?php echo get_template_directory_uri() ?>/assets/src/global/images/mark@2x.png" />';
 			})
 		</script>
@@ -34,6 +32,24 @@ function splitinfinities_login_logo() {
 }
 add_action( 'login_enqueue_scripts', 'splitinfinities_login_logo' );
 
+add_theme_support( 'custom-logo', array(
+	'height'      => 100,
+	'width'       => 100,
+	'flex-height' => true,
+	'flex-width'  => true,
+	'header-text' => array( 'site-title', 'site-description' ),
+) );
+
+function the_theme_logo() {
+	$custom_logo_id = get_theme_mod( 'custom_logo' );
+
+	if ($custom_logo_id) {
+		$image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+		echo do_shortcode("[smart_image image_id=$custom_logo_id block nozoom bg='transparent' class='logo' priority='true']");
+	} else {
+		echo '<ion-icon src="' . get_template_directory_uri() .'/assets/vector/mark.svg" height="100" width="100" class="fs4 logo"></ion-icon>';
+	}
+} 
 
 /**
  * Stops the settings page name in the dashboard from wrapping in an ugly way
@@ -46,6 +62,9 @@ function splitinfinities_custom_css() {
 			overflow: hidden;
 			text-overflow: ellipsis;
 			padding-right: 10px !important;
+		}
+		:root {
+			--ms-ratio: .975;
 		}
 	</style>';
 }

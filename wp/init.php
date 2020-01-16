@@ -22,8 +22,9 @@ function my_acf_block_render_callback( $block ) {
 	// convert name ("acf/testimonial") into path friendly slug ("testimonial")
 	$slug = str_replace('acf/', '', $block['name']);
 
-	block($slug);
+	block($slug, $block);
 }
+
 
 /**
  * Add page slug to body_class() classes if it doesn't exist
@@ -58,6 +59,15 @@ function splitinfinities_dequeue_styles( $enqueue_styles ) {
 	return $enqueue_styles;
 }
 
+function register_splitinfinities_menu() {
+	register_nav_menu( 'header', __( 'Header' ) );
+	register_nav_menu( 'footer_one', __( 'Footer One' ) );
+	register_nav_menu( 'footer_two', __( 'Footer Two' ) );
+	register_nav_menu( 'footer_three', __( 'Footer Three' ) );
+	register_nav_menu( 'footer_four', __( 'Footer Four' ) );
+}
+add_action( 'init', 'register_splitinfinities_menu' );
+
 /**
  * Initialize all of the theme's stuff
  * @return null
@@ -66,6 +76,7 @@ function splitinfinities_setup() {
 	// Add post thumbnails
 	add_theme_support('post-thumbnails');
 	add_theme_support( 'woocommerce' );
+	add_theme_support( 'menus' );
 	remove_theme_support( 'wc-product-gallery-zoom' );
 	remove_theme_support( 'wc-product-gallery-lightbox' );
 	remove_theme_support( 'wc-product-gallery-slider' );

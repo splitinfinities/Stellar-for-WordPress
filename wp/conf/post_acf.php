@@ -26,7 +26,6 @@ if (function_exists('get_field')) {
 	require __DIR__ . '/../acf/blocks.php';
 }
 
-
 /**
  * Register blocks
  */
@@ -64,6 +63,57 @@ if( function_exists('acf_register_block') ) {
 		'keywords'			=> array( 'content', 'quote' ),
 		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
 	));
+
+	acf_register_block(array(
+		'name'				=> 'mosiac',
+		'title'				=> __('Mosiac'),
+		'description'		=> __('A custom mosiac block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'common',
+		'icon'				=> 'grid-view',
+		'keywords'			=> array( 'content', 'quote' ),
+		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
+	));
+
+	acf_register_block(array(
+		'name'				=> 'pagelist',
+		'title'				=> __('Page list'),
+		'description'		=> __('A custom Page list block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'common',
+		'icon'				=> 'grid-view',
+		'keywords'			=> array( 'content', 'quote' )
+	));
+
+	acf_register_block(array(
+		'name'				=> 'events',
+		'title'				=> __('Events list'),
+		'description'		=> __('A custom Events list block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'common',
+		'icon'				=> 'grid-view',
+		'keywords'			=> array( 'content', 'events' )
+	));
+
+	acf_register_block(array(
+		'name'				=> 'spacer',
+		'title'				=> __('Spacer'),
+		'description'		=> __('A custom spacer block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'common',
+		'icon'				=> 'grid-view',
+		'keywords'			=> array( 'content', 'quote' )
+	));
+
+	acf_register_block(array(
+		'name'				=> 'tabs',
+		'title'				=> __('Tabs'),
+		'description'		=> __('A custom tabs block.'),
+		'render_callback'	=> 'my_acf_block_render_callback',
+		'category'			=> 'common',
+		'icon'				=> 'grid-view',
+		'keywords'			=> array( 'content', 'quote' )
+	));
 }
 
 
@@ -82,6 +132,12 @@ if (function_exists('acf_add_options_page')) {
 		));
 
 		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Site Features',
+			'menu_title'	=> 'Features',
+			'parent_slug'	=> 'theme-general-settings',
+		));
+
+		acf_add_options_sub_page(array(
 			'page_title' 	=> 'SEO (Search Engine Optimization)',
 			'menu_title'	=> 'SEO',
 			'parent_slug'	=> 'theme-general-settings',
@@ -90,6 +146,12 @@ if (function_exists('acf_add_options_page')) {
 		acf_add_options_sub_page(array(
 			'page_title' 	=> 'SDO (Social Discovery Optimization)',
 			'menu_title'	=> 'SDO',
+			'parent_slug'	=> 'theme-general-settings',
+		));
+
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Third Party API\'S',
+			'menu_title'	=> 'API\'s',
 			'parent_slug'	=> 'theme-general-settings',
 		));
 	}

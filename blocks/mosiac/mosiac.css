@@ -1,0 +1,136 @@
+stellar-layout.mosiac copy-wrap {
+    margin: 0;
+}
+
+stellar-layout.mosiac stellar-grid {
+    height: 30rem;
+}
+
+stellar-layout.mosiac stellar-grid.unconstrained {
+    height: auto !important;
+}
+
+stellar-layout.mosiac stellar-grid.constrained {
+    display: none;
+}
+
+stellar-layout.mosiac stellar-grid > * {
+    max-width: initial;
+    max-height: initial;
+}
+
+stellar-layout.mosiac stellar-grid.flipped {
+    direction: rtl;
+}
+
+stellar-layout.mosiac stellar-grid.flipped > * {
+    direction: ltr;
+}
+
+@media (min-width: 650px) {
+    stellar-layout.mosiac stellar-grid.constrained {
+        display: grid;
+    }
+
+    stellar-layout.mosiac stellar-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    stellar-layout.mosiac stellar-grid.variant-two,
+    stellar-layout.mosiac stellar-grid.variant-five {
+        grid-template-columns: 3fr 5fr;
+    }
+
+    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-two,
+    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-five {
+        grid-template-columns: 5fr 3fr;
+    }
+
+    stellar-layout.mosiac stellar-grid.variant-three,
+    stellar-layout.mosiac stellar-grid.variant-six {
+        grid-template-columns: 1fr 3fr;
+    }
+
+    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-three,
+    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-six {
+        grid-template-columns: 3fr 1fr;
+    }
+
+    stellar-layout.mosiac stellar-grid.variant-four,
+    stellar-layout.mosiac stellar-grid.variant-five,
+    stellar-layout.mosiac stellar-grid.variant-six,
+    stellar-layout.mosiac stellar-grid.variant-seven,
+    stellar-layout.mosiac stellar-grid.variant-eight {
+        grid-template-rows: 1fr 1fr;
+        height: 40rem;
+    }
+
+    stellar-layout.mosiac stellar-grid.variant-seven {
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+
+    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-seven {
+        grid-template-columns: 2fr 1fr 2fr;
+    }
+
+    stellar-layout.mosiac stellar-grid.variant-eight {
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+
+    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-eight {
+        grid-template-columns: 3fr 1fr 3fr;
+    }
+
+    stellar-layout.mosiac stellar-grid.variant-nine,
+    stellar-layout.mosiac stellar-grid.variant-ten,
+    stellar-layout.mosiac stellar-grid.variant-eleven {
+        grid-template-columns: 1fr 1fr 1fr;
+        height: 50rem;
+    }
+
+    stellar-grid.variant-four > *:nth-child(1),
+    stellar-grid.variant-five > *:nth-child(1),
+    stellar-grid.variant-six > *:nth-child(1) { grid-area: 1/1/3/1 }
+
+    stellar-grid.variant-four > *:nth-child(2),
+    stellar-grid.variant-five > *:nth-child(2),
+    stellar-grid.variant-six > *:nth-child(2) { grid-area: 2/1  }
+
+    stellar-grid.variant-four > *:nth-child(2),
+    stellar-grid.variant-five > *:nth-child(2),
+    stellar-grid.variant-six > *:nth-child(2) { grid-area: 2/2  }
+
+    stellar-grid.variant-seven > *:nth-child(1),
+    stellar-grid.variant-eight > *:nth-child(1) { grid-area: 1/1/1/1 }
+
+    stellar-grid.variant-seven > *:nth-child(2),
+    stellar-grid.variant-eight > *:nth-child(2) { grid-area: 2/1/2/1 }
+
+    stellar-grid.variant-seven > *:nth-child(3),
+    stellar-grid.variant-eight > *:nth-child(3) { grid-area: 1/2/3/2 }
+
+    stellar-grid.variant-seven > *:nth-child(4),
+    stellar-grid.variant-eight > *:nth-child(4) { grid-area: 1/3/1/3 }
+
+    stellar-grid.variant-seven > *:nth-child(5),
+    stellar-grid.variant-eight > *:nth-child(5) { grid-area: 2/3/2/3 }
+
+    stellar-grid.variant-nine > *:nth-child(1),
+    stellar-grid.variant-ten > *:nth-child(1),
+    stellar-grid.variant-eleven > *:nth-child(1) { grid-area: 1/1/3/1 }
+
+    stellar-grid.variant-nine > *:nth-child(2),
+    stellar-grid.variant-eleven > *:nth-child(2) { grid-area: 1/2/1/2 }
+
+    stellar-grid.variant-ten > :nth-child(2) { grid-area: 1/2/1/4 }
+    stellar-grid.variant-ten > :nth-child(3) { grid-area: 2/2/2/2 }
+    stellar-grid.variant-ten > :nth-child(4) { grid-area: 2/3/2/3 }
+
+    stellar-grid.variant-nine > *:nth-child(3),
+    stellar-grid.variant-eleven > *:nth-child(3) { grid-area: 1/3/1/3 }
+
+    stellar-grid.variant-nine > *:nth-child(4) { grid-area: 2/2/2/2 }
+    stellar-grid.variant-eleven > *:nth-child(4) { grid-area: 2/2/2/4 }
+
+    stellar-grid.variant-nine > *:nth-child(5) { grid-area: 2/3/2/3 }
+}

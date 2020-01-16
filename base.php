@@ -32,7 +32,7 @@ if (get_field('enable_caching', 'option')) {
 // TODO: Move this to a function
 // If the caches are set, and the user isn't logged in,
 // Set the $content variable and $sendo variable from the cache.
-if ( $content_transient && $sendo_transient && ! is_user_logged_in( ) ) {
+if ( $content_transient && $sendo_transient && !is_user_logged_in( ) ) {
 	$content = $content_transient;
 	$sendo = $sendo_transient;
 } else {
@@ -81,10 +81,6 @@ if ( $content_transient && $sendo_transient && ! is_user_logged_in( ) ) {
 	}
 }
 
-if ($_GET["ajax"] === "true") {
-	echo $content; exit;
-}
-
 // Capture the page in memory
 ob_start(); ?>
 <!doctype html>
@@ -102,11 +98,32 @@ ob_start(); ?>
 	echo $wordpress_head;
 	?>
 
-	<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/style.css">
+	<style data-styles>stellar-docs-component,stellar-docs-page,stellar-docs-home,stellar-tester,stellar-interview,stellar-playlist,stellar-pagination,stellar-stripe,stellar-video-interview,stellar-asset-library,stellar-color-library,stellar-toggle-option,stellar-breadcrumbs,stellar-360-image,stellar-documentation,stellar-clock,stellar-dropdown,stellar-group,stellar-switch,stellar-toggle,stellar-password-requirements,stellar-song,stellar-step,stellar-table,skeleton-text,stellar-animate-text,stellar-callout,stellar-comment,stellar-image,stellar-long-shadow,stellar-reveal,stellar-reveal-list,horizontal-scroll,ion-icon,stellar-360-video,stellar-auto-scroll,stellar-comments,stellar-context,stellar-docs-not-found,stellar-follow,stellar-interview-line,stellar-keyframes,stellar-mouse-trail,stellar-pjax,stellar-scatter,stellar-scroll-z-root,stellar-scroll-z-section,stellar-steps,stellar-story,stellar-time,stencil-async-content,stencil-route-title,stencil-router-prompt,stencil-router-redirect,web-audio-debugger,web-audio-effect,web-audio-sequencer,web-audio-visualizer-shader,stellar-avatar,stellar-group-overflow,stellar-breadcrumb,stellar-color-picker,stellar-video,stellar-code,stellar-theme,stellar-form,stellar-chart,web-audio,web-audio-source,stellar-tab,stellar-tabs,stellar-content,stencil-route,stencil-route-switch,stencil-router,stellar-tag,stellar-grid,stellar-intersection,stellar-slides,stellar-simple-slides,stellar-slide,stellar-card,stellar-blur,stellar-button,stencil-route-link,stellar-asset,stellar-icon,context-consumer,stellar-select,stellar-layout,stellar-parallax,stellar-parallax-section,stellar-item,stellar-accordion,stellar-message,stellar-starscape,stellar-label,copy-wrap,stellar-tooltip,stellar-input,stellar-unit,stellar-markdown,stellar-docs-header,stellar-docs-navigation,stellar-progress,web-audio-visualizer,skeleton-img{visibility:hidden}.hydrated{visibility:inherit}</style>
+
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/style.css?v=1.2">
 </head>
 <body <?php body_class(get_field('theme') . " " . get_field('complement')); ?> data-section="top">
+	<?php if (get_field('enable_ajax', 'option')): ?>
+		<stellar-pjax></stellar-pjax>
+	<?php endif; ?>
+
 	<?php if ($sendo->chrome_shown): ?>
 		<?php get_template_part('header'); ?>
+	<?php endif; ?>
+
+	<?php if (in_array("interstitial", get_field("features", "options"))): ?>
+		<stellar-interstitial fullscreen>
+			<stellar-form ajax class="self-center relative z-2" style="height: auto;">
+				<copy-wrap>
+					<?php the_field("interstitial_content", "options") ?>
+					<stellar-group class="items-center flex mt4 bg-black">
+						<stellar-button tag="submit" class="mr4" pill outline style="--color: var(--white);--border: 4px solid var(--white);--active-border: 4px solid var(--white);">Continue</stellar-button>
+						<p class="white" style="height: auto;align-self: center;">or close this site.</p>
+					</stellar-group>
+				</copy-wrap>
+			</stellar-form>
+			<?php component("starscape"); ?>
+		</stellar-interstitial>
 	<?php endif; ?>
 
 	<main>

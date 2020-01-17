@@ -40,7 +40,7 @@ class SPLITINFINITIES_Walker_Tabs extends Walker_Nav_Menu {
         $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
         $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
         $attributes .= ' class="menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
-        $attributes .= (array_search('current-menu-item', $item->classes) != 0) ? ' open' : '';
+        $attributes .= ($item->classes && array_search('current-menu-item', $item->classes) != 0) ? ' open' : '';
 
         // Build HTML output and pass through the proper filter.
         $item_output = sprintf( '%1$s<stellar-tab tag="pjax" %2$s>%3$s%4$s%5$s</stellar-tab>%6$s',
@@ -144,7 +144,7 @@ class SPLITINFINITIES_Walker_Social extends Walker_Nav_Menu {
         $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
         $attributes .= ' class="menu-link white no-underline ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
         // Build HTML output and pass through the proper filter.
-        $item_output = sprintf( '%1$s<li><a%2$s target="_blank" rel="noopener">%3$s<ion-icon src="/wp-content/themes/'.get_template().'/assets/vector/%4$s.svg" class="black fs6"></ion-icon>%5$s</a></li>%6$s',
+        $item_output = sprintf( '%1$s<li><a%2$s target="_blank" rel="noopener">%3$s<ion-icon name="logo-%4$s" class="dm-white black fs6"></ion-icon>%5$s</a></li>%6$s',
             $args->before,
             $attributes,
             $args->link_before,
@@ -195,7 +195,7 @@ class SPLITINFINITIES_Walker_SocialText extends Walker_Nav_Menu {
         $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
         $attributes .= ' class="menu-link white no-underline flex items-center ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
         // Build HTML output and pass through the proper filter.
-        $item_output = sprintf( '%1$s<li><a%2$s target="_blank" rel="noopener">%3$s<ion-icon src="/wp-content/themes/'.get_template().'/assets/vector/%4$s.svg" class="white"></ion-icon><p class="ml3 white">%5$s</p>%6$s</a></li>%7$s',
+        $item_output = sprintf( '%1$s<li><a%2$s target="_blank" rel="noopener">%3$s<ion-icon name="logo-%4$s" class="dm-white black"></ion-icon><p class="ml3 white">%5$s</p>%6$s</a></li>%7$s',
             $args->before,
             $attributes,
             $args->link_before,

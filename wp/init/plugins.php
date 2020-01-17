@@ -30,7 +30,51 @@ function splitinfinities_register_required_plugins() {
 			'force_deactivation' => true, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
 			'external_url'       => 'http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=b3JkZXJfaWQ9MzQ1Mjl8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE0LTA3LTExIDIxOjQ1OjEz', // If set, overrides default API URL and points to an external URL.
 			'is_callable'        => 'acf_add_options_page', // If set, this callable will be be checked for availability to determine if a plugin is active.
-		)
+		),
+		array(
+			'name'               => 'Advanced Custom Fields: Post Type Selector',
+			'slug'               => 'acf-post-type-selector',
+			'required'           => true,
+			'force_activation'   => true,
+			'force_deactivation' => true,
+			'source'             => 'https://github.com/TimPerry/acf-post-type-selector/archive/master.zip',
+			'external_url'       => 'https://github.com/TimPerry/acf-post-type-selector/archive/master.zip',
+		),
+		array(
+			'name'               => 'Caldera Forms',
+			'slug'               => 'caldera-forms',
+			'required'           => true,
+			'force_activation'   => true,
+			'force_deactivation' => true,
+		),
+		array(
+			'name'               => 'Disable Gutenberg',
+			'slug'               => 'disable-gutenberg',
+			'required'           => true,
+			'force_activation'   => true,
+			'force_deactivation' => true,
+		),
+		array(
+			'name'               => 'Duplicate Post',
+			'slug'               => 'duplicate-post',
+			'required'           => true,
+			'force_activation'   => true,
+			'force_deactivation' => true,
+		),
+		array(
+			'name'               => 'PWA',
+			'slug'               => 'pwa',
+			'required'           => true,
+			'force_activation'   => true,
+			'force_deactivation' => true,
+		),
+		array(
+			'name'               => 'Simple Page Ordering',
+			'slug'               => 'simple-page-ordering',
+			'required'           => true,
+			'force_activation'   => true,
+			'force_deactivation' => true,
+		),
 	);
 
 	/*

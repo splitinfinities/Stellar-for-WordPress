@@ -32,6 +32,8 @@ function splitinfinities_login_logo() {
 }
 add_action( 'login_enqueue_scripts', 'splitinfinities_login_logo' );
 
+add_theme_support( 'service_worker', true );
+
 add_theme_support( 'custom-logo', array(
 	'height'      => 100,
 	'width'       => 100,
@@ -39,6 +41,8 @@ add_theme_support( 'custom-logo', array(
 	'flex-width'  => true,
 	'header-text' => array( 'site-title', 'site-description' ),
 ) );
+
+add_theme_support( 'custom-header' );
 
 function the_theme_logo() {
 	$custom_logo_id = get_theme_mod( 'custom_logo' );

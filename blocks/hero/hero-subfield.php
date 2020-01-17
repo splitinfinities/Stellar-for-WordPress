@@ -13,6 +13,10 @@
     <?php elseif (get_sub_field('background_video')): ?>
         <?php global $item; ?>
         <?php $item["video"] = get_sub_field('background_video'); ?>
+        <?php $item["controls"] = "false" ?>
+        <?php $item["playsinline"] = true ?>
+        <?php $item["autoplay"] = true ?>
+        <?php $item["overlay"] = true ?>
         <?php component('video'); ?>
     <?php else: ?>
         <?php component("starscape"); ?>

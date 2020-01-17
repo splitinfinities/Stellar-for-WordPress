@@ -5,6 +5,7 @@
 				<p class="white ttu b tracked fw9 mb3"><?php echo wp_get_nav_menu_name("footer_one") ?></p>
 				<?php wp_nav_menu([
 					'theme_location' => 'footer_one',
+					'menu_class' => 'list ma0 pa0',
 					'walker' => new SPLITINFINITIES_Walker_Anchors
 				]); ?>
 			</div>
@@ -13,6 +14,7 @@
 				<p class="white ttu b tracked fw9 mb3"><?php echo wp_get_nav_menu_name("footer_two") ?></p>
 				<?php wp_nav_menu([
 					'theme_location' => 'footer_two',
+					'menu_class' => 'list ma0 pa0',
 					'walker' => new SPLITINFINITIES_Walker_Anchors
 				]); ?>
 			</div>
@@ -21,6 +23,7 @@
 				<p class="white ttu b tracked fw9 mb3"><?php echo wp_get_nav_menu_name("footer_three") ?></p>
 				<?php wp_nav_menu([
 					'theme_location' => 'footer_three',
+					'menu_class' => 'list ma0 pa0',
 					'walker' => new SPLITINFINITIES_Walker_Anchors
 				]); ?>
 			</div>
@@ -29,6 +32,7 @@
 				<p class="white ttu b tracked fw9 mb3"><?php echo wp_get_nav_menu_name("footer_four") ?></p>
 				<?php wp_nav_menu([
 					'theme_location' => 'footer_four',
+					'menu_class' => 'list ma0 pa0',
 					'walker' => new SPLITINFINITIES_Walker_SocialText
 				]); ?>
 			</div>

@@ -8,3 +8,16 @@ Version: 1.1.0
 p + p {
     margin-top: 1em;
 }
+
+
+
+.layer-children {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+.layer-children > * {
+    grid-column: 1;
+    grid-row: 1;
+}

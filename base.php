@@ -102,7 +102,8 @@ ob_start(); ?>
 
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/style.css?v=1.2">
 </head>
-<body <?php body_class(get_field('theme') . " " . get_field('complement')); ?> data-section="top">
+<body <?php body_class(get_field('theme') . " " . get_field('complement') . " bg-white dm-bg-black"); ?> data-section="top">
+	<stellar-theme system body></stellar-theme>
 	<?php if (get_field('enable_ajax', 'option')): ?>
 		<stellar-pjax></stellar-pjax>
 	<?php endif; ?>
@@ -111,13 +112,13 @@ ob_start(); ?>
 		<?php get_template_part('header'); ?>
 	<?php endif; ?>
 
-	<?php if (in_array("interstitial", get_field("features", "options"))): ?>
+	<?php if ( get_field("features", "options") && in_array("interstitial", get_field("features", "options"))): ?>
 		<stellar-interstitial fullscreen>
 			<stellar-form ajax class="self-center relative z-2" style="height: auto;">
 				<copy-wrap>
 					<?php the_field("interstitial_content", "options") ?>
 					<stellar-group class="items-center flex mt4 bg-black">
-						<stellar-button tag="submit" class="mr4" pill outline style="--color: var(--white);--border: 4px solid var(--white);--active-border: 4px solid var(--white);">Continue</stellar-button>
+						<stellar-button tag="submit" class="mr4">Continue</stellar-button>
 						<p class="white" style="height: auto;align-self: center;">or close this site.</p>
 					</stellar-group>
 				</copy-wrap>

@@ -9,3 +9,7 @@
 p + p {
     margin-top: 1em;
 }
+
+.table.fixed {
+position: relative;
+}

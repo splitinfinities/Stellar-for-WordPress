@@ -9,8 +9,6 @@ p + p {
     margin-top: 1em;
 }
 
-
-
 .layer-children {
     display: grid;
     grid-template-columns: auto;
@@ -21,3 +19,7 @@ p + p {
     grid-column: 1;
     grid-row: 1;
 }
+
+table.fixed {
+    position: relative !important;
+  }

@@ -1,5 +1,5 @@
 <?php global $item; ?>
-<stellar-layout padding="<?php the_sub_field('padding') ?>" size="<?php the_sub_field('size') ?>" class="mosiac relative <?php if (get_sub_field('theme') !== "theme-none") { the_sub_field('theme'); } ?> <?php if (get_sub_field('complement') !== "complement-none") { the_sub_field('complement'); } ?> <?php the_sub_field('color_mode') ?> <?php the_sub_field('background_flood') ?>" style=" --grid-gap:<?php the_sub_field('grid_gap') ?>rem;">
+<stellar-layout padding="<?php the_sub_field('padding') ?>" size="<?php the_sub_field('size') ?>" class="mosaic relative <?php if (get_sub_field('theme') !== "theme-none") { the_sub_field('theme'); } ?> <?php if (get_sub_field('complement') !== "complement-none") { the_sub_field('complement'); } ?> <?php the_sub_field('color_mode') ?> <?php the_sub_field('background_flood') ?>" style=" --grid-gap:<?php the_sub_field('grid_gap') ?>rem;">
     <?php if (get_sub_field("include_lead_in")): ?>
         <copy-wrap class="relative z-2" align="<?php the_sub_field("lead_in_alignment") ?>">
             <?php the_sub_field("lead_in"); ?>

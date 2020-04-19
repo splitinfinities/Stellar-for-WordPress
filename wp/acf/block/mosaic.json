@@ -1,0 +1,228 @@
+[
+    {
+        "key": "group_5defda9a73b76",
+        "title": "Mosaic Block",
+        "fields": [
+            {
+                "key": "field_5deff0b86f2db",
+                "label": "Layout",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5deff0d86f2dd",
+                "label": "Layout",
+                "name": "layout",
+                "type": "clone",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "clone": [
+                    "group_5ccb53a527811"
+                ],
+                "display": "seamless",
+                "layout": "block",
+                "prefix_label": 0,
+                "prefix_name": 0
+            },
+            {
+                "key": "field_5df009cf795fb",
+                "label": "Grid gap",
+                "name": "grid_gap",
+                "type": "range",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 2,
+                "min": 0,
+                "max": 10,
+                "step": 1,
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_5deff0ca6f2dc",
+                "label": "Content",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5defdc6f027da",
+                "label": "Layouts",
+                "name": "layouts",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "field_5defdc98027db",
+                "min": 0,
+                "max": 0,
+                "layout": "block",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5defdc98027db",
+                        "label": "Layout Type",
+                        "name": "layout_type",
+                        "type": "button_group",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "variant-one": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-one.png\" \/>",
+                            "variant-two": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-two.png\" \/>",
+                            "variant-three": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-three.png\" \/>",
+                            "variant-four": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-four.png\" \/>",
+                            "variant-five": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-five.png\" \/>",
+                            "variant-six": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-six.png\" \/>",
+                            "variant-seven": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-seven.png\" \/>",
+                            "variant-eight": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-eight.png\" \/>",
+                            "variant-nine": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-nine.png\" \/>",
+                            "variant-ten": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-ten.png\" \/>",
+                            "variant-eleven": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-eleven.png\" \/>"
+                        },
+                        "allow_null": 0,
+                        "default_value": "variant-one",
+                        "layout": "horizontal",
+                        "return_format": "value"
+                    },
+                    {
+                        "key": "field_5defe6c0a6ac3",
+                        "label": "Flipped",
+                        "name": "flipped",
+                        "type": "true_false",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "",
+                        "default_value": 0,
+                        "ui": 0,
+                        "ui_on_text": "",
+                        "ui_off_text": ""
+                    },
+                    {
+                        "key": "field_5df00750310ae",
+                        "label": "Flipped sizes",
+                        "name": "flipped_sizes",
+                        "type": "true_false",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "",
+                        "default_value": 0,
+                        "ui": 0,
+                        "ui_on_text": "",
+                        "ui_off_text": ""
+                    },
+                    {
+                        "key": "field_5df5480848792",
+                        "label": "Constrained Height",
+                        "name": "constrained_height",
+                        "type": "true_false",
+                        "instructions": "If unchecked, content will dictate the height of sections. If all you have in this mosaic are images, leave this checked.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "40",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "",
+                        "default_value": 1,
+                        "ui": 0,
+                        "ui_on_text": "",
+                        "ui_off_text": ""
+                    },
+                    {
+                        "key": "field_5defe75556c73",
+                        "label": "Content",
+                        "name": "content",
+                        "type": "clone",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "clone": [
+                            "group_5cc7d0fa7f0d4"
+                        ],
+                        "display": "seamless",
+                        "layout": "block",
+                        "prefix_label": 0,
+                        "prefix_name": 0
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "block",
+                    "operator": "==",
+                    "value": "acf\/mosaic"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    }
+]

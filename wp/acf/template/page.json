@@ -1,0 +1,132 @@
+[
+    {
+        "key": "group_5ccb4916163f1",
+        "title": "Page",
+        "fields": [
+            {
+                "key": "field_5ccb491e92b5e",
+                "label": "Theme",
+                "name": "theme",
+                "type": "select",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "theme-none": "None",
+                    "theme-gray": "Gray",
+                    "theme-red": "Red",
+                    "theme-orange": "Orange",
+                    "theme-yellow": "Yellow",
+                    "theme-lime": "Lime",
+                    "theme-green": "Green",
+                    "theme-teal": "Teal",
+                    "theme-cyan": "Cyan",
+                    "theme-blue": "Blue",
+                    "theme-indigo": "Indigo",
+                    "theme-violet": "Violet",
+                    "theme-fuschia": "Fuschia",
+                    "theme-pink": "Pink"
+                },
+                "default_value": [
+                    "theme-red"
+                ],
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "return_format": "value",
+                "ajax": 0,
+                "placeholder": ""
+            },
+            {
+                "key": "field_5ccb492792b5f",
+                "label": "Complement",
+                "name": "complement",
+                "type": "select",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "complement-none": "None",
+                    "complement-gray": "Gray",
+                    "complement-red": "Red",
+                    "complement-orange": "Orange",
+                    "complement-yellow": "Yellow",
+                    "complement-lime": "Lime",
+                    "complement-green": "Green",
+                    "complement-teal": "Teal",
+                    "complement-cyan": "Cyan",
+                    "complement-blue": "Blue",
+                    "complement-indigo": "Indigo",
+                    "complement-violet": "Violet",
+                    "complement-fuschia": "Fuschia",
+                    "complement-pink": "Pink"
+                },
+                "default_value": [
+                    "complement-indigo"
+                ],
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "return_format": "value",
+                "ajax": 0,
+                "placeholder": ""
+            },
+            {
+                "key": "field_5ccb4a784875d",
+                "label": "Color Mode",
+                "name": "color_mode",
+                "type": "select",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "none": "None",
+                    "dark-mode": "Dark",
+                    "light-mode": "Light",
+                    "plain-mode": "Plain"
+                },
+                "default_value": [
+                    "none"
+                ],
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "return_format": "value",
+                "ajax": 0,
+                "placeholder": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "page"
+                }
+            ]
+        ],
+        "menu_order": -99999999,
+        "position": "side",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    }
+]

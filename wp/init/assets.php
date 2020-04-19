@@ -16,6 +16,7 @@ function prepare_scripts() {
 		'app.esm.js' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core/stellar-core.esm.js',
 		'app.nomodule.js' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core/stellar-core.js',
 		'app.css' => get_template_directory_uri() . $assets_basepath . '/stellar/stellar-core/stellar-core.css',
+		'theme' => get_template_directory_uri() . '/style.css',
 	);
 
 	// Embed resources that we need
@@ -66,6 +67,7 @@ function enqueue_load($assets) {
 
 
 	wp_enqueue_style('app.css', $assets['app.css'], $deps, null);
+	wp_enqueue_style('theme', $assets['theme'], $deps, null);
 
 	if (sendo()->esm) {
 		wp_enqueue_script('app.esm.js', $assets['app.esm.js'], array(), null, true);

@@ -1,0 +1,106 @@
+<?php 
+if( function_exists('acf_add_local_field_group') ):
+
+  acf_add_local_field_group(array(
+    'key' => 'group_5e9cb11767925',
+    'title' => 'Content Template: Code Sample',
+    'fields' => array(
+      array(
+        'key' => 'field_5e9cb138a850e',
+        'label' => 'Code',
+        'name' => 'code',
+        'type' => 'wysiwyg',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'default_value' => '',
+        'tabs' => 'text',
+        'media_upload' => 1,
+        'toolbar' => 'full',
+        'delay' => 0,
+      ),
+      array(
+        'key' => 'field_5e9cb12ea850d',
+        'label' => 'Show Preview',
+        'name' => 'show_preview',
+        'type' => 'true_false',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '50',
+          'class' => '',
+          'id' => '',
+        ),
+        'message' => '',
+        'default_value' => 0,
+        'ui' => 0,
+        'ui_on_text' => '',
+        'ui_off_text' => '',
+      ),
+      array(
+        'key' => 'field_5e9cb152a850f',
+        'label' => 'Language',
+        'name' => 'language',
+        'type' => 'text',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '50',
+          'class' => '',
+          'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+      ),
+      array(
+        'key' => 'field_5e9cb11ca850c',
+        'label' => 'Shared',
+        'name' => 'shared',
+        'type' => 'clone',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'clone' => array(
+          0 => 'group_5e9c9ed90878b',
+        ),
+        'display' => 'seamless',
+        'layout' => 'block',
+        'prefix_label' => 0,
+        'prefix_name' => 0,
+      ),
+    ),
+    'location' => array(
+      array(
+        array(
+          'param' => 'current_user',
+          'operator' => '==',
+          'value' => 'viewing_front',
+        ),
+      ),
+    ),
+    'menu_order' => 0,
+    'position' => 'normal',
+    'style' => 'default',
+    'label_placement' => 'top',
+    'instruction_placement' => 'label',
+    'hide_on_screen' => '',
+    'active' => true,
+    'description' => '',
+  ));
+  
+  endif;

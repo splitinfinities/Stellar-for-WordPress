@@ -3,7 +3,10 @@
 /**
  * Register commonly used SEO,SDO, branding, and image ACF's.
  */
-if (function_exists('get_field')) {
+if( function_exists('acf_add_local_field_group') ):
+	// Enqueues content templates
+	require __DIR__ . '/../acf/templates.php';
+
 	// Responsible for setting up the brand tab at /wp-admin/admin.php?page=theme-general-settings
 	require __DIR__ . '/../acf/brand.php';
 
@@ -19,101 +22,120 @@ if (function_exists('get_field')) {
 	// Responsible for adding page specific SEO & Social Discovery features
 	require __DIR__ . '/../acf/page-seo_and_sdo.php';
 
-	// Responsible for loading site specific ACF. You paste this so ACF loads zippy quick.
-	require __DIR__ . '/../acf/_site.php';
+	// Responsible for site features
+	require __DIR__ . '/../acf/site_features.php';
 
-	// Responsible for loading the common blocks to use in the page builder
-	require __DIR__ . '/../acf/blocks.php';
-}
+endif;
 
 /**
  * Register blocks
  */
-if( function_exists('acf_register_block') ) {
+if (function_exists('acf_register_block') ) {
 
-	acf_register_block(array(
-		'name'				=> 'hero',
-		'title'				=> __('Hero'),
-		'description'		=> __('A custom hero block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'common',
-		'icon'				=> 'layout',
-		'keywords'			=> array( 'hero', 'quote' ),
-		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
-	));
+	$blocks = get_field('gutenberg_blocks', 'options');
 
-	acf_register_block(array(
-		'name'				=> 'content',
-		'title'				=> __('Content'),
-		'description'		=> __('A custom content block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'common',
-		'icon'				=> 'layout',
-		'keywords'			=> array( 'content', 'quote' ),
-		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
-	));
+	if ($blocks === null) {
+		$blocks = [];
+	}
 
-	acf_register_block(array(
-		'name'				=> 'grid',
-		'title'				=> __('Grid'),
-		'description'		=> __('A custom grid block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'common',
-		'icon'				=> 'grid-view',
-		'keywords'			=> array( 'content', 'quote' ),
-		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
-	));
+	if (in_array("hero", $blocks)):
+		include __DIR__ . '/../acf/block/hero.php';
+		acf_register_block(array(
+			'name'				=> 'hero',
+			'title'				=> __('Hero'),
+			'description'		=> __('A custom hero block.'),
+			'render_callback'	=> 'my_acf_block_render_callback',
+			'category'			=> 'common',
+			'icon'				=> 'layout',
+			'keywords'			=> array( 'hero', 'quote' ),
+			'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
+		));
+	endif;
 
-	acf_register_block(array(
-		'name'				=> 'mosiac',
-		'title'				=> __('Mosiac'),
-		'description'		=> __('A custom mosiac block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'common',
-		'icon'				=> 'grid-view',
-		'keywords'			=> array( 'content', 'quote' ),
-		'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
-	));
+	if (in_array("content", $blocks)):
+		include __DIR__ . '/../acf/block/content.php';
+		acf_register_block(array(
+			'name'				=> 'content',
+			'title'				=> __('Content'),
+			'description'		=> __('A custom content block.'),
+			'render_callback'	=> 'my_acf_block_render_callback',
+			'category'			=> 'common',
+			'icon'				=> 'layout',
+			'keywords'			=> array( 'content', 'quote' ),
+			'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
+		));
+	endif;
 
-	acf_register_block(array(
-		'name'				=> 'pagelist',
-		'title'				=> __('Page list'),
-		'description'		=> __('A custom Page list block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'common',
-		'icon'				=> 'grid-view',
-		'keywords'			=> array( 'content', 'quote' )
-	));
+	if (in_array("grid", $blocks)):
+		include __DIR__ . '/../acf/block/grid.php';
+		acf_register_block(array(
+			'name'				=> 'grid',
+			'title'				=> __('Grid'),
+			'description'		=> __('A custom grid block.'),
+			'render_callback'	=> 'my_acf_block_render_callback',
+			'category'			=> 'common',
+			'icon'				=> 'grid-view',
+			'keywords'			=> array( 'content', 'quote' ),
+			'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
+		));
 
-	acf_register_block(array(
-		'name'				=> 'events',
-		'title'				=> __('Events list'),
-		'description'		=> __('A custom Events list block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'common',
-		'icon'				=> 'grid-view',
-		'keywords'			=> array( 'content', 'events' )
-	));
+	endif;
 
-	acf_register_block(array(
-		'name'				=> 'spacer',
-		'title'				=> __('Spacer'),
-		'description'		=> __('A custom spacer block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'common',
-		'icon'				=> 'grid-view',
-		'keywords'			=> array( 'content', 'quote' )
-	));
+	if (in_array("mosaic", $blocks)):
+		include __DIR__ . '/../acf/block/mosaic.php';
+		acf_register_block(array(
+			'name'				=> 'mosaic',
+			'title'				=> __('Mosaic'),
+			'description'		=> __('A custom mosaic block.'),
+			'render_callback'	=> 'my_acf_block_render_callback',
+			'category'			=> 'common',
+			'icon'				=> 'grid-view',
+			'keywords'			=> array( 'content', 'quote' ),
+			'enqueue_style' 	=> get_template_directory_uri() . '/blocks.css',
+		));
 
-	acf_register_block(array(
-		'name'				=> 'tabs',
-		'title'				=> __('Tabs'),
-		'description'		=> __('A custom tabs block.'),
-		'render_callback'	=> 'my_acf_block_render_callback',
-		'category'			=> 'common',
-		'icon'				=> 'grid-view',
-		'keywords'			=> array( 'content', 'quote' )
-	));
+	endif;
+
+	if (in_array("pagelist", $blocks)):
+		include __DIR__ . '/../acf/block/pagelist.php';
+		acf_register_block(array(
+			'name'				=> 'pagelist',
+			'title'				=> __('Page list'),
+			'description'		=> __('A custom Page list block.'),
+			'render_callback'	=> 'my_acf_block_render_callback',
+			'category'			=> 'common',
+			'icon'				=> 'grid-view',
+			'keywords'			=> array( 'content', 'quote' )
+		));
+
+	endif;
+
+	if (in_array("spacer", $blocks)):
+		include __DIR__ . '/../acf/block/spacer.php';
+		acf_register_block(array(
+			'name'				=> 'spacer',
+			'title'				=> __('Spacer'),
+			'description'		=> __('A custom spacer block.'),
+			'render_callback'	=> 'my_acf_block_render_callback',
+			'category'			=> 'common',
+			'icon'				=> 'grid-view',
+			'keywords'			=> array( 'content', 'quote' )
+		));
+
+	endif;
+
+	if (in_array("tab", $blocks)):
+		include __DIR__ . '/../acf/block/tab.php';
+		acf_register_block(array(
+			'name'				=> 'tabs',
+			'title'				=> __('Tabs'),
+			'description'		=> __('A custom tabs block.'),
+			'render_callback'	=> 'my_acf_block_render_callback',
+			'category'			=> 'common',
+			'icon'				=> 'grid-view',
+			'keywords'			=> array( 'content', 'quote' )
+		));
+	endif;
 }
 
 

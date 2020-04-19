@@ -17,7 +17,7 @@
 
 		<div class="pr4 pb4">
 			<?php wp_nav_menu([
-					'theme_location' => 'footer_four',
+					'theme_location' => 'socialmedia',
 					'menu_class' => 'group',
 					'walker' => new SPLITINFINITIES_Walker_Social
 				]); ?>
@@ -31,13 +31,12 @@
 		</div>
 
 		<div class="pv3 ph4 ph0-ns ph0-m ph0-l">
-			<h4 class="mw-100">Fallback</h4>
-			<p class="mw-100">Fallback copy</p>
+			<?php echo $item["fallback_content"] ?>
 		</div>
 
 		<div class="pr3">
 			<?php wp_nav_menu([
-					'theme_location' => 'footer_four',
+					'theme_location' => 'socialmedia',
 					'menu_class' => 'group',
 					'walker' => new SPLITINFINITIES_Walker_Social
 				]); ?>

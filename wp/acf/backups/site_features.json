@@ -1,0 +1,227 @@
+[
+    {
+        "key": "group_5e1fce584835d",
+        "title": "Site Features",
+        "fields": [
+            {
+                "key": "field_5e20a5b98ea42",
+                "label": "Features",
+                "name": "features",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "interstitial": "Interstitial",
+                    "message": "Message"
+                },
+                "allow_custom": 0,
+                "default_value": [],
+                "layout": "horizontal",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5e1fce668ab22",
+                "label": "Interstitial",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5e20a5b98ea42",
+                            "operator": "==",
+                            "value": "interstitial"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5e1fce748ab23",
+                "label": "Interstitial Content",
+                "name": "interstitial_content",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_5e20a5a58ea40",
+                "label": "Message",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5e20a5b98ea42",
+                            "operator": "==",
+                            "value": "message"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5e20a5b08ea41",
+                "label": "Message Content",
+                "name": "message_content",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_5e9c9cfcab2ab",
+                "label": "Content Types",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5e9c9d03ab2ac",
+                "label": "Content Types",
+                "name": "content_types",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "wysiwyg": "WYSIWYG",
+                    "markdown": "Markdown",
+                    "interview": "Interview",
+                    "image": "Image",
+                    "video": "Video",
+                    "song": "Song",
+                    "playlist": "Playlist",
+                    "carousel": "Carousel",
+                    "chart": "Chart",
+                    "code_sample": "Code Sample",
+                    "map": "Map",
+                    "latest_social_post": "Latest Social Post"
+                },
+                "allow_custom": 0,
+                "default_value": [
+                    "wysiwyg",
+                    "image",
+                    "video",
+                    "carousel",
+                    "latest_social_post"
+                ],
+                "layout": "horizontal",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            },
+            {
+                "key": "field_5e9cc1704216d",
+                "label": "Gutenberg Blocks",
+                "name": "gutenberg_blocks",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "content": "Content",
+                    "grid": "Grid",
+                    "hero": "Hero",
+                    "mosaic": "Mosaic",
+                    "pagelist": "Page List",
+                    "spacer": "Spacer",
+                    "tab": "Tabs"
+                },
+                "allow_custom": 0,
+                "default_value": [
+                    "content",
+                    "grid",
+                    "hero",
+                    "spacer",
+                    "pagelist",
+                    "mosaic"
+                ],
+                "layout": "horizontal",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "acf-options-features"
+                }
+            ]
+        ],
+        "menu_order": 2,
+        "position": "normal",
+        "style": "seamless",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    }
+]

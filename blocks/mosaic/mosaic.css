@@ -1,89 +1,89 @@
-stellar-layout.mosiac copy-wrap {
+stellar-layout.mosaic copy-wrap {
     margin: 0;
 }
 
-stellar-layout.mosiac stellar-grid {
+stellar-layout.mosaic stellar-grid {
     height: 30rem;
 }
 
-stellar-layout.mosiac stellar-grid.unconstrained {
+stellar-layout.mosaic stellar-grid.unconstrained {
     height: auto !important;
 }
 
-stellar-layout.mosiac stellar-grid.constrained {
+stellar-layout.mosaic stellar-grid.constrained {
     display: none;
 }
 
-stellar-layout.mosiac stellar-grid > * {
+stellar-layout.mosaic stellar-grid > * {
     max-width: initial;
     max-height: initial;
 }
 
-stellar-layout.mosiac stellar-grid.flipped {
+stellar-layout.mosaic stellar-grid.flipped {
     direction: rtl;
 }
 
-stellar-layout.mosiac stellar-grid.flipped > * {
+stellar-layout.mosaic stellar-grid.flipped > * {
     direction: ltr;
 }
 
 @media (min-width: 650px) {
-    stellar-layout.mosiac stellar-grid.constrained {
+    stellar-layout.mosaic stellar-grid.constrained {
         display: grid;
     }
 
-    stellar-layout.mosiac stellar-grid {
+    stellar-layout.mosaic stellar-grid {
         grid-template-columns: 1fr 1fr;
     }
 
-    stellar-layout.mosiac stellar-grid.variant-two,
-    stellar-layout.mosiac stellar-grid.variant-five {
+    stellar-layout.mosaic stellar-grid.variant-two,
+    stellar-layout.mosaic stellar-grid.variant-five {
         grid-template-columns: 3fr 5fr;
     }
 
-    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-two,
-    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-five {
+    stellar-layout.mosaic stellar-grid.flipped_sizes.variant-two,
+    stellar-layout.mosaic stellar-grid.flipped_sizes.variant-five {
         grid-template-columns: 5fr 3fr;
     }
 
-    stellar-layout.mosiac stellar-grid.variant-three,
-    stellar-layout.mosiac stellar-grid.variant-six {
+    stellar-layout.mosaic stellar-grid.variant-three,
+    stellar-layout.mosaic stellar-grid.variant-six {
         grid-template-columns: 1fr 3fr;
     }
 
-    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-three,
-    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-six {
+    stellar-layout.mosaic stellar-grid.flipped_sizes.variant-three,
+    stellar-layout.mosaic stellar-grid.flipped_sizes.variant-six {
         grid-template-columns: 3fr 1fr;
     }
 
-    stellar-layout.mosiac stellar-grid.variant-four,
-    stellar-layout.mosiac stellar-grid.variant-five,
-    stellar-layout.mosiac stellar-grid.variant-six,
-    stellar-layout.mosiac stellar-grid.variant-seven,
-    stellar-layout.mosiac stellar-grid.variant-eight {
+    stellar-layout.mosaic stellar-grid.variant-four,
+    stellar-layout.mosaic stellar-grid.variant-five,
+    stellar-layout.mosaic stellar-grid.variant-six,
+    stellar-layout.mosaic stellar-grid.variant-seven,
+    stellar-layout.mosaic stellar-grid.variant-eight {
         grid-template-rows: 1fr 1fr;
         height: 40rem;
     }
 
-    stellar-layout.mosiac stellar-grid.variant-seven {
+    stellar-layout.mosaic stellar-grid.variant-seven {
         grid-template-columns: 1fr 2fr 1fr;
     }
 
-    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-seven {
+    stellar-layout.mosaic stellar-grid.flipped_sizes.variant-seven {
         grid-template-columns: 2fr 1fr 2fr;
     }
 
-    stellar-layout.mosiac stellar-grid.variant-eight {
+    stellar-layout.mosaic stellar-grid.variant-eight {
         grid-template-columns: 1fr 3fr 1fr;
     }
 
-    stellar-layout.mosiac stellar-grid.flipped_sizes.variant-eight {
+    stellar-layout.mosaic stellar-grid.flipped_sizes.variant-eight {
         grid-template-columns: 3fr 1fr 3fr;
     }
 
-    stellar-layout.mosiac stellar-grid.variant-nine,
-    stellar-layout.mosiac stellar-grid.variant-ten,
-    stellar-layout.mosiac stellar-grid.variant-eleven {
+    stellar-layout.mosaic stellar-grid.variant-nine,
+    stellar-layout.mosaic stellar-grid.variant-ten,
+    stellar-layout.mosaic stellar-grid.variant-eleven {
         grid-template-columns: 1fr 1fr 1fr;
         height: 50rem;
     }

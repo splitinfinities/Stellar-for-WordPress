@@ -8,7 +8,7 @@
     >
 
     <?php if (get_field("include_lead_in")): ?>
-        <copy-wrap align="<?php the_field("lead_in_alignment") ?>">
+        <copy-wrap align="<?php the_field("lead_in_alignment") ?>" style="grid-column: span 2;">
             <?php the_field("lead_in"); ?>
         </copy-wrap>
     <?php endif; ?>
@@ -16,7 +16,7 @@
     <?php component("flex"); ?>
 
     <?php if (get_field("include_lead_out")): ?>
-        <copy-wrap align="<?php the_field("lead_out_alignment") ?>">
+        <copy-wrap align="<?php the_field("lead_out_alignment") ?>" style="grid-column: span 2;">
             <?php the_field("lead_out"); ?>
         </copy-wrap>
     <?php endif; ?>

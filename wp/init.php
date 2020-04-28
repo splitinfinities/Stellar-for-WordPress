@@ -64,7 +64,7 @@ function register_splitinfinities_menu() {
 	register_nav_menu( 'footer_one', __( 'Footer One' ) );
 	register_nav_menu( 'footer_two', __( 'Footer Two' ) );
 	register_nav_menu( 'footer_three', __( 'Footer Three' ) );
-	register_nav_menu( 'footer_four', __( 'Footer Four' ) );
+	register_nav_menu( 'social', __( 'Social' ) );
 }
 add_action( 'init', 'register_splitinfinities_menu' );
 
@@ -74,7 +74,7 @@ add_action( 'init', 'register_splitinfinities_menu' );
  */
 function splitinfinities_setup() {
 	// Add post thumbnails
-	add_theme_support('post-thumbnails');
+	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'woocommerce' );
 	add_theme_support( 'menus' );
 	remove_theme_support( 'wc-product-gallery-zoom' );

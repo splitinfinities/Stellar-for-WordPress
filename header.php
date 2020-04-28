@@ -34,8 +34,8 @@
 				<hr class="vertical self-center bg-black dm-bg-white" />
 
 				<?php wp_nav_menu([
-						'theme_location' => 'footer_four',
-						'menu_class' => 'group mt0',
+						'theme_location' => 'social',
+						'menu_class' => 'group social mt0',
 						'container_class' => 'self-center',
 						'walker' => new SPLITINFINITIES_Walker_Social
 					]); ?>

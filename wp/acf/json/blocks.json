@@ -3239,7 +3239,7 @@
     },
     {
         "key": "group_5defda9a73b76",
-        "title": "Mosiac Block",
+        "title": "mosaic Block",
         "fields": [
             {
                 "key": "field_5deff0b86f2db",
@@ -3347,17 +3347,17 @@
                             "id": ""
                         },
                         "choices": {
-                            "variant-one": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-one.png\" \/>",
-                            "variant-two": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-two.png\" \/>",
-                            "variant-three": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-three.png\" \/>",
-                            "variant-four": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-four.png\" \/>",
-                            "variant-five": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-five.png\" \/>",
-                            "variant-six": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-six.png\" \/>",
-                            "variant-seven": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-seven.png\" \/>",
-                            "variant-eight": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-eight.png\" \/>",
-                            "variant-nine": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-nine.png\" \/>",
-                            "variant-ten": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-ten.png\" \/>",
-                            "variant-eleven": "<img src =\"http:\/\/launch-brewery.local\/wp-content\/uploads\/2019\/12\/variant-eleven.png\" \/>"
+                            "variant-one": "<img src =\"\/wp-content\/themes\/gabriella-parsons\/variant-one.png\" \/>",
+                            "variant-two": "<img src =\"\/wp-content\/themes\/gabriella-parsons\/variant-two.png\" \/>",
+                            "variant-three": "<img src =\"\/wp-content\/themes\/gabriella-parsons\/variant-three.png\" \/>",
+                            "variant-four": "<img src =\"\/wp-content\/themes\/gabriella-parsons\/variant-four.png\" \/>",
+                            "variant-five": "<img src =\"\/wp-content\/themes\/gabriella-parsons\/variant-five.png\" \/>",
+                            "variant-six": "<img src =\"\/wp-content\/themes\/gabriella-parsons\/variant-six.png\" \/>",
+                            "variant-seven": "<img src =\"\/wp-content\/themes\/gabriella-parsons\/variant-seven.png\" \/>",
+                            "variant-eight": "<img src =\"\/wp-content\/themes\/gabriella-parsons\/variant-eight.png\" \/>",
+                            "variant-nine": "<img src =\"\/wp-content\/themes\/gabriella-parsons\/variant-nine.png\" \/>",
+                            "variant-ten": "<img src =\"\/wp-content\/themes\/gabriella-parsons\/variant-ten.png\" \/>",
+                            "variant-eleven": "<img src =\"\/wp-content\/themes\/gabriella-parsons\/variant-eleven.png\" \/>"
                         },
                         "allow_null": 0,
                         "default_value": "variant-one",
@@ -3450,7 +3450,7 @@
                 {
                     "param": "block",
                     "operator": "==",
-                    "value": "acf\/mosiac"
+                    "value": "acf\/mosaic"
                 }
             ]
         ],
@@ -3882,8 +3882,8 @@
                             },
                             "layout_5df3d0024e23f": {
                                 "key": "layout_5df3d0024e23f",
-                                "name": "mosiac",
-                                "label": "Mosiac",
+                                "name": "mosaic",
+                                "label": "mosaic",
                                 "display": "block",
                                 "sub_fields": [
                                     {

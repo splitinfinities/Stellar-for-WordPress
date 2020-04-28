@@ -1,4 +1,4 @@
-@import "./blocks/mosiac/mosiac.css";
+@import "./blocks/mosaic/mosaic.css";
 .wp-block { max-width: 100% !important; }
 .table.fixed {
   position: relative;

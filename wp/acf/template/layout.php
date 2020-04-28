@@ -235,6 +235,7 @@ if( function_exists('acf_add_local_field_group') ):
           'id' => '',
         ),
         'choices' => array(
+          'bg-transparent' => 'Transparent',
           'bg-white' => 'White',
           'bg-black' => 'Black',
           'bg-black-alt' => 'Black Alt',
@@ -260,7 +261,7 @@ if( function_exists('acf_add_local_field_group') ):
           'bg-theme-complement9' => 'Complement\'s Darkest',
         ),
         'default_value' => array(
-          0 => 'bg-white',
+          0 => 'bg-transparent',
         ),
         'allow_null' => 0,
         'multiple' => 0,

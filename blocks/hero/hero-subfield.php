@@ -1,7 +1,9 @@
 <stellar-layout 
     padding="none" 
+    intrinsicsize="1900 x 800"
     size="flush" 
-    class="type-hero <?php echo (!get_sub_field('background_image') && !get_sub_field('background_video')) ? "parallax" : "no-parallax"; ?> <?php if (get_sub_field('theme') !== "theme-none") { the_sub_field('theme'); } ?> relative overflow-hidden <?php the_sub_field('background_flood') ?> <?php the_sub_field('color_mode') ?>"
+    align="<?php the_field('align') ?>" 
+    class="type-hero layer-children <?php echo (!get_sub_field('background_image') && !get_sub_field('background_video')) ? "parallax" : "no-parallax"; ?> <?php if (get_sub_field('theme') !== "theme-none") { the_sub_field('theme'); } ?> relative overflow-hidden <?php the_sub_field('background_flood') ?> <?php the_sub_field('color_mode') ?>"
     >
     <stellar-layout type="<?php the_sub_field('type') ?>" align="<?php the_sub_field('align') ?>" padding="<?php the_sub_field('padding') ?>" size="<?php the_sub_field('size') ?>" class="relative z-3">
         <?php component("flex", "subfield"); ?>

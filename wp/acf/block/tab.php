@@ -225,8 +225,8 @@ if( function_exists('acf_add_local_field_group') ):
               ),
               'layout_5df3d0024e23f' => array(
                 'key' => 'layout_5df3d0024e23f',
-                'name' => 'mosiac',
-                'label' => 'Mosiac',
+                'name' => 'mosaic',
+                'label' => 'mosaic',
                 'display' => 'block',
                 'sub_fields' => array(
                   array(

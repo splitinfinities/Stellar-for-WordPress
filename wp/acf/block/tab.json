@@ -222,8 +222,8 @@
                             },
                             "layout_5df3d0024e23f": {
                                 "key": "layout_5df3d0024e23f",
-                                "name": "mosiac",
-                                "label": "Mosiac",
+                                "name": "mosaic",
+                                "label": "mosaic",
                                 "display": "block",
                                 "sub_fields": [
                                     {

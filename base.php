@@ -102,8 +102,8 @@ ob_start(); ?>
 
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/style.css?v=1.2">
 </head>
-<body <?php body_class(get_field('theme') . " " . get_field('complement') . " bg-white dm-bg-black"); ?> data-section="top">
-	<stellar-theme system body></stellar-theme>
+<body <?php body_class("bg-white dm-bg-black"); ?> data-section="top">
+	<stellar-theme system body base="<?php echo str_replace("theme-", "", get_field('theme')) ?>" complement="<?php echo str_replace("complement-", "", get_field('complement')) ?>"></stellar-theme>
 	<?php if (get_field('enable_ajax', 'option')): ?>
 		<stellar-pjax></stellar-pjax>
 	<?php endif; ?>
@@ -147,6 +147,21 @@ ob_start(); ?>
 
 		ga('create', '<?php echo GOOGLE_ANALYTICS_ID; ?>', 'auto');
 		ga('send', 'pageview');
+	</script>
+	<script>
+		document.addEventListener("pjax:success", (e, a, b) => {
+			var temp = document.createElement("html");
+			temp.innerHTML = e.request.response;
+			document.querySelector("body").classList = temp.querySelector("body").classList;
+			document.querySelector("stellar-theme").base = temp.querySelector("stellar-theme").base;
+			document.querySelector("stellar-theme").complement = temp.querySelector("stellar-theme").complement;
+			document.querySelector(".post-edit-link").href = temp.querySelector(".post-edit-link").href;
+		})
+	</script>
+	<script>
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+			document.querySelector('stellar-theme').dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		})
 	</script>
 	<script>
 		// IE/Edge: 11, ff/opera/chrome:older than 6 months, safari: older than 9

@@ -687,7 +687,7 @@ add_action( 'admin_init', 'my_theme_add_editor_styles' );
 function misha_allowed_block_types( $allowed_blocks ) {
 	$allowed_blocks = array(
 		'acf/hero',
-		'acf/mosiac',
+		'acf/mosaic',
 		'acf/pagelist',
 		'acf/events',
 		'acf/content',

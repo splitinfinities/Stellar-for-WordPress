@@ -233,6 +233,7 @@
                     "id": ""
                 },
                 "choices": {
+                    "bg-transparent": "Transparent",
                     "bg-white": "White",
                     "bg-black": "Black",
                     "bg-black-alt": "Black Alt",
@@ -258,7 +259,7 @@
                     "bg-theme-complement9": "Complement's Darkest"
                 },
                 "default_value": [
-                    "bg-white"
+                    "bg-transparent"
                 ],
                 "allow_null": 0,
                 "multiple": 0,

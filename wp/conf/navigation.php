@@ -143,8 +143,11 @@ class SPLITINFINITIES_Walker_Social extends Walker_Nav_Menu {
         $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
         $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
         $attributes .= ' class="menu-link white no-underline ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+
+        $nameString = ($item->title === "Email") ? "mail" : 'logo-%4$s';
+
         // Build HTML output and pass through the proper filter.
-        $item_output = sprintf( '%1$s<li><a%2$s target="_blank" rel="noopener">%3$s<ion-icon name="logo-%4$s" class="dm-white black fs6"></ion-icon>%5$s</a></li>%6$s',
+        $item_output = sprintf( '%1$s<li><a%2$s target="_blank" rel="noopener">%3$s<ion-icon name="' . $nameString . '" class="dm-white black fs6"></ion-icon>%5$s</a></li>%6$s',
             $args->before,
             $attributes,
             $args->link_before,

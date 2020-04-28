@@ -4,46 +4,6 @@
         "title": "Tab Block",
         "fields": [
             {
-                "key": "field_5df2ea5616612",
-                "label": "Layout",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "left",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5df3cbee9b25f",
-                "label": "Layout",
-                "name": "layout",
-                "type": "clone",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "clone": [
-                    "field_5ccb53a529c5e",
-                    "field_5ccb53a529c8b",
-                    "field_5ccb53a529cb7",
-                    "field_5ccb53a529ce1"
-                ],
-                "display": "seamless",
-                "layout": "block",
-                "prefix_label": 0,
-                "prefix_name": 0
-            },
-            {
                 "key": "field_5df2ea6216613",
                 "label": "Content",
                 "name": "",
@@ -288,6 +248,46 @@
                         "max": ""
                     }
                 ]
+            },
+            {
+                "key": "field_5df2ea5616612",
+                "label": "Layout",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5df3cbee9b25f",
+                "label": "Layout",
+                "name": "layout",
+                "type": "clone",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "clone": [
+                    "field_5ccb53a529c5e",
+                    "field_5ccb53a529c8b",
+                    "field_5ccb53a529cb7",
+                    "field_5ccb53a529ce1"
+                ],
+                "display": "seamless",
+                "layout": "block",
+                "prefix_label": 0,
+                "prefix_name": 0
             }
         ],
         "location": [

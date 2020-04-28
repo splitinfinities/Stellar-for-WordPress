@@ -4,85 +4,6 @@
         "title": "Grid Block",
         "fields": [
             {
-                "key": "field_5ccb5c1f24151",
-                "label": "Layout",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "left",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5ccb5edf1a86c",
-                "label": "Grid Width",
-                "name": "grid_width",
-                "type": "number",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": 300,
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "min": 0,
-                "max": 5000,
-                "step": 5
-            },
-            {
-                "key": "field_5ccb5ec91a86b",
-                "label": "Grid Gap",
-                "name": "grid_gap",
-                "type": "number",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": 1,
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "min": 0,
-                "max": 8,
-                "step": ""
-            },
-            {
-                "key": "field_5ccb5c1f24171",
-                "label": "Layout",
-                "name": "layout",
-                "type": "clone",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "clone": [
-                    "group_5ccb53a527811"
-                ],
-                "display": "seamless",
-                "layout": "block",
-                "prefix_label": 0,
-                "prefix_name": 0
-            },
-            {
                 "key": "field_5ccb5c1f2418f",
                 "label": "Content",
                 "name": "",
@@ -210,6 +131,85 @@
                 "toolbar": "full",
                 "media_upload": 1,
                 "delay": 0
+            },
+            {
+                "key": "field_5ccb5c1f24151",
+                "label": "Layout",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5ccb5edf1a86c",
+                "label": "Grid Width",
+                "name": "grid_width",
+                "type": "number",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 300,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": 0,
+                "max": 5000,
+                "step": 5
+            },
+            {
+                "key": "field_5ccb5ec91a86b",
+                "label": "Grid Gap",
+                "name": "grid_gap",
+                "type": "number",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 1,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": 0,
+                "max": 8,
+                "step": ""
+            },
+            {
+                "key": "field_5ccb5c1f24171",
+                "label": "Layout",
+                "name": "layout",
+                "type": "clone",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "clone": [
+                    "group_5ccb53a527811"
+                ],
+                "display": "seamless",
+                "layout": "block",
+                "prefix_label": 0,
+                "prefix_name": 0
             }
         ],
         "location": [

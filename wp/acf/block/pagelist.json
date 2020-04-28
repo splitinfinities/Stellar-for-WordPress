@@ -4,6 +4,56 @@
         "title": "Page List Block",
         "fields": [
             {
+                "key": "field_5df3feee16ed2",
+                "label": "Content",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5df40082a7e5d",
+                "label": "Post types",
+                "name": "post_types",
+                "type": "post_type_selector",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "select_type": 0
+            },
+            {
+                "key": "field_5e0ad72d3144f",
+                "label": "Tags",
+                "name": "tags",
+                "type": "text",
+                "instructions": "Comma separated list of tags or categories you want to filter by",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_5df3fedf16ed1",
                 "label": "Layout",
                 "name": "",
@@ -61,56 +111,6 @@
                 "layout": "block",
                 "prefix_label": 0,
                 "prefix_name": 0
-            },
-            {
-                "key": "field_5df3feee16ed2",
-                "label": "Content",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "left",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5df40082a7e5d",
-                "label": "Post types",
-                "name": "post_types",
-                "type": "post_type_selector",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "select_type": 0
-            },
-            {
-                "key": "field_5e0ad72d3144f",
-                "label": "Tags",
-                "name": "tags",
-                "type": "text",
-                "instructions": "Comma separated list of tags or categories you want to filter by",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
             }
         ],
         "location": [

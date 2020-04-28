@@ -6,17 +6,17 @@
  */
 function init_custom_post_types() {
 	$post_types = array(
-		// 'event' => array(
-		// 	'title' => "Events",
-		// 	'singular' => "Event",
-		// 	'plural' => "Events",
-		// 	'slug' => "event",
-		// 	'position' => -1,
-		// 	'has_archive' => true,
-		// 	'menu_icon' => '',
-		// 	'supports' => array('title', 'permalink'),
-		// 	'taxonomies' => array()
-		// )
+		'event' => array(
+			'title' => "Events",
+			'singular' => "Event",
+			'plural' => "Events",
+			'slug' => "event",
+			'position' => -1,
+			'has_archive' => true,
+			'menu_icon' => '',
+			'supports' => array('title', 'permalink'),
+			'taxonomies' => array()
+		)
 	);
 
 	if ($enable_events) {
@@ -30,7 +30,7 @@ function init_custom_post_types() {
 			'menu_icon' => '',
 			'supports' => array('title', 'permalink'),
 			'taxonomies' => array()
-		)
+		);
 	}
 
 	foreach ($post_types as $name => $options) {
